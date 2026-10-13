@@ -1,0 +1,105 @@
+erDiagram
+    branches ||--o{ orders : receives
+    customers ||--o{ orders : places
+    orders ||--|{ order_lines : contains
+    menu_items ||--o{ order_lines : sold_as
+    menu_items ||--|{ recipe_components : requires
+    ingredients ||--o{ recipe_components : used_in
+    branches ||--o{ branch_stock : holds
+    ingredients ||--o{ branch_stock : stocked_as
+    branches ||--o{ stock_movements : records
+    ingredients ||--o{ stock_movements : changes
+    orders o|--o{ stock_movements : consumes
+    branches ||--o{ stock_receipts : receives
+    ingredients ||--o{ stock_receipts : replenished
+    customers ||--o{ loyalty_transactions : owns
+    orders o|--o{ loyalty_transactions : earns_or_redeems
+    customers o|--o{ users : identity
+    branches o|--o{ users : assigned
+    branches {
+        int id PK
+        string name
+        string address
+        string postal_code
+    }
+    customers {
+        int id PK
+        string name
+        string email UK
+    }
+    users {
+        int id PK
+        string email UK
+        string password_hash
+        string role
+        int customer_id FK
+        int branch_id FK
+        boolean is_active
+    }
+    orders {
+        int id PK
+        int branch_id FK
+        int customer_id FK
+        string request_key UK
+        string request_payload_hash
+        decimal total
+        int points_redeemed
+        string status
+        datetime created_at
+    }
+    order_lines {
+        int id PK
+        int order_id FK
+        int menu_item_id FK
+        int quantity
+        decimal unit_price
+        string notes
+    }
+    menu_items {
+        int id PK
+        string name
+        string category
+        decimal price
+        boolean is_active
+    }
+    ingredients {
+        int id PK
+        string name UK
+        string unit
+    }
+    recipe_components {
+        int menu_item_id PK,FK
+        int ingredient_id PK,FK
+        decimal quantity
+    }
+    branch_stock {
+        int branch_id PK,FK
+        int ingredient_id PK,FK
+        decimal quantity
+        decimal reorder_level
+    }
+    stock_movements {
+        int id PK
+        int branch_id FK
+        int ingredient_id FK
+        int order_id FK
+        decimal quantity_delta
+        string reason
+        datetime created_at
+    }
+    stock_receipts {
+        int id PK
+        string request_key UK
+        int branch_id FK
+        int ingredient_id FK
+        decimal quantity
+        datetime created_at
+    }
+    loyalty_transactions {
+        int id PK
+        int customer_id FK
+        int order_id FK
+        int points_delta
+        string event_type
+        datetime created_at
+    }

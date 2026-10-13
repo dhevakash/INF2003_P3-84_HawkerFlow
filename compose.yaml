@@ -1,0 +1,51 @@
+services:
+  sql:
+    image: mariadb:10.11.14
+    environment:
+      MARIADB_DATABASE: hawkerflow
+      MARIADB_USER: hawkerflow
+      MARIADB_PASSWORD: hawkerflow_dev
+      MARIADB_ROOT_PASSWORD: local_root_dev
+    ports:
+      - "127.0.0.1:3307:3306"
+    volumes:
+      - sql_data:/var/lib/mysql
+      - ./scripts/sql-init.sql:/docker-entrypoint-initdb.d/10-test-databases.sql:ro
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+  mongo:
+    image: mongo:7.0.16
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: local_admin
+      MONGO_INITDB_ROOT_PASSWORD: local_admin_dev
+      MONGO_INITDB_DATABASE: hawkerflow
+    ports:
+      - "127.0.0.1:27018:27017"
+    volumes:
+      - mongo_data:/data/db
+      - ./scripts/mongo-init.js:/docker-entrypoint-initdb.d/10-app-user.js:ro
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--username", "hawkerflow", "--password", "hawkerflow_mongo_dev", "--authenticationDatabase", "admin", "--eval", "db.adminCommand('ping').ok"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+  app:
+    build: .
+    environment:
+      SQL_URL: mysql+pymysql://hawkerflow:hawkerflow_dev@sql:3306/hawkerflow
+      MONGO_URL: mongodb://hawkerflow:hawkerflow_mongo_dev@mongo:27017/?authSource=admin
+      MONGO_DATABASE: hawkerflow
+      SECRET_KEY: ${SECRET_KEY:-local-demo-only-change-this-before-sharing-network}
+    ports:
+      - "127.0.0.1:8000:8000"
+    depends_on:
+      sql:
+        condition: service_healthy
+      mongo:
+        condition: service_healthy
+volumes:
+  sql_data:
+  mongo_data:

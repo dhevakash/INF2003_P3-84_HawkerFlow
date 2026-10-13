@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1,
+    "name": "HawkerFlow Demo — Adam Road Food Centre",
+    "address": "2, Adam Road, S(289876)",
+    "postal_code": "289876",
+    "source_centre_name": "Adam Road Food Centre",
+    "source_record_id": 1,
+    "scenario": "Fictional teaching branch using a historical public location; no affiliation"
+  },
+  {
+    "id": 2,
+    "name": "HawkerFlow Demo — Amoy Street Food Centre",
+    "address": "National Development Building, Annex B, Telok Ayer Street, S(069111)",
+    "postal_code": "069111",
+    "source_centre_name": "Amoy Street Food Centre",
+    "source_record_id": 2,
+    "scenario": "Fictional teaching branch using a historical public location; no affiliation"
+  },
+  {
+    "id": 3,
+    "name": "HawkerFlow Demo — Bedok Food Centre",
+    "address": "1, Bedok Road, S(469572)",
+    "postal_code": "469572",
+    "source_centre_name": "Bedok Food Centre",
+    "source_record_id": 3,
+    "scenario": "Fictional teaching branch using a historical public location; no affiliation"
+  },
+  {
+    "id": 4,
+    "name": "HawkerFlow Demo — Berseh Food Centre",
+    "address": "166, Jalan Besar, S(208877)",
+    "postal_code": "208877",
+    "source_centre_name": "Berseh Food Centre",
+    "source_record_id": 5,
+    "scenario": "Fictional teaching branch using a historical public location; no affiliation"
+  },
+  {
+    "id": 5,
+    "name": "HawkerFlow Demo — Chomp Chomp Food Centre",
+    "address": "20, Kensington Park Road, S(557269)",
+    "postal_code": "557269",
+    "source_centre_name": "Chomp Chomp Food Centre",
+    "source_record_id": 7,
+    "scenario": "Fictional teaching branch using a historical public location; no affiliation"
+  }
+]

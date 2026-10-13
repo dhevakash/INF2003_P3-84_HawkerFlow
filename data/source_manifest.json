@@ -1,0 +1,33 @@
+{
+  "dataset_id": "d_68a42f09f350881996d83f9cd73ab02f",
+  "title": "List of Government Markets Hawker Centres",
+  "publisher": "National Environment Agency",
+  "source_url": "https://data.gov.sg/datasets/d_68a42f09f350881996d83f9cd73ab02f/view",
+  "api_url": "https://data.gov.sg/api/action/datastore_search?resource_id=d_68a42f09f350881996d83f9cd73ab02f&limit=1000",
+  "licence_url": "https://data.gov.sg/open-data-licence",
+  "retrieved_at_utc": "2026-10-02T09:16:42.069079+00:00",
+  "source_data_period": "January–September 2016",
+  "source_page_last_updated": "2024-06-06",
+  "record_count": 107,
+  "column_count_excluding_api_id": 7,
+  "files": {
+    "nea_hawker_centres_raw.json": {
+      "sha256": "4830395c35d049a71fbe071edf8ac65969854f06a276bc811da1d8d3b8450d2b",
+      "bytes": 26190
+    },
+    "nea_hawker_centres.csv": {
+      "sha256": "63ceb8eff5de2aee9fe42fd6312d8b186e7e3c505ea6eaecb265e2bd3f01a9b7",
+      "bytes": 9499
+    },
+    "demo_branches.json": {
+      "sha256": "45b53e8685cd553620ca222aabe1c537cbc9364c4c368f2e7361ac95ad96ee39",
+      "bytes": 1674
+    }
+  },
+  "limitations": [
+    "Historical locations, not a current directory",
+    "Centres are not branches of HawkerFlow",
+    "No menu, stock, sales, customer or review data is provided by this source"
+  ],
+  "attribution": "Contains information from List of Government Markets Hawker Centres, accessed on 2026-10-02 from data.gov.sg, made available under Singapore Open Data Licence v1.0: https://data.gov.sg/open-data-licence"
+}

@@ -1,0 +1,42 @@
+{
+  "provenance": "Manually curated synthetic teaching menu and illustrative recipes; prices, ingredients and quantities are not measurements from NEA centres. No nutritional/allergen certification is implied.",
+  "ingredients": [
+    {"id": 1, "name": "Rice", "unit": "g"},
+    {"id": 2, "name": "Chicken", "unit": "g"},
+    {"id": 3, "name": "Tofu", "unit": "g"},
+    {"id": 4, "name": "Egg", "unit": "each"},
+    {"id": 5, "name": "Noodles", "unit": "g"},
+    {"id": 6, "name": "Bread", "unit": "g"},
+    {"id": 7, "name": "Milk", "unit": "ml"},
+    {"id": 8, "name": "Tea leaves", "unit": "g"},
+    {"id": 9, "name": "Coffee powder", "unit": "g"},
+    {"id": 10, "name": "Sugar", "unit": "g"},
+    {"id": 11, "name": "Oil", "unit": "ml"},
+    {"id": 12, "name": "Soy sauce", "unit": "ml"},
+    {"id": 13, "name": "Vegetables", "unit": "g"},
+    {"id": 14, "name": "Fish", "unit": "g"},
+    {"id": 15, "name": "Chilli paste", "unit": "g"}
+  ],
+  "menu_items": [
+    {"id":1,"name":"Chicken Rice","category":"Rice","price":"6.00","recipe":{"1":"150","2":"120","12":"10","13":"30"}},
+    {"id":2,"name":"Chilli Chicken Rice","category":"Rice","price":"6.50","recipe":{"1":"150","2":"120","15":"15","13":"30"}},
+    {"id":3,"name":"Tofu Rice Bowl","category":"Rice","price":"5.00","recipe":{"1":"150","3":"120","13":"80","12":"10"}},
+    {"id":4,"name":"Egg Fried Rice","category":"Rice","price":"4.50","recipe":{"1":"160","4":"1","11":"15","13":"40","12":"10"}},
+    {"id":5,"name":"Chicken Fried Rice","category":"Rice","price":"6.00","recipe":{"1":"160","2":"100","4":"1","11":"15","12":"10"}},
+    {"id":6,"name":"Fish Rice Bowl","category":"Rice","price":"7.00","recipe":{"1":"150","14":"130","13":"60","12":"10"}},
+    {"id":7,"name":"Chicken Noodles","category":"Noodles","price":"6.00","recipe":{"5":"180","2":"100","13":"40","12":"15"}},
+    {"id":8,"name":"Vegetable Noodles","category":"Noodles","price":"4.50","recipe":{"5":"180","13":"100","11":"10","12":"10"}},
+    {"id":9,"name":"Tofu Noodles","category":"Noodles","price":"5.00","recipe":{"5":"180","3":"100","13":"60","12":"10"}},
+    {"id":10,"name":"Spicy Fish Noodles","category":"Noodles","price":"7.50","recipe":{"5":"180","14":"120","15":"15","13":"40"}},
+    {"id":11,"name":"Egg Toast","category":"Breakfast","price":"3.50","recipe":{"6":"70","4":"2","11":"5"}},
+    {"id":12,"name":"Milk Toast","category":"Breakfast","price":"2.80","recipe":{"6":"70","7":"30","10":"10"}},
+    {"id":13,"name":"Chicken Sandwich","category":"Breakfast","price":"4.80","recipe":{"6":"90","2":"80","13":"40"}},
+    {"id":14,"name":"Tofu Sandwich","category":"Breakfast","price":"4.00","recipe":{"6":"90","3":"80","13":"40"}},
+    {"id":15,"name":"Steamed Rice","category":"Sides","price":"1.00","recipe":{"1":"150"}},
+    {"id":16,"name":"Vegetable Side","category":"Sides","price":"2.00","recipe":{"13":"100","11":"5","12":"5"}},
+    {"id":17,"name":"Kopi","category":"Drinks","price":"1.80","recipe":{"9":"12","7":"40","10":"10"}},
+    {"id":18,"name":"Teh","category":"Drinks","price":"1.80","recipe":{"8":"5","7":"40","10":"10"}},
+    {"id":19,"name":"Kopi O","category":"Drinks","price":"1.50","recipe":{"9":"12","10":"10"}},
+    {"id":20,"name":"Teh O","category":"Drinks","price":"1.50","recipe":{"8":"5","10":"10"}}
+  ]
+}

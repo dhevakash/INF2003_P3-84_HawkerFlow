@@ -1,0 +1,31 @@
+{
+  "created_orders_this_run": 0,
+  "sql_row_counts": {
+    "branches": 5,
+    "customers": 50,
+    "menu_items": 20,
+    "ingredients": 15,
+    "recipe_components": 68,
+    "branch_stock": 75,
+    "stock_movements": 1195,
+    "orders": 200,
+    "loyalty_transactions": 200,
+    "users": 3
+  },
+  "created_reviews_this_run": 0,
+  "mongo_document_counts": {
+    "reviews": 100,
+    "customer_profiles": 50,
+    "external_review_examples": 1000
+  },
+  "seed": 20261002,
+  "generated_at_utc": "2026-10-02T09:32:26.560516+00:00",
+  "real_fields": [
+    "source centre name",
+    "historical address",
+    "postal code extracted from address"
+  ],
+  "synthetic_fields": "All fictional branch affiliations and operational records, reviews and preferences",
+  "seed_order_prefix": "hawkerflow-demo-v1-",
+  "sql_only": false
+}

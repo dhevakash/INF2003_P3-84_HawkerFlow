@@ -1,0 +1,1263 @@
+{
+  "generated_at": "2026-10-02T09:30:39.548619+00:00",
+  "workload": "Low-rating complaint tag counts for one branch",
+  "fixture_type": "synthetic, identical across databases",
+  "seed": 2026,
+  "warmups": 5,
+  "repetitions": 30,
+  "branch_id": 1,
+  "environment": {
+    "python": "3.12.14",
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+    "cpu_count": 9,
+    "sql_version": "10.11.14-MariaDB-0ubuntu0.24.04.1",
+    "mongo_version": "7.0.16",
+    "sql_host": "127.0.0.1",
+    "sql_database": "hawkerflow_benchmark",
+    "mongo_database": "hawkerflow_benchmark",
+    "connector_versions": {
+      "sqlalchemy": "2.1.2",
+      "pymongo": "4.18.2"
+    }
+  },
+  "sql_query": "\nSELECT t.tag, COUNT(*) AS count\nFROM benchmark_reviews r\nJOIN benchmark_review_tags t ON t.review_id = r.id\nWHERE r.branch_id = :branch_id AND r.rating <= 2\n  AND t.tag IN ('cold','slow service','too spicy','wrong order','poor value')\nGROUP BY t.tag\nORDER BY count DESC, t.tag ASC\n",
+  "mongo_pipeline": [
+    {
+      "$match": {
+        "branch_id": 1,
+        "rating": {
+          "$lte": 2
+        }
+      }
+    },
+    {
+      "$unwind": "$tags"
+    },
+    {
+      "$match": {
+        "tags": {
+          "$in": [
+            "cold",
+            "slow service",
+            "too spicy",
+            "wrong order",
+            "poor value"
+          ]
+        }
+      }
+    },
+    {
+      "$group": {
+        "_id": "$tags",
+        "count": {
+          "$sum": 1
+        }
+      }
+    },
+    {
+      "$sort": {
+        "count": -1,
+        "_id": 1
+      }
+    }
+  ],
+  "results": [
+    {
+      "size": 1000,
+      "answers_verified_equal": true,
+      "review_count_sql": 1000,
+      "review_count_mongo": 1000,
+      "answer": [
+        {
+          "tag": "poor value",
+          "count": 16
+        },
+        {
+          "tag": "too spicy",
+          "count": 13
+        },
+        {
+          "tag": "cold",
+          "count": 12
+        },
+        {
+          "tag": "wrong order",
+          "count": 12
+        },
+        {
+          "tag": "slow service",
+          "count": 7
+        }
+      ],
+      "sql": {
+        "median_ms": 0.3469439998298185,
+        "p95_ms": 0.42535500006124494,
+        "min_ms": 0.32532800014450913,
+        "max_ms": 0.6266810000852274,
+        "samples_ms": [
+          0.35298800003147335,
+          0.36667900030806777,
+          0.3406399996492837,
+          0.34089999962816364,
+          0.3580560000955302,
+          0.33959800020966213,
+          0.32859200018720003,
+          0.35801600006379886,
+          0.3351729997120856,
+          0.3256979998695897,
+          0.3559530000529776,
+          0.3753309997591714,
+          0.33297899972239975,
+          0.3647459998319391,
+          0.42535500006124494,
+          0.32644999964759336,
+          0.3637139998318162,
+          0.3293439999652037,
+          0.35680400014825864,
+          0.33322900026178104,
+          0.32532800014450913,
+          0.3561230000741489,
+          0.38863099962327396,
+          0.32947399995464366,
+          0.35748499976762105,
+          0.3257289999964996,
+          0.3261890001340362,
+          0.36274299964134116,
+          0.3386180001143657,
+          0.6266810000852274
+        ]
+      },
+      "mongo": {
+        "median_ms": 0.396938499989119,
+        "p95_ms": 0.49274399998466833,
+        "min_ms": 0.36749899982169154,
+        "max_ms": 0.599941000018589,
+        "samples_ms": [
+          0.3775250002036046,
+          0.39619200015295064,
+          0.3852760000881972,
+          0.40589599984741653,
+          0.37983799984431244,
+          0.370635000308539,
+          0.45838300002287724,
+          0.41996700019808486,
+          0.42293099977541715,
+          0.3921760003322561,
+          0.4319950003264239,
+          0.4897290000371868,
+          0.37746500038338127,
+          0.40650699975230964,
+          0.37233700004435377,
+          0.43121299995618756,
+          0.599941000018589,
+          0.45934400031910627,
+          0.37615200017171446,
+          0.368901999991067,
+          0.3930969996872591,
+          0.38176999987626914,
+          0.4049640001539956,
+          0.3976849998252874,
+          0.36749899982169154,
+          0.43563999997786595,
+          0.3812700001617486,
+          0.49274399998466833,
+          0.39976699963517603,
+          0.3762530000130937
+        ]
+      },
+      "sql_plan": [
+        {
+          "id": 1,
+          "select_type": "SIMPLE",
+          "table": "r",
+          "type": "range",
+          "possible_keys": "PRIMARY,ix_benchmark_branch_rating",
+          "key": "ix_benchmark_branch_rating",
+          "key_len": "8",
+          "ref": null,
+          "rows": "50",
+          "Extra": "Using where; Using index; Using temporary; Using filesort"
+        },
+        {
+          "id": 1,
+          "select_type": "SIMPLE",
+          "table": "t",
+          "type": "ref",
+          "possible_keys": "PRIMARY,ix_benchmark_tag",
+          "key": "PRIMARY",
+          "key_len": "4",
+          "ref": "hawkerflow_benchmark.r.id",
+          "rows": "1",
+          "Extra": "Using where; Using index"
+        }
+      ],
+      "mongo_plan": {
+        "explainVersion": "1",
+        "stages": [
+          {
+            "$cursor": {
+              "queryPlanner": {
+                "namespace": "hawkerflow_benchmark.benchmark_reviews",
+                "indexFilterSet": false,
+                "parsedQuery": {
+                  "$and": [
+                    {
+                      "branch_id": {
+                        "$eq": 1
+                      }
+                    },
+                    {
+                      "rating": {
+                        "$lte": 2
+                      }
+                    }
+                  ]
+                },
+                "queryHash": "95422FF2",
+                "planCacheKey": "2FE50F15",
+                "maxIndexedOrSolutionsReached": false,
+                "maxIndexedAndSolutionsReached": false,
+                "maxScansToExplodeReached": false,
+                "winningPlan": {
+                  "stage": "PROJECTION_SIMPLE",
+                  "transformBy": {
+                    "tags": 1,
+                    "_id": 0
+                  },
+                  "inputStage": {
+                    "stage": "FETCH",
+                    "inputStage": {
+                      "stage": "IXSCAN",
+                      "keyPattern": {
+                        "branch_id": 1,
+                        "rating": 1
+                      },
+                      "indexName": "ix_benchmark_branch_rating",
+                      "isMultiKey": false,
+                      "multiKeyPaths": {
+                        "branch_id": [],
+                        "rating": []
+                      },
+                      "isUnique": false,
+                      "isSparse": false,
+                      "isPartial": false,
+                      "indexVersion": 2,
+                      "direction": "forward",
+                      "indexBounds": {
+                        "branch_id": [
+                          "[1, 1]"
+                        ],
+                        "rating": [
+                          "[-inf.0, 2]"
+                        ]
+                      }
+                    }
+                  }
+                },
+                "rejectedPlans": []
+              },
+              "executionStats": {
+                "executionSuccess": true,
+                "nReturned": 50,
+                "executionTimeMillis": 0,
+                "totalKeysExamined": 50,
+                "totalDocsExamined": 50,
+                "executionStages": {
+                  "stage": "PROJECTION_SIMPLE",
+                  "nReturned": 50,
+                  "executionTimeMillisEstimate": 0,
+                  "works": 51,
+                  "advanced": 50,
+                  "needTime": 0,
+                  "needYield": 0,
+                  "saveState": 1,
+                  "restoreState": 1,
+                  "isEOF": 1,
+                  "transformBy": {
+                    "tags": 1,
+                    "_id": 0
+                  },
+                  "inputStage": {
+                    "stage": "FETCH",
+                    "nReturned": 50,
+                    "executionTimeMillisEstimate": 0,
+                    "works": 51,
+                    "advanced": 50,
+                    "needTime": 0,
+                    "needYield": 0,
+                    "saveState": 1,
+                    "restoreState": 1,
+                    "isEOF": 1,
+                    "docsExamined": 50,
+                    "alreadyHasObj": 0,
+                    "inputStage": {
+                      "stage": "IXSCAN",
+                      "nReturned": 50,
+                      "executionTimeMillisEstimate": 0,
+                      "works": 51,
+                      "advanced": 50,
+                      "needTime": 0,
+                      "needYield": 0,
+                      "saveState": 1,
+                      "restoreState": 1,
+                      "isEOF": 1,
+                      "keyPattern": {
+                        "branch_id": 1,
+                        "rating": 1
+                      },
+                      "indexName": "ix_benchmark_branch_rating",
+                      "isMultiKey": false,
+                      "multiKeyPaths": {
+                        "branch_id": [],
+                        "rating": []
+                      },
+                      "isUnique": false,
+                      "isSparse": false,
+                      "isPartial": false,
+                      "indexVersion": 2,
+                      "direction": "forward",
+                      "indexBounds": {
+                        "branch_id": [
+                          "[1, 1]"
+                        ],
+                        "rating": [
+                          "[-inf.0, 2]"
+                        ]
+                      },
+                      "keysExamined": 50,
+                      "seeks": 1,
+                      "dupsTested": 0,
+                      "dupsDropped": 0
+                    }
+                  }
+                }
+              }
+            },
+            "nReturned": 50,
+            "executionTimeMillisEstimate": 0
+          },
+          {
+            "$unwind": {
+              "path": "$tags"
+            },
+            "nReturned": 94,
+            "executionTimeMillisEstimate": 0
+          },
+          {
+            "$match": {
+              "tags": {
+                "$in": [
+                  "cold",
+                  "poor value",
+                  "slow service",
+                  "too spicy",
+                  "wrong order"
+                ]
+              }
+            },
+            "nReturned": 60,
+            "executionTimeMillisEstimate": 0
+          },
+          {
+            "$group": {
+              "_id": "$tags",
+              "count": {
+                "$sum": {
+                  "$const": 1
+                }
+              }
+            },
+            "maxAccumulatorMemoryUsageBytes": {
+              "count": 480
+            },
+            "totalOutputDataSizeBytes": 1225,
+            "usedDisk": false,
+            "spills": 0,
+            "spilledDataStorageSize": 0,
+            "numBytesSpilledEstimate": 0,
+            "spilledRecords": 0,
+            "nReturned": 5,
+            "executionTimeMillisEstimate": 0
+          },
+          {
+            "$sort": {
+              "sortKey": {
+                "count": -1,
+                "_id": 1
+              }
+            },
+            "totalDataSizeSortedBytesEstimate": 1625,
+            "usedDisk": false,
+            "spills": 0,
+            "spilledDataStorageSize": 0,
+            "nReturned": 5,
+            "executionTimeMillisEstimate": 0
+          }
+        ],
+        "serverInfo": {
+          "host": "ee691c92e100",
+          "port": 27018,
+          "version": "7.0.16",
+          "gitVersion": "18b949444cfdaa88e30b0e10243bc18268251c1f"
+        },
+        "serverParameters": {
+          "internalQueryFacetBufferSizeBytes": 104857600,
+          "internalQueryFacetMaxOutputDocSizeBytes": 104857600,
+          "internalLookupStageIntermediateDocumentMaxSizeBytes": 104857600,
+          "internalDocumentSourceGroupMaxMemoryBytes": 104857600,
+          "internalQueryMaxBlockingSortMemoryUsageBytes": 104857600,
+          "internalQueryProhibitBlockingMergeOnMongoS": 0,
+          "internalQueryMaxAddToSetBytes": 104857600,
+          "internalDocumentSourceSetWindowFieldsMaxMemoryBytes": 104857600,
+          "internalQueryFrameworkControl": "trySbeRestricted"
+        },
+        "command": {
+          "aggregate": "benchmark_reviews",
+          "pipeline": [
+            {
+              "$match": {
+                "branch_id": 1,
+                "rating": {
+                  "$lte": 2
+                }
+              }
+            },
+            {
+              "$unwind": "$tags"
+            },
+            {
+              "$match": {
+                "tags": {
+                  "$in": [
+                    "cold",
+                    "slow service",
+                    "too spicy",
+                    "wrong order",
+                    "poor value"
+                  ]
+                }
+              }
+            },
+            {
+              "$group": {
+                "_id": "$tags",
+                "count": {
+                  "$sum": 1
+                }
+              }
+            },
+            {
+              "$sort": {
+                "count": -1,
+                "_id": 1
+              }
+            }
+          ],
+          "cursor": {},
+          "$db": "hawkerflow_benchmark"
+        },
+        "ok": 1.0
+      }
+    },
+    {
+      "size": 10000,
+      "answers_verified_equal": true,
+      "review_count_sql": 10000,
+      "review_count_mongo": 10000,
+      "answer": [
+        {
+          "tag": "slow service",
+          "count": 134
+        },
+        {
+          "tag": "wrong order",
+          "count": 128
+        },
+        {
+          "tag": "too spicy",
+          "count": 120
+        },
+        {
+          "tag": "cold",
+          "count": 118
+        },
+        {
+          "tag": "poor value",
+          "count": 116
+        }
+      ],
+      "mongo": {
+        "median_ms": 1.0888995000186696,
+        "p95_ms": 1.2479930001063622,
+        "min_ms": 1.0520749997340317,
+        "max_ms": 1.3041950001024816,
+        "samples_ms": [
+          1.0973819998980616,
+          1.0776119997899514,
+          1.1601940000218747,
+          1.074668000001111,
+          1.0826600000655162,
+          1.1062149997087545,
+          1.0852840000552533,
+          1.3041950001024816,
+          1.2004130003333557,
+          1.1253930001657864,
+          1.1284669999440666,
+          1.100195999697462,
+          1.1107310001534643,
+          1.0769020000225282,
+          1.0717739996835007,
+          1.0922540000137815,
+          1.2479930001063622,
+          1.1244209999858867,
+          1.071784000032494,
+          1.072044000011374,
+          1.0847630001080688,
+          1.0653350000211503,
+          1.0651340003278165,
+          1.0997750000569795,
+          1.0855450000235578,
+          1.1070760001530289,
+          1.0745680001491564,
+          1.1017980000360694,
+          1.0696610002014495,
+          1.0520749997340317
+        ]
+      },
+      "sql": {
+        "median_ms": 1.0729004998211167,
+        "p95_ms": 1.2021450002066558,
+        "min_ms": 1.033827999890491,
+        "max_ms": 1.2030470002173388,
+        "samples_ms": [
+          1.2021450002066558,
+          1.083360999928118,
+          1.0843720001503243,
+          1.0628810000525846,
+          1.048470000114321,
+          1.0468880000189529,
+          1.0610480003379053,
+          1.0446739997860277,
+          1.0375639999438135,
+          1.0417899998174107,
+          1.0617289999572677,
+          1.1966679999204644,
+          1.0843430000022636,
+          1.0782029999063525,
+          1.1104710001745843,
+          1.1655719999907888,
+          1.0798660000546079,
+          1.1534039999787637,
+          1.0558109997873544,
+          1.0852540003725153,
+          1.0446040000715584,
+          1.0812979999172967,
+          1.0589959997560072,
+          1.0569430000941793,
+          1.033827999890491,
+          1.1815249999926891,
+          1.0675979997358809,
+          1.2030470002173388,
+          1.1125439996249042,
+          1.0638230000949989
+        ]
+      },
+      "sql_plan": [
+        {
+          "id": 1,
+          "select_type": "SIMPLE",
+          "table": "r",
+          "type": "range",
+          "possible_keys": "PRIMARY,ix_benchmark_branch_rating",
+          "key": "ix_benchmark_branch_rating",
+          "key_len": "8",
+          "ref": null,
+          "rows": "489",
+          "Extra": "Using where; Using index; Using temporary; Using filesort"
+        },
+        {
+          "id": 1,
+          "select_type": "SIMPLE",
+          "table": "t",
+          "type": "ref",
+          "possible_keys": "PRIMARY,ix_benchmark_tag",
+          "key": "PRIMARY",
+          "key_len": "4",
+          "ref": "hawkerflow_benchmark.r.id",
+          "rows": "1",
+          "Extra": "Using where; Using index"
+        }
+      ],
+      "mongo_plan": {
+        "explainVersion": "1",
+        "stages": [
+          {
+            "$cursor": {
+              "queryPlanner": {
+                "namespace": "hawkerflow_benchmark.benchmark_reviews",
+                "indexFilterSet": false,
+                "parsedQuery": {
+                  "$and": [
+                    {
+                      "branch_id": {
+                        "$eq": 1
+                      }
+                    },
+                    {
+                      "rating": {
+                        "$lte": 2
+                      }
+                    }
+                  ]
+                },
+                "queryHash": "95422FF2",
+                "planCacheKey": "2FE50F15",
+                "maxIndexedOrSolutionsReached": false,
+                "maxIndexedAndSolutionsReached": false,
+                "maxScansToExplodeReached": false,
+                "winningPlan": {
+                  "stage": "PROJECTION_SIMPLE",
+                  "transformBy": {
+                    "tags": 1,
+                    "_id": 0
+                  },
+                  "inputStage": {
+                    "stage": "FETCH",
+                    "inputStage": {
+                      "stage": "IXSCAN",
+                      "keyPattern": {
+                        "branch_id": 1,
+                        "rating": 1
+                      },
+                      "indexName": "ix_benchmark_branch_rating",
+                      "isMultiKey": false,
+                      "multiKeyPaths": {
+                        "branch_id": [],
+                        "rating": []
+                      },
+                      "isUnique": false,
+                      "isSparse": false,
+                      "isPartial": false,
+                      "indexVersion": 2,
+                      "direction": "forward",
+                      "indexBounds": {
+                        "branch_id": [
+                          "[1, 1]"
+                        ],
+                        "rating": [
+                          "[-inf.0, 2]"
+                        ]
+                      }
+                    }
+                  }
+                },
+                "rejectedPlans": []
+              },
+              "executionStats": {
+                "executionSuccess": true,
+                "nReturned": 489,
+                "executionTimeMillis": 1,
+                "totalKeysExamined": 489,
+                "totalDocsExamined": 489,
+                "executionStages": {
+                  "stage": "PROJECTION_SIMPLE",
+                  "nReturned": 489,
+                  "executionTimeMillisEstimate": 0,
+                  "works": 490,
+                  "advanced": 489,
+                  "needTime": 0,
+                  "needYield": 0,
+                  "saveState": 1,
+                  "restoreState": 1,
+                  "isEOF": 1,
+                  "transformBy": {
+                    "tags": 1,
+                    "_id": 0
+                  },
+                  "inputStage": {
+                    "stage": "FETCH",
+                    "nReturned": 489,
+                    "executionTimeMillisEstimate": 0,
+                    "works": 490,
+                    "advanced": 489,
+                    "needTime": 0,
+                    "needYield": 0,
+                    "saveState": 1,
+                    "restoreState": 1,
+                    "isEOF": 1,
+                    "docsExamined": 489,
+                    "alreadyHasObj": 0,
+                    "inputStage": {
+                      "stage": "IXSCAN",
+                      "nReturned": 489,
+                      "executionTimeMillisEstimate": 0,
+                      "works": 490,
+                      "advanced": 489,
+                      "needTime": 0,
+                      "needYield": 0,
+                      "saveState": 1,
+                      "restoreState": 1,
+                      "isEOF": 1,
+                      "keyPattern": {
+                        "branch_id": 1,
+                        "rating": 1
+                      },
+                      "indexName": "ix_benchmark_branch_rating",
+                      "isMultiKey": false,
+                      "multiKeyPaths": {
+                        "branch_id": [],
+                        "rating": []
+                      },
+                      "isUnique": false,
+                      "isSparse": false,
+                      "isPartial": false,
+                      "indexVersion": 2,
+                      "direction": "forward",
+                      "indexBounds": {
+                        "branch_id": [
+                          "[1, 1]"
+                        ],
+                        "rating": [
+                          "[-inf.0, 2]"
+                        ]
+                      },
+                      "keysExamined": 489,
+                      "seeks": 1,
+                      "dupsTested": 0,
+                      "dupsDropped": 0
+                    }
+                  }
+                }
+              }
+            },
+            "nReturned": 489,
+            "executionTimeMillisEstimate": 0
+          },
+          {
+            "$unwind": {
+              "path": "$tags"
+            },
+            "nReturned": 965,
+            "executionTimeMillisEstimate": 0
+          },
+          {
+            "$match": {
+              "tags": {
+                "$in": [
+                  "cold",
+                  "poor value",
+                  "slow service",
+                  "too spicy",
+                  "wrong order"
+                ]
+              }
+            },
+            "nReturned": 616,
+            "executionTimeMillisEstimate": 0
+          },
+          {
+            "$group": {
+              "_id": "$tags",
+              "count": {
+                "$sum": {
+                  "$const": 1
+                }
+              }
+            },
+            "maxAccumulatorMemoryUsageBytes": {
+              "count": 480
+            },
+            "totalOutputDataSizeBytes": 1225,
+            "usedDisk": false,
+            "spills": 0,
+            "spilledDataStorageSize": 0,
+            "numBytesSpilledEstimate": 0,
+            "spilledRecords": 0,
+            "nReturned": 5,
+            "executionTimeMillisEstimate": 0
+          },
+          {
+            "$sort": {
+              "sortKey": {
+                "count": -1,
+                "_id": 1
+              }
+            },
+            "totalDataSizeSortedBytesEstimate": 1625,
+            "usedDisk": false,
+            "spills": 0,
+            "spilledDataStorageSize": 0,
+            "nReturned": 5,
+            "executionTimeMillisEstimate": 0
+          }
+        ],
+        "serverInfo": {
+          "host": "ee691c92e100",
+          "port": 27018,
+          "version": "7.0.16",
+          "gitVersion": "18b949444cfdaa88e30b0e10243bc18268251c1f"
+        },
+        "serverParameters": {
+          "internalQueryFacetBufferSizeBytes": 104857600,
+          "internalQueryFacetMaxOutputDocSizeBytes": 104857600,
+          "internalLookupStageIntermediateDocumentMaxSizeBytes": 104857600,
+          "internalDocumentSourceGroupMaxMemoryBytes": 104857600,
+          "internalQueryMaxBlockingSortMemoryUsageBytes": 104857600,
+          "internalQueryProhibitBlockingMergeOnMongoS": 0,
+          "internalQueryMaxAddToSetBytes": 104857600,
+          "internalDocumentSourceSetWindowFieldsMaxMemoryBytes": 104857600,
+          "internalQueryFrameworkControl": "trySbeRestricted"
+        },
+        "command": {
+          "aggregate": "benchmark_reviews",
+          "pipeline": [
+            {
+              "$match": {
+                "branch_id": 1,
+                "rating": {
+                  "$lte": 2
+                }
+              }
+            },
+            {
+              "$unwind": "$tags"
+            },
+            {
+              "$match": {
+                "tags": {
+                  "$in": [
+                    "cold",
+                    "slow service",
+                    "too spicy",
+                    "wrong order",
+                    "poor value"
+                  ]
+                }
+              }
+            },
+            {
+              "$group": {
+                "_id": "$tags",
+                "count": {
+                  "$sum": 1
+                }
+              }
+            },
+            {
+              "$sort": {
+                "count": -1,
+                "_id": 1
+              }
+            }
+          ],
+          "cursor": {},
+          "$db": "hawkerflow_benchmark"
+        },
+        "ok": 1.0
+      }
+    },
+    {
+      "size": 50000,
+      "answers_verified_equal": true,
+      "review_count_sql": 50000,
+      "review_count_mongo": 50000,
+      "answer": [
+        {
+          "tag": "too spicy",
+          "count": 637
+        },
+        {
+          "tag": "wrong order",
+          "count": 616
+        },
+        {
+          "tag": "slow service",
+          "count": 599
+        },
+        {
+          "tag": "cold",
+          "count": 598
+        },
+        {
+          "tag": "poor value",
+          "count": 560
+        }
+      ],
+      "sql": {
+        "median_ms": 4.996293499971216,
+        "p95_ms": 8.19357399996079,
+        "min_ms": 4.629580000255373,
+        "max_ms": 8.522968999841396,
+        "samples_ms": [
+          7.539004000136629,
+          7.439567999881547,
+          7.761790000131441,
+          8.19357399996079,
+          8.522968999841396,
+          7.932061000246904,
+          7.501007999962894,
+          4.670769999847835,
+          4.945304000102624,
+          4.9443420002717176,
+          5.978370999855542,
+          5.3902179997749045,
+          4.904563999843958,
+          4.778347999945254,
+          5.336618000001181,
+          4.912706000141043,
+          4.99314399985451,
+          5.263642000045365,
+          5.171316000087245,
+          5.430215000160388,
+          4.718921999938175,
+          4.629580000255373,
+          4.837214999952266,
+          4.921008999644982,
+          4.885965999619657,
+          4.97340499987331,
+          5.209672000091814,
+          4.999443000087922,
+          4.882610999629833,
+          4.891084000064438
+        ]
+      },
+      "mongo": {
+        "median_ms": 5.085920000055921,
+        "p95_ms": 11.149176999879273,
+        "min_ms": 4.592044999753853,
+        "max_ms": 12.564560000100755,
+        "samples_ms": [
+          9.209387000282732,
+          9.368189000269922,
+          7.15061400023842,
+          6.037957999978971,
+          6.1214209999889135,
+          6.56306000018958,
+          5.2109240000390855,
+          4.893067000011797,
+          4.823754999961238,
+          5.054875000041648,
+          4.6103010004117095,
+          4.607177000252705,
+          4.608237999946141,
+          4.689288000008673,
+          4.9058859999604465,
+          4.629629999726603,
+          4.59669199972268,
+          4.592044999753853,
+          4.709076999915851,
+          5.116965000070195,
+          6.548168000335863,
+          8.486445000016829,
+          8.61878900013835,
+          10.165234999931272,
+          12.564560000100755,
+          11.149176999879273,
+          6.383315999755723,
+          4.951212999912968,
+          4.764207999869541,
+          4.827942000247276
+        ]
+      },
+      "sql_plan": [
+        {
+          "id": 1,
+          "select_type": "SIMPLE",
+          "table": "r",
+          "type": "range",
+          "possible_keys": "PRIMARY,ix_benchmark_branch_rating",
+          "key": "ix_benchmark_branch_rating",
+          "key_len": "8",
+          "ref": null,
+          "rows": "2489",
+          "Extra": "Using where; Using index; Using temporary; Using filesort"
+        },
+        {
+          "id": 1,
+          "select_type": "SIMPLE",
+          "table": "t",
+          "type": "ref",
+          "possible_keys": "PRIMARY,ix_benchmark_tag",
+          "key": "PRIMARY",
+          "key_len": "4",
+          "ref": "hawkerflow_benchmark.r.id",
+          "rows": "1",
+          "Extra": "Using where; Using index"
+        }
+      ],
+      "mongo_plan": {
+        "explainVersion": "1",
+        "stages": [
+          {
+            "$cursor": {
+              "queryPlanner": {
+                "namespace": "hawkerflow_benchmark.benchmark_reviews",
+                "indexFilterSet": false,
+                "parsedQuery": {
+                  "$and": [
+                    {
+                      "branch_id": {
+                        "$eq": 1
+                      }
+                    },
+                    {
+                      "rating": {
+                        "$lte": 2
+                      }
+                    }
+                  ]
+                },
+                "queryHash": "95422FF2",
+                "planCacheKey": "2FE50F15",
+                "maxIndexedOrSolutionsReached": false,
+                "maxIndexedAndSolutionsReached": false,
+                "maxScansToExplodeReached": false,
+                "winningPlan": {
+                  "stage": "PROJECTION_SIMPLE",
+                  "transformBy": {
+                    "tags": 1,
+                    "_id": 0
+                  },
+                  "inputStage": {
+                    "stage": "FETCH",
+                    "inputStage": {
+                      "stage": "IXSCAN",
+                      "keyPattern": {
+                        "branch_id": 1,
+                        "rating": 1
+                      },
+                      "indexName": "ix_benchmark_branch_rating",
+                      "isMultiKey": false,
+                      "multiKeyPaths": {
+                        "branch_id": [],
+                        "rating": []
+                      },
+                      "isUnique": false,
+                      "isSparse": false,
+                      "isPartial": false,
+                      "indexVersion": 2,
+                      "direction": "forward",
+                      "indexBounds": {
+                        "branch_id": [
+                          "[1, 1]"
+                        ],
+                        "rating": [
+                          "[-inf.0, 2]"
+                        ]
+                      }
+                    }
+                  }
+                },
+                "rejectedPlans": []
+              },
+              "executionStats": {
+                "executionSuccess": true,
+                "nReturned": 2489,
+                "executionTimeMillis": 8,
+                "totalKeysExamined": 2489,
+                "totalDocsExamined": 2489,
+                "executionStages": {
+                  "stage": "PROJECTION_SIMPLE",
+                  "nReturned": 2489,
+                  "executionTimeMillisEstimate": 2,
+                  "works": 2490,
+                  "advanced": 2489,
+                  "needTime": 0,
+                  "needYield": 0,
+                  "saveState": 3,
+                  "restoreState": 3,
+                  "isEOF": 1,
+                  "transformBy": {
+                    "tags": 1,
+                    "_id": 0
+                  },
+                  "inputStage": {
+                    "stage": "FETCH",
+                    "nReturned": 2489,
+                    "executionTimeMillisEstimate": 2,
+                    "works": 2490,
+                    "advanced": 2489,
+                    "needTime": 0,
+                    "needYield": 0,
+                    "saveState": 3,
+                    "restoreState": 3,
+                    "isEOF": 1,
+                    "docsExamined": 2489,
+                    "alreadyHasObj": 0,
+                    "inputStage": {
+                      "stage": "IXSCAN",
+                      "nReturned": 2489,
+                      "executionTimeMillisEstimate": 2,
+                      "works": 2490,
+                      "advanced": 2489,
+                      "needTime": 0,
+                      "needYield": 0,
+                      "saveState": 3,
+                      "restoreState": 3,
+                      "isEOF": 1,
+                      "keyPattern": {
+                        "branch_id": 1,
+                        "rating": 1
+                      },
+                      "indexName": "ix_benchmark_branch_rating",
+                      "isMultiKey": false,
+                      "multiKeyPaths": {
+                        "branch_id": [],
+                        "rating": []
+                      },
+                      "isUnique": false,
+                      "isSparse": false,
+                      "isPartial": false,
+                      "indexVersion": 2,
+                      "direction": "forward",
+                      "indexBounds": {
+                        "branch_id": [
+                          "[1, 1]"
+                        ],
+                        "rating": [
+                          "[-inf.0, 2]"
+                        ]
+                      },
+                      "keysExamined": 2489,
+                      "seeks": 1,
+                      "dupsTested": 0,
+                      "dupsDropped": 0
+                    }
+                  }
+                }
+              }
+            },
+            "nReturned": 2489,
+            "executionTimeMillisEstimate": 5
+          },
+          {
+            "$unwind": {
+              "path": "$tags"
+            },
+            "nReturned": 4871,
+            "executionTimeMillisEstimate": 5
+          },
+          {
+            "$match": {
+              "tags": {
+                "$in": [
+                  "cold",
+                  "poor value",
+                  "slow service",
+                  "too spicy",
+                  "wrong order"
+                ]
+              }
+            },
+            "nReturned": 3010,
+            "executionTimeMillisEstimate": 5
+          },
+          {
+            "$group": {
+              "_id": "$tags",
+              "count": {
+                "$sum": {
+                  "$const": 1
+                }
+              }
+            },
+            "maxAccumulatorMemoryUsageBytes": {
+              "count": 480
+            },
+            "totalOutputDataSizeBytes": 1225,
+            "usedDisk": false,
+            "spills": 0,
+            "spilledDataStorageSize": 0,
+            "numBytesSpilledEstimate": 0,
+            "spilledRecords": 0,
+            "nReturned": 5,
+            "executionTimeMillisEstimate": 5
+          },
+          {
+            "$sort": {
+              "sortKey": {
+                "count": -1,
+                "_id": 1
+              }
+            },
+            "totalDataSizeSortedBytesEstimate": 1625,
+            "usedDisk": false,
+            "spills": 0,
+            "spilledDataStorageSize": 0,
+            "nReturned": 5,
+            "executionTimeMillisEstimate": 5
+          }
+        ],
+        "serverInfo": {
+          "host": "ee691c92e100",
+          "port": 27018,
+          "version": "7.0.16",
+          "gitVersion": "18b949444cfdaa88e30b0e10243bc18268251c1f"
+        },
+        "serverParameters": {
+          "internalQueryFacetBufferSizeBytes": 104857600,
+          "internalQueryFacetMaxOutputDocSizeBytes": 104857600,
+          "internalLookupStageIntermediateDocumentMaxSizeBytes": 104857600,
+          "internalDocumentSourceGroupMaxMemoryBytes": 104857600,
+          "internalQueryMaxBlockingSortMemoryUsageBytes": 104857600,
+          "internalQueryProhibitBlockingMergeOnMongoS": 0,
+          "internalQueryMaxAddToSetBytes": 104857600,
+          "internalDocumentSourceSetWindowFieldsMaxMemoryBytes": 104857600,
+          "internalQueryFrameworkControl": "trySbeRestricted"
+        },
+        "command": {
+          "aggregate": "benchmark_reviews",
+          "pipeline": [
+            {
+              "$match": {
+                "branch_id": 1,
+                "rating": {
+                  "$lte": 2
+                }
+              }
+            },
+            {
+              "$unwind": "$tags"
+            },
+            {
+              "$match": {
+                "tags": {
+                  "$in": [
+                    "cold",
+                    "slow service",
+                    "too spicy",
+                    "wrong order",
+                    "poor value"
+                  ]
+                }
+              }
+            },
+            {
+              "$group": {
+                "_id": "$tags",
+                "count": {
+                  "$sum": 1
+                }
+              }
+            },
+            {
+              "$sort": {
+                "count": -1,
+                "_id": 1
+              }
+            }
+          ],
+          "cursor": {},
+          "$db": "hawkerflow_benchmark"
+        },
+        "ok": 1.0
+      }
+    }
+  ],
+  "limitations": [
+    "One workload; not a general SQL versus NoSQL ranking.",
+    "Warm-cache timings include connector/network and full result fetching.",
+    "Generated reviews do not imply real customer feedback.",
+    "Database caches, CPU quotas and background processes affect timings."
+  ]
+}

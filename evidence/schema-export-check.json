@@ -1,0 +1,6 @@
+{
+  "tables": 12,
+  "views": 2,
+  "status": "passed",
+  "engine": "MariaDB 10.11.14"
+}

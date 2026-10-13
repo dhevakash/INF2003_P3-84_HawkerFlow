@@ -1,0 +1,282 @@
+{
+  "reviews": {
+    "$jsonSchema": {
+      "bsonType": "object",
+      "required": [
+        "order_id",
+        "customer_id",
+        "branch_id",
+        "rating",
+        "text",
+        "tags",
+        "category_ratings",
+        "replies",
+        "moderation_status",
+        "created_at",
+        "updated_at"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "_id": {
+          "bsonType": "objectId"
+        },
+        "order_id": {
+          "bsonType": [
+            "int",
+            "long"
+          ],
+          "minimum": 1
+        },
+        "customer_id": {
+          "bsonType": [
+            "int",
+            "long"
+          ],
+          "minimum": 1
+        },
+        "branch_id": {
+          "bsonType": [
+            "int",
+            "long"
+          ],
+          "minimum": 1
+        },
+        "rating": {
+          "bsonType": [
+            "int",
+            "long"
+          ],
+          "minimum": 1,
+          "maximum": 5
+        },
+        "text": {
+          "bsonType": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "tags": {
+          "bsonType": "array",
+          "maxItems": 10,
+          "uniqueItems": true,
+          "items": {
+            "bsonType": "string",
+            "minLength": 1,
+            "maxLength": 40
+          }
+        },
+        "category_ratings": {
+          "bsonType": "object",
+          "additionalProperties": false,
+          "properties": {
+            "food": {
+              "bsonType": [
+                "int",
+                "long"
+              ],
+              "minimum": 1,
+              "maximum": 5
+            },
+            "service": {
+              "bsonType": [
+                "int",
+                "long"
+              ],
+              "minimum": 1,
+              "maximum": 5
+            },
+            "value": {
+              "bsonType": [
+                "int",
+                "long"
+              ],
+              "minimum": 1,
+              "maximum": 5
+            },
+            "cleanliness": {
+              "bsonType": [
+                "int",
+                "long"
+              ],
+              "minimum": 1,
+              "maximum": 5
+            },
+            "ambience": {
+              "bsonType": [
+                "int",
+                "long"
+              ],
+              "minimum": 1,
+              "maximum": 5
+            },
+            "speed": {
+              "bsonType": [
+                "int",
+                "long"
+              ],
+              "minimum": 1,
+              "maximum": 5
+            }
+          }
+        },
+        "moderation_status": {
+          "enum": [
+            "published",
+            "hidden"
+          ]
+        },
+        "replies": {
+          "bsonType": "array",
+          "maxItems": 20,
+          "items": {
+            "bsonType": "object",
+            "required": [
+              "author_user_id",
+              "text",
+              "created_at"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "author_user_id": {
+                "bsonType": [
+                  "int",
+                  "long"
+                ],
+                "minimum": 1
+              },
+              "text": {
+                "bsonType": "string",
+                "minLength": 1,
+                "maxLength": 1000
+              },
+              "created_at": {
+                "bsonType": "date"
+              }
+            }
+          }
+        },
+        "created_at": {
+          "bsonType": "date"
+        },
+        "updated_at": {
+          "bsonType": "date"
+        }
+      }
+    }
+  },
+  "customer_profiles": {
+    "$jsonSchema": {
+      "bsonType": "object",
+      "additionalProperties": false,
+      "required": [
+        "customer_id",
+        "dietary_preferences",
+        "favourite_categories",
+        "communication_preferences",
+        "milestones",
+        "updated_at"
+      ],
+      "properties": {
+        "_id": {
+          "bsonType": "objectId"
+        },
+        "customer_id": {
+          "bsonType": [
+            "int",
+            "long"
+          ],
+          "minimum": 1
+        },
+        "dietary_preferences": {
+          "bsonType": "array",
+          "maxItems": 10,
+          "uniqueItems": true,
+          "items": {
+            "bsonType": "string",
+            "minLength": 1,
+            "maxLength": 40
+          }
+        },
+        "favourite_categories": {
+          "bsonType": "array",
+          "maxItems": 10,
+          "uniqueItems": true,
+          "items": {
+            "bsonType": "string",
+            "minLength": 1,
+            "maxLength": 40
+          }
+        },
+        "communication_preferences": {
+          "bsonType": "object",
+          "additionalProperties": false,
+          "properties": {
+            "email": {
+              "bsonType": "bool"
+            },
+            "sms": {
+              "bsonType": "bool"
+            },
+            "push": {
+              "bsonType": "bool"
+            }
+          }
+        },
+        "milestones": {
+          "bsonType": "object",
+          "maxProperties": 20,
+          "additionalProperties": {
+            "bsonType": "string",
+            "maxLength": 100
+          }
+        },
+        "updated_at": {
+          "bsonType": "date"
+        }
+      }
+    }
+  },
+  "external_review_examples": {
+    "$jsonSchema": {
+      "bsonType": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_record_id",
+        "text",
+        "sentiment",
+        "source"
+      ],
+      "properties": {
+        "_id": {
+          "bsonType": "objectId"
+        },
+        "source_record_id": {
+          "bsonType": [
+            "int",
+            "long"
+          ],
+          "minimum": 0
+        },
+        "text": {
+          "bsonType": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "sentiment": {
+          "bsonType": [
+            "int",
+            "long"
+          ],
+          "enum": [
+            0,
+            1
+          ]
+        },
+        "source": {
+          "enum": [
+            "uci_yelp"
+          ]
+        }
+      }
+    }
+  }
+}

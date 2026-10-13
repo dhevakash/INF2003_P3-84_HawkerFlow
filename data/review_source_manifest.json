@@ -1,0 +1,50 @@
+{
+  "title": "Sentiment Labelled Sentences — Yelp subset",
+  "publisher": "UCI Machine Learning Repository",
+  "creator": "Dimitrios Kotzias",
+  "publication_year": 2015,
+  "doi": "10.24432/C57604",
+  "source_url": "https://archive.ics.uci.edu/dataset/331/sentiment+labelled+sentences",
+  "download_url": "https://archive.ics.uci.edu/static/public/331/sentiment+labelled+sentences.zip",
+  "licence": "CC BY 4.0",
+  "licence_url": "https://creativecommons.org/licenses/by/4.0/",
+  "retrieved_at_utc": "2026-10-02T09:22:41.174732+00:00",
+  "selected_archive_member": "sentiment labelled sentences/yelp_labelled.txt",
+  "records": 1000,
+  "sentiment_counts": {
+    "negative": 500,
+    "positive": 500
+  },
+  "files": {
+    "uci_sentiment_source.zip": {
+      "bytes": 84188,
+      "sha256": "afc26626d710899948693e1a61405dce197f57ffa719fa1130d346b4cc095343"
+    },
+    "uci_yelp_labelled.txt": {
+      "bytes": 61320,
+      "sha256": "c76468b7b5c6e56a0804d728345c5f84aa2142ddb214420f61cc9cfd4c00d2ea"
+    },
+    "uci_sentiment_readme.txt": {
+      "bytes": 1070,
+      "sha256": "736c26aa54e3614459e50314ece0698051f0923d108ed53938dcb1aa0483bfd4"
+    },
+    "external_review_examples.json": {
+      "bytes": 157243,
+      "sha256": "bdeceb7abf39ab847d517a2c1e6c7c808bac693cdc6d4d087d67e336bb41d979"
+    }
+  },
+  "transformations": [
+    "Extract Yelp member only",
+    "Split final tab into sentence and integer sentiment",
+    "Assign reproducible source row number",
+    "Preserve sentence text; no inferred ratings/tags/locations"
+  ],
+  "limitations": [
+    "Balanced research sample, not a representative complaint rate",
+    "No neutral sentences",
+    "No dates, locations, customer IDs or purchase links",
+    "Never joined to fictional local branches"
+  ],
+  "citation": "Kotzias, D. (2015). Sentiment Labelled Sentences [Dataset]. UCI Machine Learning Repository. https://doi.org/10.24432/C57604",
+  "paper_citation": "Kotzias, D., Denil, M., de Freitas, N., & Smyth, P. (2015). From Group to Individual Labels Using Deep Features. KDD."
+}

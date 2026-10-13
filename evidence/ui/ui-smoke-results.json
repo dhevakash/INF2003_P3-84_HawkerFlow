@@ -1,0 +1,25 @@
+{
+  "base_url": "http://127.0.0.1:8000",
+  "checks": [
+    "Manager menu and recipe creation use real SQL APIs",
+    "Checkout updates receipt, one order, loyalty points and recipe stock",
+    "Manager delivery raises live stock by the recorded quantity",
+    "Menu update preserves historic receipt prices; dish deactivation succeeds",
+    "Customer owns order/review/profile actions and cannot see staff navigation",
+    "Manager replies, SQL/Mongo analytics, separate 1000-sentence UCI benchmark, responsive layout",
+    "Owner confirms deletion; review disappears after successful API deletion",
+    "Cashier has assigned-branch access and no manager controls"
+  ],
+  "writes": {
+    "menu_item_id": 22,
+    "order_id": 202,
+    "restock": {
+      "ingredient_id": 6,
+      "quantity": 1
+    },
+    "review_id_deleted_at_end": "6abf7c2b1a1490ddb33de0cb"
+  },
+  "js_errors": [],
+  "before_order_count": 41,
+  "status": "passed"
+}

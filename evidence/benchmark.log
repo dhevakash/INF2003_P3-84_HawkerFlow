@@ -1,0 +1,4 @@
+Verified 1000 identical reviews: SQL median 0.347 ms; Mongo median 0.397 ms
+Verified 10000 identical reviews: SQL median 1.073 ms; Mongo median 1.089 ms
+Verified 50000 identical reviews: SQL median 4.996 ms; Mongo median 5.086 ms
+Saved measured JSON to evidence/benchmark.json and CSV to evidence/benchmark.csv

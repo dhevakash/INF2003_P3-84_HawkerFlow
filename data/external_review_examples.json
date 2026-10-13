@@ -1,0 +1,6002 @@
+[
+  {
+    "source_record_id": 1,
+    "text": "Wow... Loved this place.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 2,
+    "text": "Crust is not good.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 3,
+    "text": "Not tasty and the texture was just nasty.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 4,
+    "text": "Stopped by during the late May bank holiday off Rick Steve recommendation and loved it.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 5,
+    "text": "The selection on the menu was great and so were the prices.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 6,
+    "text": "Now I am getting angry and I want my damn pho.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 7,
+    "text": "Honeslty it didn't taste THAT fresh.)",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 8,
+    "text": "The potatoes were like rubber and you could tell they had been made up ahead of time being kept under a warmer.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 9,
+    "text": "The fries were great too.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 10,
+    "text": "A great touch.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 11,
+    "text": "Service was very prompt.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 12,
+    "text": "Would not go back.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 13,
+    "text": "The cashier had no care what so ever on what I had to say it still ended up being wayyy overpriced.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 14,
+    "text": "I tried the Cape Cod ravoli, chicken,with cranberry...mmmm!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 15,
+    "text": "I was disgusted because I was pretty sure that was human hair.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 16,
+    "text": "I was shocked because no signs indicate cash only.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 17,
+    "text": "Highly recommended.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 18,
+    "text": "Waitress was a little slow in service.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 19,
+    "text": "This place is not worth your time, let alone Vegas.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 20,
+    "text": "did not like at all.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 21,
+    "text": "The Burrittos Blah!",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 22,
+    "text": "The food, amazing.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 23,
+    "text": "Service is also cute.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 24,
+    "text": "I could care less... The interior is just beautiful.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 25,
+    "text": "So they performed.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 26,
+    "text": "That's right....the red velvet cake.....ohhh this stuff is so good.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 27,
+    "text": "- They never brought a salad we asked for.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 28,
+    "text": "This hole in the wall has great Mexican street tacos, and friendly staff.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 29,
+    "text": "Took an hour to get our food only 4 tables in restaurant my food was Luke warm, Our sever was running around like he was totally overwhelmed.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 30,
+    "text": "The worst was the salmon sashimi.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 31,
+    "text": "Also there are combos like a burger, fries, and beer for 23 which is a decent deal.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 32,
+    "text": "This was like the final blow!",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 33,
+    "text": "I found this place by accident and I could not be happier.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 34,
+    "text": "seems like a good quick place to grab a bite of some familiar pub food, but do yourself a favor and look elsewhere.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 35,
+    "text": "Overall, I like this place a lot.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 36,
+    "text": "The only redeeming quality of the restaurant was that it was very inexpensive.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 37,
+    "text": "Ample portions and good prices.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 38,
+    "text": "Poor service, the waiter made me feel like I was stupid every time he came to the table.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 39,
+    "text": "My first visit to Hiro was a delight!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 40,
+    "text": "Service sucks.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 41,
+    "text": "The shrimp tender and moist.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 42,
+    "text": "There is not a deal good enough that would drag me into that establishment again.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 43,
+    "text": "Hard to judge whether these sides were good because we were grossed out by the melted styrofoam and didn't want to eat it for fear of getting sick.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 44,
+    "text": "On a positive note, our server was very attentive and provided great service.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 45,
+    "text": "Frozen pucks of disgust, with some of the worst people behind the register.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 46,
+    "text": "The only thing I did like was the prime rib and dessert section.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 47,
+    "text": "It's too bad the food is so damn generic.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 48,
+    "text": "The burger is good beef, cooked just right.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 49,
+    "text": "If you want a sandwich just go to any Firehouse!!!!!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 50,
+    "text": "My side Greek salad with the Greek dressing was so tasty, and the pita and hummus was very refreshing.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 51,
+    "text": "We ordered the duck rare and it was pink and tender on the inside with a nice char on the outside.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 52,
+    "text": "He came running after us when he realized my husband had left his sunglasses on the table.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 53,
+    "text": "Their chow mein is so good!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 54,
+    "text": "They have horrible attitudes towards customers, and talk down to each one when customers don't enjoy their food.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 55,
+    "text": "The portion was huge!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 56,
+    "text": "Loved it...friendly servers, great food, wonderful and imaginative menu.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 57,
+    "text": "The Heart Attack Grill in downtown Vegas is an absolutely flat-lined excuse for a restaurant.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 58,
+    "text": "Not much seafood and like 5 strings of pasta at the bottom.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 59,
+    "text": "The salad had just the right amount of sauce to not over power the scallop, which was perfectly cooked.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 60,
+    "text": "The ripped banana was not only ripped, but petrified and tasteless.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 61,
+    "text": "At least think to refill my water before I struggle to wave you over for 10 minutes.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 62,
+    "text": "This place receives stars for their APPETIZERS!!!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 63,
+    "text": "The cocktails are all handmade and delicious.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 64,
+    "text": "We'd definitely go back here again.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 65,
+    "text": "We are so glad we found this place.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 66,
+    "text": "Great food and service, huge portions and they give a military discount.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 67,
+    "text": "Always a great time at Dos Gringos!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 68,
+    "text": "Update.....went back for a second time and it was still just as amazing",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 69,
+    "text": "We got the food and apparently they have never heard of salt and the batter on the fish was chewy.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 70,
+    "text": "A great way to finish a great.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 71,
+    "text": "The deal included 5 tastings and 2 drinks, and Jeff went above and beyond what we expected.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 72,
+    "text": "- Really, really good rice, all the time.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 73,
+    "text": "The service was meh.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 74,
+    "text": "It took over 30 min to get their milkshake, which was nothing more than chocolate milk.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 75,
+    "text": "I guess I should have known that this place would suck, because it is inside of the Excalibur, but I didn't use my common sense.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 76,
+    "text": "The scallop dish is quite appalling for value as well.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 77,
+    "text": "2 times - Very Bad Customer Service !",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 78,
+    "text": "The sweet potato fries were very good and seasoned well.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 79,
+    "text": "Today is the second time I've been to their lunch buffet and it was pretty good.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 80,
+    "text": "There is so much good food in Vegas that I feel cheated for wasting an eating opportunity by going to Rice and Company.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 81,
+    "text": "Coming here is like experiencing an underwhelming relationship where both parties can't wait for the other person to ask to break up.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 82,
+    "text": "walked in and the place smelled like an old grease trap and only 2 others there eating.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 83,
+    "text": "The turkey and roast beef were bland.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 84,
+    "text": "This place has it!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 85,
+    "text": "The pan cakes everyone are raving about taste like a sugary disaster tailored to the palate of a six year old.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 86,
+    "text": "I love the Pho and the spring rolls oh so yummy you have to try.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 87,
+    "text": "The poor batter to meat ratio made the chicken tenders very unsatisfying.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 88,
+    "text": "All I have to say is the food was amazing!!!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 89,
+    "text": "Omelets are to die for!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 90,
+    "text": "Everything was fresh and delicious!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 91,
+    "text": "In summary, this was a largely disappointing dining experience.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 92,
+    "text": "It's like a really sexy party in your mouth, where you're outrageously flirting with the hottest person at the party.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 93,
+    "text": "Never been to Hard Rock Casino before, WILL NEVER EVER STEP FORWARD IN IT AGAIN!",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 94,
+    "text": "Best breakfast buffet!!!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 95,
+    "text": "say bye bye to your tip lady!",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 96,
+    "text": "We'll never go again.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 97,
+    "text": "Will be back again!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 98,
+    "text": "Food arrived quickly!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 99,
+    "text": "It was not good.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 100,
+    "text": "On the up side, their cafe serves really good food.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 101,
+    "text": "Our server was fantastic and when he found out the wife loves roasted garlic and bone marrow, he added extra to our meal and another marrow to go!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 102,
+    "text": "The only good thing was our waiter, he was very helpful and kept the bloddy mary's coming.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 103,
+    "text": "Best Buffet in town, for the price you cannot beat it.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 104,
+    "text": "I LOVED their mussels cooked in this wine reduction, the duck was tender, and their potato dishes were delicious.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 105,
+    "text": "This is one of the better buffets that I have been to.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 106,
+    "text": "So we went to Tigerlilly and had a fantastic afternoon!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 107,
+    "text": "The food was delicious, our bartender was attentive and personable AND we got a great deal!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 108,
+    "text": "The ambience is wonderful and there is music playing.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 109,
+    "text": "Will go back next trip out.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 110,
+    "text": "Sooooo good!!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 111,
+    "text": "REAL sushi lovers, let's be honest - Yama is not that good.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 112,
+    "text": "At least 40min passed in between us ordering and the food arriving, and it wasn't that busy.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 113,
+    "text": "This is a really fantastic Thai restaurant which is definitely worth a visit.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 114,
+    "text": "Nice, spicy and tender.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 115,
+    "text": "Good prices.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 116,
+    "text": "Check it out.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 117,
+    "text": "It was pretty gross!",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 118,
+    "text": "I've had better atmosphere.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 119,
+    "text": "Kind of hard to mess up a steak but they did.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 120,
+    "text": "Although I very much liked the look and sound of this place, the actual experience was a bit disappointing.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 121,
+    "text": "I just don't know how this place managed to served the blandest food I have ever eaten when they are preparing Indian cuisine.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 122,
+    "text": "Worst service to boot, but that is the least of their worries.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 123,
+    "text": "Service was fine and the waitress was friendly.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 124,
+    "text": "The guys all had steaks, and our steak loving son who has had steak at the best and worst places said it was the best steak he's ever eaten.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 125,
+    "text": "We thought you'd have to venture further away to get good sushi, but this place really hit the spot that night.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 126,
+    "text": "Host staff were, for lack of a better word, BITCHES!",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 127,
+    "text": "Bland... Not a liking this place for a number of reasons and I don't want to waste time on bad reviewing.. I'll leave it at that...",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 128,
+    "text": "Phenomenal food, service and ambiance.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 129,
+    "text": "I wouldn't return.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 130,
+    "text": "Definitely worth venturing off the strip for the pork belly, will return next time I'm in Vegas.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 131,
+    "text": "This place is way too overpriced for mediocre food.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 132,
+    "text": "Penne vodka excellent!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 133,
+    "text": "They have a good selection of food including a massive meatloaf sandwich, a crispy chicken wrap, a delish tuna melt and some tasty burgers.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 134,
+    "text": "The management is rude.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 135,
+    "text": "Delicious NYC bagels, good selections of cream cheese, real Lox with capers even.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 136,
+    "text": "Great Subway, in fact it's so good when you come here every other Subway will not meet your expectations.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 137,
+    "text": "I had a seriously solid breakfast here.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 138,
+    "text": "This is one of the best bars with food in Vegas.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 139,
+    "text": "He was extremely rude and really, there are so many other restaurants I would love to dine at during a weekend in Vegas.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 140,
+    "text": "My drink was never empty and he made some really great menu suggestions.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 141,
+    "text": "Don't do it!!!!",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 142,
+    "text": "The waiter wasn't helpful or friendly and rarely checked on us.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 143,
+    "text": "My husband and I ate lunch here and were very disappointed with the food and service.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 144,
+    "text": "And the red curry had so much bamboo shoots and wasn't very tasty to me.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 145,
+    "text": "Nice blanket of moz over top but i feel like this was done to cover up the subpar food.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 146,
+    "text": "The bathrooms are clean and the place itself is well decorated.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 147,
+    "text": "The menu is always changing, food quality is going down & service is extremely slow.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 148,
+    "text": "The service was a little slow , considering that were served by 3 people servers so the food was coming in a slow pace.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 149,
+    "text": "I give it 2 thumbs down",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 150,
+    "text": "We watched our waiter pay a lot more attention to other tables and ignore us.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 151,
+    "text": "My fiancé and I came in the middle of the day and we were greeted and seated right away.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 152,
+    "text": "This is a great restaurant at the Mandalay Bay.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 153,
+    "text": "We waited for forty five minutes in vain.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 154,
+    "text": "Crostini that came with the salad was stale.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 155,
+    "text": "Some highlights : Great quality nigiri here!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 156,
+    "text": "the staff is friendly and the joint is always clean.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 157,
+    "text": "this was a different cut than the piece the other day but still wonderful and tender s well as well flavored.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 158,
+    "text": "I ordered the Voodoo pasta and it was the first time I'd had really excellent pasta since going gluten free several years ago.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 159,
+    "text": "this place is good.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 160,
+    "text": "Unfortunately, we must have hit the bakery on leftover day because everything we ordered was STALE.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 161,
+    "text": "I came back today since they relocated and still not impressed.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 162,
+    "text": "I was seated immediately.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 163,
+    "text": "Their menu is diverse, and reasonably priced.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 164,
+    "text": "Avoid at all cost!",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 165,
+    "text": "Restaurant is always full but never a wait.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 166,
+    "text": "DELICIOUS!!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 167,
+    "text": "This place is hands-down one of the best places to eat in the Phoenix metro area.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 168,
+    "text": "So don't go there if you are looking for good food...",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 169,
+    "text": "I've never been treated so bad.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 170,
+    "text": "Bacon is hella salty.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 171,
+    "text": "We also ordered the spinach and avocado salad; the ingredients were sad and the dressing literally had zero taste.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 172,
+    "text": "This really is how Vegas fine dining used to be, right down to the menus handed to the ladies that have no prices listed.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 173,
+    "text": "The waitresses are very friendly.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 174,
+    "text": "Lordy, the Khao Soi is a dish that is not to be missed for curry lovers!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 175,
+    "text": "Everything on the menu is terrific and we were also thrilled that they made amazing accommodations for our vegetarian daughter.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 176,
+    "text": "Perhaps I caught them on an off night judging by the other reviews, but I'm not inspired to go back.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 177,
+    "text": "The service here leaves a lot to be desired.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 178,
+    "text": "The atmosphere is modern and hip, while maintaining a touch of coziness.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 179,
+    "text": "Not a weekly haunt, but definitely a place to come back to every once in a while.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 180,
+    "text": "We literally sat there for 20 minutes with no one asking to take our order.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 181,
+    "text": "The burger had absolutely no flavor - the meat itself was totally bland, the burger was overcooked and there was no charcoal flavor.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 182,
+    "text": "I also decided not to send it back because our waitress looked like she was on the verge of having a heart attack.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 183,
+    "text": "I dressed up to be treated so rudely!",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 184,
+    "text": "It was probably dirt.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 185,
+    "text": "Love this place, hits the spot when I want something healthy but not lacking in quantity or flavor.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 186,
+    "text": "I ordered the Lemon raspberry ice cocktail which was also incredible.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 187,
+    "text": "The food sucked, which we expected but it sucked more than we could have imagined.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 188,
+    "text": "Interesting decor.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 189,
+    "text": "What I really like there is the crepe station.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 190,
+    "text": "Also were served hot bread and butter, and home made potato chips with bacon bits on top....very original and very good.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 191,
+    "text": "you can watch them preparing the delicious food!)",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 192,
+    "text": "Both of the egg rolls were fantastic.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 193,
+    "text": "When my order arrived, one of the gyros was missing.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 194,
+    "text": "I had a salad with the wings, and some ice cream for dessert and left feeling quite satisfied.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 195,
+    "text": "I'm not really sure how Joey's was voted best hot dog in the Valley by readers of Phoenix Magazine.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 196,
+    "text": "The best place to go for a tasty bowl of Pho!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 197,
+    "text": "The live music on Fridays totally blows.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 198,
+    "text": "I've never been more insulted or felt disrespected.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 199,
+    "text": "Very friendly staff.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 200,
+    "text": "It is worth the drive.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 201,
+    "text": "I had heard good things about this place, but it exceeding every hope I could have dreamed of.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 202,
+    "text": "Food was great and so was the serivce!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 203,
+    "text": "The warm beer didn't help.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 204,
+    "text": "Great brunch spot.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 205,
+    "text": "Service is friendly and inviting.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 206,
+    "text": "Very good lunch spot.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 207,
+    "text": "I've lived here since 1979 and this was the first (and last) time I've stepped foot into this place.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 208,
+    "text": "The WORST EXPERIENCE EVER.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 209,
+    "text": "Must have been an off night at this place.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 210,
+    "text": "The sides are delish - mixed mushrooms, yukon gold puree, white corn - beateous.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 211,
+    "text": "If that bug never showed up I would have given a 4 for sure, but on the other side of the wall where this bug was climbing was the kitchen.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 212,
+    "text": "For about 10 minutes, we we're waiting for her salad when we realized that it wasn't coming any time soon.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 213,
+    "text": "My friend loved the salmon tartar.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 214,
+    "text": "Won't go back.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 215,
+    "text": "Extremely Tasty!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 216,
+    "text": "Waitress was good though!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 217,
+    "text": "Soggy and not good.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 218,
+    "text": "The Jamaican mojitos are delicious.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 219,
+    "text": "Which are small and not worth the price.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 220,
+    "text": "- the food is rich so order accordingly.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 221,
+    "text": "The shower area is outside so you can only rinse, not take a full shower, unless you don't mind being nude for everyone to see!",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 222,
+    "text": "The service was a bit lacking.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 223,
+    "text": "Lobster Bisque, Bussell Sprouts, Risotto, Filet ALL needed salt and pepper..and of course there is none at the tables.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 224,
+    "text": "Hopefully this bodes for them going out of business and someone who can cook can come in.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 225,
+    "text": "It was either too cold, not enough flavor or just bad.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 226,
+    "text": "I loved the bacon wrapped dates.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 227,
+    "text": "This is an unbelievable BARGAIN!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 228,
+    "text": "The folks at Otto always make us feel so welcome and special.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 229,
+    "text": "As for the \"mains,\" also uninspired.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 230,
+    "text": "This is the place where I first had pho and it was amazing!!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 231,
+    "text": "This wonderful experience made this place a must-stop whenever we are in town again.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 232,
+    "text": "If the food isn't bad enough for you, then enjoy dealing with the world's worst/annoying drunk people.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 233,
+    "text": "Very very fun chef.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 234,
+    "text": "Ordered a double cheeseburger & got a single patty that was falling apart (picture uploaded) Yeah, still sucks.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 235,
+    "text": "Great place to have a couple drinks and watch any and all sporting events as the walls are covered with TV's.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 236,
+    "text": "If it were possible to give them zero stars, they'd have it.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 237,
+    "text": "The descriptions said \"yum yum sauce\" and another said \"eel sauce\", yet another said \"spicy mayo\"...well NONE of the rolls had sauces on them.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 238,
+    "text": "I'd say that would be the hardest decision... Honestly, all of M's dishes taste how they are supposed to taste (amazing).",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 239,
+    "text": "If she had not rolled the eyes we may have stayed... Not sure if we will go back and try it again.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 240,
+    "text": "Everyone is very attentive, providing excellent customer service.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 241,
+    "text": "Horrible - don't waste your time and money.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 242,
+    "text": "Now this dish was quite flavourful.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 243,
+    "text": "By this time our side of the restaurant was almost empty so there was no excuse.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 244,
+    "text": "(It wasn't busy either) Also, the building was FREEZING cold.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 245,
+    "text": "like the other reviewer said \"you couldn't pay me to eat at this place again.\"",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 246,
+    "text": "-Drinks took close to 30 minutes to come out at one point.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 247,
+    "text": "Seriously flavorful delights, folks.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 248,
+    "text": "Much better than the other AYCE sushi place I went to in Vegas.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 249,
+    "text": "The lighting is just dark enough to set the mood.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 250,
+    "text": "Based on the sub-par service I received and no effort to show their gratitude for my business I won't be going back.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 251,
+    "text": "Owner's are really great people.!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 252,
+    "text": "There is nothing privileged about working/eating there.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 253,
+    "text": "The Greek dressing was very creamy and flavorful.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 254,
+    "text": "Overall, I don't think that I would take my parents to this place again because they made most of the similar complaints that I silently felt too.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 255,
+    "text": "Now the pizza itself was good the peanut sauce was very tasty.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 256,
+    "text": "We had 7 at our table and the service was pretty fast.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 257,
+    "text": "Fantastic service here.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 258,
+    "text": "I as well would've given godfathers zero stars if possible.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 259,
+    "text": "They know how to make them here.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 260,
+    "text": "very tough and very short on flavor!",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 261,
+    "text": "I hope this place sticks around.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 262,
+    "text": "I have been in more than a few bars in Vegas, and do not ever recall being charged for tap water.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 263,
+    "text": "The restaurant atmosphere was exquisite.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 264,
+    "text": "Good service, very clean, and inexpensive, to boot!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 265,
+    "text": "The seafood was fresh and generous in portion.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 266,
+    "text": "Plus, it's only 8 bucks.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 267,
+    "text": "The service was not up to par, either.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 268,
+    "text": "Thus far, have only visited twice and the food was absolutely delicious each time.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 269,
+    "text": "Just as good as when I had it more than a year ago!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 270,
+    "text": "For a self proclaimed coffee cafe, I was wildly disappointed.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 271,
+    "text": "The Veggitarian platter is out of this world!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 272,
+    "text": "You cant go wrong with any of the food here.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 273,
+    "text": "You can't beat that.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 274,
+    "text": "Stopped by this place while in Madison for the Ironman, very friendly, kind staff.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 275,
+    "text": "The chefs were friendly and did a good job.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 276,
+    "text": "I've had better, not only from dedicated boba tea spots, but even from Jenni Pho.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 277,
+    "text": "I liked the patio and the service was outstanding.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 278,
+    "text": "The goat taco didn't skimp on the meat and wow what FLAVOR!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 279,
+    "text": "I think not again",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 280,
+    "text": "I had the mac salad and it was pretty bland so I will not be getting that again.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 281,
+    "text": "I went to Bachi Burger on a friend's recommendation and was not disappointed.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 282,
+    "text": "Service stinks here!",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 283,
+    "text": "I waited and waited.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 284,
+    "text": "This place is not quality sushi, it is not a quality restaurant.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 285,
+    "text": "I would definitely recommend the wings as well as the pizza.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 286,
+    "text": "Great Pizza and Salads!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 287,
+    "text": "Things that went wrong: - They burned the saganaki.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 288,
+    "text": "We waited an hour for what was a breakfast I could have done 100 times better at home.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 289,
+    "text": "This place is amazing!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 290,
+    "text": "I hate to disagree with my fellow Yelpers, but my husband and I were so disappointed with this place.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 291,
+    "text": "Waited 2 hours & never got either of our pizzas as many other around us who came in later did!",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 292,
+    "text": "Just don't know why they were so slow.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 293,
+    "text": "The staff is great, the food is delish, and they have an incredible beer selection.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 294,
+    "text": "I live in the neighborhood so I am disappointed I won't be back here, because it is a convenient location.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 295,
+    "text": "I didn't know pulled pork could be soooo delicious.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 296,
+    "text": "You get incredibly fresh fish, prepared with care.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 297,
+    "text": "Before I go in to why I gave a 1 star rating please know that this was my third time eating at Bachi burger before writing a review.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 298,
+    "text": "I love the fact that everything on their menu is worth it.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 299,
+    "text": "Never again will I be dining at this place!",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 300,
+    "text": "The food was excellent and service was very good.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 301,
+    "text": "Good beer & drink selection and good food selection.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 302,
+    "text": "Please stay away from the shrimp stir fried noodles.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 303,
+    "text": "The potato chip order was sad... I could probably count how many chips were in that box and it was probably around 12.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 304,
+    "text": "Food was really boring.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 305,
+    "text": "Good Service-check!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 306,
+    "text": "This greedy corporation will NEVER see another dime from me!",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 307,
+    "text": "Will never, ever go back.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 308,
+    "text": "As much as I'd like to go back, I can't get passed the atrocious service and will never return.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 309,
+    "text": "In the summer, you can dine in a charming outdoor patio - so very delightful.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 310,
+    "text": "I did not expect this to be so good!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 311,
+    "text": "Fantastic food!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 312,
+    "text": "She ordered a toasted English muffin that came out untoasted.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 313,
+    "text": "The food was very good.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 314,
+    "text": "Never going back.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 315,
+    "text": "Great food for the price, which is very high quality and house made.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 316,
+    "text": "The bus boy on the other hand was so rude.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 317,
+    "text": "By this point, my friends and I had basically figured out this place was a joke and didn't mind making it publicly and loudly known.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 318,
+    "text": "Back to good BBQ, lighter fare, reasonable pricing and tell the public they are back to the old ways.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 319,
+    "text": "And considering the two of us left there very full and happy for about $20, you just can't go wrong.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 320,
+    "text": "All the bread is made in-house!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 321,
+    "text": "The only downside is the service.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 322,
+    "text": "Also, the fries are without a doubt the worst fries I've ever had.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 323,
+    "text": "Service was exceptional and food was a good as all the reviews.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 324,
+    "text": "A couple of months later, I returned and had an amazing meal.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 325,
+    "text": "Favorite place in town for shawarrrrrrma!!!!!!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 326,
+    "text": "The black eyed peas and sweet potatoes... UNREAL!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 327,
+    "text": "You won't be disappointed.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 328,
+    "text": "They could serve it with just the vinaigrette and it may make for a better overall dish, but it was still very good.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 329,
+    "text": "I go to far too many places and I've never seen any restaurant that serves a 1 egg breakfast, especially for $4.00.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 330,
+    "text": "When my mom and I got home she immediately got sick and she only had a few bites of salad.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 331,
+    "text": "The servers are not pleasant to deal with and they don't always honor Pizza Hut coupons.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 332,
+    "text": "Both of them were truly unbelievably good, and I am so glad we went back.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 333,
+    "text": "We had fantastic service, and were pleased by the atmosphere.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 334,
+    "text": "Everything was gross.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 335,
+    "text": "I love this place.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 336,
+    "text": "Great service and food.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 337,
+    "text": "First - the bathrooms at this location were dirty- Seat covers were not replenished & just plain yucky!!!",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 338,
+    "text": "The burger... I got the \"Gold Standard\" a $17 burger and was kind of disappointed.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 339,
+    "text": "OMG, the food was delicioso!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 340,
+    "text": "There is nothing authentic about this place.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 341,
+    "text": "the spaghetti is nothing special whatsoever.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 342,
+    "text": "Of all the dishes, the salmon was the best, but all were great.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 343,
+    "text": "The vegetables are so fresh and the sauce feels like authentic Thai.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 344,
+    "text": "It's worth driving up from Tucson!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 345,
+    "text": "The selection was probably the worst I've seen in Vegas.....there was none.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 346,
+    "text": "Pretty good beer selection too.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 347,
+    "text": "This place is like Chipotle, but BETTER.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 348,
+    "text": "Classy/warm atmosphere, fun and fresh appetizers, succulent steaks (Baseball steak!!!!!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 349,
+    "text": "5 stars for the brick oven bread app!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 350,
+    "text": "I have eaten here multiple times, and each time the food was delicious.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 351,
+    "text": "We sat another ten minutes and finally gave up and left.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 352,
+    "text": "He was terrible!",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 353,
+    "text": "Everyone is treated equally special.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 354,
+    "text": "It shouldn't take 30 min for pancakes and eggs.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 355,
+    "text": "It was delicious!!!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 356,
+    "text": "On the good side, the staff was genuinely pleasant and enthusiastic - a real treat.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 357,
+    "text": "Sadly, Gordon Ramsey's Steak is a place we shall sharply avoid during our next trip to Vegas.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 358,
+    "text": "As always the evening was wonderful and the food delicious!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 359,
+    "text": "Best fish I've ever had in my life!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 360,
+    "text": "(The bathroom is just next door and very nice.)",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 361,
+    "text": "The buffet is small and all the food they offered was BLAND.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 362,
+    "text": "This is an Outstanding little restaurant with some of the Best Food I have ever tasted.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 363,
+    "text": "Pretty cool I would say.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 364,
+    "text": "Definitely a turn off for me & i doubt I'll be back unless someone else is buying.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 365,
+    "text": "Server did a great job handling our large rowdy table.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 366,
+    "text": "I find wasting food to be despicable, but this just wasn't food.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 367,
+    "text": "My wife had the Lobster Bisque soup which was lukewarm.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 368,
+    "text": "Would come back again if I had a sushi craving while in Vegas.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 369,
+    "text": "The staff are great, the ambiance is great.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 370,
+    "text": "He deserves 5 stars.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 371,
+    "text": "I left with a stomach ache and felt sick the rest of the day.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 372,
+    "text": "They dropped more than the ball.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 373,
+    "text": "The dining space is tiny, but elegantly decorated and comfortable.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 374,
+    "text": "They will customize your order any way you'd like, my usual is Eggplant with Green Bean stir fry, love it!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 375,
+    "text": "And the beans and rice were mediocre at best.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 376,
+    "text": "Best tacos in town by far!!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 377,
+    "text": "I took back my money and got outta there.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 378,
+    "text": "In an interesting part of town, this place is amazing.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 379,
+    "text": "RUDE & INCONSIDERATE MANAGEMENT.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 380,
+    "text": "The staff are now not as friendly, the wait times for being served are horrible, no one even says hi for the first 10 minutes.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 381,
+    "text": "I won't be back.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 382,
+    "text": "They have great dinners.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 383,
+    "text": "The service was outshining & I definitely recommend the Halibut.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 384,
+    "text": "The food was terrible.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 385,
+    "text": "WILL NEVER EVER GO BACK AND HAVE TOLD MANY PEOPLE WHAT HAD HAPPENED.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 386,
+    "text": "I don't recommend unless your car breaks down in front of it and you are starving.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 387,
+    "text": "I will come back here every time I'm in Vegas.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 388,
+    "text": "This place deserves one star and 90% has to do with the food.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 389,
+    "text": "This is a disgrace.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 390,
+    "text": "Def coming back to bowl next time",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 391,
+    "text": "If you want healthy authentic or ethic food, try this place.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 392,
+    "text": "I will continue to come here on ladies night andddd date night ... highly recommend this place to anyone who is in the area (;",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 393,
+    "text": "I have been here several times in the past, and the experience has always been great.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 394,
+    "text": "We walked away stuffed and happy about our first Vegas buffet experience.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 395,
+    "text": "Service was excellent and prices are pretty reasonable considering this is Vegas and located inside the Crystals shopping mall by Aria.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 396,
+    "text": "To summarize... the food was incredible, nay, transcendant... but nothing brings me joy quite like the memory of the pneumatic condiment dispenser.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 397,
+    "text": "I'm probably one of the few people to ever go to Ians and not like it.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 398,
+    "text": "Kids pizza is always a hit too with lots of great side dish options for the kiddos!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 399,
+    "text": "Service is perfect and the family atmosphere is nice to see.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 400,
+    "text": "Cooked to perfection and the service was impeccable.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 401,
+    "text": "This one is simply a disappointment.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 402,
+    "text": "Overall, I was very disappointed with the quality of food at Bouchon.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 403,
+    "text": "I don't have to be an accountant to know I'm getting screwed!",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 404,
+    "text": "Great place to eat, reminds me of the little mom and pop shops in the San Francisco Bay Area.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 405,
+    "text": "Today was my first taste of a Buldogis Gourmet Hot Dog and I have to tell you it was more than I ever thought possible.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 406,
+    "text": "Left very frustrated.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 407,
+    "text": "I'll definitely be in soon again.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 408,
+    "text": "Food was really good and I got full petty fast.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 409,
+    "text": "Service was fantastic.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 410,
+    "text": "TOTAL WASTE OF TIME.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 411,
+    "text": "I don't know what kind it is but they have the best iced tea.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 412,
+    "text": "Come hungry, leave happy and stuffed!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 413,
+    "text": "For service, I give them no stars.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 414,
+    "text": "I can assure you that you won't be disappointed.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 415,
+    "text": "I can take a little bad service but the food sucks.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 416,
+    "text": "Gave up trying to eat any of the crust (teeth still sore).",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 417,
+    "text": "But now I was completely grossed out.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 418,
+    "text": "I really enjoyed eating here.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 419,
+    "text": "First time going but I think I will quickly become a regular.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 420,
+    "text": "Our server was very nice, and even though he looked a little overwhelmed with all of our needs, he stayed professional and friendly until the end.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 421,
+    "text": "From what my dinner companions told me...everything was very fresh with nice texture and taste.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 422,
+    "text": "On the ground, right next to our table was a large, smeared, been-stepped-in-and-tracked-everywhere pile of green bird poop.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 423,
+    "text": "Furthermore, you can't even find hours of operation on the website!",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 424,
+    "text": "We've tried to like this place but after 10+ times I think we're done with them.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 425,
+    "text": "What a mistake that was!",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 426,
+    "text": "No complaints!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 427,
+    "text": "This is some seriously good pizza and I'm an expert/connisseur on the topic.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 428,
+    "text": "Waiter was a jerk.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 429,
+    "text": "Strike 2, who wants to be rushed.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 430,
+    "text": "These are the nicest restaurant owners I've ever come across.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 431,
+    "text": "I never come again.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 432,
+    "text": "We loved the biscuits!!!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 433,
+    "text": "Service is quick and friendly.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 434,
+    "text": "Ordered an appetizer and took 40 minutes and then the pizza another 10 minutes.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 435,
+    "text": "So absolutley fantastic.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 436,
+    "text": "It was a huge awkward 1.5lb piece of cow that was 3/4ths gristle and fat.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 437,
+    "text": "definitely will come back here again.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 438,
+    "text": "I like Steiners because it's dark and it feels like a bar.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 439,
+    "text": "Wow very spicy but delicious.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 440,
+    "text": "If you're not familiar, check it out.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 441,
+    "text": "I'll take my business dinner dollars elsewhere.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 442,
+    "text": "I'd love to go back.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 443,
+    "text": "Anyway, this FS restaurant has a wonderful breakfast/lunch.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 444,
+    "text": "Nothing special.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 445,
+    "text": "Each day of the week they have a different deal and it's all so delicious!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 446,
+    "text": "Not to mention the combination of pears, almonds and bacon is a big winner!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 447,
+    "text": "Will not be back.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 448,
+    "text": "Sauce was tasteless.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 449,
+    "text": "The food is delicious and just spicy enough, so be sure to ask for spicier if you prefer it that way.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 450,
+    "text": "My ribeye steak was cooked perfectly and had great mesquite flavor.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 451,
+    "text": "I don't think we'll be going back anytime soon.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 452,
+    "text": "Food was so gooodd.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 453,
+    "text": "I am far from a sushi connoisseur but I can definitely tell the difference between good food and bad food and this was certainly bad food.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 454,
+    "text": "I was so insulted.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 455,
+    "text": "The last 3 times I had lunch here has been bad.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 456,
+    "text": "The chicken wings contained the driest chicken meat I have ever eaten.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 457,
+    "text": "The food was very good and I enjoyed every mouthful, an enjoyable relaxed venue for couples small family groups etc.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 458,
+    "text": "Nargile - I think you are great.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 459,
+    "text": "Best tater tots in the southwest.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 460,
+    "text": "We loved the place.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 461,
+    "text": "Definitely not worth the $3 I paid.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 462,
+    "text": "The vanilla ice cream was creamy and smooth while the profiterole (choux) pastry was fresh enough.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 463,
+    "text": "Im in AZ all the time and now have my new spot.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 464,
+    "text": "The manager was the worst.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 465,
+    "text": "The inside is really quite nice and very clean.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 466,
+    "text": "The food was outstanding and the prices were very reasonable.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 467,
+    "text": "I don't think I'll be running back to Carly's anytime soon for food.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 468,
+    "text": "This is was due to the fact that it took 20 minutes to be acknowledged, then another 35 minutes to get our food...and they kept forgetting things.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 469,
+    "text": "Love the margaritas, too!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 470,
+    "text": "This was my first and only Vegas buffet and it did not disappoint.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 471,
+    "text": "Very good, though!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 472,
+    "text": "The one down note is the ventilation could use some upgrading.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 473,
+    "text": "Great pork sandwich.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 474,
+    "text": "Don't waste your time here.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 475,
+    "text": "Total letdown, I would much rather just go to the Camelback Flower Shop and Cartel Coffee.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 476,
+    "text": "Third, the cheese on my friend's burger was cold.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 477,
+    "text": "We enjoy their pizza and brunch.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 478,
+    "text": "The steaks are all well trimmed and also perfectly cooked.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 479,
+    "text": "We had a group of 70+ when we claimed we would only have 40 and they handled us beautifully.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 480,
+    "text": "I LOVED it!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 481,
+    "text": "We asked for the bill to leave without eating and they didn't bring that either.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 482,
+    "text": "This place is a jewel in Las Vegas, and exactly what I've been hoping to find in nearly ten years living here.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 483,
+    "text": "Seafood was limited to boiled shrimp and crab legs but the crab legs definitely did not taste fresh.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 484,
+    "text": "The selection of food was not the best.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 485,
+    "text": "Delicious and I will absolutely be back!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 486,
+    "text": "This isn't a small family restaurant, this is a fine dining establishment.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 487,
+    "text": "They had a toro tartare with a cavier that was extraordinary and I liked the thinly sliced wagyu with white truffle.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 488,
+    "text": "I dont think I will be back for a very long time.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 489,
+    "text": "It was attached to a gas station, and that is rarely a good sign.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 490,
+    "text": "How awesome is that.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 491,
+    "text": "I will be back many times soon.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 492,
+    "text": "The menu had so much good stuff on it i could not decide!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 493,
+    "text": "Worse of all, he humiliated his worker right in front of me..Bunch of horrible name callings.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 494,
+    "text": "CONCLUSION: Very filling meals.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 495,
+    "text": "Their daily specials are always a hit with my group.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 496,
+    "text": "And then tragedy struck.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 497,
+    "text": "The pancake was also really good and pretty large at that.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 498,
+    "text": "This was my first crawfish experience, and it was delicious!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 499,
+    "text": "Their monster chicken fried steak and eggs is my all time favorite.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 500,
+    "text": "Waitress was sweet and funny.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 501,
+    "text": "I also had to taste my Mom's multi-grain pumpkin pancakes with pecan butter and they were amazing, fluffy, and delicious!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 502,
+    "text": "I'd rather eat airline food, seriously.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 503,
+    "text": "Cant say enough good things about this place.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 504,
+    "text": "The ambiance was incredible.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 505,
+    "text": "The waitress and manager are so friendly.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 506,
+    "text": "I would not recommend this place.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 507,
+    "text": "Overall I wasn't very impressed with Noca.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 508,
+    "text": "My gyro was basically lettuce only.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 509,
+    "text": "Terrible service!",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 510,
+    "text": "Thoroughly disappointed!",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 511,
+    "text": "I don't each much pasta, but I love the homemade /hand made pastas and thin pizzas here.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 512,
+    "text": "Give it a try, you will be happy you did.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 513,
+    "text": "By far the BEST cheesecurds we have ever had!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 514,
+    "text": "Reasonably priced also!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 515,
+    "text": "Everything was perfect the night we were in.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 516,
+    "text": "The food is very good for your typical bar food.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 517,
+    "text": "it was a drive to get there.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 518,
+    "text": "At first glance it is a lovely bakery cafe - nice ambiance, clean, friendly staff.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 519,
+    "text": "Anyway, I do not think i will go back there.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 520,
+    "text": "Point your finger at any item on the menu, order it and you won't be disappointed.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 521,
+    "text": "Oh this is such a thing of beauty, this restaurant.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 522,
+    "text": "If you haven't gone here GO NOW!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 523,
+    "text": "A greasy, unhealthy meal.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 524,
+    "text": "first time there and might just be the last.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 525,
+    "text": "Those burgers were amazing.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 526,
+    "text": "Similarly, the delivery man did not say a word of apology when our food was 45 minutes late.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 527,
+    "text": "And it was way to expensive.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 528,
+    "text": "Be sure to order dessert, even if you need to pack it to-go - the tiramisu and cannoli are both to die for.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 529,
+    "text": "This was my first time and I can't wait until the next.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 530,
+    "text": "The bartender was also nice.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 531,
+    "text": "Everything was good and tasty!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 532,
+    "text": "This place is two thumbs up....way up.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 533,
+    "text": "The best place in Vegas for breakfast (just check out a Sat, or Sun.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 534,
+    "text": "If you love authentic Mexican food and want a whole bunch of interesting, yet delicious meats to choose from, you need to try this place.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 535,
+    "text": "Terrible management.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 536,
+    "text": "An excellent new restaurant by an experienced Frenchman.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 537,
+    "text": "If there were zero stars I would give it zero stars.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 538,
+    "text": "Great steak, great sides, great wine, amazing desserts.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 539,
+    "text": "Worst martini ever!",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 540,
+    "text": "The steak and the shrimp are in my opinion the best entrees at GC.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 541,
+    "text": "I had the opportunity today to sample your amazing pizzas!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 542,
+    "text": "We waited for thirty minutes to be seated (although there were 8 vacant tables and we were the only folks waiting).",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 543,
+    "text": "The yellowtail carpaccio was melt in your mouth fresh.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 544,
+    "text": "I won't try going back there even if it's empty.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 545,
+    "text": "No, I'm going to eat the potato that I found some strangers hair in it.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 546,
+    "text": "Just spicy enough.. Perfect actually.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 547,
+    "text": "Last night was my second time dining here and I was so happy I decided to go back!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 548,
+    "text": "not even a \"hello, we will be right with you.\"",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 549,
+    "text": "The desserts were a bit strange.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 550,
+    "text": "My boyfriend and I came here for the first time on a recent trip to Vegas and could not have been more pleased with the quality of food and service.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 551,
+    "text": "I really do recommend this place, you can go wrong with this donut place!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 552,
+    "text": "Nice ambiance.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 553,
+    "text": "I would recommend saving room for this!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 554,
+    "text": "I guess maybe we went on an off night but it was disgraceful.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 555,
+    "text": "However, my recent experience at this particular location was not so good.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 556,
+    "text": "I know this is not like the other restaurants at all, something is very off here!",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 557,
+    "text": "AVOID THIS ESTABLISHMENT!",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 558,
+    "text": "I think this restaurant suffers from not trying hard enough.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 559,
+    "text": "All of the tapas dishes were delicious!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 560,
+    "text": "I *heart* this place.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 561,
+    "text": "My salad had a bland vinegrette on the baby greens and hearts of Palm.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 562,
+    "text": "After two I felt disgusting.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 563,
+    "text": "A good time!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 564,
+    "text": "I believe that this place is a great stop for those with a huge belly and hankering for sushi.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 565,
+    "text": "Generous portions and great taste.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 566,
+    "text": "I will never go back to this place and will never ever recommended this place to anyone!",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 567,
+    "text": "The servers went back and forth several times, not even so much as an \"Are you being helped?\"",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 568,
+    "text": "Food was delicious!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 569,
+    "text": "AN HOUR... seriously?",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 570,
+    "text": "I consider this theft.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 571,
+    "text": "Eew... This location needs a complete overhaul.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 572,
+    "text": "We recently witnessed her poor quality of management towards other guests as well.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 573,
+    "text": "Waited and waited and waited.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 574,
+    "text": "He also came back to check on us regularly, excellent service.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 575,
+    "text": "Our server was super nice and checked on us many times.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 576,
+    "text": "The pizza tasted old, super chewy in not a good way.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 577,
+    "text": "I swung in to give them a try but was deeply disappointed.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 578,
+    "text": "Service was good and the company was better!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 579,
+    "text": "The staff are also very friendly and efficient.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 580,
+    "text": "As for the service: I'm a fan, because it's quick and you're being served by some nice folks.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 581,
+    "text": "Boy was that sucker dry!!.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 582,
+    "text": "Over rated.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 583,
+    "text": "If you look for authentic Thai food, go else where.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 584,
+    "text": "Their steaks are 100% recommended!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 585,
+    "text": "After I pulled up my car I waited for another 15 minutes before being acknowledged.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 586,
+    "text": "Great food and great service in a clean and friendly setting.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 587,
+    "text": "All in all, I can assure you I'll be back.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 588,
+    "text": "I hate those things as much as cheap quality black olives.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 589,
+    "text": "My breakfast was perpared great, with a beautiful presentation of 3 giant slices of Toast, lightly dusted with powdered sugar.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 590,
+    "text": "The kids play area is NASTY!",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 591,
+    "text": "Great place fo take out or eat in.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 592,
+    "text": "The waitress was friendly and happy to accomodate for vegan/veggie options.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 593,
+    "text": "OMG I felt like I had never eaten Thai food until this dish.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 594,
+    "text": "It was extremely \"crumby\" and pretty tasteless.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 595,
+    "text": "It was a pale color instead of nice and char and has NO flavor.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 596,
+    "text": "The croutons also taste homemade which is an extra plus.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 597,
+    "text": "I got home to see the driest damn wings ever!",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 598,
+    "text": "It'll be a regular stop on my trips to Phoenix!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 599,
+    "text": "I really enjoyed Crema Café before they expanded; I even told friends they had the BEST breakfast.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 600,
+    "text": "Not good for the money.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 601,
+    "text": "I miss it and wish they had one in Philadelphia!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 602,
+    "text": "We got sitting fairly fast, but, ended up waiting 40 minutes just to place our order, another 30 minutes before the food arrived.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 603,
+    "text": "They also have the best cheese crisp in town.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 604,
+    "text": "Good value, great food, great service.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 605,
+    "text": "Couldn't ask for a more satisfying meal.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 606,
+    "text": "The food is good.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 607,
+    "text": "It was awesome.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 608,
+    "text": "I just wanted to leave.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 609,
+    "text": "We made the drive all the way from North Scottsdale... and I was not one bit disappointed!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 610,
+    "text": "I will not be eating there again.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 611,
+    "text": "!....THE OWNERS REALLY REALLY need to quit being soooooo cheap let them wrap my freaking sandwich in two papers not one!",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 612,
+    "text": "I checked out this place a couple years ago and was not impressed.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 613,
+    "text": "The chicken I got was definitely reheated and was only ok, the wedges were cold and soggy.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 614,
+    "text": "Sorry, I will not be getting food from here anytime soon :(",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 615,
+    "text": "An absolute must visit!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 616,
+    "text": "The cow tongue and cheek tacos are amazing.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 617,
+    "text": "My friend did not like his Bloody Mary.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 618,
+    "text": "Despite how hard I rate businesses, its actually rare for me to give a 1 star.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 619,
+    "text": "They really want to make your experience a good one.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 620,
+    "text": "I will not return.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 621,
+    "text": "I had the chicken Pho and it tasted very bland.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 622,
+    "text": "Very disappointing!!!",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 623,
+    "text": "The grilled chicken was so tender and yellow from the saffron seasoning.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 624,
+    "text": "a drive thru means you do not want to wait around for half an hour for your food, but somehow when we end up going here they make us wait and wait.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 625,
+    "text": "Pretty awesome place.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 626,
+    "text": "Ambience is perfect.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 627,
+    "text": "Best of luck to the rude and non-customer service focused new management.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 628,
+    "text": "Any grandmother can make a roasted chicken better than this one.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 629,
+    "text": "I asked multiple times for the wine list and after some time of being ignored I went to the hostess and got one myself.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 630,
+    "text": "The staff is always super friendly and helpful, which is especially cool when you bring two small boys and a baby!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 631,
+    "text": "Four stars for the food & the guy in the blue shirt for his great vibe & still letting us in to eat !",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 632,
+    "text": "The roast beef sandwich tasted really good!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 633,
+    "text": "Same evening, him and I are both drastically sick.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 634,
+    "text": "High-quality chicken on the chicken Caesar salad.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 635,
+    "text": "Ordered burger rare came in we'll done.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 636,
+    "text": "We were promptly greeted and seated.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 637,
+    "text": "Tried to go here for lunch and it was a madhouse.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 638,
+    "text": "I was proven dead wrong by this sushi bar, not only because the quality is great, but the service is fast and the food, impeccable.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 639,
+    "text": "After waiting an hour and being seated, I was not in the greatest of moods.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 640,
+    "text": "This is a good joint.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 641,
+    "text": "The Macarons here are insanely good.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 642,
+    "text": "I'm not eating here!",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 643,
+    "text": "Our waiter was very attentive, friendly, and informative.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 644,
+    "text": "Maybe if they weren't cold they would have been somewhat edible.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 645,
+    "text": "This place has a lot of promise but fails to deliver.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 646,
+    "text": "Very bad Experience!",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 647,
+    "text": "What a mistake.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 648,
+    "text": "Food was average at best.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 649,
+    "text": "Great food.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 650,
+    "text": "We won't be going back anytime soon!",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 651,
+    "text": "Very Very Disappointed ordered the $35 Big Bay Plater.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 652,
+    "text": "Great place to relax and have an awesome burger and beer.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 653,
+    "text": "It is PERFECT for a sit-down family meal or get together with a few friends.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 654,
+    "text": "Not much flavor to them, and very poorly constructed.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 655,
+    "text": "The patio seating was very comfortable.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 656,
+    "text": "The fried rice was dry as well.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 657,
+    "text": "Hands down my favorite Italian restaurant!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 658,
+    "text": "That just SCREAMS \"LEGIT\" in my book...somethat's also pretty rare here in Vegas.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 659,
+    "text": "It was just not a fun experience.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 660,
+    "text": "The atmosphere was great with a lovely duo of violinists playing songs we requested.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 661,
+    "text": "I personally love the hummus, pita, baklava, falafels and Baba Ganoush (it's amazing what they do with eggplant!).",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 662,
+    "text": "Very convenient, since we were staying at the MGM!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 663,
+    "text": "The owners are super friendly and the staff is courteous.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 664,
+    "text": "Both great!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 665,
+    "text": "Eclectic selection.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 666,
+    "text": "The sweet potato tots were good but the onion rings were perfection or as close as I have had.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 667,
+    "text": "The staff was very attentive.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 668,
+    "text": "And the chef was generous with his time (even came around twice so we can take pictures with him).",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 669,
+    "text": "The owner used to work at Nobu, so this place is really similar for half the price.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 670,
+    "text": "Google mediocre and I imagine Smashburger will pop up.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 671,
+    "text": "dont go here.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 672,
+    "text": "I promise they won't disappoint.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 673,
+    "text": "As a sushi lover avoid this place by all means.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 674,
+    "text": "What a great double cheeseburger!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 675,
+    "text": "Awesome service and food.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 676,
+    "text": "A fantastic neighborhood gem !!!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 677,
+    "text": "I can't wait to go back.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 678,
+    "text": "The plantains were the worst I've ever tasted.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 679,
+    "text": "It's a great place and I highly recommend it.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 680,
+    "text": "Service was slow and not attentive.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 681,
+    "text": "I gave it 5 stars then, and I'm giving it 5 stars now.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 682,
+    "text": "Your staff spends more time talking to themselves than me.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 683,
+    "text": "Dessert: Panna Cotta was amazing.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 684,
+    "text": "Very good food, great atmosphere.1",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 685,
+    "text": "Damn good steak.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 686,
+    "text": "Total brunch fail.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 687,
+    "text": "Prices are very reasonable, flavors are spot on, the sauce is home made, and the slaw is not drenched in mayo.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 688,
+    "text": "The decor is nice, and the piano music soundtrack is pleasant.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 689,
+    "text": "The steak was amazing...rge fillet relleno was the best seafood plate i have ever had!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 690,
+    "text": "Good food , good service .",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 691,
+    "text": "It was absolutely amazing.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 692,
+    "text": "I probably won't be back, to be honest.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 693,
+    "text": "will definitely be back!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 694,
+    "text": "The sergeant pepper beef sandwich with auju sauce is an excellent sandwich as well.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 695,
+    "text": "Hawaiian Breeze, Mango Magic, and Pineapple Delight are the smoothies that I've tried so far and they're all good.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 696,
+    "text": "Went for lunch - service was slow.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 697,
+    "text": "We had so much to say about the place before we walked in that he expected it to be amazing, but was quickly disappointed.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 698,
+    "text": "I was mortified.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 699,
+    "text": "Needless to say, we will never be back here again.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 700,
+    "text": "Anyways, The food was definitely not filling at all, and for the price you pay you should expect more.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 701,
+    "text": "The chips that came out were dripping with grease, and mostly not edible.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 702,
+    "text": "I wasn't really impressed with Strip Steak.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 703,
+    "text": "Have been going since 2007 and every meal has been awesome!!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 704,
+    "text": "Our server was very nice and attentive as were the other serving staff.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 705,
+    "text": "The cashier was friendly and even brought the food out to me.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 706,
+    "text": "I work in the hospitality industry in Paradise Valley and have refrained from recommending Cibo any longer.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 707,
+    "text": "The atmosphere here is fun.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 708,
+    "text": "Would not recommend to others.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 709,
+    "text": "Service is quick and even \"to go\" orders are just like we like it!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 710,
+    "text": "I mean really, how do you get so famous for your fish and chips when it's so terrible!?!",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 711,
+    "text": "That said, our mouths and bellies were still quite pleased.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 712,
+    "text": "Not my thing.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 713,
+    "text": "2 Thumbs Up!!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 714,
+    "text": "If you are reading this please don't go there.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 715,
+    "text": "I loved the grilled pizza, reminded me of legit Italian pizza.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 716,
+    "text": "Only Pros : Large seating area/ Nice bar area/ Great simple drink menu/ The BEST brick oven pizza with homemade dough!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 717,
+    "text": "They have a really nice atmosphere.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 718,
+    "text": "Tonight I had the Elk Filet special...and it sucked.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 719,
+    "text": "After one bite, I was hooked.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 720,
+    "text": "We ordered some old classics and some new dishes after going there a few times and were sorely disappointed with everything.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 721,
+    "text": "Cute, quaint, simple, honest.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 722,
+    "text": "The chicken was deliciously seasoned and had the perfect fry on the outside and moist chicken on the inside.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 723,
+    "text": "The food was great as always, compliments to the chef.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 724,
+    "text": "Special thanks to Dylan T. for the recommendation on what to order :) All yummy for my tummy.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 725,
+    "text": "Awesome selection of beer.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 726,
+    "text": "Great food and awesome service!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 727,
+    "text": "One nice thing was that they added gratuity on the bill since our party was larger than 6 or 8, and they didn't expect more tip than that.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 728,
+    "text": "A FLY was in my apple juice.. A FLY!!!!!!!!",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 729,
+    "text": "The Han Nan Chicken was also very tasty.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 730,
+    "text": "As for the service, I thought it was good.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 731,
+    "text": "The food was barely lukewarm, so it must have been sitting waiting for the server to bring it out to us.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 732,
+    "text": "Ryan's Bar is definitely one Edinburgh establishment I won't be revisiting.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 733,
+    "text": "Nicest Chinese restaurant I've been in a while.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 734,
+    "text": "Overall, I like there food and the service.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 735,
+    "text": "They also now serve Indian naan bread with hummus and some spicy pine nut sauce that was out of this world.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 736,
+    "text": "Probably never coming back, and wouldn't recommend it.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 737,
+    "text": "Friend's pasta -- also bad, he barely touched it.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 738,
+    "text": "Try them in the airport to experience some tasty food and speedy, friendly service.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 739,
+    "text": "I love the decor with the Chinese calligraphy wall paper.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 740,
+    "text": "Never had anything to complain about here.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 741,
+    "text": "The restaurant is very clean and has a family restaurant feel to it.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 742,
+    "text": "It was way over fried.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 743,
+    "text": "I'm not sure how long we stood there but it was long enough for me to begin to feel awkwardly out of place.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 744,
+    "text": "When I opened the sandwich, I was impressed, but not in a good way.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 745,
+    "text": "Will not be back!",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 746,
+    "text": "There was a warm feeling with the service and I felt like their guest for a special treat.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 747,
+    "text": "An extensive menu provides lots of options for breakfast.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 748,
+    "text": "I always order from the vegetarian menu during dinner, which has a wide array of options to choose from.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 749,
+    "text": "I have watched their prices inflate, portions get smaller and management attitudes grow rapidly!",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 750,
+    "text": "Wonderful lil tapas and the ambience made me feel all warm and fuzzy inside.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 751,
+    "text": "I got to enjoy the seafood salad, with a fabulous vinegrette.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 752,
+    "text": "The wontons were thin, not thick and chewy, almost melt in your mouth.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 753,
+    "text": "Level 5 spicy was perfect, where spice didn't over-whelm the soup.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 754,
+    "text": "We were sat right on time and our server from the get go was FANTASTIC!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 755,
+    "text": "Main thing I didn't enjoy is that the crowd is of older crowd, around mid 30s and up.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 756,
+    "text": "When I'm on this side of town, this will definitely be a spot I'll hit up again!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 757,
+    "text": "I had to wait over 30 minutes to get my drink and longer to get 2 arepas.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 758,
+    "text": "This is a GREAT place to eat!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 759,
+    "text": "The jalapeno bacon is soooo good.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 760,
+    "text": "The service was poor and thats being nice.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 761,
+    "text": "Food was good, service was good, Prices were good.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 762,
+    "text": "The place was not clean and the food oh so stale!",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 763,
+    "text": "The chicken dishes are OK, the beef is like shoe leather.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 764,
+    "text": "But the service was beyond bad.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 765,
+    "text": "I'm so happy to be here!!!\"",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 766,
+    "text": "Tasted like dirt.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 767,
+    "text": "One of the few places in Phoenix that I would definately go back to again .",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 768,
+    "text": "The block was amazing.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 769,
+    "text": "It's close to my house, it's low-key, non-fancy, affordable prices, good food.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 770,
+    "text": "* Both the Hot & Sour & the Egg Flower Soups were absolutely 5 Stars!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 771,
+    "text": "My sashimi was poor quality being soggy and tasteless.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 772,
+    "text": "Great time - family dinner on a Sunday night.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 773,
+    "text": "the food is not tasty at all, not to say its \"real traditional Hunan style\".",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 774,
+    "text": "What did bother me, was the slow service.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 775,
+    "text": "The flair bartenders are absolutely amazing!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 776,
+    "text": "Their frozen margaritas are WAY too sugary for my taste.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 777,
+    "text": "These were so good we ordered them twice.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 778,
+    "text": "So in a nutshell: 1) The restaraunt smells like a combination of a dirty fish market and a sewer.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 779,
+    "text": "My girlfriend's veal was very bad.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 780,
+    "text": "Unfortunately, it was not good.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 781,
+    "text": "I had a pretty satifying experience.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 782,
+    "text": "Join the club and get awesome offers via email.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 783,
+    "text": "Perfect for someone (me) who only likes beer ice cold, or in this case, even colder.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 784,
+    "text": "Bland and flavorless is a good way of describing the barely tepid meat.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 785,
+    "text": "The chains, which I'm no fan of, beat this place easily.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 786,
+    "text": "The nachos are a MUST HAVE!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 787,
+    "text": "We will not be coming back.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 788,
+    "text": "I don't have very many words to say about this place, but it does everything pretty well.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 789,
+    "text": "The staff is super nice and very quick even with the crazy crowds of the downtown juries, lawyers, and court staff.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 790,
+    "text": "Great atmosphere, friendly and fast service.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 791,
+    "text": "When I received my Pita it was huge it did have a lot of meat in it so thumbs up there.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 792,
+    "text": "Once your food arrives it's meh.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 793,
+    "text": "Paying $7.85 for a hot dog and fries that looks like it came out of a kid's meal at the Wienerschnitzel is not my idea of a good meal.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 794,
+    "text": "The classic Maine Lobster Roll was fantastic.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 795,
+    "text": "My brother in law who works at the mall ate here same day, and guess what he was sick all night too.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 796,
+    "text": "So good I am going to have to review this place twice - once hereas a tribute to the place and once as a tribute to an event held here last night.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 797,
+    "text": "The chips and salsa were really good, the salsa was very fresh.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 798,
+    "text": "This place is great!!!!!!!!!!!!!!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 799,
+    "text": "Mediocre food.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 800,
+    "text": "Once you get inside you'll be impressed with the place.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 801,
+    "text": "I'm super pissd.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 802,
+    "text": "And service was super friendly.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 803,
+    "text": "Why are these sad little vegetables so overcooked?",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 804,
+    "text": "This place was such a nice surprise!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 805,
+    "text": "They were golden-crispy and delicious.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 806,
+    "text": "I had high hopes for this place since the burgers are cooked over a charcoal grill, but unfortunately the taste fell flat, way flat.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 807,
+    "text": "I could eat their bruschetta all day it is devine.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 808,
+    "text": "Not a single employee came out to see if we were OK or even needed a water refill once they finally served us our food.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 809,
+    "text": "Lastly, the mozzarella sticks, they were the best thing we ordered.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 810,
+    "text": "The first time I ever came here I had an amazing experience, I still tell people how awesome the duck was.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 811,
+    "text": "The server was very negligent of our needs and made us feel very unwelcome... I would not suggest this place!",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 812,
+    "text": "The service was terrible though.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 813,
+    "text": "This place is overpriced, not consistent with their boba, and it really is OVERPRICED!",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 814,
+    "text": "It was packed!!",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 815,
+    "text": "I love this place.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 816,
+    "text": "I can say that the desserts were yummy.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 817,
+    "text": "The food was terrible.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 818,
+    "text": "The seasonal fruit was fresh white peach puree.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 819,
+    "text": "It kept getting worse and worse so now I'm officially done.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 820,
+    "text": "This place should honestly be blown up.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 821,
+    "text": "But I definitely would not eat here again.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 822,
+    "text": "Do not waste your money here!",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 823,
+    "text": "I love that they put their food in nice plastic containers as opposed to cramming it in little paper takeout boxes.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 824,
+    "text": "The crêpe was delicate and thin and moist.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 825,
+    "text": "Awful service.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 826,
+    "text": "Won't ever go here again.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 827,
+    "text": "Food quality has been horrible.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 828,
+    "text": "For that price I can think of a few place I would have much rather gone.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 829,
+    "text": "The service here is fair at best.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 830,
+    "text": "I do love sushi, but I found Kabuki to be over-priced, over-hip and under-services.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 831,
+    "text": "Do yourself a favor and stay away from this dish.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 832,
+    "text": "Very poor service.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 833,
+    "text": "No one at the table thought the food was above average or worth the wait that we had for it.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 834,
+    "text": "Best service and food ever, Maria our server was so good and friendly she made our day.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 835,
+    "text": "They were excellent.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 836,
+    "text": "I paid the bill but did not tip because I felt the server did a terrible job.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 837,
+    "text": "Just had lunch here and had a great experience.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 838,
+    "text": "I have never had such bland food which surprised me considering the article we read focused so much on their spices and flavor.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 839,
+    "text": "Food is way overpriced and portions are fucking small.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 840,
+    "text": "I recently tried Caballero's and I have been back every week since!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 841,
+    "text": "for 40 bucks a head, i really expect better food.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 842,
+    "text": "The food came out at a good pace.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 843,
+    "text": "I ate there twice on my last visit, and especially enjoyed the salmon salad.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 844,
+    "text": "I won't be back.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 845,
+    "text": "We could not believe how dirty the oysters were!",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 846,
+    "text": "This place deserves no stars.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 847,
+    "text": "I would not recommend this place.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 848,
+    "text": "In fact I'm going to round up to 4 stars, just because she was so awesome.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 849,
+    "text": "To my disbelief, each dish qualified as the worst version of these foods I have ever tasted.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 850,
+    "text": "Bad day or not, I have a very low tolerance for rude customer service people, it is your job to be nice and polite, wash dishes otherwise!!",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 851,
+    "text": "the potatoes were great and so was the biscuit.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 852,
+    "text": "I probably would not go here again.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 853,
+    "text": "So flavorful and has just the perfect amount of heat.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 854,
+    "text": "The price is reasonable and the service is great.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 855,
+    "text": "The Wife hated her meal (coconut shrimp), and our friends really did not enjoy their meals, either.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 856,
+    "text": "My fella got the huevos rancheros and they didn't look too appealing.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 857,
+    "text": "Went in for happy hour, great list of wines.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 858,
+    "text": "Some may say this buffet is pricey but I think you get what you pay for and this place you are getting quite a lot!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 859,
+    "text": "I probably won't be coming back here.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 860,
+    "text": "Worst food/service I've had in a while.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 861,
+    "text": "This place is pretty good, nice little vibe in the restaurant.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 862,
+    "text": "Talk about great customer service of course we will be back.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 863,
+    "text": "Hot dishes are not hot, cold dishes are close to room temp.I watched staff prepare food with BARE HANDS, no gloves.Everything is deep fried in oil.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 864,
+    "text": "I love their fries and their beans.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 865,
+    "text": "Always a pleasure dealing with him.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 866,
+    "text": "They have a plethora of salads and sandwiches, and everything I've tried gets my seal of approval.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 867,
+    "text": "This place is awesome if you want something light and healthy during the summer.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 868,
+    "text": "For sushi on the Strip, this is the place to go.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 869,
+    "text": "The service was great, even the manager came and helped with our table.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 870,
+    "text": "The feel of the dining room was more college cooking course than high class dining and the service was slow at best.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 871,
+    "text": "I started this review with two stars, but I'm editing it to give it only one.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 872,
+    "text": "this is the worst sushi i have ever eat besides Costco's.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 873,
+    "text": "All in all an excellent restaurant highlighted by great service, a unique menu, and a beautiful setting.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 874,
+    "text": "My boyfriend and i sat at the bar and had a completely delightful experience.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 875,
+    "text": "Weird vibe from owners.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 876,
+    "text": "There was hardly any meat.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 877,
+    "text": "I've had better bagels from the grocery store.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 878,
+    "text": "Go To Place for Gyros.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 879,
+    "text": "I love the owner/chef, his one authentic Japanese cool dude!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 880,
+    "text": "Now the burgers aren't as good, the pizza which used to be amazing is doughy and flavorless.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 881,
+    "text": "I found a six inch long piece of wire in my salsa.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 882,
+    "text": "The service was terrible, food was mediocre.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 883,
+    "text": "We definately enjoyed ourselves.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 884,
+    "text": "I ordered Albondigas soup - which was just warm - and tasted like tomato soup with frozen meatballs.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 885,
+    "text": "On three different occasions I asked for well done or medium well, and all three times I got the bloodiest piece of meat on my plate.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 886,
+    "text": "I had about two bites and refused to eat anymore.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 887,
+    "text": "The service was extremely slow.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 888,
+    "text": "After 20 minutes wait, I got a table.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 889,
+    "text": "Seriously killer hot chai latte.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 890,
+    "text": "No allergy warnings on the menu, and the waitress had absolutely no clue as to which meals did or did not contain peanuts.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 891,
+    "text": "My boyfriend tried the Mediterranean Chicken Salad and fell in love.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 892,
+    "text": "Their rotating beers on tap is also a highlight of this place.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 893,
+    "text": "Pricing is a bit of a concern at Mellow Mushroom.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 894,
+    "text": "Worst Thai ever.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 895,
+    "text": "If you stay in Vegas you must get breakfast here at least once.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 896,
+    "text": "I want to first say our server was great and we had perfect service.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 897,
+    "text": "The pizza selections are good.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 898,
+    "text": "I had strawberry tea, which was good.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 899,
+    "text": "Highly unprofessional and rude to a loyal patron!",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 900,
+    "text": "Overall, a great experience.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 901,
+    "text": "Spend your money elsewhere.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 902,
+    "text": "Their regular toasted bread was equally satisfying with the occasional pats of butter... Mmmm...!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 903,
+    "text": "The Buffet at Bellagio was far from what I anticipated.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 904,
+    "text": "And the drinks are WEAK, people!",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 905,
+    "text": "-My order was not correct.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 906,
+    "text": "Also, I feel like the chips are bought, not made in house.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 907,
+    "text": "After the disappointing dinner we went elsewhere for dessert.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 908,
+    "text": "The chips and sals a here is amazing!!!!!!!!!!!!!!!!!!!",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 909,
+    "text": "We won't be returning.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 910,
+    "text": "This is my new fav Vegas buffet spot.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 911,
+    "text": "I seriously cannot believe that the owner has so many unexperienced employees that all are running around like chickens with their heads cut off.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 912,
+    "text": "Very, very sad.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 913,
+    "text": "i felt insulted and disrespected, how could you talk and judge another human being like that?",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 914,
+    "text": "How can you call yourself a steakhouse if you can't properly cook a steak, I don't understand!",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 915,
+    "text": "I'm not impressed with the concept or the food.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 916,
+    "text": "The only thing I wasn't too crazy about was their guacamole as I don't like it puréed.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 917,
+    "text": "There is really nothing for me at postinos, hope your experience is better",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 918,
+    "text": "I got food poisoning here at the buffet.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 919,
+    "text": "They brought a fresh batch of fries and I was thinking yay something warm but no!",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 920,
+    "text": "What SHOULD have been a hilarious, yummy Christmas Eve dinner to remember was the biggest fail of the entire trip for us.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 921,
+    "text": "Needless to say, I won't be going back anytime soon.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 922,
+    "text": "This place is disgusting!",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 923,
+    "text": "Every time I eat here, I see caring teamwork to a professional degree.",
+    "sentiment": 1,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 924,
+    "text": "The RI style calamari was a joke.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 925,
+    "text": "However, there was so much garlic in the fondue, it was barely edible.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 926,
+    "text": "I could barely stomach the meal, but didn't complain because it was a business lunch.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 927,
+    "text": "It was so bad, I had lost the heart to finish it.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 928,
+    "text": "It also took her forever to bring us the check when we asked for it.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 929,
+    "text": "We aren't ones to make a scene at restaurants but I just don't get it...definitely lost the love after this one!",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 930,
+    "text": "Disappointing experience.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 931,
+    "text": "The food is about on par with Denny's, which is to say, not good at all.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 932,
+    "text": "If you want to wait for mediocre food and downright terrible service, then this is the place for you.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 933,
+    "text": "WAAAAAAyyyyyyyyyy over rated is all I am saying.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 934,
+    "text": "We won't be going back.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 935,
+    "text": "The place was fairly clean but the food simply wasn't worth it.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 936,
+    "text": "This place lacked style!!",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 937,
+    "text": "The sangria was about half of a glass wine full and was $12, ridiculous.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 938,
+    "text": "Don't bother coming here.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 939,
+    "text": "The meat was pretty dry, I had the sliced brisket and pulled pork.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 940,
+    "text": "The building itself seems pretty neat; the bathroom is pretty trippy, but I wouldn't eat here again.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 941,
+    "text": "It was equally awful.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 942,
+    "text": "Probably not in a hurry to go back.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 943,
+    "text": "very slow at seating even with reservation.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 944,
+    "text": "Not good by any stretch of the imagination.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 945,
+    "text": "The cashew cream sauce was bland and the vegetables were undercooked.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 946,
+    "text": "The chipolte ranch dipping sause was tasteless, seemed thin and watered down with no heat.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 947,
+    "text": "It was a bit too sweet, not really spicy enough, and lacked flavor.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 948,
+    "text": "I was VERY disappointed!!",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 949,
+    "text": "This place is horrible and way overpriced.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 950,
+    "text": "Maybe it's just their Vegetarian fare, but I've been twice and I thought it was average at best.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 951,
+    "text": "It wasn't busy at all and now we know why.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 952,
+    "text": "The tables outside are also dirty a lot of the time and the workers are not always friendly and helpful with the menu.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 953,
+    "text": "The ambiance here did not feel like a buffet setting, but more of a douchey indoor garden for tea and biscuits.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 954,
+    "text": "Con: spotty service.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 955,
+    "text": "The fries were not hot, and neither was my burger.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 956,
+    "text": "But then they came back cold.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 957,
+    "text": "Then our food came out, disappointment ensued.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 958,
+    "text": "The real disappointment was our waiter.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 959,
+    "text": "My husband said she was very rude... did not even apologize for the bad food or anything.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 960,
+    "text": "The only reason to eat here would be to fill up before a night of binge drinking just to get some carbs in your stomach.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 961,
+    "text": "Insults, profound deuchebaggery, and had to go outside for a smoke break while serving just to solidify it.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 962,
+    "text": "If someone orders two tacos don't' you think it may be part of customer service to ask if it is combo or ala cart?",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 963,
+    "text": "She was quite disappointed although some blame needs to be placed at her door.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 964,
+    "text": "After all the rave reviews I couldn't wait to eat here......what a disappointment!",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 965,
+    "text": "Del Taco is pretty nasty and should be avoided if possible.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 966,
+    "text": "It's NOT hard to make a decent hamburger.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 967,
+    "text": "But I don't like it.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 968,
+    "text": "Hell no will I go back",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 969,
+    "text": "We've have gotten a much better service from the pizza place next door than the services we received from this restaurant.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 970,
+    "text": "I don't know what the big deal is about this place, but I won't be back \"ya'all\".",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 971,
+    "text": "I immediately said I wanted to talk to the manager but I did not want to talk to the guy who was doing shots of fireball behind the bar.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 972,
+    "text": "The ambiance isn't much better.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 973,
+    "text": "Unfortunately, it only set us up for disapppointment with our entrees.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 974,
+    "text": "The food wasn't good.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 975,
+    "text": "Your servers suck, wait, correction, our server Heimer sucked.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 976,
+    "text": "What happened next was pretty....off putting.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 977,
+    "text": "too bad cause I know it's family owned, I really wanted to like this place.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 978,
+    "text": "Overpriced for what you are getting.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 979,
+    "text": "I vomited in the bathroom mid lunch.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 980,
+    "text": "I kept looking at the time and it had soon become 35 minutes, yet still no food.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 981,
+    "text": "I have been to very few places to eat that under no circumstances would I ever return to, and this tops the list.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 982,
+    "text": "We started with the tuna sashimi which was brownish in color and obviously wasn't fresh.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 983,
+    "text": "Food was below average.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 984,
+    "text": "It sure does beat the nachos at the movies but I would expect a little bit more coming from a restaurant.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 985,
+    "text": "All in all, Ha Long Bay was a bit of a flop.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 986,
+    "text": "The problem I have is that they charge $11.99 for a sandwich that is no bigger than a Subway sub (which offers better and more amount of vegetables).",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 987,
+    "text": "Shrimp- When I unwrapped it (I live only 1/2 a mile from Brushfire) it was literally ice cold.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 988,
+    "text": "It lacked flavor, seemed undercooked, and dry.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 989,
+    "text": "It really is impressive that the place hasn't closed down.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 990,
+    "text": "I would avoid this place if you are staying in the Mirage.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 991,
+    "text": "The refried beans that came with my meal were dried out and crusty and the food was bland.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 992,
+    "text": "Spend your money and time some place else.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 993,
+    "text": "A lady at the table next to us found a live green caterpillar In her salad.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 994,
+    "text": "the presentation of the food was awful.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 995,
+    "text": "I can't tell you how disappointed I was.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 996,
+    "text": "I think food should have flavor and texture and both were lacking.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 997,
+    "text": "Appetite instantly gone.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 998,
+    "text": "Overall I was not impressed and would not go back.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 999,
+    "text": "The whole experience was underwhelming, and I think we'll just go to Ninja Sushi next time.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  },
+  {
+    "source_record_id": 1000,
+    "text": "Then, as if I hadn't wasted enough of my life there, they poured salt in the wound by drawing out the time it took to bring the check.",
+    "sentiment": 0,
+    "source": "uci_yelp"
+  }
+]
