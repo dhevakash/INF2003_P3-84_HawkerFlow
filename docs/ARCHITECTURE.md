@@ -18,7 +18,7 @@ A plain HTML/CSS/JavaScript browser interface calls a Python FastAPI backend. SQ
 
 ## Relational model
 
-The operational schema contains twelve tables. Two additional tables support a controlled review-analysis benchmark. Operational field declarations and constraints are authoritative in `app/models.py`; benchmark tables are constructed by `scripts/benchmark.py`. This dictionary explains their purposes.
+The operational schema contains fifteen tables, including the three batch tables added for extra credit. Two additional tables support a controlled review-analysis benchmark. Operational field declarations and constraints are authoritative in `app/models.py`; benchmark tables are constructed by `scripts/benchmark.py`. This dictionary explains their purposes.
 
 | Table | Keys and important fields | Types and rules |
 |---|---|---|
@@ -34,12 +34,17 @@ The operational schema contains twelve tables. Two additional tables support a c
 | `stock_movements` | PK `id`; branch/ingredient/order FKs | Signed nonzero DECIMAL change; reason; UTC date |
 | `stock_receipts` | PK `id`; unique `request_key`; branch/ingredient FKs | Positive received quantity; UTC date; restock idempotency |
 | `loyalty_transactions` | PK `id`; customer/order FKs; `points_delta`, `event_type` | Signed nonzero integer points; UTC date; ledger-derived balance |
+| `stock_batches` | PK `id`; branch/ingredient FKs; optional unique receipt FK | Positive initial quantity; remaining between zero and initial; nullable expiry and cost; explicit source |
+| `stock_batch_allocations` | PK `id`; batch/order FKs | Positive quantity; traces ingredients consumed by a sale |
+| `stock_batch_discards` | PK `id`; unique batch and request key; manager and movement FKs | Positive disposed quantity; auditable idempotent expired-stock removal |
 | `benchmark_reviews` | Benchmark PK `id`; `branch_id`, rating | Rating 1–5 fixture values; branch/rating index; independent fixtures |
 | `benchmark_review_tags` | Benchmark composite PK `(review_id, tag)` | Review identifier; one normalized tag per fixture review; independent fixture table |
 
 A branch has many orders and stock records. A customer has many orders and loyalty transactions. Each order has many order lines. Menu items and ingredients have a many-to-many relationship resolved by `recipe_components`; branches and ingredients are resolved by `branch_stock`. `order_lines` resolve orders and menu items while preserving duplicate items with different notes.
 
-![Operational ER diagram](diagrams/erd.png)
+![Original twelve-table operational ER diagram](diagrams/erd.png)
+
+The image above shows the original foundation. The editable `erd.mmd` includes the three batch tables; the extra-credit guide explains their transaction flow and analytics.
 
 Editable Mermaid source: `diagrams/erd.mmd`. The source schema may change during implementation; regenerate or update this diagram when field names or relationships change.
 
@@ -103,7 +108,7 @@ Managers manage menu and stock and access analytics. Cashiers operate their assi
 
 The benchmark uses the same review IDs, branch IDs, ratings and deduplicated tags in normalized SQL tables and MongoDB documents. It verifies identical answers before reporting warm repeated median and p95 latency, row/document count, indexes and environment. It does not prove a universal speed advantage. The completed experiment verified identical answers at 1,000, 10,000 and 50,000 reviews, with five warm-ups and thirty timed repetitions per size and indexed execution plans. The full measurements and environment metadata are preserved in the benchmark output; conclusions apply to this workload and environment.
 
-The included NEA snapshot is historical; demonstration branches are fictional selections. Operational data are generated and do not represent actual spending or customer feedback. Completed cash sales are implemented scope. Refunds, real payment processing, expiry batches, predictive analytics, horizontal scaling and production operation are future work, not delivered features.
+The included NEA snapshot is historical; demonstration branches are fictional selections. Operational data are generated and do not represent actual spending or customer feedback. Completed cash sales, expiry batches, FEFO, demand estimates and RFM insights are implemented. Refunds, real payment processing, trained predictive models, horizontal scaling and production operation remain outside scope. See `EXTRA_CREDIT_GUIDE.md` for the new formulas and boundaries.
 
 ## Verification boundary
 

@@ -7,6 +7,17 @@ from sqlalchemy import text
 
 
 VIEW_QUERIES = {
+    "v_stock_batch_inventory": """
+SELECT batch.id AS batch_id, batch.branch_id, branches.name AS branch_name,
+       batch.ingredient_id, ingredients.name AS ingredient_name, ingredients.unit,
+       batch.initial_quantity, batch.remaining_quantity, batch.expires_on,
+       batch.unit_cost, batch.remaining_quantity * batch.unit_cost AS remaining_value,
+       batch.source
+FROM stock_batches AS batch
+JOIN branches ON branches.id = batch.branch_id
+JOIN ingredients ON ingredients.id = batch.ingredient_id
+WHERE batch.remaining_quantity > 0
+""".strip(),
     "v_low_stock": """
 SELECT stock.branch_id, branches.name AS branch_name,
        stock.ingredient_id, ingredients.name AS ingredient_name,
@@ -31,7 +42,7 @@ GROUP BY branches.id, branches.name
 
 
 def create_views(engine):
-    """Create/update the two application-owned views after table creation.
+    """Create/update the application-owned views after table creation.
 
 SQLite's DROP/CREATE branch is for unit tests only. MariaDB atomically replaces
 each view without leaving it temporarily missing to concurrent readers.

@@ -10,7 +10,7 @@ from sqlalchemy.orm import Session
 from app.db import get_session
 from app.models import Branch, BranchStock, Customer, Ingredient, MenuItem, Order, RecipeComponent, User
 from app.security import current_user, require_roles
-from app.sql_service import BusinessError, checkout, list_inventory, loyalty_summary, order_dict, receive_stock, sales_analytics
+from app.sql_service import BusinessError, checkout, list_inventory, loyalty_summary, order_dict, receive_stock, sales_analytics, menu_availability, list_batches, waste_analytics, discard_batch
 
 router = APIRouter(prefix="/api", tags=["SQL operations"])
 SessionDep = Annotated[Session, Depends(get_session)]
@@ -60,6 +60,11 @@ class ReceiptInput(Input):
     branch_id: StrictInt = Field(gt=0)
     ingredient_id: StrictInt = Field(gt=0)
     quantity: Decimal = Field(gt=0, max_digits=14, decimal_places=4)
+    request_key: str = Field(min_length=1, max_length=100)
+    expires_on: date | None = None
+    unit_cost: Decimal | None = Field(default=None, ge=0, max_digits=14, decimal_places=4)
+
+class DiscardInput(Input):
     request_key: str = Field(min_length=1, max_length=100)
 
 class ReorderInput(Input):
@@ -133,6 +138,11 @@ def create_menu(payload: MenuInput, session: SessionDep, user: ManagerDep):
     commit(session)
     return menu_dict(item)
 
+@router.get("/menu/availability")
+def availability(session: SessionDep, user: StaffDep, branch_id: int = Query(gt=0)):
+    branch_access(user, branch_id)
+    return invoke(menu_availability, session, branch_id)
+
 @router.patch("/menu/{item_id}")
 def update_menu(item_id: int, payload: MenuPatch, session: SessionDep, user: ManagerDep):
     item = session.scalar(select(MenuItem).where(MenuItem.id == item_id).with_for_update())
@@ -199,6 +209,15 @@ def inventory(session: SessionDep, user: StaffDep, branch_id: int = Query(gt=0))
 def receive(payload: ReceiptInput, session: SessionDep, user: ManagerDep):
     return invoke(receive_stock, session, payload.model_dump())
 
+@router.get("/inventory/batches")
+def batches(session: SessionDep, user: StaffDep, branch_id: int = Query(gt=0)):
+    branch_access(user, branch_id)
+    return invoke(list_batches, session, branch_id)
+
+@router.post("/inventory/batches/{batch_id}/discard")
+def discard(batch_id: int, payload: DiscardInput, session: SessionDep, user: ManagerDep):
+    return invoke(discard_batch, session, batch_id, payload.request_key, user.id)
+
 @router.patch("/inventory/{branch_id}/{ingredient_id}")
 def set_reorder(branch_id: int, ingredient_id: int, payload: ReorderInput, session: SessionDep, user: ManagerDep):
     stock = session.scalar(select(BranchStock).where(BranchStock.branch_id == branch_id, BranchStock.ingredient_id == ingredient_id).with_for_update())
@@ -252,3 +271,8 @@ def sales(session: SessionDep, user: ManagerDep, start: date, end: date):
 @router.get("/analytics/low-stock")
 def low_stock(session: SessionDep, user: ManagerDep, branch_id: int = Query(gt=0)):
     return invoke(list_inventory, session, branch_id, low_only=True)
+
+@router.get("/analytics/waste")
+def waste(session: SessionDep, user: ManagerDep, branch_id: int = Query(gt=0),
+          as_of: date | None = None, horizon_days: int = Query(default=7, ge=1, le=90)):
+    return invoke(waste_analytics, session, branch_id, as_of, horizon_days)

@@ -25,5 +25,8 @@ def get_session():
 def init_db():
     from . import models  # register every mapped table
     Base.metadata.create_all(engine)
+    from .sql_service import backfill_stock_batches
+    with SessionLocal() as session:
+        backfill_stock_batches(session)
     from .sql_views import create_views
     create_views(engine)

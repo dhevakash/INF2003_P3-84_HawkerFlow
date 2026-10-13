@@ -1,6 +1,6 @@
 # HawkerFlow implementation contract
 
-Use Python FastAPI, SQLAlchemy 2, MariaDB 10.11.14 (InnoDB), MongoDB 7.0.16, a plain HTML/CSS/JS frontend. API prefix /api. Database image tags match the real engines tested. Docker orchestration itself needs a teammate clean-install check. Core workflow is order -> stock -> points in one SQL transaction; Mongo is not on the checkout commit path. Expiry batch allocation is deferred, not claimed implemented. Reports must distinguish real location data and synthetic operational data.
+Use Python FastAPI, SQLAlchemy 2, MariaDB 10.11.14 (InnoDB), MongoDB 7.0.16, a plain HTML/CSS/JS frontend. API prefix /api. Database image tags match the real engines tested. Core workflow is order -> batches -> stock -> points in one SQL transaction; Mongo is not on the checkout commit path. Expiry allocation uses FEFO and excludes expired batches. Reports distinguish real location data and synthetic operational data. Enhancement details and verification: docs/EXTRA_CREDIT_GUIDE.md and evidence/extra-credit/RESULTS.md.
 
 ## Shared dependencies
 `app.db.get_session()` yields SQLAlchemy Session; `app.db.SessionLocal`, `engine`, `init_db()`. Models use `app.db.Base`. SQL services must be independent of FastAPI and callable from tests.
@@ -25,7 +25,21 @@ GET /reviews?branch_id=&limit=; POST /reviews {order_id,rating,text,tags:[],cate
 GET /profiles/{customer_id}; PUT /profiles/{customer_id} {dietary_preferences:[],favourite_categories:[],communication_preferences:{},milestones:{}} owner/manager. No point balance stored in Mongo.
 GET /analytics/feedback?branch_id=&start=&end= -> {complaints:[{tag,count}],rating_trends:[{month,average,count}],total_reviews}. Negative tag allowlist and low-rating rule explicit. Only manager.
 
-UI is 4 sections orders/inventory/customer feedback/manager dashboard. Login switches manager/cashier/customer test roles. Document provided development credentials; no real payments, no production claims.
+UI is 4 sections orders/inventory/customer feedback/manager intelligence. Manager intelligence has sales, forecast, waste/promotions, loyalty and reviews tabs. Login switches manager/cashier/customer test roles. Document provided development credentials; no real payments, no production claims.
+
+## Extra-credit contract
+
+Additive tables: StockBatch(id,branch_id,ingredient_id,receipt_id nullable unique,initial_quantity,remaining_quantity,expires_on nullable,unit_cost nullable,source,created_at); StockBatchAllocation(id,batch_id,order_id,quantity); StockBatchDiscard(id,batch_id unique,request_key unique,quantity,actor_user_id nullable,movement_id unique,created_at). init_db creates added tables and backfills aggregate stock as unknown-expiry batches without altering existing table layouts. Unit cost is per ingredient stock unit.
+
+GET /menu/availability?branch_id: staff and assigned-branch scope; recipe-based portions and ingredient requirements. GET /inventory/batches?branch_id: staff scoped; batch expiry statuses. POST /inventory/receive additionally accepts expires_on/unit_cost and includes them in replay identity. POST /inventory/batches/{id}/discard {request_key}: manager-only, past-date expired batches, idempotent audit and stock movement.
+
+GET /analytics/dashboard?start=&end=&branch_id= optional: manager-only; net summary, gross menu sales, DENSE_RANK quantity rankings, daily zero-filled totals, UTC peak hours, equal-period comparisons and declining dishes. End exclusive; max range 366 days.
+
+GET /analytics/forecast?branch_id=&as_of=&window_days=28&target_days=7&lead_days=2: manager-only; negative recorded sale movements, calendar CTE, seven-day window average and restock calculation. as_of is exclusive UTC history cutoff; current stock/expiry uses Singapore stock_as_of; not reconstructed historical stock.
+
+GET /analytics/waste?branch_id=&as_of=&horizon_days=7: manager-only; current remaining batches assessed for expiry on as_of, known values and explained promotion ranking. Window for promotion popularity is 28 Singapore calendar days ending on assessment day. No automatic discounts.
+
+GET /analytics/loyalty?as_of=&window_days=90&branch_id= optional: manager-only; lifetime recency and trailing-window frequency/net spend, deterministic RFM scores and segments. Customers with zero orders retained; no churn-model claim.
 
 ## Verification
 SQLite/mongomock unit checks and actual MariaDB/Mongo integration checks have both run successfully; see docs/EVALUATION.md. Include rollback, overselling, duplicate request, historic price, point balance/redemption, role/ownership, Mongo validator/unique constraints, SQL-Mongo benchmark identical answers. Benchmark on real DB only, no fabricated times.

@@ -176,7 +176,7 @@ def main():
         loaded()
         assert "UI smoke manager reply" in replied["replies"][-1]["text"]
         view("dashboard")
-        expect(page.locator("#content")).to_contain_text("Net completed sales")
+        expect(page.locator("#content")).to_contain_text("Net completed revenue")
         expect(page.locator("#content .form-error")).to_have_count(0)
         page.locator("#branch-selector").select_option("")
         page.locator('#dashboard-filters button[type="submit"]').click()
@@ -184,6 +184,8 @@ def main():
         expect(page.locator("#content .form-error")).to_have_count(0)
         external = api("/analytics/external-feedback")
         assert external["total"] == 1000 and external["positive"] + external["negative"] == 1000
+        page.locator('[data-insight-tab="feedback"]').click()
+        loaded()
         expect(page.locator("#content")).to_contain_text("UCI Yelp sentence sample")
         expect(page.locator("#content")).to_contain_text("benchmark data")
         page.screenshot(path=str(output / "05-manager-insights.png"), full_page=True)
@@ -214,7 +216,7 @@ def main():
         results["checks"].append("Cashier has assigned-branch access and no manager controls")
         assert not results["js_errors"], results["js_errors"]
         results["status"] = "passed"
-        (output / "ui-smoke-results.json").write_text(json.dumps(results, indent=2))
+        (output / "ui-smoke-results.json").write_text(json.dumps(results, indent=2), encoding="utf-8")
         print(json.dumps(results, indent=2))
         browser.close()
 

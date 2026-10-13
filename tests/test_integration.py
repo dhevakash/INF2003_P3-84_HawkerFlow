@@ -411,3 +411,98 @@ def test_profile_owner_and_schema_limits(system):
     assert s.client.get("/api/profiles/1", headers=s.headers["other"]).status_code in (403, 404)
     oversized = dict(body, dietary_preferences=["x"] * 11)
     assert s.client.put("/api/profiles/1", json=oversized, headers=s.headers["owner"]).status_code == 422
+
+
+def test_advanced_reports_execute_on_real_mariadb(system):
+    """Exercise CTEs, window functions and UTC/date expressions on MariaDB."""
+    from datetime import timedelta
+    from app.sql_service import business_today
+    s = system
+    checkout(s)
+    today = business_today()
+    tomorrow = today + timedelta(days=1)
+    paths = [
+        f"/api/analytics/dashboard?branch_id=1&start={today}&end={tomorrow}",
+        f"/api/analytics/forecast?branch_id=1&as_of={tomorrow}&window_days=7",
+        f"/api/analytics/loyalty?branch_id=1&as_of={tomorrow}",
+        f"/api/analytics/waste?branch_id=1&as_of={today}",
+    ]
+    reports = []
+    for path in paths:
+        response = s.client.get(path, headers=s.headers["manager"])
+        assert response.status_code == 200, response.text
+        reports.append(response.json())
+        assert s.client.get(path, headers=s.headers["owner"]).status_code == 403
+    assert reports[0]["summary"]["net_revenue"] == 120
+    assert reports[0]["menu"][0]["rank"] == 1
+    assert reports[1]["ingredients"][0]["average_daily_usage"] == pytest.approx(2 / 7, abs=0.0001)
+    assert reports[2]["customers"][0]["frequency"] == 1
+    assert reports[2]["customers"][1]["segment"] == "No orders"
+
+
+def test_expiry_fefo_receipt_replay_and_discard_on_real_mariadb(system):
+    from datetime import timedelta
+    from sqlalchemy import select, text
+    from app.sql_service import business_today
+    s, m = system, system.models
+    today = business_today()
+    with s.Session() as db:
+        db.get(m.BranchStock, (1, 1)).quantity = 0
+        db.commit()
+    def receive(key, quantity, expiry):
+        body = {"branch_id": 1, "ingredient_id": 1, "quantity": quantity,
+                "request_key": key, "expires_on": str(expiry), "unit_cost": "1.00"}
+        response = s.client.post("/api/inventory/receive", json=body, headers=s.headers["manager"])
+        assert response.status_code == 200, response.text
+        return response.json(), body
+    expired, _ = receive("expired-batch", 4, today - timedelta(days=1))
+    later, _ = receive("later-batch", 3, today + timedelta(days=4))
+    sooner, body = receive("sooner-batch", 1, today)
+    replay = s.client.post("/api/inventory/receive", json=body, headers=s.headers["manager"])
+    assert replay.json()["idempotent_replay"]
+    available = s.client.get("/api/menu/availability?branch_id=1", headers=s.headers["cashier"]).json()
+    assert available[0]["available_portions"] == 2
+    order = checkout(s)
+    with s.Session() as db:
+        assert db.get(m.StockBatch, expired["batch_id"]).remaining_quantity == 4
+        assert db.get(m.StockBatch, sooner["batch_id"]).remaining_quantity == 0
+        assert db.get(m.StockBatch, later["batch_id"]).remaining_quantity == 2
+        allocations = db.scalars(select(m.StockBatchAllocation).where(m.StockBatchAllocation.order_id == order["id"])).all()
+        assert sum(row.quantity for row in allocations) == 2
+        assert len(allocations) == 2
+        assert len(db.execute(text("SELECT * FROM v_stock_batch_inventory WHERE branch_id=1")).all()) == 2
+    waste = s.client.get(f"/api/analytics/waste?branch_id=1&as_of={today}", headers=s.headers["manager"]).json()
+    assert waste["summary"]["expired_batches"] == 1
+    assert waste["summary"]["known_value_at_risk"] == 6
+    path = f"/api/inventory/batches/{expired['batch_id']}/discard"
+    for _ in range(2):
+        response = s.client.post(path, json={"request_key": "dispose-expired"}, headers=s.headers["manager"])
+        assert response.status_code == 200, response.text
+    with s.Session() as db:
+        assert db.get(m.BranchStock, (1, 1)).quantity == 2
+        assert count(db, m.StockBatchDiscard) == 1
+
+
+def test_concurrent_orders_cannot_oversell_dated_batch(system):
+    from datetime import timedelta
+    from app.sql_service import business_today
+    s, m = system, system.models
+    with s.Session() as db:
+        db.get(m.BranchStock, (1, 1)).quantity = 0
+        db.commit()
+    response = s.client.post("/api/inventory/receive", json={"branch_id": 1,
+        "ingredient_id": 1, "quantity": 2, "expires_on": str(business_today() + timedelta(days=1)),
+        "request_key": "last-dated-serving"}, headers=s.headers["manager"])
+    assert response.status_code == 200, response.text
+    batch_id = response.json()["batch_id"]
+    barrier = threading.Barrier(2)
+    def submit(customer):
+        barrier.wait(timeout=10)
+        return s.client.post("/api/orders", json=payload(customer_id=customer), headers=s.headers["manager"])
+    with ThreadPoolExecutor(max_workers=2) as executor:
+        responses = list(executor.map(submit, [1, 2]))
+    assert sorted(r.status_code for r in responses) == [201, 409], [r.text for r in responses]
+    with s.Session() as db:
+        assert db.get(m.StockBatch, batch_id).remaining_quantity == 0
+        assert db.get(m.BranchStock, (1, 1)).quantity == 0
+        assert count(db, m.StockBatchAllocation) == count(db, m.Order) == 1

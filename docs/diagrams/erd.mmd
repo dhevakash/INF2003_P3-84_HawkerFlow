@@ -16,6 +16,14 @@ erDiagram
     orders o|--o{ loyalty_transactions : earns_or_redeems
     customers o|--o{ users : identity
     branches o|--o{ users : assigned
+    branches ||--o{ stock_batches : holds_batches
+    ingredients ||--o{ stock_batches : batch_ingredient
+    stock_receipts o|--o| stock_batches : creates
+    stock_batches ||--o{ stock_batch_allocations : consumed_from
+    orders ||--o{ stock_batch_allocations : allocates
+    stock_batches ||--o| stock_batch_discards : disposed
+    users o|--o{ stock_batch_discards : recorded_by
+    stock_movements ||--o| stock_batch_discards : audits
     branches {
         int id PK
         string name
@@ -101,5 +109,32 @@ erDiagram
         int order_id FK
         int points_delta
         string event_type
+        datetime created_at
+    }
+    stock_batches {
+        int id PK
+        int branch_id FK
+        int ingredient_id FK
+        int receipt_id FK,UK
+        decimal initial_quantity
+        decimal remaining_quantity
+        date expires_on
+        decimal unit_cost
+        string source
+        datetime created_at
+    }
+    stock_batch_allocations {
+        int id PK
+        int batch_id FK
+        int order_id FK
+        decimal quantity
+    }
+    stock_batch_discards {
+        int id PK
+        int batch_id FK,UK
+        string request_key UK
+        decimal quantity
+        int actor_user_id FK
+        int movement_id FK,UK
         datetime created_at
     }

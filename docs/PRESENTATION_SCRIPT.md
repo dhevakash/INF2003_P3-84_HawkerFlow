@@ -1,6 +1,6 @@
 # HawkerFlow presentation script and recording plan
 
-Working draft dated 2 October 2026. Target duration: **9 minutes**, leaving one minute below the brief's ten-minute maximum. This is a presentation preparation pack, not a completed group video.
+Working draft updated 13 October 2026. Target duration: **9 minutes**, leaving one minute below the brief's ten-minute maximum. This is a presentation preparation pack, not a completed group video. The extra-credit feature walkthrough and exact formulas are in [EXTRA_CREDIT_GUIDE.md](EXTRA_CREDIT_GUIDE.md); integrate its three-minute demo by shortening repeated basic UI descriptions.
 
 Replace Group [ID] and all five member names. Put each speaker's actual name on screen during their segment. Speaking allocations below are suggested presentation roles, not claims about individual contributions. Rehearse the application and rerun the evidence on the submission machine before recording.
 
@@ -42,7 +42,7 @@ Source evidence: docs/ARCHITECTURE.md
 
 **Member 2 [full name], 2:15–3:05 (50 seconds)**
 
-The twelve-table operational model includes branches, customers, users, menu items, ingredients, recipes, stock, orders, lines, movements, receipts and loyalty transactions. Three bridge tables resolve many-to-many relationships. A separate line identifier permits repeated menu items with different notes. DECIMAL avoids floating-point money errors. Quantities must remain valid, and foreign keys protect SQL relationships. Order lines preserve the paid unit price, so updating the menu leaves previous sales unchanged. Stock movement and point ledgers make changes traceable. The full ER diagram accompanies the report.
+The fifteen-table operational model includes the original order, stock and loyalty tables plus expiry batches, sale allocations and disposal audits. Bridge tables resolve many-to-many relationships. A separate line identifier permits repeated menu items with different notes. DECIMAL avoids floating-point money errors. Quantities must remain valid, and foreign keys protect SQL relationships. Order lines preserve the paid unit price, so updating the menu leaves previous sales unchanged. Stock movement, batch allocation and point ledgers make changes traceable. The editable ER diagram and exported schema accompany the report.
 
 Source evidence: app/models.py; docs/diagrams/erd.mmd
 
@@ -90,7 +90,7 @@ Source evidence: evidence/benchmark.json; evidence/benchmark.csv
 
 **Member 5 [full name], 7:40–8:30 (50 seconds)**
 
-The unit suite has forty-four passing tests. Unit tests use lightweight stores and cannot establish MariaDB lock behaviour or MongoDB server validation. The separately executed real integration suite has sixteen passing tests and covers transaction rollback, concurrent checkout and redemption, request replay, ownership, reporting views, database constraints and Mongo validators. Refer to the latest integration log for the current count rather than treating skipped tests as passes. We also captured UI smoke evidence. Scope remains completed cash sales without a real payment gateway. Refunds, expiry batches, demand forecasting and distributed transactions are future work. Before final submission, the team must rerun on its own machines, inspect the deployment instructions and record all five named presenters.
+Use the current test counts in `evidence/extra-credit/RESULTS.md`. Unit tests use lightweight stores and cannot establish MariaDB lock behaviour or MongoDB server validation. Real integration checks cover transaction rollback, concurrent checkout and redemption, request replay, ownership, reporting views, constraints, Mongo validators, advanced SQL and dated-batch contention. Browser evidence checks actual screens and workflows. Scope includes FEFO batches, demand estimates, waste suggestions, sales trends and RFM insights. Refunds, real payments, trained predictive models and distributed transactions remain outside scope. Before final submission, the team must rehearse and record all five named presenters.
 
 Source evidence: evidence/unit.xml; evidence/integration.xml; evidence/ui-smoke.log; docs/ACCEPTANCE.md
 
@@ -122,4 +122,4 @@ Use the UI walkthrough in the user manual and the acceptance sequence in `docs/A
 
 ## Honest project boundaries
 
-The prototype implements completed cash sales. It does not implement a real payment gateway, refunds, expiry allocation, demand forecasting or a distributed transaction across the two databases. The MongoDB outage check uses fault injection. It does not measure a real network outage. A future enhancement must not appear as an implemented demonstration.
+The prototype implements completed cash sales, expiry allocation, average-demand forecasting, waste recommendations and RFM insights. It does not implement a real payment gateway, refunds, a trained forecasting model or a distributed transaction across the two databases. Stock forecasts always use current stock, including when the demand date is historical. The MongoDB outage check uses fault injection; it does not measure a real network outage. Use the extra-credit guide to distinguish implemented calculations from their limitations.

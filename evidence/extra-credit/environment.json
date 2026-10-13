@@ -1,0 +1,17 @@
+{
+  "verified_at_utc": "2026-10-13T10:37:14.620433+00:00",
+  "host_python": "3.13.7",
+  "host_platform": "Windows-11-10.0.26200-SP0",
+  "mariadb": "10.11.14-MariaDB-ubu2204",
+  "mongodb": "7.0.16",
+  "packages": {
+    "fastapi": "0.142.2",
+    "SQLAlchemy": "2.1.2",
+    "PyMySQL": "1.2.3",
+    "pymongo": "4.18.2",
+    "pytest": "9.1.1",
+    "playwright": "1.63.0"
+  },
+  "operational_tables": 15,
+  "reporting_views": 3
+}

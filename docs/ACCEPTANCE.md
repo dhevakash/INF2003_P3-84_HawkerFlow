@@ -28,9 +28,10 @@ was tested. Record the test environment and command with every result.
   contain verified equal answers for 1k, 10k and 50k identical generated reviews,
   5 warmups and 30 repetitions. Both execution plans use the branch/rating index.
   Its outcome supports one indexed review analytics workload only.
-- Expiry batches, refunds, demand forecasting, and cross-store distributed
-  transactions are outside the current implementation and must not be demoed as
-  completed features.
+- These bullets record the original prototype evidence. Added FEFO batches,
+  demand estimates, food-waste suggestions, sales trends and RFM insights have
+  separate current results in `evidence/extra-credit/RESULTS.md`. Refunds,
+  real payments and cross-store distributed transactions remain outside scope.
 
 ## Reproducible validation
 

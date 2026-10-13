@@ -1,7 +1,7 @@
 """Normalized operational schema. MariaDB tables explicitly use InnoDB."""
-from datetime import datetime, timezone
+from datetime import date, datetime, timezone
 from decimal import Decimal
-from sqlalchemy import Boolean, CheckConstraint, DateTime, ForeignKey, Integer, Numeric, String, Index
+from sqlalchemy import Boolean, CheckConstraint, Date, DateTime, ForeignKey, Integer, Numeric, String, Index
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from app.db import Base
 
@@ -122,4 +122,41 @@ class LoyaltyTransaction(Base):
     order_id: Mapped[int | None] = mapped_column(ForeignKey("orders.id"))
     points_delta: Mapped[int] = mapped_column(Integer)
     event_type: Mapped[str] = mapped_column(String(40))
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow)
+
+class StockBatch(Base):
+    """Expiry is unknown for legacy inventory; no historical dates are invented."""
+    __tablename__ = "stock_batches"
+    __table_args__ = (CheckConstraint("initial_quantity > 0", name="ck_batch_initial"),
+                     CheckConstraint("remaining_quantity >= 0 AND remaining_quantity <= initial_quantity", name="ck_batch_remaining"),
+                     CheckConstraint("unit_cost IS NULL OR unit_cost >= 0", name="ck_batch_cost"),
+                     Index("ix_batches_branch_ingredient_expiry", "branch_id", "ingredient_id", "expires_on"), {"mysql_engine": "InnoDB"})
+    id: Mapped[int] = mapped_column(primary_key=True)
+    branch_id: Mapped[int] = mapped_column(ForeignKey("branches.id"))
+    ingredient_id: Mapped[int] = mapped_column(ForeignKey("ingredients.id"))
+    receipt_id: Mapped[int | None] = mapped_column(ForeignKey("stock_receipts.id"), unique=True)
+    initial_quantity: Mapped[Decimal] = mapped_column(Numeric(14, 4))
+    remaining_quantity: Mapped[Decimal] = mapped_column(Numeric(14, 4))
+    expires_on: Mapped[date | None] = mapped_column(Date)
+    unit_cost: Mapped[Decimal | None] = mapped_column(Numeric(14, 4))
+    source: Mapped[str] = mapped_column(String(40), default="receipt")
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow)
+
+class StockBatchAllocation(Base):
+    __tablename__ = "stock_batch_allocations"
+    __table_args__ = (CheckConstraint("quantity > 0", name="ck_allocation_quantity"), {"mysql_engine": "InnoDB"})
+    id: Mapped[int] = mapped_column(primary_key=True)
+    batch_id: Mapped[int] = mapped_column(ForeignKey("stock_batches.id"), index=True)
+    order_id: Mapped[int] = mapped_column(ForeignKey("orders.id"), index=True)
+    quantity: Mapped[Decimal] = mapped_column(Numeric(14, 4))
+
+class StockBatchDiscard(Base):
+    __tablename__ = "stock_batch_discards"
+    __table_args__ = (CheckConstraint("quantity > 0", name="ck_discard_quantity"), {"mysql_engine": "InnoDB"})
+    id: Mapped[int] = mapped_column(primary_key=True)
+    batch_id: Mapped[int] = mapped_column(ForeignKey("stock_batches.id"), unique=True)
+    request_key: Mapped[str] = mapped_column(String(100), unique=True)
+    quantity: Mapped[Decimal] = mapped_column(Numeric(14, 4))
+    actor_user_id: Mapped[int | None] = mapped_column(ForeignKey("users.id"))
+    movement_id: Mapped[int] = mapped_column(ForeignKey("stock_movements.id"), unique=True)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow)

@@ -79,8 +79,10 @@ def health():
 
 from .sql_routes import router as sql_router
 from .mongo_routes import router as mongo_router
+from .advanced_routes import router as advanced_router
 app.include_router(sql_router)
 app.include_router(mongo_router)
+app.include_router(advanced_router)
 STATIC=Path(__file__).parent/'static'
 app.mount('/static',StaticFiles(directory=STATIC),name='static')
 

@@ -1,5 +1,7 @@
 {
   "created_orders_this_run": 0,
+  "created_demo_batches_this_run": 0,
+  "extra_credit_demo_as_of": "2026-10-13",
   "sql_row_counts": {
     "branches": 5,
     "customers": 50,
@@ -7,9 +9,11 @@
     "ingredients": 15,
     "recipe_components": 68,
     "branch_stock": 75,
-    "stock_movements": 1195,
-    "orders": 200,
-    "loyalty_transactions": 200,
+    "stock_movements": 1214,
+    "stock_receipts": 15,
+    "stock_batches": 90,
+    "orders": 201,
+    "loyalty_transactions": 201,
     "users": 3
   },
   "created_reviews_this_run": 0,
@@ -19,7 +23,7 @@
     "external_review_examples": 1000
   },
   "seed": 20261002,
-  "generated_at_utc": "2026-10-02T09:32:26.560516+00:00",
+  "generated_at_utc": "2026-10-13T10:30:27.925665+00:00",
   "real_fields": [
     "source centre name",
     "historical address",

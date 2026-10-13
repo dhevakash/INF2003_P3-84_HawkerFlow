@@ -14,7 +14,7 @@ The final report must use Calibri Body 12 and at most ten body pages, excluding 
 
 ## Introduction
 
-Explain why a small F&B operator needs stock-aware orders, dependable reward accounting and feedback analysis. Define intended users, completed-cash-sale scope and excluded payments/refunds/expiry batches. State measurable goals such as rollback on shortage and no duplicated rewards on retry. Add a verified member responsibility table only once the group confirms its allocation.
+Explain why a small F&B operator needs stock-aware orders, dependable reward accounting, demand estimates, expiry monitoring and feedback analysis. Define intended users, completed-cash-sale scope and excluded real payments/refunds. State measurable goals such as rollback on shortage, expired-stock exclusion, FEFO and no duplicated rewards on retry. Add a verified member responsibility table only once the group confirms its allocation. Use `EXTRA_CREDIT_GUIDE.md` for the implemented extra-credit features.
 
 ## System architecture Design and requirements
 
@@ -54,7 +54,7 @@ Reliability: demonstrate shortage rollback, last-stock contention, retry idempot
 
 Security: describe password hashing, token handling, role checks, branch restrictions, customer ownership and query parameterization. Distinguish implemented controls from production recommendations.
 
-Include known limitations: historical location data, synthetic transactions/feedback, cash-sales-only, no real payments/refunds/expiry allocation and development deployment assumptions.
+Include known limitations: historical location data, synthetic transactions/feedback/expiry fixtures, cash-sales-only, no real payments/refunds, unknown legacy expiry, current-stock rather than historical inventory reconstruction, average-demand rather than trained forecasting, and development deployment assumptions.
 
 ## Reflection and takeaways
 

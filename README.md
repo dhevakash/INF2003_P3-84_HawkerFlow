@@ -54,7 +54,15 @@ These are fictional development accounts. The included secrets and database cred
 5. As manager, reply or moderate reviews, inspect branch sales, low stock, complaints and monthly ratings. Dates filter UTC timestamps with an exclusive end date. Gross item sales precede points discounts; branch totals are net sales.
 6. Inspect the separately labelled UCI sentence sample. It has no invented local customer/order/branch links.
 
-Notes on order lines are informational. They do not alter recipes or constitute an allergen-management feature. Refunds, expiry-batch allocation, real payments, forecasting and distributed transactions are outside this prototype.
+Notes on order lines are informational. They do not alter recipes or constitute an allergen-management feature. Refunds, real payments and distributed transactions remain outside this prototype.
+
+## Extra-credit features
+
+Manager intelligence now includes sales trends and rankings, stock forecasting, food-waste monitoring with explained promotion suggestions, and RFM customer loyalty insights. Orders show ingredient-based available portions and check shared ingredients across the cart. Checkout consumes dated stock by earliest expiry, excludes expired lots, and records batch allocations atomically with stock and points. Deliveries accept expiry and cost; managers can record audited expired-stock disposal.
+
+Read [the extra-credit implementation and presentation guide](docs/EXTRA_CREDIT_GUIDE.md) for exact formulas, database techniques, demo steps, and professor questions. New verification is recorded separately in [the enhancement results](evidence/extra-credit/RESULTS.md).
+
+After pulling these changes, run `docker compose up -d --build` and `docker compose exec app python scripts/seed.py`. This adds tables and preserves existing records and database volumes. Existing stock is labelled unknown expiry; the seed adds explicitly synthetic expiry lots using fixed receipt keys. Historical seed sales are August–September 2026: use **Manager intelligence → Use seeded sales dates** for demand/sales/loyalty, then **Return to today** for expiry monitoring. Forecasting uses current inventory and current expiry status even when you select historical demand dates. The fixed waste fixture assessment date is **13 October 2026**.
 
 ## Data and provenance
 
@@ -93,7 +101,7 @@ On macOS/Linux use `python3 -m venv .venv` and `.venv/bin/python` in place of th
 Unit checks use explicit SQLite/mongomock fixtures. Run them separately from integration tests because configuration is loaded at import:
 
 ```powershell
-.venv\Scripts\python.exe -m pytest tests/test_sql.py tests/test_mongo.py -q
+.venv\Scripts\python.exe -m pytest tests/test_sql.py tests/test_mongo.py tests/test_inventory_features.py tests/test_advanced_analytics.py -q
 ```
 
 The real-engine integration suite **clears its dedicated test records** and rejects SQL/Mongo database names not ending in `_test`. The Compose initialization scripts create these databases and scope the development account to them. Use a separate terminal for the test configuration:

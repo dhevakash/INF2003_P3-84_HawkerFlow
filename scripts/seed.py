@@ -10,7 +10,7 @@ import hashlib
 import json
 import random
 import sys
-from datetime import datetime, timedelta, timezone
+from datetime import date, datetime, timedelta, timezone
 from decimal import Decimal
 from pathlib import Path
 
@@ -20,25 +20,26 @@ SEED = 20261002
 PASSWORD = "DemoPass123!"
 SEED_PREFIX = "hawkerflow-demo-v1-"
 BASE_DATE = datetime(2026, 8, 25, 9, 0)
+EXTRA_CREDIT_AS_OF = date(2026, 10, 13)
 
 
 def load_inputs():
-    manifest = json.loads((ROOT / "data/source_manifest.json").read_text())
+    manifest = json.loads((ROOT / "data/source_manifest.json").read_text(encoding="utf-8"))
     for filename, attributes in manifest["files"].items():
         content = (ROOT / "data" / filename).read_bytes()
         if hashlib.sha256(content).hexdigest() != attributes["sha256"]:
             raise RuntimeError(f"Source checksum mismatch: {filename}. Refresh with fetch_locations.py.")
-    return (json.loads((ROOT / "data/demo_branches.json").read_text()),
-            json.loads((ROOT / "data/menu_recipes.json").read_text()))
+    return (json.loads((ROOT / "data/demo_branches.json").read_text(encoding="utf-8")),
+            json.loads((ROOT / "data/menu_recipes.json").read_text(encoding="utf-8")))
 
 
 def seed_sql(order_count=200):
     from sqlalchemy import func, select, update
     from app.db import SessionLocal, init_db
     from app.models import (Branch, BranchStock, Customer, Ingredient, LoyaltyTransaction,
-                            MenuItem, Order, RecipeComponent, StockMovement, User)
+                            MenuItem, Order, RecipeComponent, StockMovement, StockBatch, StockReceipt, User)
     from app.security import hash_password
-    from app.sql_service import checkout
+    from app.sql_service import checkout, receive_stock, backfill_stock_batches
 
     branch_input, catalogue = load_inputs()
     init_db()
@@ -124,11 +125,33 @@ def seed_sql(order_count=200):
             seed_orders.append({"id": order.id, "customer_id": order.customer_id,
                                 "branch_id": order.branch_id, "created_at": order.created_at,
                                 "status": order.status})
+        # Add separately labelled synthetic lots after historical order generation.
+        # Fixed fixture dates/keys make reruns safe, including after consumption
+        # or disposal. Existing aggregate stock is never assigned invented expiry.
+        backfill_stock_batches(session)
+        created_batches = 0
+        for branch in branch_input:
+            for label, ingredient_id, quantity, days, cost in (
+                    ("chicken-expiring", 2, "1200", 1, "0.0120"),
+                    ("vegetables-expiring", 13, "1500", 2, "0.0040"),
+                    ("milk-expired", 7, "500", -1, "0.0030")):
+                key = f"hawkerflow-extra-v1-{branch['id']}-{label}"
+                previous = session.scalar(select(StockReceipt.id).where(StockReceipt.request_key == key))
+                session.rollback()
+                result = receive_stock(session, {"branch_id": branch["id"], "ingredient_id": ingredient_id,
+                    "quantity": quantity, "request_key": key,
+                    "expires_on": EXTRA_CREDIT_AS_OF + timedelta(days=days), "unit_cost": cost})
+                if previous is None:
+                    batch = session.get(StockBatch, result["batch_id"])
+                    batch.source = "synthetic_demo"
+                    session.commit()
+                    created_batches += 1
         users = {user.email: user.id for user in session.scalars(select(User))}
         counts = {model.__tablename__: session.scalar(select(func.count()).select_from(model))
                   for model in (Branch, Customer, MenuItem, Ingredient, RecipeComponent, BranchStock,
-                                StockMovement, Order, LoyaltyTransaction, User)}
-        return seed_orders, users, {"created_orders_this_run": created, "sql_row_counts": counts}
+                                StockMovement, StockReceipt, StockBatch, Order, LoyaltyTransaction, User)}
+        return seed_orders, users, {"created_orders_this_run": created, "created_demo_batches_this_run": created_batches,
+                                  "extra_credit_demo_as_of": EXTRA_CREDIT_AS_OF.isoformat(), "sql_row_counts": counts}
 
 
 def seed_mongo(seed_orders, users, review_count=100):
@@ -167,7 +190,7 @@ def seed_mongo(seed_orders, users, review_count=100):
                     "milestones": {"first_visit": first_visit.date().isoformat()} if customer_id % 2 else {},
                     "updated_at": first_visit.replace(tzinfo=timezone.utc)}
         database.customer_profiles.update_one({"customer_id": customer_id}, {"$setOnInsert": document}, upsert=True)
-    manifest = json.loads((ROOT / "data/review_source_manifest.json").read_text())
+    manifest = json.loads((ROOT / "data/review_source_manifest.json").read_text(encoding="utf-8"))
     filename = "external_review_examples.json"
     content = (ROOT / "data" / filename).read_bytes()
     if hashlib.sha256(content).hexdigest() != manifest["files"][filename]["sha256"]:
@@ -198,7 +221,7 @@ def main():
                   real_fields=["source centre name", "historical address", "postal code extracted from address"],
                   synthetic_fields="All fictional branch affiliations and operational records, reviews and preferences",
                   seed_order_prefix=SEED_PREFIX, sql_only=args.sql_only)
-    (ROOT / "data/seed_run_manifest.json").write_text(json.dumps(result, indent=2) + "\n")
+    (ROOT / "data/seed_run_manifest.json").write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(result, indent=2))
 
 

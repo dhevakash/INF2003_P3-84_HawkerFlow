@@ -2,6 +2,8 @@
 
 This evidence describes the implemented prototype as tested on 2 October 2026. It does not claim production readiness, a fresh Windows installation, or completed human presentation/reflection work.
 
+The extra-credit extension was verified separately on 13 October 2026. See [the current enhancement results](../evidence/extra-credit/RESULTS.md) and [the feature and presentation guide](EXTRA_CREDIT_GUIDE.md). The table below preserves the original run; its counts do not cover the new features.
+
 ## Verified checks
 
 | Evidence | Result | What it establishes |
