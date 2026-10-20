@@ -1,0 +1,25 @@
+{
+  "host_python": "3.13.7",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "test_packages": {
+    "pytest": "9.1.1",
+    "playwright": "1.63.0",
+    "fastapi": "0.142.2",
+    "SQLAlchemy": "2.1.2"
+  },
+  "test_helpers": {
+    "axe.min.js": {
+      "bytes": 553446,
+      "sha256": "880970c081707360e64f34cea25ff91892f5bc95675b0776925b9709dd8a68bb"
+    },
+    "web-vitals.iife.js": {
+      "bytes": 7226,
+      "sha256": "f759996a85b1ddf539ef3f16fdca3d39e48f670aef69e82c6200cc2b5f9f47bd"
+    }
+  },
+  "assets_sha256": {
+    "app.js": "9e550d50e4aa083ab14fa6946acc6ab8fdd3f91e722b39954af78482ef75f3b3",
+    "index.html": "16ffe225d6fae19b4a75211b150100a00b40c2632079fcbdd8599cd8bd6debef",
+    "styles.css": "353dde621a4355b3238b606607702a0327c5738278625a8196f09069e3a548b9"
+  }
+}

@@ -415,11 +415,12 @@ def test_profile_owner_and_schema_limits(system):
 
 def test_advanced_reports_execute_on_real_mariadb(system):
     """Exercise CTEs, window functions and UTC/date expressions on MariaDB."""
-    from datetime import timedelta
-    from app.sql_service import business_today
+    from datetime import datetime, timedelta
     s = system
-    checkout(s)
-    today = business_today()
+    order = checkout(s)
+    # Sales/report cutoffs use UTC, while batch expiry uses Singapore dates.
+    # Derive this report date from the recorded UTC order, including SG 00–08h.
+    today = datetime.fromisoformat(order["created_at"]).date()
     tomorrow = today + timedelta(days=1)
     paths = [
         f"/api/analytics/dashboard?branch_id=1&start={today}&end={tomorrow}",

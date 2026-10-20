@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="How the HawkerFlow local demonstration works and what data it stores.">
+  <title>Demo information &amp; privacy · HawkerFlow</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body class="policy-page">
+  <a class="skip-link" href="#information">Skip to demo information</a>
+  <header class="policy-header">
+    <a class="brand" href="/" aria-label="HawkerFlow workspace"><span class="brand-mark" aria-hidden="true">H</span> HawkerFlow</a>
+    <a class="text-button" href="/">Back to workspace</a>
+  </header>
+  <main id="information" class="policy-content" tabindex="-1">
+    <span class="eyebrow teal">INF2003 PROJECT DEMONSTRATION</span>
+    <h1>Demo information &amp; privacy</h1>
+    <p class="policy-meta">This page describes the current local prototype. It is not a reviewed commercial service agreement or a claim of legal compliance.</p>
+    <nav class="policy-nav" aria-label="Information sections">
+      <a href="#usage">Demo usage</a>
+      <a href="#privacy">Privacy &amp; stored data</a>
+      <a href="#limitations">Deployment limitations</a>
+    </nav>
+
+    <section id="usage" aria-labelledby="usage-title">
+      <h2 id="usage-title">Demo usage</h2>
+      <p>HawkerFlow is a local database coursework application for counter staff, kitchen staff, managers and customers. It demonstrates orders, loyalty points, inventory, customer feedback and management analysis.</p>
+      <p>Use the supplied development accounts and synthetic records. Avoid entering real customer details, private feedback or production credentials. Completing a cash order records a sale in the demonstration database; it does not take a payment, contact a payment provider or make a bank transfer.</p>
+      <h3>Where to find the advanced features</h3>
+      <ul>
+        <li><strong>Manager intelligence:</strong> sales performance, stock forecasting, food waste and suggested offers, customer loyalty segments, and review intelligence.</li>
+        <li><strong>Orders &amp; points:</strong> ingredient availability checks and checkout that updates orders, stock and points together.</li>
+        <li><strong>Kitchen stock:</strong> stock receipts, expiry dates, stock batches and expired-stock disposal.</li>
+      </ul>
+      <p>Stock forecasts use recorded ingredient consumption from stock movements and compare historical usage with current inventory. Offer suggestions use explainable scores. Their usefulness depends on the quality and date range of the stored records; they are not guaranteed predictions or automatic business decisions.</p>
+      <h3>Demonstration data</h3>
+      <p>Branches and operational records are fictional. Branch locations use a historical 2016 NEA dataset from <a href="https://data.gov.sg/datasets/d_68a42f09f350881996d83f9cd73ab02f/view" target="_blank" rel="noopener noreferrer">data.gov.sg</a>. The separate external feedback explorer uses <a href="https://archive.ics.uci.edu/dataset/331/sentiment+labelled+sentences" target="_blank" rel="noopener noreferrer">UCI Sentiment Labelled Sentences</a>; those sentences are research examples, not testimonials about these branches.</p>
+    </section>
+
+    <section id="privacy" aria-labelledby="privacy-title">
+      <h2 id="privacy-title">Privacy &amp; stored data</h2>
+      <h3>What is saved</h3>
+      <ul>
+        <li><strong>MariaDB:</strong> account names, email addresses, roles and password hashes; customer names and email addresses; orders, dish quantities, order notes, loyalty history, recipes, inventory and stock movements.</li>
+        <li><strong>MongoDB:</strong> purchase-linked review text, ratings, tags, moderation state and replies; customer dietary and favourite-category preferences, communication preferences and milestone labels.</li>
+        <li><strong>Your browser:</strong> the sign-in token and basic account details in <code>sessionStorage</code> for the current browser session. The application removes these entries on sign-out. Sign-out does not revoke an already issued token on the server; tokens expire according to server configuration.</li>
+      </ul>
+      <p>Passwords are stored as salted password hashes. Sign-in tokens are signed and expire. Neither mechanism makes this demonstration suitable for holding real personal records without further review.</p>
+      <h3>Who can access records</h3>
+      <p>Server checks enforce roles, branch access and ownership. Managers can access management reports and customer profiles. Cashiers can manage orders and stock at their assigned branch and access customer records needed at the counter. Customers can access their own orders, points and profile. Published reviews are visible to signed-in users; managers can also access hidden reviews.</p>
+      <h3>Storage and deletion</h3>
+      <p>Database records persist in the configured databases, including across Docker application rebuilds. There is no automatic retention schedule or complete account-deletion request workflow. Review owners and managers can delete reviews through the application. Other data removal requires an authorised project maintainer to use the database administration process.</p>
+      <h3>External services</h3>
+      <p>The workspace does not integrate third-party advertising, tracking scripts or an online payment service. Product reports analyse the records in the local databases. Source links take you to external websites. The optional API documentation at <a href="/docs">/docs</a> and <a href="/redoc">/redoc</a> downloads its interface libraries from jsDelivr; ReDoc also loads its attribution logo from Redocly's CDN. Your browser connects to those providers when you visit the documentation pages.</p>
+    </section>
+
+    <section id="limitations" aria-labelledby="limitations-title">
+      <h2 id="limitations-title">Deployment limitations</h2>
+      <p>The supplied Docker configuration binds application and database ports to the local computer. Development passwords and the default signing key are publicly known within this project. The prototype has no published support address, named commercial operator, approved retention policy or reviewed commercial terms.</p>
+      <p>Before public deployment, the project owner needs to define the operator and contact details, data purposes, applicable consent, retention, access and correction processes, deletion procedures, and appropriate privacy and service terms. Use with real personal data in Singapore needs a review of the <a href="https://www.pdpc.gov.sg/overview-of-pdpa/the-legislation/personal-data-protection-act/data-protection-obligations" target="_blank" rel="noopener noreferrer">PDPC's data protection obligations</a>. Hosting, HTTPS, secret management, session revocation and abuse protection also require deployment-specific review.</p>
+    </section>
+    <footer class="policy-meta">HawkerFlow · Local demonstration · <a href="/">Return to workspace</a></footer>
+  </main>
+</body>
+</html>

@@ -1,0 +1,17 @@
+{
+  "base_url": "http://127.0.0.1:8000",
+  "checks": [
+    "Ingredient-aware menu shows live available portions",
+    "Seeded sales, all branches, actual revenue chart and mobile layout",
+    "Equal-period preset has a real comparison baseline and declining dishes",
+    "Recorded-demand forecasts and expandable rolling SQL averages",
+    "RFM customer scores, segment filter, and mobile layout",
+    "Expiry statuses, known value and promotion score/reasons",
+    "Dated/costed delivery and audited expired disposal leave original quantity intact"
+  ],
+  "js_errors": [],
+  "writes": {
+    "verification_batch": 95
+  },
+  "status": "passed"
+}

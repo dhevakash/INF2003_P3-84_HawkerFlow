@@ -1,0 +1,14 @@
+{
+  "assets_match": {
+    "app.js": true,
+    "index.html": true,
+    "styles.css": true
+  },
+  "health": {
+    "status": "ready",
+    "databases": {
+      "sql": "connected",
+      "mongo": "connected"
+    }
+  }
+}

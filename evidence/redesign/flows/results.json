@@ -1,0 +1,14 @@
+{
+  "checks": [
+    "Keyboard skip link reaches the visible sign-in form",
+    "Sign-in works with Enter and places focus on the workspace heading",
+    "Dish text/category search and no-results recovery",
+    "Manager shortcuts plus manual Arrow/Space/Home/End tab navigation retain focus",
+    "Ingredient search and usable low-stock filtering",
+    "Injected read failure shows error and retry recovers without a business write",
+    "Recipe load failure disables saving and its retry reloads safely",
+    "Sign-out clears app session, preserves unrelated storage and survives refresh"
+  ],
+  "page_errors": [],
+  "status": "passed"
+}

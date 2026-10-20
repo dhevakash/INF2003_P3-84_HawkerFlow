@@ -1,0 +1,28 @@
+{
+  "before": {
+    "scenes": 13,
+    "responsive_cases": 78,
+    "axe_rule_violations": 27,
+    "overflow_cases": 0,
+    "offscreen_nav_cases": 20
+  },
+  "after": {
+    "scenes": 14,
+    "responsive_cases": 84,
+    "axe_rule_violations": 0,
+    "axe_mobile_rule_violations": 0,
+    "overflow_cases": 0,
+    "offscreen_nav_cases": 0
+  },
+  "core_web_vitals_lab_p75": {
+    "LCP": 140,
+    "INP": 16,
+    "CLS": 0.0014827230043764467
+  },
+  "core_web_vitals_lab_samples": 5,
+  "encoded_js_css_bytes": {
+    "before": 76317,
+    "after": 27401
+  },
+  "payload_reduction_pct": 64.1
+}

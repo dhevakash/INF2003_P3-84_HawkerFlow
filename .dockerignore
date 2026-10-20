@@ -6,4 +6,5 @@ __pycache__
 evidence/ui
 .git
 evidence/extra-credit
+evidence/redesign
 pytest-cache-files-*

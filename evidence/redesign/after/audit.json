@@ -1,0 +1,5101 @@
+{
+  "phase": "after",
+  "base_url": "http://127.0.0.1:8000",
+  "recorded_utc": "2026-10-13T17:30:12.719049+00:00",
+  "widths": [
+    320,
+    375,
+    768,
+    1024,
+    1440,
+    1920
+  ],
+  "scenes": [
+    {
+      "name": "login",
+      "viewports": [
+        {
+          "viewport": 320,
+          "documentWidth": 320,
+          "nav": [],
+          "targetsBelow24px": [],
+          "bodyFont": "16px"
+        },
+        {
+          "viewport": 375,
+          "documentWidth": 375,
+          "nav": [],
+          "targetsBelow24px": [],
+          "bodyFont": "16px"
+        },
+        {
+          "viewport": 768,
+          "documentWidth": 768,
+          "nav": [],
+          "targetsBelow24px": [],
+          "bodyFont": "16px"
+        },
+        {
+          "viewport": 1024,
+          "documentWidth": 1024,
+          "nav": [],
+          "targetsBelow24px": [],
+          "bodyFont": "16px"
+        },
+        {
+          "viewport": 1440,
+          "documentWidth": 1440,
+          "nav": [],
+          "targetsBelow24px": [],
+          "bodyFont": "16px"
+        },
+        {
+          "viewport": 1920,
+          "documentWidth": 1920,
+          "nav": [],
+          "targetsBelow24px": [],
+          "bodyFont": "16px"
+        }
+      ],
+      "axe": {
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "nodes": 1
+          }
+        ],
+        "passes": 40
+      },
+      "axe_mobile": {
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "nodes": 1
+          }
+        ],
+        "passes": 38
+      },
+      "vitals_observed": {
+        "lcp": 120,
+        "cls": 0,
+        "events": []
+      }
+    },
+    {
+      "name": "manager-orders",
+      "viewports": [
+        {
+          "viewport": 320,
+          "documentWidth": 320,
+          "nav": [
+            {
+              "text": "\u25a4Orders & points",
+              "height": 48.09375,
+              "width": 140,
+              "right": 156,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25a6Kitchen stock",
+              "height": 48.09375,
+              "width": 140,
+              "right": 304,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25c9Customers & feedback",
+              "height": 59.6875,
+              "width": 140,
+              "right": 156,
+              "withinViewport": true
+            },
+            {
+              "text": "\u2197Manager intelligence",
+              "height": 59.6875,
+              "width": 140,
+              "right": 304,
+              "withinViewport": true
+            }
+          ],
+          "targetsBelow24px": [],
+          "bodyFont": "16px"
+        },
+        {
+          "viewport": 375,
+          "documentWidth": 375,
+          "nav": [
+            {
+              "text": "\u25a4Orders & points",
+              "height": 48.09375,
+              "width": 167.5,
+              "right": 183.5,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25a6Kitchen stock",
+              "height": 48.09375,
+              "width": 167.5,
+              "right": 359,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25c9Customers & feedback",
+              "height": 59.6875,
+              "width": 167.5,
+              "right": 183.5,
+              "withinViewport": true
+            },
+            {
+              "text": "\u2197Manager intelligence",
+              "height": 59.6875,
+              "width": 167.5,
+              "right": 359,
+              "withinViewport": true
+            }
+          ],
+          "targetsBelow24px": [],
+          "bodyFont": "16px"
+        },
+        {
+          "viewport": 768,
+          "documentWidth": 768,
+          "nav": [
+            {
+              "text": "\u25a4Orders & points",
+              "height": 63.6875,
+              "width": 174,
+              "right": 198,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25a6Kitchen stock",
+              "height": 63.6875,
+              "width": 174,
+              "right": 380,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25c9Customers & feedback",
+              "height": 63.6875,
+              "width": 174,
+              "right": 562,
+              "withinViewport": true
+            },
+            {
+              "text": "\u2197Manager intelligence",
+              "height": 63.6875,
+              "width": 174,
+              "right": 744,
+              "withinViewport": true
+            }
+          ],
+          "targetsBelow24px": [],
+          "bodyFont": "16px"
+        },
+        {
+          "viewport": 1024,
+          "documentWidth": 1024,
+          "nav": [
+            {
+              "text": "\u25a4Orders & points",
+              "height": 55,
+              "width": 208,
+              "right": 224,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25a6Kitchen stock",
+              "height": 55,
+              "width": 208,
+              "right": 224,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25c9Customers & feedback",
+              "height": 55,
+              "width": 208,
+              "right": 224,
+              "withinViewport": true
+            },
+            {
+              "text": "\u2197Manager intelligence",
+              "height": 55,
+              "width": 208,
+              "right": 224,
+              "withinViewport": true
+            }
+          ],
+          "targetsBelow24px": [],
+          "bodyFont": "16px"
+        },
+        {
+          "viewport": 1440,
+          "documentWidth": 1440,
+          "nav": [
+            {
+              "text": "\u25a4Orders & points",
+              "height": 55,
+              "width": 224,
+              "right": 240,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25a6Kitchen stock",
+              "height": 55,
+              "width": 224,
+              "right": 240,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25c9Customers & feedback",
+              "height": 55,
+              "width": 224,
+              "right": 240,
+              "withinViewport": true
+            },
+            {
+              "text": "\u2197Manager intelligence",
+              "height": 55,
+              "width": 224,
+              "right": 240,
+              "withinViewport": true
+            }
+          ],
+          "targetsBelow24px": [],
+          "bodyFont": "16px"
+        },
+        {
+          "viewport": 1920,
+          "documentWidth": 1920,
+          "nav": [
+            {
+              "text": "\u25a4Orders & points",
+              "height": 55,
+              "width": 224,
+              "right": 240,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25a6Kitchen stock",
+              "height": 55,
+              "width": 224,
+              "right": 240,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25c9Customers & feedback",
+              "height": 55,
+              "width": 224,
+              "right": 240,
+              "withinViewport": true
+            },
+            {
+              "text": "\u2197Manager intelligence",
+              "height": 55,
+              "width": 224,
+              "right": 240,
+              "withinViewport": true
+            }
+          ],
+          "targetsBelow24px": [],
+          "bodyFont": "16px"
+        }
+      ],
+      "axe": {
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "nodes": 4
+          }
+        ],
+        "passes": 49
+      },
+      "axe_mobile": {
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "nodes": 90
+          }
+        ],
+        "passes": 50
+      },
+      "vitals_observed": {
+        "lcp": 120,
+        "cls": 0,
+        "events": [
+          {
+            "id": 1413,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1413,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1413,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 1420,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1420,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1420,
+            "duration": 16,
+            "name": "click"
+          }
+        ]
+      }
+    },
+    {
+      "name": "manager-inventory",
+      "viewports": [
+        {
+          "viewport": 320,
+          "documentWidth": 320,
+          "nav": [
+            {
+              "text": "\u25a4Orders & points",
+              "height": 48.09375,
+              "width": 140,
+              "right": 156,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25a6Kitchen stock",
+              "height": 48.09375,
+              "width": 140,
+              "right": 304,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25c9Customers & feedback",
+              "height": 59.6875,
+              "width": 140,
+              "right": 156,
+              "withinViewport": true
+            },
+            {
+              "text": "\u2197Manager intelligence",
+              "height": 59.6875,
+              "width": 140,
+              "right": 304,
+              "withinViewport": true
+            }
+          ],
+          "targetsBelow24px": [
+            {
+              "text": "inventory-low-only",
+              "height": 20,
+              "width": 20
+            }
+          ],
+          "bodyFont": "16px"
+        },
+        {
+          "viewport": 375,
+          "documentWidth": 375,
+          "nav": [
+            {
+              "text": "\u25a4Orders & points",
+              "height": 48.09375,
+              "width": 167.5,
+              "right": 183.5,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25a6Kitchen stock",
+              "height": 48.09375,
+              "width": 167.5,
+              "right": 359,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25c9Customers & feedback",
+              "height": 59.6875,
+              "width": 167.5,
+              "right": 183.5,
+              "withinViewport": true
+            },
+            {
+              "text": "\u2197Manager intelligence",
+              "height": 59.6875,
+              "width": 167.5,
+              "right": 359,
+              "withinViewport": true
+            }
+          ],
+          "targetsBelow24px": [
+            {
+              "text": "inventory-low-only",
+              "height": 20,
+              "width": 20
+            }
+          ],
+          "bodyFont": "16px"
+        },
+        {
+          "viewport": 768,
+          "documentWidth": 768,
+          "nav": [
+            {
+              "text": "\u25a4Orders & points",
+              "height": 63.6875,
+              "width": 174,
+              "right": 198,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25a6Kitchen stock",
+              "height": 63.6875,
+              "width": 174,
+              "right": 380,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25c9Customers & feedback",
+              "height": 63.6875,
+              "width": 174,
+              "right": 562,
+              "withinViewport": true
+            },
+            {
+              "text": "\u2197Manager intelligence",
+              "height": 63.6875,
+              "width": 174,
+              "right": 744,
+              "withinViewport": true
+            }
+          ],
+          "targetsBelow24px": [
+            {
+              "text": "inventory-low-only",
+              "height": 20,
+              "width": 20
+            }
+          ],
+          "bodyFont": "16px"
+        },
+        {
+          "viewport": 1024,
+          "documentWidth": 1024,
+          "nav": [
+            {
+              "text": "\u25a4Orders & points",
+              "height": 55,
+              "width": 208,
+              "right": 224,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25a6Kitchen stock",
+              "height": 55,
+              "width": 208,
+              "right": 224,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25c9Customers & feedback",
+              "height": 55,
+              "width": 208,
+              "right": 224,
+              "withinViewport": true
+            },
+            {
+              "text": "\u2197Manager intelligence",
+              "height": 55,
+              "width": 208,
+              "right": 224,
+              "withinViewport": true
+            }
+          ],
+          "targetsBelow24px": [
+            {
+              "text": "inventory-low-only",
+              "height": 20,
+              "width": 20
+            }
+          ],
+          "bodyFont": "16px"
+        },
+        {
+          "viewport": 1440,
+          "documentWidth": 1440,
+          "nav": [
+            {
+              "text": "\u25a4Orders & points",
+              "height": 55,
+              "width": 224,
+              "right": 240,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25a6Kitchen stock",
+              "height": 55,
+              "width": 224,
+              "right": 240,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25c9Customers & feedback",
+              "height": 55,
+              "width": 224,
+              "right": 240,
+              "withinViewport": true
+            },
+            {
+              "text": "\u2197Manager intelligence",
+              "height": 55,
+              "width": 224,
+              "right": 240,
+              "withinViewport": true
+            }
+          ],
+          "targetsBelow24px": [
+            {
+              "text": "inventory-low-only",
+              "height": 20,
+              "width": 20
+            }
+          ],
+          "bodyFont": "16px"
+        },
+        {
+          "viewport": 1920,
+          "documentWidth": 1920,
+          "nav": [
+            {
+              "text": "\u25a4Orders & points",
+              "height": 55,
+              "width": 224,
+              "right": 240,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25a6Kitchen stock",
+              "height": 55,
+              "width": 224,
+              "right": 240,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25c9Customers & feedback",
+              "height": 55,
+              "width": 224,
+              "right": 240,
+              "withinViewport": true
+            },
+            {
+              "text": "\u2197Manager intelligence",
+              "height": 55,
+              "width": 224,
+              "right": 240,
+              "withinViewport": true
+            }
+          ],
+          "targetsBelow24px": [
+            {
+              "text": "inventory-low-only",
+              "height": 20,
+              "width": 20
+            }
+          ],
+          "bodyFont": "16px"
+        }
+      ],
+      "axe": {
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "nodes": 4
+          }
+        ],
+        "passes": 49
+      },
+      "axe_mobile": {
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "nodes": 43
+          }
+        ],
+        "passes": 50
+      },
+      "vitals_observed": {
+        "lcp": 120,
+        "cls": 0,
+        "events": [
+          {
+            "id": 1413,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1413,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1413,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 1420,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1420,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1420,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 1427,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1427,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1427,
+            "duration": 16,
+            "name": "click"
+          }
+        ]
+      }
+    },
+    {
+      "name": "manager-feedback",
+      "viewports": [
+        {
+          "viewport": 320,
+          "documentWidth": 320,
+          "nav": [
+            {
+              "text": "\u25a4Orders & points",
+              "height": 48.09375,
+              "width": 140,
+              "right": 156,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25a6Kitchen stock",
+              "height": 48.09375,
+              "width": 140,
+              "right": 304,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25c9Customers & feedback",
+              "height": 59.6875,
+              "width": 140,
+              "right": 156,
+              "withinViewport": true
+            },
+            {
+              "text": "\u2197Manager intelligence",
+              "height": 59.6875,
+              "width": 140,
+              "right": 304,
+              "withinViewport": true
+            }
+          ],
+          "targetsBelow24px": [
+            {
+              "text": "email",
+              "height": 20,
+              "width": 20
+            },
+            {
+              "text": "sms",
+              "height": 20,
+              "width": 20
+            },
+            {
+              "text": "push",
+              "height": 20,
+              "width": 20
+            }
+          ],
+          "bodyFont": "16px"
+        },
+        {
+          "viewport": 375,
+          "documentWidth": 375,
+          "nav": [
+            {
+              "text": "\u25a4Orders & points",
+              "height": 48.09375,
+              "width": 167.5,
+              "right": 183.5,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25a6Kitchen stock",
+              "height": 48.09375,
+              "width": 167.5,
+              "right": 359,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25c9Customers & feedback",
+              "height": 59.6875,
+              "width": 167.5,
+              "right": 183.5,
+              "withinViewport": true
+            },
+            {
+              "text": "\u2197Manager intelligence",
+              "height": 59.6875,
+              "width": 167.5,
+              "right": 359,
+              "withinViewport": true
+            }
+          ],
+          "targetsBelow24px": [
+            {
+              "text": "email",
+              "height": 20,
+              "width": 20
+            },
+            {
+              "text": "sms",
+              "height": 20,
+              "width": 20
+            },
+            {
+              "text": "push",
+              "height": 20,
+              "width": 20
+            }
+          ],
+          "bodyFont": "16px"
+        },
+        {
+          "viewport": 768,
+          "documentWidth": 768,
+          "nav": [
+            {
+              "text": "\u25a4Orders & points",
+              "height": 63.6875,
+              "width": 174,
+              "right": 198,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25a6Kitchen stock",
+              "height": 63.6875,
+              "width": 174,
+              "right": 380,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25c9Customers & feedback",
+              "height": 63.6875,
+              "width": 174,
+              "right": 562,
+              "withinViewport": true
+            },
+            {
+              "text": "\u2197Manager intelligence",
+              "height": 63.6875,
+              "width": 174,
+              "right": 744,
+              "withinViewport": true
+            }
+          ],
+          "targetsBelow24px": [
+            {
+              "text": "email",
+              "height": 20,
+              "width": 20
+            },
+            {
+              "text": "sms",
+              "height": 20,
+              "width": 20
+            },
+            {
+              "text": "push",
+              "height": 20,
+              "width": 20
+            }
+          ],
+          "bodyFont": "16px"
+        },
+        {
+          "viewport": 1024,
+          "documentWidth": 1024,
+          "nav": [
+            {
+              "text": "\u25a4Orders & points",
+              "height": 55,
+              "width": 208,
+              "right": 224,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25a6Kitchen stock",
+              "height": 55,
+              "width": 208,
+              "right": 224,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25c9Customers & feedback",
+              "height": 55,
+              "width": 208,
+              "right": 224,
+              "withinViewport": true
+            },
+            {
+              "text": "\u2197Manager intelligence",
+              "height": 55,
+              "width": 208,
+              "right": 224,
+              "withinViewport": true
+            }
+          ],
+          "targetsBelow24px": [
+            {
+              "text": "email",
+              "height": 20,
+              "width": 20
+            },
+            {
+              "text": "sms",
+              "height": 20,
+              "width": 20
+            },
+            {
+              "text": "push",
+              "height": 20,
+              "width": 20
+            }
+          ],
+          "bodyFont": "16px"
+        },
+        {
+          "viewport": 1440,
+          "documentWidth": 1440,
+          "nav": [
+            {
+              "text": "\u25a4Orders & points",
+              "height": 55,
+              "width": 224,
+              "right": 240,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25a6Kitchen stock",
+              "height": 55,
+              "width": 224,
+              "right": 240,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25c9Customers & feedback",
+              "height": 55,
+              "width": 224,
+              "right": 240,
+              "withinViewport": true
+            },
+            {
+              "text": "\u2197Manager intelligence",
+              "height": 55,
+              "width": 224,
+              "right": 240,
+              "withinViewport": true
+            }
+          ],
+          "targetsBelow24px": [
+            {
+              "text": "email",
+              "height": 20,
+              "width": 20
+            },
+            {
+              "text": "sms",
+              "height": 20,
+              "width": 20
+            },
+            {
+              "text": "push",
+              "height": 20,
+              "width": 20
+            }
+          ],
+          "bodyFont": "16px"
+        },
+        {
+          "viewport": 1920,
+          "documentWidth": 1920,
+          "nav": [
+            {
+              "text": "\u25a4Orders & points",
+              "height": 55,
+              "width": 224,
+              "right": 240,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25a6Kitchen stock",
+              "height": 55,
+              "width": 224,
+              "right": 240,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25c9Customers & feedback",
+              "height": 55,
+              "width": 224,
+              "right": 240,
+              "withinViewport": true
+            },
+            {
+              "text": "\u2197Manager intelligence",
+              "height": 55,
+              "width": 224,
+              "right": 240,
+              "withinViewport": true
+            }
+          ],
+          "targetsBelow24px": [
+            {
+              "text": "email",
+              "height": 20,
+              "width": 20
+            },
+            {
+              "text": "sms",
+              "height": 20,
+              "width": 20
+            },
+            {
+              "text": "push",
+              "height": 20,
+              "width": 20
+            }
+          ],
+          "bodyFont": "16px"
+        }
+      ],
+      "axe": {
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "nodes": 25
+          }
+        ],
+        "passes": 43
+      },
+      "axe_mobile": {
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "nodes": 25
+          }
+        ],
+        "passes": 43
+      },
+      "vitals_observed": {
+        "lcp": 120,
+        "cls": 0,
+        "events": [
+          {
+            "id": 1413,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1413,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1413,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 1420,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1420,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1420,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 1427,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1427,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1427,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 1434,
+            "duration": 24,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1434,
+            "duration": 24,
+            "name": "pointerup"
+          },
+          {
+            "id": 1434,
+            "duration": 24,
+            "name": "click"
+          }
+        ]
+      }
+    },
+    {
+      "name": "manager-sales",
+      "viewports": [
+        {
+          "viewport": 320,
+          "documentWidth": 320,
+          "nav": [
+            {
+              "text": "\u25a4Orders & points",
+              "height": 48.09375,
+              "width": 140,
+              "right": 156,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25a6Kitchen stock",
+              "height": 48.09375,
+              "width": 140,
+              "right": 304,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25c9Customers & feedback",
+              "height": 59.6875,
+              "width": 140,
+              "right": 156,
+              "withinViewport": true
+            },
+            {
+              "text": "\u2197Manager intelligence",
+              "height": 59.6875,
+              "width": 140,
+              "right": 304,
+              "withinViewport": true
+            }
+          ],
+          "targetsBelow24px": [],
+          "bodyFont": "16px"
+        },
+        {
+          "viewport": 375,
+          "documentWidth": 375,
+          "nav": [
+            {
+              "text": "\u25a4Orders & points",
+              "height": 48.09375,
+              "width": 167.5,
+              "right": 183.5,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25a6Kitchen stock",
+              "height": 48.09375,
+              "width": 167.5,
+              "right": 359,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25c9Customers & feedback",
+              "height": 59.6875,
+              "width": 167.5,
+              "right": 183.5,
+              "withinViewport": true
+            },
+            {
+              "text": "\u2197Manager intelligence",
+              "height": 59.6875,
+              "width": 167.5,
+              "right": 359,
+              "withinViewport": true
+            }
+          ],
+          "targetsBelow24px": [],
+          "bodyFont": "16px"
+        },
+        {
+          "viewport": 768,
+          "documentWidth": 768,
+          "nav": [
+            {
+              "text": "\u25a4Orders & points",
+              "height": 63.6875,
+              "width": 174,
+              "right": 198,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25a6Kitchen stock",
+              "height": 63.6875,
+              "width": 174,
+              "right": 380,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25c9Customers & feedback",
+              "height": 63.6875,
+              "width": 174,
+              "right": 562,
+              "withinViewport": true
+            },
+            {
+              "text": "\u2197Manager intelligence",
+              "height": 63.6875,
+              "width": 174,
+              "right": 744,
+              "withinViewport": true
+            }
+          ],
+          "targetsBelow24px": [],
+          "bodyFont": "16px"
+        },
+        {
+          "viewport": 1024,
+          "documentWidth": 1024,
+          "nav": [
+            {
+              "text": "\u25a4Orders & points",
+              "height": 55,
+              "width": 208,
+              "right": 224,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25a6Kitchen stock",
+              "height": 55,
+              "width": 208,
+              "right": 224,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25c9Customers & feedback",
+              "height": 55,
+              "width": 208,
+              "right": 224,
+              "withinViewport": true
+            },
+            {
+              "text": "\u2197Manager intelligence",
+              "height": 55,
+              "width": 208,
+              "right": 224,
+              "withinViewport": true
+            }
+          ],
+          "targetsBelow24px": [],
+          "bodyFont": "16px"
+        },
+        {
+          "viewport": 1440,
+          "documentWidth": 1440,
+          "nav": [
+            {
+              "text": "\u25a4Orders & points",
+              "height": 55,
+              "width": 224,
+              "right": 240,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25a6Kitchen stock",
+              "height": 55,
+              "width": 224,
+              "right": 240,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25c9Customers & feedback",
+              "height": 55,
+              "width": 224,
+              "right": 240,
+              "withinViewport": true
+            },
+            {
+              "text": "\u2197Manager intelligence",
+              "height": 55,
+              "width": 224,
+              "right": 240,
+              "withinViewport": true
+            }
+          ],
+          "targetsBelow24px": [],
+          "bodyFont": "16px"
+        },
+        {
+          "viewport": 1920,
+          "documentWidth": 1920,
+          "nav": [
+            {
+              "text": "\u25a4Orders & points",
+              "height": 55,
+              "width": 224,
+              "right": 240,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25a6Kitchen stock",
+              "height": 55,
+              "width": 224,
+              "right": 240,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25c9Customers & feedback",
+              "height": 55,
+              "width": 224,
+              "right": 240,
+              "withinViewport": true
+            },
+            {
+              "text": "\u2197Manager intelligence",
+              "height": 55,
+              "width": 224,
+              "right": 240,
+              "withinViewport": true
+            }
+          ],
+          "targetsBelow24px": [],
+          "bodyFont": "16px"
+        }
+      ],
+      "axe": {
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "nodes": 4
+          }
+        ],
+        "passes": 51
+      },
+      "axe_mobile": {
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "nodes": 27
+          }
+        ],
+        "passes": 52
+      },
+      "vitals_observed": {
+        "lcp": 120,
+        "cls": 0,
+        "events": [
+          {
+            "id": 1413,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1413,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1413,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 1420,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1420,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1420,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 1427,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1427,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1427,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 1434,
+            "duration": 24,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1434,
+            "duration": 24,
+            "name": "pointerup"
+          },
+          {
+            "id": 1434,
+            "duration": 24,
+            "name": "click"
+          },
+          {
+            "id": 1441,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1441,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1441,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 1448,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1448,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1448,
+            "duration": 16,
+            "name": "click"
+          }
+        ]
+      }
+    },
+    {
+      "name": "manager-forecast",
+      "viewports": [
+        {
+          "viewport": 320,
+          "documentWidth": 320,
+          "nav": [
+            {
+              "text": "\u25a4Orders & points",
+              "height": 48.09375,
+              "width": 140,
+              "right": 156,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25a6Kitchen stock",
+              "height": 48.09375,
+              "width": 140,
+              "right": 304,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25c9Customers & feedback",
+              "height": 59.6875,
+              "width": 140,
+              "right": 156,
+              "withinViewport": true
+            },
+            {
+              "text": "\u2197Manager intelligence",
+              "height": 59.6875,
+              "width": 140,
+              "right": 304,
+              "withinViewport": true
+            }
+          ],
+          "targetsBelow24px": [],
+          "bodyFont": "16px"
+        },
+        {
+          "viewport": 375,
+          "documentWidth": 375,
+          "nav": [
+            {
+              "text": "\u25a4Orders & points",
+              "height": 48.09375,
+              "width": 167.5,
+              "right": 183.5,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25a6Kitchen stock",
+              "height": 48.09375,
+              "width": 167.5,
+              "right": 359,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25c9Customers & feedback",
+              "height": 59.6875,
+              "width": 167.5,
+              "right": 183.5,
+              "withinViewport": true
+            },
+            {
+              "text": "\u2197Manager intelligence",
+              "height": 59.6875,
+              "width": 167.5,
+              "right": 359,
+              "withinViewport": true
+            }
+          ],
+          "targetsBelow24px": [],
+          "bodyFont": "16px"
+        },
+        {
+          "viewport": 768,
+          "documentWidth": 768,
+          "nav": [
+            {
+              "text": "\u25a4Orders & points",
+              "height": 63.6875,
+              "width": 174,
+              "right": 198,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25a6Kitchen stock",
+              "height": 63.6875,
+              "width": 174,
+              "right": 380,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25c9Customers & feedback",
+              "height": 63.6875,
+              "width": 174,
+              "right": 562,
+              "withinViewport": true
+            },
+            {
+              "text": "\u2197Manager intelligence",
+              "height": 63.6875,
+              "width": 174,
+              "right": 744,
+              "withinViewport": true
+            }
+          ],
+          "targetsBelow24px": [],
+          "bodyFont": "16px"
+        },
+        {
+          "viewport": 1024,
+          "documentWidth": 1024,
+          "nav": [
+            {
+              "text": "\u25a4Orders & points",
+              "height": 55,
+              "width": 208,
+              "right": 224,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25a6Kitchen stock",
+              "height": 55,
+              "width": 208,
+              "right": 224,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25c9Customers & feedback",
+              "height": 55,
+              "width": 208,
+              "right": 224,
+              "withinViewport": true
+            },
+            {
+              "text": "\u2197Manager intelligence",
+              "height": 55,
+              "width": 208,
+              "right": 224,
+              "withinViewport": true
+            }
+          ],
+          "targetsBelow24px": [],
+          "bodyFont": "16px"
+        },
+        {
+          "viewport": 1440,
+          "documentWidth": 1440,
+          "nav": [
+            {
+              "text": "\u25a4Orders & points",
+              "height": 55,
+              "width": 224,
+              "right": 240,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25a6Kitchen stock",
+              "height": 55,
+              "width": 224,
+              "right": 240,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25c9Customers & feedback",
+              "height": 55,
+              "width": 224,
+              "right": 240,
+              "withinViewport": true
+            },
+            {
+              "text": "\u2197Manager intelligence",
+              "height": 55,
+              "width": 224,
+              "right": 240,
+              "withinViewport": true
+            }
+          ],
+          "targetsBelow24px": [],
+          "bodyFont": "16px"
+        },
+        {
+          "viewport": 1920,
+          "documentWidth": 1920,
+          "nav": [
+            {
+              "text": "\u25a4Orders & points",
+              "height": 55,
+              "width": 224,
+              "right": 240,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25a6Kitchen stock",
+              "height": 55,
+              "width": 224,
+              "right": 240,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25c9Customers & feedback",
+              "height": 55,
+              "width": 224,
+              "right": 240,
+              "withinViewport": true
+            },
+            {
+              "text": "\u2197Manager intelligence",
+              "height": 55,
+              "width": 224,
+              "right": 240,
+              "withinViewport": true
+            }
+          ],
+          "targetsBelow24px": [],
+          "bodyFont": "16px"
+        }
+      ],
+      "axe": {
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "nodes": 4
+          }
+        ],
+        "passes": 50
+      },
+      "axe_mobile": {
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "nodes": 67
+          }
+        ],
+        "passes": 51
+      },
+      "vitals_observed": {
+        "lcp": 120,
+        "cls": 0,
+        "events": [
+          {
+            "id": 1413,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1413,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1413,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 1420,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1420,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1420,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 1427,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1427,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1427,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 1434,
+            "duration": 24,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1434,
+            "duration": 24,
+            "name": "pointerup"
+          },
+          {
+            "id": 1434,
+            "duration": 24,
+            "name": "click"
+          },
+          {
+            "id": 1441,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1441,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1441,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 1448,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1448,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1448,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 1455,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1455,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1455,
+            "duration": 16,
+            "name": "click"
+          }
+        ]
+      }
+    },
+    {
+      "name": "manager-waste",
+      "viewports": [
+        {
+          "viewport": 320,
+          "documentWidth": 320,
+          "nav": [
+            {
+              "text": "\u25a4Orders & points",
+              "height": 48.09375,
+              "width": 140,
+              "right": 156,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25a6Kitchen stock",
+              "height": 48.09375,
+              "width": 140,
+              "right": 304,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25c9Customers & feedback",
+              "height": 59.6875,
+              "width": 140,
+              "right": 156,
+              "withinViewport": true
+            },
+            {
+              "text": "\u2197Manager intelligence",
+              "height": 59.6875,
+              "width": 140,
+              "right": 304,
+              "withinViewport": true
+            }
+          ],
+          "targetsBelow24px": [],
+          "bodyFont": "16px"
+        },
+        {
+          "viewport": 375,
+          "documentWidth": 375,
+          "nav": [
+            {
+              "text": "\u25a4Orders & points",
+              "height": 48.09375,
+              "width": 167.5,
+              "right": 183.5,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25a6Kitchen stock",
+              "height": 48.09375,
+              "width": 167.5,
+              "right": 359,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25c9Customers & feedback",
+              "height": 59.6875,
+              "width": 167.5,
+              "right": 183.5,
+              "withinViewport": true
+            },
+            {
+              "text": "\u2197Manager intelligence",
+              "height": 59.6875,
+              "width": 167.5,
+              "right": 359,
+              "withinViewport": true
+            }
+          ],
+          "targetsBelow24px": [],
+          "bodyFont": "16px"
+        },
+        {
+          "viewport": 768,
+          "documentWidth": 768,
+          "nav": [
+            {
+              "text": "\u25a4Orders & points",
+              "height": 63.6875,
+              "width": 174,
+              "right": 198,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25a6Kitchen stock",
+              "height": 63.6875,
+              "width": 174,
+              "right": 380,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25c9Customers & feedback",
+              "height": 63.6875,
+              "width": 174,
+              "right": 562,
+              "withinViewport": true
+            },
+            {
+              "text": "\u2197Manager intelligence",
+              "height": 63.6875,
+              "width": 174,
+              "right": 744,
+              "withinViewport": true
+            }
+          ],
+          "targetsBelow24px": [],
+          "bodyFont": "16px"
+        },
+        {
+          "viewport": 1024,
+          "documentWidth": 1024,
+          "nav": [
+            {
+              "text": "\u25a4Orders & points",
+              "height": 55,
+              "width": 208,
+              "right": 224,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25a6Kitchen stock",
+              "height": 55,
+              "width": 208,
+              "right": 224,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25c9Customers & feedback",
+              "height": 55,
+              "width": 208,
+              "right": 224,
+              "withinViewport": true
+            },
+            {
+              "text": "\u2197Manager intelligence",
+              "height": 55,
+              "width": 208,
+              "right": 224,
+              "withinViewport": true
+            }
+          ],
+          "targetsBelow24px": [],
+          "bodyFont": "16px"
+        },
+        {
+          "viewport": 1440,
+          "documentWidth": 1440,
+          "nav": [
+            {
+              "text": "\u25a4Orders & points",
+              "height": 55,
+              "width": 224,
+              "right": 240,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25a6Kitchen stock",
+              "height": 55,
+              "width": 224,
+              "right": 240,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25c9Customers & feedback",
+              "height": 55,
+              "width": 224,
+              "right": 240,
+              "withinViewport": true
+            },
+            {
+              "text": "\u2197Manager intelligence",
+              "height": 55,
+              "width": 224,
+              "right": 240,
+              "withinViewport": true
+            }
+          ],
+          "targetsBelow24px": [],
+          "bodyFont": "16px"
+        },
+        {
+          "viewport": 1920,
+          "documentWidth": 1920,
+          "nav": [
+            {
+              "text": "\u25a4Orders & points",
+              "height": 55,
+              "width": 224,
+              "right": 240,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25a6Kitchen stock",
+              "height": 55,
+              "width": 224,
+              "right": 240,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25c9Customers & feedback",
+              "height": 55,
+              "width": 224,
+              "right": 240,
+              "withinViewport": true
+            },
+            {
+              "text": "\u2197Manager intelligence",
+              "height": 55,
+              "width": 224,
+              "right": 240,
+              "withinViewport": true
+            }
+          ],
+          "targetsBelow24px": [],
+          "bodyFont": "16px"
+        }
+      ],
+      "axe": {
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "nodes": 4
+          }
+        ],
+        "passes": 49
+      },
+      "axe_mobile": {
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "nodes": 26
+          }
+        ],
+        "passes": 50
+      },
+      "vitals_observed": {
+        "lcp": 120,
+        "cls": 0,
+        "events": [
+          {
+            "id": 1413,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1413,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1413,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 1420,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1420,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1420,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 1427,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1427,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1427,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 1434,
+            "duration": 24,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1434,
+            "duration": 24,
+            "name": "pointerup"
+          },
+          {
+            "id": 1434,
+            "duration": 24,
+            "name": "click"
+          },
+          {
+            "id": 1441,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1441,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1441,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 1448,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1448,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1448,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 1455,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1455,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1455,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 1462,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1462,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1462,
+            "duration": 16,
+            "name": "click"
+          }
+        ]
+      }
+    },
+    {
+      "name": "manager-loyalty",
+      "viewports": [
+        {
+          "viewport": 320,
+          "documentWidth": 320,
+          "nav": [
+            {
+              "text": "\u25a4Orders & points",
+              "height": 48.09375,
+              "width": 140,
+              "right": 156,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25a6Kitchen stock",
+              "height": 48.09375,
+              "width": 140,
+              "right": 304,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25c9Customers & feedback",
+              "height": 59.6875,
+              "width": 140,
+              "right": 156,
+              "withinViewport": true
+            },
+            {
+              "text": "\u2197Manager intelligence",
+              "height": 59.6875,
+              "width": 140,
+              "right": 304,
+              "withinViewport": true
+            }
+          ],
+          "targetsBelow24px": [],
+          "bodyFont": "16px"
+        },
+        {
+          "viewport": 375,
+          "documentWidth": 375,
+          "nav": [
+            {
+              "text": "\u25a4Orders & points",
+              "height": 48.09375,
+              "width": 167.5,
+              "right": 183.5,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25a6Kitchen stock",
+              "height": 48.09375,
+              "width": 167.5,
+              "right": 359,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25c9Customers & feedback",
+              "height": 59.6875,
+              "width": 167.5,
+              "right": 183.5,
+              "withinViewport": true
+            },
+            {
+              "text": "\u2197Manager intelligence",
+              "height": 59.6875,
+              "width": 167.5,
+              "right": 359,
+              "withinViewport": true
+            }
+          ],
+          "targetsBelow24px": [],
+          "bodyFont": "16px"
+        },
+        {
+          "viewport": 768,
+          "documentWidth": 768,
+          "nav": [
+            {
+              "text": "\u25a4Orders & points",
+              "height": 63.6875,
+              "width": 174,
+              "right": 198,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25a6Kitchen stock",
+              "height": 63.6875,
+              "width": 174,
+              "right": 380,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25c9Customers & feedback",
+              "height": 63.6875,
+              "width": 174,
+              "right": 562,
+              "withinViewport": true
+            },
+            {
+              "text": "\u2197Manager intelligence",
+              "height": 63.6875,
+              "width": 174,
+              "right": 744,
+              "withinViewport": true
+            }
+          ],
+          "targetsBelow24px": [],
+          "bodyFont": "16px"
+        },
+        {
+          "viewport": 1024,
+          "documentWidth": 1024,
+          "nav": [
+            {
+              "text": "\u25a4Orders & points",
+              "height": 55,
+              "width": 208,
+              "right": 224,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25a6Kitchen stock",
+              "height": 55,
+              "width": 208,
+              "right": 224,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25c9Customers & feedback",
+              "height": 55,
+              "width": 208,
+              "right": 224,
+              "withinViewport": true
+            },
+            {
+              "text": "\u2197Manager intelligence",
+              "height": 55,
+              "width": 208,
+              "right": 224,
+              "withinViewport": true
+            }
+          ],
+          "targetsBelow24px": [],
+          "bodyFont": "16px"
+        },
+        {
+          "viewport": 1440,
+          "documentWidth": 1440,
+          "nav": [
+            {
+              "text": "\u25a4Orders & points",
+              "height": 55,
+              "width": 224,
+              "right": 240,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25a6Kitchen stock",
+              "height": 55,
+              "width": 224,
+              "right": 240,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25c9Customers & feedback",
+              "height": 55,
+              "width": 224,
+              "right": 240,
+              "withinViewport": true
+            },
+            {
+              "text": "\u2197Manager intelligence",
+              "height": 55,
+              "width": 224,
+              "right": 240,
+              "withinViewport": true
+            }
+          ],
+          "targetsBelow24px": [],
+          "bodyFont": "16px"
+        },
+        {
+          "viewport": 1920,
+          "documentWidth": 1920,
+          "nav": [
+            {
+              "text": "\u25a4Orders & points",
+              "height": 55,
+              "width": 224,
+              "right": 240,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25a6Kitchen stock",
+              "height": 55,
+              "width": 224,
+              "right": 240,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25c9Customers & feedback",
+              "height": 55,
+              "width": 224,
+              "right": 240,
+              "withinViewport": true
+            },
+            {
+              "text": "\u2197Manager intelligence",
+              "height": 55,
+              "width": 224,
+              "right": 240,
+              "withinViewport": true
+            }
+          ],
+          "targetsBelow24px": [],
+          "bodyFont": "16px"
+        }
+      ],
+      "axe": {
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "nodes": 4
+          }
+        ],
+        "passes": 50
+      },
+      "axe_mobile": {
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "nodes": 107
+          }
+        ],
+        "passes": 51
+      },
+      "vitals_observed": {
+        "lcp": 120,
+        "cls": 0,
+        "events": [
+          {
+            "id": 1413,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1413,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1413,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 1420,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1420,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1420,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 1427,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1427,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1427,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 1434,
+            "duration": 24,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1434,
+            "duration": 24,
+            "name": "pointerup"
+          },
+          {
+            "id": 1434,
+            "duration": 24,
+            "name": "click"
+          },
+          {
+            "id": 1441,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1441,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1441,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 1448,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1448,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1448,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 1455,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1455,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1455,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 1462,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1462,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1462,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 1469,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1469,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1469,
+            "duration": 16,
+            "name": "click"
+          }
+        ]
+      }
+    },
+    {
+      "name": "manager-reviews",
+      "viewports": [
+        {
+          "viewport": 320,
+          "documentWidth": 320,
+          "nav": [
+            {
+              "text": "\u25a4Orders & points",
+              "height": 48.09375,
+              "width": 140,
+              "right": 156,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25a6Kitchen stock",
+              "height": 48.09375,
+              "width": 140,
+              "right": 304,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25c9Customers & feedback",
+              "height": 59.6875,
+              "width": 140,
+              "right": 156,
+              "withinViewport": true
+            },
+            {
+              "text": "\u2197Manager intelligence",
+              "height": 59.6875,
+              "width": 140,
+              "right": 304,
+              "withinViewport": true
+            }
+          ],
+          "targetsBelow24px": [],
+          "bodyFont": "16px"
+        },
+        {
+          "viewport": 375,
+          "documentWidth": 375,
+          "nav": [
+            {
+              "text": "\u25a4Orders & points",
+              "height": 48.09375,
+              "width": 167.5,
+              "right": 183.5,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25a6Kitchen stock",
+              "height": 48.09375,
+              "width": 167.5,
+              "right": 359,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25c9Customers & feedback",
+              "height": 59.6875,
+              "width": 167.5,
+              "right": 183.5,
+              "withinViewport": true
+            },
+            {
+              "text": "\u2197Manager intelligence",
+              "height": 59.6875,
+              "width": 167.5,
+              "right": 359,
+              "withinViewport": true
+            }
+          ],
+          "targetsBelow24px": [],
+          "bodyFont": "16px"
+        },
+        {
+          "viewport": 768,
+          "documentWidth": 768,
+          "nav": [
+            {
+              "text": "\u25a4Orders & points",
+              "height": 63.6875,
+              "width": 174,
+              "right": 198,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25a6Kitchen stock",
+              "height": 63.6875,
+              "width": 174,
+              "right": 380,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25c9Customers & feedback",
+              "height": 63.6875,
+              "width": 174,
+              "right": 562,
+              "withinViewport": true
+            },
+            {
+              "text": "\u2197Manager intelligence",
+              "height": 63.6875,
+              "width": 174,
+              "right": 744,
+              "withinViewport": true
+            }
+          ],
+          "targetsBelow24px": [],
+          "bodyFont": "16px"
+        },
+        {
+          "viewport": 1024,
+          "documentWidth": 1024,
+          "nav": [
+            {
+              "text": "\u25a4Orders & points",
+              "height": 55,
+              "width": 208,
+              "right": 224,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25a6Kitchen stock",
+              "height": 55,
+              "width": 208,
+              "right": 224,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25c9Customers & feedback",
+              "height": 55,
+              "width": 208,
+              "right": 224,
+              "withinViewport": true
+            },
+            {
+              "text": "\u2197Manager intelligence",
+              "height": 55,
+              "width": 208,
+              "right": 224,
+              "withinViewport": true
+            }
+          ],
+          "targetsBelow24px": [],
+          "bodyFont": "16px"
+        },
+        {
+          "viewport": 1440,
+          "documentWidth": 1440,
+          "nav": [
+            {
+              "text": "\u25a4Orders & points",
+              "height": 55,
+              "width": 224,
+              "right": 240,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25a6Kitchen stock",
+              "height": 55,
+              "width": 224,
+              "right": 240,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25c9Customers & feedback",
+              "height": 55,
+              "width": 224,
+              "right": 240,
+              "withinViewport": true
+            },
+            {
+              "text": "\u2197Manager intelligence",
+              "height": 55,
+              "width": 224,
+              "right": 240,
+              "withinViewport": true
+            }
+          ],
+          "targetsBelow24px": [],
+          "bodyFont": "16px"
+        },
+        {
+          "viewport": 1920,
+          "documentWidth": 1920,
+          "nav": [
+            {
+              "text": "\u25a4Orders & points",
+              "height": 55,
+              "width": 224,
+              "right": 240,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25a6Kitchen stock",
+              "height": 55,
+              "width": 224,
+              "right": 240,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25c9Customers & feedback",
+              "height": 55,
+              "width": 224,
+              "right": 240,
+              "withinViewport": true
+            },
+            {
+              "text": "\u2197Manager intelligence",
+              "height": 55,
+              "width": 224,
+              "right": 240,
+              "withinViewport": true
+            }
+          ],
+          "targetsBelow24px": [],
+          "bodyFont": "16px"
+        }
+      ],
+      "axe": {
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "nodes": 4
+          }
+        ],
+        "passes": 49
+      },
+      "axe_mobile": {
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "nodes": 4
+          }
+        ],
+        "passes": 49
+      },
+      "vitals_observed": {
+        "lcp": 120,
+        "cls": 0,
+        "events": [
+          {
+            "id": 1413,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1413,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1413,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 1420,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1420,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1420,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 1427,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1427,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1427,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 1434,
+            "duration": 24,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1434,
+            "duration": 24,
+            "name": "pointerup"
+          },
+          {
+            "id": 1434,
+            "duration": 24,
+            "name": "click"
+          },
+          {
+            "id": 1441,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1441,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1441,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 1448,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1448,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1448,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 1455,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1455,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1455,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 1462,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1462,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1462,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 1469,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1469,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1469,
+            "duration": 16,
+            "name": "click"
+          }
+        ]
+      }
+    },
+    {
+      "name": "customer-orders",
+      "viewports": [
+        {
+          "viewport": 320,
+          "documentWidth": 320,
+          "nav": [
+            {
+              "text": "\u25a4Orders & points",
+              "height": 59.6875,
+              "width": 140,
+              "right": 156,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25c9Customers & feedback",
+              "height": 59.6875,
+              "width": 140,
+              "right": 304,
+              "withinViewport": true
+            }
+          ],
+          "targetsBelow24px": [],
+          "bodyFont": "16px"
+        },
+        {
+          "viewport": 375,
+          "documentWidth": 375,
+          "nav": [
+            {
+              "text": "\u25a4Orders & points",
+              "height": 59.6875,
+              "width": 167.5,
+              "right": 183.5,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25c9Customers & feedback",
+              "height": 59.6875,
+              "width": 167.5,
+              "right": 359,
+              "withinViewport": true
+            }
+          ],
+          "targetsBelow24px": [],
+          "bodyFont": "16px"
+        },
+        {
+          "viewport": 768,
+          "documentWidth": 768,
+          "nav": [
+            {
+              "text": "\u25a4Orders & points",
+              "height": 63.6875,
+              "width": 174,
+              "right": 198,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25c9Customers & feedback",
+              "height": 63.6875,
+              "width": 174,
+              "right": 380,
+              "withinViewport": true
+            }
+          ],
+          "targetsBelow24px": [],
+          "bodyFont": "16px"
+        },
+        {
+          "viewport": 1024,
+          "documentWidth": 1024,
+          "nav": [
+            {
+              "text": "\u25a4Orders & points",
+              "height": 55,
+              "width": 208,
+              "right": 224,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25c9Customers & feedback",
+              "height": 55,
+              "width": 208,
+              "right": 224,
+              "withinViewport": true
+            }
+          ],
+          "targetsBelow24px": [],
+          "bodyFont": "16px"
+        },
+        {
+          "viewport": 1440,
+          "documentWidth": 1440,
+          "nav": [
+            {
+              "text": "\u25a4Orders & points",
+              "height": 55,
+              "width": 224,
+              "right": 240,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25c9Customers & feedback",
+              "height": 55,
+              "width": 224,
+              "right": 240,
+              "withinViewport": true
+            }
+          ],
+          "targetsBelow24px": [],
+          "bodyFont": "16px"
+        },
+        {
+          "viewport": 1920,
+          "documentWidth": 1920,
+          "nav": [
+            {
+              "text": "\u25a4Orders & points",
+              "height": 55,
+              "width": 224,
+              "right": 240,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25c9Customers & feedback",
+              "height": 55,
+              "width": 224,
+              "right": 240,
+              "withinViewport": true
+            }
+          ],
+          "targetsBelow24px": [],
+          "bodyFont": "16px"
+        }
+      ],
+      "axe": {
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "nodes": 3
+          }
+        ],
+        "passes": 42
+      },
+      "axe_mobile": {
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "nodes": 47
+          }
+        ],
+        "passes": 43
+      },
+      "vitals_observed": {
+        "lcp": 120,
+        "cls": 0,
+        "events": [
+          {
+            "id": 1413,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1413,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1413,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 1420,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1420,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1420,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 1427,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1427,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1427,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 1434,
+            "duration": 24,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1434,
+            "duration": 24,
+            "name": "pointerup"
+          },
+          {
+            "id": 1434,
+            "duration": 24,
+            "name": "click"
+          },
+          {
+            "id": 1441,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1441,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1441,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 1448,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1448,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1448,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 1455,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1455,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1455,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 1462,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1462,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1462,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 1469,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1469,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1469,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 1483,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1483,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1483,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 1490,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1490,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1490,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 1497,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1497,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1497,
+            "duration": 16,
+            "name": "click"
+          }
+        ]
+      }
+    },
+    {
+      "name": "customer-feedback",
+      "viewports": [
+        {
+          "viewport": 320,
+          "documentWidth": 320,
+          "nav": [
+            {
+              "text": "\u25a4Orders & points",
+              "height": 59.6875,
+              "width": 140,
+              "right": 156,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25c9Customers & feedback",
+              "height": 59.6875,
+              "width": 140,
+              "right": 304,
+              "withinViewport": true
+            }
+          ],
+          "targetsBelow24px": [
+            {
+              "text": "email",
+              "height": 20,
+              "width": 20
+            },
+            {
+              "text": "sms",
+              "height": 20,
+              "width": 20
+            },
+            {
+              "text": "push",
+              "height": 20,
+              "width": 20
+            }
+          ],
+          "bodyFont": "16px"
+        },
+        {
+          "viewport": 375,
+          "documentWidth": 375,
+          "nav": [
+            {
+              "text": "\u25a4Orders & points",
+              "height": 59.6875,
+              "width": 167.5,
+              "right": 183.5,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25c9Customers & feedback",
+              "height": 59.6875,
+              "width": 167.5,
+              "right": 359,
+              "withinViewport": true
+            }
+          ],
+          "targetsBelow24px": [
+            {
+              "text": "email",
+              "height": 20,
+              "width": 20
+            },
+            {
+              "text": "sms",
+              "height": 20,
+              "width": 20
+            },
+            {
+              "text": "push",
+              "height": 20,
+              "width": 20
+            }
+          ],
+          "bodyFont": "16px"
+        },
+        {
+          "viewport": 768,
+          "documentWidth": 768,
+          "nav": [
+            {
+              "text": "\u25a4Orders & points",
+              "height": 63.6875,
+              "width": 174,
+              "right": 198,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25c9Customers & feedback",
+              "height": 63.6875,
+              "width": 174,
+              "right": 380,
+              "withinViewport": true
+            }
+          ],
+          "targetsBelow24px": [
+            {
+              "text": "email",
+              "height": 20,
+              "width": 20
+            },
+            {
+              "text": "sms",
+              "height": 20,
+              "width": 20
+            },
+            {
+              "text": "push",
+              "height": 20,
+              "width": 20
+            }
+          ],
+          "bodyFont": "16px"
+        },
+        {
+          "viewport": 1024,
+          "documentWidth": 1024,
+          "nav": [
+            {
+              "text": "\u25a4Orders & points",
+              "height": 55,
+              "width": 208,
+              "right": 224,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25c9Customers & feedback",
+              "height": 55,
+              "width": 208,
+              "right": 224,
+              "withinViewport": true
+            }
+          ],
+          "targetsBelow24px": [
+            {
+              "text": "email",
+              "height": 20,
+              "width": 20
+            },
+            {
+              "text": "sms",
+              "height": 20,
+              "width": 20
+            },
+            {
+              "text": "push",
+              "height": 20,
+              "width": 20
+            }
+          ],
+          "bodyFont": "16px"
+        },
+        {
+          "viewport": 1440,
+          "documentWidth": 1440,
+          "nav": [
+            {
+              "text": "\u25a4Orders & points",
+              "height": 55,
+              "width": 224,
+              "right": 240,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25c9Customers & feedback",
+              "height": 55,
+              "width": 224,
+              "right": 240,
+              "withinViewport": true
+            }
+          ],
+          "targetsBelow24px": [
+            {
+              "text": "email",
+              "height": 20,
+              "width": 20
+            },
+            {
+              "text": "sms",
+              "height": 20,
+              "width": 20
+            },
+            {
+              "text": "push",
+              "height": 20,
+              "width": 20
+            }
+          ],
+          "bodyFont": "16px"
+        },
+        {
+          "viewport": 1920,
+          "documentWidth": 1920,
+          "nav": [
+            {
+              "text": "\u25a4Orders & points",
+              "height": 55,
+              "width": 224,
+              "right": 240,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25c9Customers & feedback",
+              "height": 55,
+              "width": 224,
+              "right": 240,
+              "withinViewport": true
+            }
+          ],
+          "targetsBelow24px": [
+            {
+              "text": "email",
+              "height": 20,
+              "width": 20
+            },
+            {
+              "text": "sms",
+              "height": 20,
+              "width": 20
+            },
+            {
+              "text": "push",
+              "height": 20,
+              "width": 20
+            }
+          ],
+          "bodyFont": "16px"
+        }
+      ],
+      "axe": {
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "nodes": 24
+          }
+        ],
+        "passes": 43
+      },
+      "axe_mobile": {
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "nodes": 24
+          }
+        ],
+        "passes": 43
+      },
+      "vitals_observed": {
+        "lcp": 120,
+        "cls": 0,
+        "events": [
+          {
+            "id": 1413,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1413,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1413,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 1420,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1420,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1420,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 1427,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1427,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1427,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 1434,
+            "duration": 24,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1434,
+            "duration": 24,
+            "name": "pointerup"
+          },
+          {
+            "id": 1434,
+            "duration": 24,
+            "name": "click"
+          },
+          {
+            "id": 1441,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1441,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1441,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 1448,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1448,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1448,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 1455,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1455,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1455,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 1462,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1462,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1462,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 1469,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1469,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1469,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 1483,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1483,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1483,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 1490,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1490,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1490,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 1497,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1497,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1497,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 1504,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1504,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1504,
+            "duration": 16,
+            "name": "click"
+          }
+        ]
+      }
+    },
+    {
+      "name": "cashier-orders",
+      "viewports": [
+        {
+          "viewport": 320,
+          "documentWidth": 320,
+          "nav": [
+            {
+              "text": "\u25a4Orders & points",
+              "height": 48.09375,
+              "width": 140,
+              "right": 156,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25a6Kitchen stock",
+              "height": 48.09375,
+              "width": 140,
+              "right": 304,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25c9Customers & feedback",
+              "height": 59.6875,
+              "width": 140,
+              "right": 156,
+              "withinViewport": true
+            }
+          ],
+          "targetsBelow24px": [],
+          "bodyFont": "16px"
+        },
+        {
+          "viewport": 375,
+          "documentWidth": 375,
+          "nav": [
+            {
+              "text": "\u25a4Orders & points",
+              "height": 48.09375,
+              "width": 167.5,
+              "right": 183.5,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25a6Kitchen stock",
+              "height": 48.09375,
+              "width": 167.5,
+              "right": 359,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25c9Customers & feedback",
+              "height": 59.6875,
+              "width": 167.5,
+              "right": 183.5,
+              "withinViewport": true
+            }
+          ],
+          "targetsBelow24px": [],
+          "bodyFont": "16px"
+        },
+        {
+          "viewport": 768,
+          "documentWidth": 768,
+          "nav": [
+            {
+              "text": "\u25a4Orders & points",
+              "height": 63.6875,
+              "width": 174,
+              "right": 198,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25a6Kitchen stock",
+              "height": 63.6875,
+              "width": 174,
+              "right": 380,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25c9Customers & feedback",
+              "height": 63.6875,
+              "width": 174,
+              "right": 562,
+              "withinViewport": true
+            }
+          ],
+          "targetsBelow24px": [],
+          "bodyFont": "16px"
+        },
+        {
+          "viewport": 1024,
+          "documentWidth": 1024,
+          "nav": [
+            {
+              "text": "\u25a4Orders & points",
+              "height": 55,
+              "width": 208,
+              "right": 224,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25a6Kitchen stock",
+              "height": 55,
+              "width": 208,
+              "right": 224,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25c9Customers & feedback",
+              "height": 55,
+              "width": 208,
+              "right": 224,
+              "withinViewport": true
+            }
+          ],
+          "targetsBelow24px": [],
+          "bodyFont": "16px"
+        },
+        {
+          "viewport": 1440,
+          "documentWidth": 1440,
+          "nav": [
+            {
+              "text": "\u25a4Orders & points",
+              "height": 55,
+              "width": 224,
+              "right": 240,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25a6Kitchen stock",
+              "height": 55,
+              "width": 224,
+              "right": 240,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25c9Customers & feedback",
+              "height": 55,
+              "width": 224,
+              "right": 240,
+              "withinViewport": true
+            }
+          ],
+          "targetsBelow24px": [],
+          "bodyFont": "16px"
+        },
+        {
+          "viewport": 1920,
+          "documentWidth": 1920,
+          "nav": [
+            {
+              "text": "\u25a4Orders & points",
+              "height": 55,
+              "width": 224,
+              "right": 240,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25a6Kitchen stock",
+              "height": 55,
+              "width": 224,
+              "right": 240,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25c9Customers & feedback",
+              "height": 55,
+              "width": 224,
+              "right": 240,
+              "withinViewport": true
+            }
+          ],
+          "targetsBelow24px": [],
+          "bodyFont": "16px"
+        }
+      ],
+      "axe": {
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "nodes": 4
+          }
+        ],
+        "passes": 49
+      },
+      "axe_mobile": {
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "nodes": 90
+          }
+        ],
+        "passes": 50
+      },
+      "vitals_observed": {
+        "lcp": 120,
+        "cls": 0,
+        "events": [
+          {
+            "id": 1413,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1413,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1413,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 1420,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1420,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1420,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 1427,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1427,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1427,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 1434,
+            "duration": 24,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1434,
+            "duration": 24,
+            "name": "pointerup"
+          },
+          {
+            "id": 1434,
+            "duration": 24,
+            "name": "click"
+          },
+          {
+            "id": 1441,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1441,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1441,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 1448,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1448,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1448,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 1455,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1455,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1455,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 1462,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1462,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1462,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 1469,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1469,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1469,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 1483,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1483,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1483,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 1490,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1490,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1490,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 1497,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1497,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1497,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 1504,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1504,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1504,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 1511,
+            "duration": 24,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1511,
+            "duration": 24,
+            "name": "pointerup"
+          },
+          {
+            "id": 1511,
+            "duration": 24,
+            "name": "click"
+          },
+          {
+            "id": 1518,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1518,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1518,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 1525,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1525,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1525,
+            "duration": 16,
+            "name": "click"
+          }
+        ]
+      }
+    },
+    {
+      "name": "cashier-inventory",
+      "viewports": [
+        {
+          "viewport": 320,
+          "documentWidth": 320,
+          "nav": [
+            {
+              "text": "\u25a4Orders & points",
+              "height": 48.09375,
+              "width": 140,
+              "right": 156,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25a6Kitchen stock",
+              "height": 48.09375,
+              "width": 140,
+              "right": 304,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25c9Customers & feedback",
+              "height": 59.6875,
+              "width": 140,
+              "right": 156,
+              "withinViewport": true
+            }
+          ],
+          "targetsBelow24px": [
+            {
+              "text": "inventory-low-only",
+              "height": 20,
+              "width": 20
+            }
+          ],
+          "bodyFont": "16px"
+        },
+        {
+          "viewport": 375,
+          "documentWidth": 375,
+          "nav": [
+            {
+              "text": "\u25a4Orders & points",
+              "height": 48.09375,
+              "width": 167.5,
+              "right": 183.5,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25a6Kitchen stock",
+              "height": 48.09375,
+              "width": 167.5,
+              "right": 359,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25c9Customers & feedback",
+              "height": 59.6875,
+              "width": 167.5,
+              "right": 183.5,
+              "withinViewport": true
+            }
+          ],
+          "targetsBelow24px": [
+            {
+              "text": "inventory-low-only",
+              "height": 20,
+              "width": 20
+            }
+          ],
+          "bodyFont": "16px"
+        },
+        {
+          "viewport": 768,
+          "documentWidth": 768,
+          "nav": [
+            {
+              "text": "\u25a4Orders & points",
+              "height": 63.6875,
+              "width": 174,
+              "right": 198,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25a6Kitchen stock",
+              "height": 63.6875,
+              "width": 174,
+              "right": 380,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25c9Customers & feedback",
+              "height": 63.6875,
+              "width": 174,
+              "right": 562,
+              "withinViewport": true
+            }
+          ],
+          "targetsBelow24px": [
+            {
+              "text": "inventory-low-only",
+              "height": 20,
+              "width": 20
+            }
+          ],
+          "bodyFont": "16px"
+        },
+        {
+          "viewport": 1024,
+          "documentWidth": 1024,
+          "nav": [
+            {
+              "text": "\u25a4Orders & points",
+              "height": 55,
+              "width": 208,
+              "right": 224,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25a6Kitchen stock",
+              "height": 55,
+              "width": 208,
+              "right": 224,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25c9Customers & feedback",
+              "height": 55,
+              "width": 208,
+              "right": 224,
+              "withinViewport": true
+            }
+          ],
+          "targetsBelow24px": [
+            {
+              "text": "inventory-low-only",
+              "height": 20,
+              "width": 20
+            }
+          ],
+          "bodyFont": "16px"
+        },
+        {
+          "viewport": 1440,
+          "documentWidth": 1440,
+          "nav": [
+            {
+              "text": "\u25a4Orders & points",
+              "height": 55,
+              "width": 224,
+              "right": 240,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25a6Kitchen stock",
+              "height": 55,
+              "width": 224,
+              "right": 240,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25c9Customers & feedback",
+              "height": 55,
+              "width": 224,
+              "right": 240,
+              "withinViewport": true
+            }
+          ],
+          "targetsBelow24px": [
+            {
+              "text": "inventory-low-only",
+              "height": 20,
+              "width": 20
+            }
+          ],
+          "bodyFont": "16px"
+        },
+        {
+          "viewport": 1920,
+          "documentWidth": 1920,
+          "nav": [
+            {
+              "text": "\u25a4Orders & points",
+              "height": 55,
+              "width": 224,
+              "right": 240,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25a6Kitchen stock",
+              "height": 55,
+              "width": 224,
+              "right": 240,
+              "withinViewport": true
+            },
+            {
+              "text": "\u25c9Customers & feedback",
+              "height": 55,
+              "width": 224,
+              "right": 240,
+              "withinViewport": true
+            }
+          ],
+          "targetsBelow24px": [
+            {
+              "text": "inventory-low-only",
+              "height": 20,
+              "width": 20
+            }
+          ],
+          "bodyFont": "16px"
+        }
+      ],
+      "axe": {
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "nodes": 4
+          }
+        ],
+        "passes": 48
+      },
+      "axe_mobile": {
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "nodes": 31
+          }
+        ],
+        "passes": 49
+      },
+      "vitals_observed": {
+        "lcp": 120,
+        "cls": 0,
+        "events": [
+          {
+            "id": 1413,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1413,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1413,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 1420,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1420,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1420,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 1427,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1427,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1427,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 1434,
+            "duration": 24,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1434,
+            "duration": 24,
+            "name": "pointerup"
+          },
+          {
+            "id": 1434,
+            "duration": 24,
+            "name": "click"
+          },
+          {
+            "id": 1441,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1441,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1441,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 1448,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1448,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1448,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 1455,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1455,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1455,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 1462,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1462,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1462,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 1469,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1469,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1469,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 1483,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1483,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1483,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 1490,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1490,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1490,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 1497,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1497,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1497,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 1504,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1504,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1504,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 1511,
+            "duration": 24,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1511,
+            "duration": 24,
+            "name": "pointerup"
+          },
+          {
+            "id": 1511,
+            "duration": 24,
+            "name": "click"
+          },
+          {
+            "id": 1518,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1518,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1518,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 1525,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1525,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1525,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 1532,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1532,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1532,
+            "duration": 16,
+            "name": "click"
+          }
+        ]
+      }
+    },
+    {
+      "name": "about",
+      "viewports": [
+        {
+          "viewport": 320,
+          "documentWidth": 320,
+          "nav": [],
+          "targetsBelow24px": [],
+          "bodyFont": "16px"
+        },
+        {
+          "viewport": 375,
+          "documentWidth": 375,
+          "nav": [],
+          "targetsBelow24px": [],
+          "bodyFont": "16px"
+        },
+        {
+          "viewport": 768,
+          "documentWidth": 768,
+          "nav": [],
+          "targetsBelow24px": [],
+          "bodyFont": "16px"
+        },
+        {
+          "viewport": 1024,
+          "documentWidth": 1024,
+          "nav": [],
+          "targetsBelow24px": [],
+          "bodyFont": "16px"
+        },
+        {
+          "viewport": 1440,
+          "documentWidth": 1440,
+          "nav": [],
+          "targetsBelow24px": [],
+          "bodyFont": "16px"
+        },
+        {
+          "viewport": 1920,
+          "documentWidth": 1920,
+          "nav": [],
+          "targetsBelow24px": [],
+          "bodyFont": "16px"
+        }
+      ],
+      "axe": {
+        "violations": [],
+        "incomplete": [],
+        "passes": 33
+      },
+      "axe_mobile": {
+        "violations": [],
+        "incomplete": [],
+        "passes": 33
+      },
+      "vitals_observed": {
+        "lcp": 92,
+        "cls": 0,
+        "events": []
+      }
+    }
+  ],
+  "js_errors": [],
+  "performance_lab": [
+    {
+      "vitals": {
+        "lcp": 140,
+        "cls": 0,
+        "events": [
+          {
+            "id": 7142,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 7142,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 7142,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 7149,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 7149,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 7149,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 7156,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 7156,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 7156,
+            "duration": 16,
+            "name": "click"
+          }
+        ]
+      },
+      "resources": [
+        {
+          "name": "styles.css",
+          "transferSize": 6570,
+          "encodedBodySize": 6270,
+          "duration": 21.799999952316284
+        },
+        {
+          "name": "app.js",
+          "transferSize": 21431,
+          "encodedBodySize": 21131,
+          "duration": 26.799999952316284
+        }
+      ],
+      "navigation": [
+        {
+          "domContentLoaded": 56.10000014305115,
+          "load": 58.200000047683716
+        }
+      ],
+      "web_vitals_4_2_4": {
+        "LCP": 140,
+        "CLS": 0,
+        "INP": 16
+      }
+    },
+    {
+      "vitals": {
+        "lcp": 144,
+        "cls": 0.0014827230043764467,
+        "events": [
+          {
+            "id": 1175,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1175,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1175,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 1182,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1182,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1182,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 1189,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1189,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1189,
+            "duration": 16,
+            "name": "click"
+          }
+        ]
+      },
+      "resources": [
+        {
+          "name": "styles.css",
+          "transferSize": 6570,
+          "encodedBodySize": 6270,
+          "duration": 23.399999856948853
+        },
+        {
+          "name": "app.js",
+          "transferSize": 21431,
+          "encodedBodySize": 21131,
+          "duration": 21
+        }
+      ],
+      "navigation": [
+        {
+          "domContentLoaded": 117.40000009536743,
+          "load": 117.60000014305115
+        }
+      ],
+      "web_vitals_4_2_4": {
+        "LCP": 144,
+        "CLS": 0.0014827230043764467,
+        "INP": 16
+      }
+    },
+    {
+      "vitals": {
+        "lcp": 128,
+        "cls": 0,
+        "events": [
+          {
+            "id": 1405,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1405,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1405,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 1412,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1412,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1412,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 1419,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 1419,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 1419,
+            "duration": 16,
+            "name": "click"
+          }
+        ]
+      },
+      "resources": [
+        {
+          "name": "styles.css",
+          "transferSize": 6570,
+          "encodedBodySize": 6270,
+          "duration": 20.800000190734863
+        },
+        {
+          "name": "app.js",
+          "transferSize": 21431,
+          "encodedBodySize": 21131,
+          "duration": 24.300000190734863
+        }
+      ],
+      "navigation": [
+        {
+          "domContentLoaded": 49.5,
+          "load": 51
+        }
+      ],
+      "web_vitals_4_2_4": {
+        "LCP": 128,
+        "CLS": 0,
+        "INP": 16
+      }
+    },
+    {
+      "vitals": {
+        "lcp": 120,
+        "cls": 0,
+        "events": [
+          {
+            "id": 8746,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 8746,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 8746,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 8760,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 8760,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 8760,
+            "duration": 16,
+            "name": "click"
+          }
+        ]
+      },
+      "resources": [
+        {
+          "name": "styles.css",
+          "transferSize": 6570,
+          "encodedBodySize": 6270,
+          "duration": 20.199999809265137
+        },
+        {
+          "name": "app.js",
+          "transferSize": 21431,
+          "encodedBodySize": 21131,
+          "duration": 24.799999952316284
+        }
+      ],
+      "navigation": [
+        {
+          "domContentLoaded": 49.700000047683716,
+          "load": 51.200000047683716
+        }
+      ],
+      "web_vitals_4_2_4": {
+        "LCP": 120,
+        "CLS": 0,
+        "INP": 16
+      }
+    },
+    {
+      "vitals": {
+        "lcp": 128,
+        "cls": 0.0014827230043764467,
+        "events": [
+          {
+            "id": 2738,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 2738,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 2738,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 2745,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 2745,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 2745,
+            "duration": 16,
+            "name": "click"
+          },
+          {
+            "id": 2752,
+            "duration": 16,
+            "name": "pointerdown"
+          },
+          {
+            "id": 2752,
+            "duration": 16,
+            "name": "pointerup"
+          },
+          {
+            "id": 2752,
+            "duration": 16,
+            "name": "click"
+          }
+        ]
+      },
+      "resources": [
+        {
+          "name": "styles.css",
+          "transferSize": 6570,
+          "encodedBodySize": 6270,
+          "duration": 23.100000143051147
+        },
+        {
+          "name": "app.js",
+          "transferSize": 21431,
+          "encodedBodySize": 21131,
+          "duration": 24.699999809265137
+        }
+      ],
+      "navigation": [
+        {
+          "domContentLoaded": 110.29999995231628,
+          "load": 110.39999985694885
+        }
+      ],
+      "web_vitals_4_2_4": {
+        "LCP": 128,
+        "CLS": 0.0014827230043764467,
+        "INP": 16
+      }
+    }
+  ],
+  "summary": {
+    "scenes": 14,
+    "responsive_cases": 84,
+    "axe_rule_violations": 0,
+    "axe_mobile_rule_violations": 0,
+    "overflow_cases": 0,
+    "offscreen_nav_cases": 0
+  }
+}

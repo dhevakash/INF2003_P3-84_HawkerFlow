@@ -1,0 +1,22 @@
+{
+  "routes": [
+    {
+      "path": "/docs",
+      "status": 200,
+      "visible": true
+    },
+    {
+      "path": "/redoc",
+      "status": 200,
+      "visible": true
+    },
+    {
+      "path": "/about",
+      "status": 200,
+      "visible": true
+    }
+  ],
+  "console_errors": [],
+  "page_errors": [],
+  "status": "passed"
+}

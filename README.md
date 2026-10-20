@@ -58,6 +58,8 @@ Notes on order lines are informational. They do not alter recipes or constitute 
 
 ## Extra-credit features
 
+The interface has been refined with a charcoal, porcelain and burgundy palette, clearer tables, visible mobile navigation, keyboard-accessible manager tabs, real dish/ingredient filters, and direct Manager tools shortcuts. Read [the website audit and redesign report](docs/WEBSITE_AUDIT.md) for the complete 30-pattern review, design system and limitations. [Redesign verification](evidence/redesign/RESULTS.md) records browser, accessibility, responsive and local performance evidence. Demo usage and data information is also available at **http://localhost:8000/about**.
+
 Manager intelligence now includes sales trends and rankings, stock forecasting, food-waste monitoring with explained promotion suggestions, and RFM customer loyalty insights. Orders show ingredient-based available portions and check shared ingredients across the cart. Checkout consumes dated stock by earliest expiry, excludes expired lots, and records batch allocations atomically with stock and points. Deliveries accept expiry and cost; managers can record audited expired-stock disposal.
 
 Read [the extra-credit implementation and presentation guide](docs/EXTRA_CREDIT_GUIDE.md) for exact formulas, database techniques, demo steps, and professor questions. New verification is recorded separately in [the enhancement results](evidence/extra-credit/RESULTS.md).

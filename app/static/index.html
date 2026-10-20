@@ -1,18 +1,83 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-SG">
 <head>
-  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>HawkerFlow · Food, stock & community</title>
-  <link rel="stylesheet" href="/static/styles.css"><script src="/static/app.js" defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#272328">
+  <meta name="description" content="HawkerFlow demonstration: cash orders, ingredient stock and manager insights for hawker operations.">
+  <title>HawkerFlow · Counter, kitchen & insights</title>
+  <link rel="stylesheet" href="/static/styles.css">
+  <script src="/static/app.js" defer></script>
 </head>
 <body>
-  <section id="login-screen" class="login-layout">
-    <div class="login-story"><div class="brand"><span class="brand-mark">H</span> HawkerFlow</div><div><span class="eyebrow">LOCAL FLAVOUR. BETTER OPERATIONS.</span><h1>Good food starts<br>with a better flow.</h1><p>A shared workspace for your counter, kitchen and customer community.</p><div class="story-grid"><div><b>01</b><span>Every order,<br>accounted for.</span></div><div><b>02</b><span>Know your stock.<br>Keep service moving.</span></div><div><b>03</b><span>Listen to customers.<br>Make the next visit better.</span></div></div></div><small>INF2003 database application · Demonstration environment</small></div>
-    <div class="login-panel"><form id="login-form"><span class="eyebrow teal">WELCOME BACK</span><h2>Open your workspace</h2><p class="muted">Sign in to access the tools for your role.</p><label>Email<input id="login-email" type="email" autocomplete="username" required placeholder="manager@hawkerflow.local"></label><label>Password<input id="login-password" type="password" autocomplete="current-password" required></label><p id="login-error" class="form-error" role="alert"></p><button class="button primary full" type="submit">Sign in <span>→</span></button><div class="demo-box"><b>Explore the demonstration</b><p id="demo-hint">Use the development credentials in the user manual.</p><div class="demo-buttons"><button type="button" data-demo="manager">Manager</button><button type="button" data-demo="cashier">Cashier</button><button type="button" data-demo="customer">Customer</button></div></div></form></div>
-  </section>
+  <a id="skip-link" class="skip-link" href="#login-form">Skip to sign in</a>
+  <main id="login-screen" class="login-layout" aria-labelledby="login-title">
+    <div class="login-story">
+      <div class="brand"><span class="brand-mark" aria-hidden="true">H</span> HawkerFlow</div>
+      <div class="login-intro">
+        <span class="eyebrow">A WORKSPACE FOR HAWKER OPERATIONS</span>
+        <h1 id="login-title">From the counter<br>to the kitchen.</h1>
+        <p>Record cash sales, track ingredient batches and use order history to plan the next day.</p>
+        <dl class="login-workflows">
+          <div><dt>During service</dt><dd>Orders, available portions and loyalty points.</dd></div>
+          <div><dt>After service</dt><dd>Stock forecasts, expiry risks and sales insights.</dd></div>
+        </dl>
+      </div>
+      <small>INF2003 database project · Local demonstration</small>
+    </div>
+    <div class="login-panel">
+      <form id="login-form" tabindex="-1" aria-labelledby="signin-title">
+        <span class="eyebrow teal">SIGN IN</span>
+        <h2 id="signin-title">Open your workspace</h2>
+        <p class="muted">Your role determines which tools are available.</p>
+        <label for="login-email">Email<input id="login-email" type="email" autocomplete="username" required placeholder="manager@hawkerflow.local"></label>
+        <label for="login-password">Password<input id="login-password" type="password" autocomplete="current-password" required></label>
+        <p id="login-error" class="form-error" role="alert"></p>
+        <button class="button primary full" type="submit">Sign in <span aria-hidden="true">→</span></button>
+        <div class="demo-box">
+          <b>Try a demonstration role</b>
+          <p id="demo-hint">Use the development credentials in the user manual.</p>
+          <div class="demo-buttons">
+            <button type="button" data-demo="manager">Manager</button>
+            <button type="button" data-demo="cashier">Cashier</button>
+            <button type="button" data-demo="customer">Customer</button>
+          </div>
+          <p class="demo-context">Sample operations use synthetic data. Cash orders only; this app does not take payments.</p>
+        </div>
+        <div class="login-links"><a href="/about#usage">Demo usage</a><a href="/about#privacy">Privacy & data</a></div>
+      </form>
+    </div>
+  </main>
   <div id="workspace" class="workspace" hidden>
-    <aside class="sidebar"><div class="brand"><span class="brand-mark">H</span> HawkerFlow</div><p class="sidebar-caption">YOUR DAILY WORKSPACE</p><nav aria-label="Workspace"><button data-view="orders" class="nav-item active"><span>▤</span>Orders & points</button><button data-view="inventory" class="nav-item"><span>▦</span>Kitchen stock</button><button data-view="feedback" class="nav-item"><span>◉</span>Customers & feedback</button><button data-view="dashboard" class="nav-item"><span>↗</span>Manager intelligence</button></nav><div class="sidebar-bottom"><div class="session-dot">Session active</div><div class="account-card"><div id="user-avatar" class="avatar">H</div><div><b id="user-name"></b><small id="user-role"></small></div></div><button id="logout" class="logout">Sign out →</button><small class="demo-label">Demo · Complete cash sales only</small></div></aside>
-    <main class="main"><header class="topbar"><div><span class="eyebrow teal" id="view-eyebrow">COUNTER & LOYALTY</span><h1 id="view-title">Orders & points</h1><p id="view-description" class="muted">A smooth checkout. Stock and loyalty updated together.</p></div><span class="date-pill" id="today-label"></span></header><div id="page-error" class="error-banner" role="alert" hidden></div><div id="content" aria-live="polite"></div><footer class="main-footer">HawkerFlow <span>Fictional branches use historical 2016 <a href="https://data.gov.sg/datasets/d_68a42f09f350881996d83f9cd73ab02f/view" target="_blank" rel="noopener noreferrer">NEA / data.gov.sg location data</a>. Operational data is synthetic.</span></footer></main>
+    <aside class="sidebar" aria-label="Workspace navigation and account">
+      <div class="brand"><span class="brand-mark" aria-hidden="true">H</span> HawkerFlow</div>
+      <p class="sidebar-caption">YOUR DAILY WORKSPACE</p>
+      <nav aria-label="Workspace">
+        <button data-view="orders" class="nav-item active"><span aria-hidden="true">▤</span>Orders & points</button>
+        <button data-view="inventory" class="nav-item"><span aria-hidden="true">▦</span>Kitchen stock</button>
+        <button data-view="feedback" class="nav-item"><span aria-hidden="true">◉</span>Customers & feedback</button>
+        <button data-view="dashboard" class="nav-item"><span aria-hidden="true">↗</span>Manager intelligence</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="session-dot">Session active</div>
+        <div class="account-card"><div id="user-avatar" class="avatar" aria-hidden="true">H</div><div><b id="user-name"></b><small id="user-role"></small></div></div>
+        <button id="logout" class="logout">Sign out <span aria-hidden="true">→</span></button>
+        <small class="demo-label">Local demo · Cash orders only</small>
+      </div>
+    </aside>
+    <main id="main-content" class="main" tabindex="-1">
+      <header class="topbar">
+        <div><span class="eyebrow teal" id="view-eyebrow">COUNTER & LOYALTY</span><h1 id="view-title">Orders & points</h1><p id="view-description" class="muted">Complete cash orders with stock and points checked together.</p></div>
+        <span class="date-pill" id="today-label"></span>
+      </header>
+      <div id="page-error" class="error-banner" role="alert" hidden></div>
+      <div id="content"></div>
+      <footer class="main-footer">
+        <div><b>HawkerFlow</b><p>Fictional branches use historical 2016 <a href="https://data.gov.sg/datasets/d_68a42f09f350881996d83f9cd73ab02f/view" target="_blank" rel="noopener noreferrer">NEA / data.gov.sg location data</a>. Operational data is synthetic.</p></div>
+        <nav aria-label="Demonstration information"><a href="/about#usage">Demo usage</a><a href="/about#privacy">Privacy & data</a></nav>
+      </footer>
+    </main>
   </div>
   <div id="toast" class="toast" role="status" hidden></div>
-</body></html>
+</body>
+</html>
