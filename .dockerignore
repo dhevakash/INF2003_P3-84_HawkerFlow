@@ -1,10 +1,7 @@
 .venv
+.git
+.env
 __pycache__
 .pytest_cache
-.env
-*.pyc
-evidence/ui
-.git
-evidence/extra-credit
-evidence/redesign
-pytest-cache-files-*
+*.sqlite
+evidence/*.json

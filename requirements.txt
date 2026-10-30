@@ -1,7 +1,7 @@
-fastapi==0.142.2
-uvicorn==0.54.0
-SQLAlchemy==2.1.2
-PyMySQL==1.2.3
-pymongo==4.18.2
-pydantic==2.13.5
-pydantic-settings==2.15.0
+fastapi>=0.115,<1
+uvicorn>=0.30,<1
+SQLAlchemy>=2.0,<2.1
+PyMySQL>=1.1,<2
+pymongo>=4.10,<5
+PyJWT>=2.9,<3
+python-dotenv>=1,<2

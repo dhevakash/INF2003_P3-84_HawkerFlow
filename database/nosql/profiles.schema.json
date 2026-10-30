@@ -1,0 +1,42 @@
+{
+  "$jsonSchema": {
+    "bsonType": "object",
+    "required": [
+      "customer_id",
+      "dietary_preferences",
+      "favourite_tags"
+    ],
+    "properties": {
+      "customer_id": {
+        "bsonType": [
+          "int",
+          "long"
+        ],
+        "minimum": 1
+      },
+      "dietary_preferences": {
+        "bsonType": "array",
+        "maxItems": 10,
+        "uniqueItems": true,
+        "items": {
+          "bsonType": "string",
+          "minLength": 1,
+          "maxLength": 40
+        }
+      },
+      "favourite_tags": {
+        "bsonType": "array",
+        "maxItems": 10,
+        "uniqueItems": true,
+        "items": {
+          "bsonType": "string",
+          "minLength": 1,
+          "maxLength": 40
+        }
+      },
+      "updated_at": {
+        "bsonType": "date"
+      }
+    }
+  }
+}

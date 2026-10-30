@@ -1,0 +1,90 @@
+erDiagram
+    direction TB
+    BRANCHES ||--o{ BRANCH_STOCK : holds
+    INGREDIENTS ||--o{ BRANCH_STOCK : stocked_at
+    MENU_ITEMS ||--o{ RECIPE_COMPONENTS : requires
+    INGREDIENTS ||--o{ RECIPE_COMPONENTS : used_in
+    CUSTOMERS ||--o| USERS : may_have_account
+    CUSTOMERS ||--o{ ORDERS : places
+    BRANCHES ||--o{ ORDERS : fulfills
+    USERS ||--o{ ORDERS : cashier
+    ORDERS ||--|{ ORDER_LINES : contains
+    MENU_ITEMS ||--o{ ORDER_LINES : appears_in
+    BRANCHES ||--o{ STOCK_RECEIPTS : receives
+    INGREDIENTS ||--o{ STOCK_RECEIPTS : replenished
+    USERS ||--o{ STOCK_RECEIPTS : records
+    BRANCHES ||--o{ STOCK_MOVEMENTS : logs
+    INGREDIENTS ||--o{ STOCK_MOVEMENTS : changes
+    ORDERS o|--o{ STOCK_MOVEMENTS : deducts
+    STOCK_RECEIPTS o|--o{ STOCK_MOVEMENTS : adds
+    ORDERS ||--o{ LOYALTY_TRANSACTIONS : generates
+    CUSTOMERS ||--o{ LOYALTY_TRANSACTIONS : earns_or_redeems
+    BRANCHES {
+        int id PK
+    }
+    CUSTOMERS {
+        int id PK
+        string email UK
+        int points
+    }
+    USERS {
+        int id PK
+        int customer_id FK
+        string role
+    }
+    MENU_ITEMS {
+        int id PK
+        decimal price
+        boolean active
+    }
+    INGREDIENTS {
+        int id PK
+        string unit
+    }
+    RECIPE_COMPONENTS {
+        int menu_item_id PK,FK
+        int ingredient_id PK,FK
+        decimal quantity
+    }
+    BRANCH_STOCK {
+        int branch_id PK,FK
+        int ingredient_id PK,FK
+        decimal quantity
+    }
+    ORDERS {
+        int id PK
+        string request_key UK
+        int branch_id FK
+        int customer_id FK
+        int cashier_user_id FK
+        decimal total
+    }
+    ORDER_LINES {
+        int id PK
+        int order_id FK
+        int menu_item_id FK
+        decimal unit_price
+        int quantity
+    }
+    STOCK_RECEIPTS {
+        int id PK
+        int branch_id FK
+        int ingredient_id FK
+        int actor_user_id FK
+        decimal quantity
+    }
+    STOCK_MOVEMENTS {
+        int id PK
+        int branch_id FK
+        int ingredient_id FK
+        int order_id FK
+        int receipt_id FK
+        decimal delta
+    }
+    LOYALTY_TRANSACTIONS {
+        int id PK
+        int customer_id FK
+        int order_id FK
+        int delta
+        string kind
+    }

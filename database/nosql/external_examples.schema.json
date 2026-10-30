@@ -1,0 +1,35 @@
+{
+  "$jsonSchema": {
+    "bsonType": "object",
+    "required": [
+      "source",
+      "source_row",
+      "text",
+      "sentiment"
+    ],
+    "properties": {
+      "source": {
+        "enum": [
+          "UCI_YELP"
+        ]
+      },
+      "source_row": {
+        "bsonType": [
+          "int",
+          "long"
+        ]
+      },
+      "text": {
+        "bsonType": "string"
+      },
+      "sentiment": {
+        "bsonType": [
+          "int",
+          "long"
+        ],
+        "minimum": 0,
+        "maximum": 1
+      }
+    }
+  }
+}
