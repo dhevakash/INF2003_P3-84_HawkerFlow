@@ -1,5 +1,8 @@
 from decimal import Decimal
-from pydantic import BaseModel, ConfigDict, Field, model_validator
+import re
+from typing import Literal
+from pydantic import BaseModel, ConfigDict, Field, SecretStr, field_validator, model_validator
+from app.roles import Role
 
 
 class StrictModel(BaseModel):
@@ -9,6 +12,65 @@ class StrictModel(BaseModel):
 class Login(StrictModel):
     email: str = Field(min_length=3, max_length=180)
     password: str = Field(min_length=1, max_length=128)
+
+
+class AccountCredentials(StrictModel):
+    email: str = Field(min_length=3, max_length=180, pattern=r'^[^\s@]+@[^\s@]+\.[^\s@]+$')
+    password: SecretStr = Field(min_length=12, max_length=128)
+
+    @field_validator('email', mode='before')
+    @classmethod
+    def normalize_email(cls, value):
+        if isinstance(value, str):
+            value = value.strip().lower()
+        return value
+
+    @field_validator('password')
+    @classmethod
+    def nonblank_password(cls, value):
+        if not value.get_secret_value().strip():
+            raise ValueError('Password must not be blank.')
+        return value
+
+
+class SignupInput(AccountCredentials):
+    name: str = Field(min_length=1, max_length=120)
+
+    @field_validator('name', mode='before')
+    @classmethod
+    def normalize_name(cls, value):
+        return value.strip() if isinstance(value, str) else value
+
+
+class InitialAdminInput(AccountCredentials):
+    pass
+
+
+class PrivilegedAccountInput(AccountCredentials):
+    role: Literal['admin', 'staff']
+
+
+class AccountResult(StrictModel):
+    id: int = Field(gt=0)
+    email: str
+    role: Role
+    customer_id: int | None
+    active: bool
+
+
+class SignupResult(StrictModel):
+    id: int = Field(gt=0)
+    email: str
+    role: Literal['customer']
+    customer_id: int = Field(gt=0)
+
+
+class AccountRoleInput(StrictModel):
+    role: Role
+
+
+class AccountStatusInput(StrictModel):
+    active: bool = Field(strict=True)
 
 
 class MenuInput(StrictModel):
@@ -42,11 +104,38 @@ class CheckoutInput(StrictModel):
         return self
 
 
+def plain_stock_decimal(value):
+    if isinstance(value, str) and not re.fullmatch(r'[0-9]+(?:\.[0-9]{1,3})?', value):
+        raise ValueError('Use digits and up to three decimal places for stock quantities.')
+    return value
+
+
 class RestockInput(StrictModel):
-    branch_id: int = Field(gt=0)
-    ingredient_id: int = Field(gt=0)
+    branch_id: int = Field(gt=0, strict=True)
+    ingredient_id: int = Field(gt=0, strict=True)
     quantity: Decimal = Field(gt=0, max_digits=14, decimal_places=3)
     note: str = Field(default='', max_length=255)
+
+    @field_validator('quantity', mode='before')
+    @classmethod
+    def plain_quantity(cls, value):
+        return plain_stock_decimal(value)
+
+
+class StockAdjustmentInput(StrictModel):
+    quantity: Decimal = Field(ge=0, max_digits=14, decimal_places=3)
+    expected_quantity: Decimal = Field(ge=0, max_digits=14, decimal_places=3)
+    reason: str = Field(min_length=1, max_length=255)
+
+    @field_validator('quantity', 'expected_quantity', mode='before')
+    @classmethod
+    def plain_quantity(cls, value):
+        return plain_stock_decimal(value)
+
+    @field_validator('reason', mode='before')
+    @classmethod
+    def trim_reason(cls, value):
+        return value.strip() if isinstance(value, str) else value
 
 
 class ReviewInput(StrictModel):

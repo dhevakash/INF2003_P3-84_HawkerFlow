@@ -6,6 +6,14 @@ This is a working starter, not a finished assessed submission. See [docs/STATUS.
 
 ## Start here on Windows
 
+Admin/Staff/Customer account rules and upgrade instructions:
+[ACCOUNT_ACTIVATION_AND_ROLLOUT.md](docs/ACCOUNT_ACTIVATION_AND_ROLLOUT.md).
+
+These commands are for a fresh database. Existing installations must first
+complete the coordinated role upgrade described in
+[docs/ACCOUNT_ACTIVATION_AND_ROLLOUT.md](docs/ACCOUNT_ACTIVATION_AND_ROLLOUT.md); rebuilding alone does not migrate
+the existing role constraint or accounts.
+
 1. Extract the ZIP, then use **File → Open Folder** in VS Code and select the inner `hawkerflow-starter` folder containing `compose.yaml`.
 2. Start Docker Desktop. In **Terminal → New Terminal**, run:
 
@@ -13,15 +21,22 @@ This is a working starter, not a finished assessed submission. See [docs/STATUS.
 docker compose up -d --build
 docker compose ps
 docker compose exec app python -m app.cli init-db
+docker compose exec app python -m app.cli init-admin
 docker compose exec app python -m app.cli seed
 ```
 
-3. Open http://localhost:8000. Open http://localhost:8000/docs for the interactive API explorer, and http://localhost:8000/api/health to check both stores.
+The `init-admin` command asks for your Admin email and a hidden password entered
+twice. Use a nonblank password of 12-128 characters. If an Admin already exists,
+the command leaves every account and password unchanged. See
+[docs/ADMIN_ACCOUNT_SETUP.md](docs/ADMIN_ACCOUNT_SETUP.md).
+
+3. Open http://localhost:8080. Open http://localhost:8080/docs for the interactive API explorer, and http://localhost:8080/api/health to check both stores.
 
 | Role | Email | Password |
 |---|---|---|
-| Manager | manager@hawkerflow.local | DemoPass123! |
-| Cashier | cashier@hawkerflow.local | DemoPass123! |
+| Admin | Your setup email | Your setup password |
+| Staff (legacy manager email) | manager@hawkerflow.local | DemoPass123! |
+| Staff (legacy cashier email) | cashier@hawkerflow.local | DemoPass123! |
 | Customer 1 | customer1@hawkerflow.local | DemoPass123! |
 
 The seed command uses synthetic demonstration accounts and can be repeated without duplicating its orders, stock or profiles. Keep default DB credentials on your local machine only. Ports bind to localhost. No payment processor is involved.
@@ -37,6 +52,7 @@ py -3.12 -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -r requirements-lock.txt
 Copy-Item .env.example .env
 .\.venv\Scripts\python.exe -m app.cli init-db
+.\.venv\Scripts\python.exe -m app.cli init-admin
 .\.venv\Scripts\python.exe -m app.cli seed
 .\.venv\Scripts\python.exe -m uvicorn app.main:app --reload --port 8001
 ```
@@ -51,6 +67,7 @@ Before creating `.env`, the default database is local SQLite and MongoDB is disa
 py -3.12 -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -r requirements-lock.txt
 .\.venv\Scripts\python.exe -m app.cli init-db --sql-only
+.\.venv\Scripts\python.exe -m app.cli init-admin
 .\.venv\Scripts\python.exe -m app.cli seed --sql-only
 .\.venv\Scripts\python.exe -m uvicorn app.main:app --reload
 ```

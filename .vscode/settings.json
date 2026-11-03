@@ -1,6 +1,12 @@
 {
   "python.defaultInterpreterPath": "${workspaceFolder}/.venv/Scripts/python.exe",
   "python.testing.pytestEnabled": true,
-  "python.testing.pytestArgs": ["tests"],
-  "files.exclude": {"**/__pycache__": true}
+  "python.testing.pytestArgs": [
+    "tests"
+  ],
+  "files.exclude": {
+    "**/__pycache__": true
+  },
+  "python-envs.defaultEnvManager": "ms-python.python:system",
+  "python.terminal.useEnvFile": true
 }

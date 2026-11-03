@@ -17,17 +17,20 @@ REVIEW_SCHEMA = {
         'text': {'bsonType': 'string', 'minLength': 3, 'maxLength': 2000},
         'tags': TAG_ARRAY, 'created_at': {'bsonType': 'date'}, 'updated_at': {'bsonType': 'date'},
         'source': {'enum': ['synthetic_purchase', 'application_purchase']},
+        'created_by_user_id': {**NUMBER, 'minimum': 1}, 'updated_by_user_id': {**NUMBER, 'minimum': 1},
         'category_ratings': {'bsonType': 'object', 'additionalProperties': False,
             'properties': {name: RATING for name in ('food', 'service', 'value')}},
         'replies': {'bsonType': 'array', 'maxItems': 20, 'items': {
             'bsonType': 'object', 'required': ['manager_user_id', 'text', 'created_at'],
             'properties': {'manager_user_id': NUMBER, 'text': {'bsonType': 'string', 'minLength': 1, 'maxLength': 1000},
-                           'created_at': {'bsonType': 'date'}}}},
+                           'created_at': {'bsonType': 'date'}, 'updated_at': {'bsonType': 'date'},
+                           'updated_by_user_id': {**NUMBER, 'minimum': 1}}}},
     }
 }
 PROFILE_SCHEMA = {'bsonType': 'object', 'required': ['customer_id', 'dietary_preferences', 'favourite_tags'],
     'properties': {'customer_id': {**NUMBER, 'minimum': 1}, 'dietary_preferences': TAG_ARRAY,
-                   'favourite_tags': TAG_ARRAY, 'updated_at': {'bsonType': 'date'}}}
+                   'favourite_tags': TAG_ARRAY, 'updated_at': {'bsonType': 'date'},
+                   'updated_by_user_id': {**NUMBER, 'minimum': 1}}}
 EXTERNAL_SCHEMA = {'bsonType': 'object', 'required': ['source', 'source_row', 'text', 'sentiment'],
     'properties': {'source': {'enum': ['UCI_YELP']}, 'source_row': NUMBER,
                    'text': {'bsonType': 'string'}, 'sentiment': {**NUMBER, 'minimum': 0, 'maximum': 1}}}

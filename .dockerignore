@@ -5,3 +5,4 @@ __pycache__
 .pytest_cache
 *.sqlite
 evidence/*.json
+**/node_modules

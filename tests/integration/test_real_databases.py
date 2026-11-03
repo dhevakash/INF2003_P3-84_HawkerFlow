@@ -44,7 +44,7 @@ def test_innodb_competing_checkouts_cannot_oversell(real_databases):
         item = MenuItem(name=label, price=Decimal('5.00'))
         customer = Customer(name=label, email=label+'@example.test', points=0)
         s.add_all([branch, ingredient, item, customer]); s.flush()
-        user = User(email=label+'-manager@example.test', password_hash='not-a-login-account', role='manager')
+        user = User(email=label+'-staff@example.test', password_hash='not-a-login-account', role='staff')
         s.add(user); s.flush()
         ids = branch.id, ingredient.id, item.id, customer.id, user.id
         s.add_all([BranchStock(branch_id=branch.id, ingredient_id=ingredient.id, quantity=Decimal('2.000')),
@@ -83,3 +83,48 @@ def test_mongodb_server_validator_and_unique_index(real_databases):
         assert error.value.code == 121
     finally:
         db.drop_collection(name)
+
+
+@pytest.mark.parametrize('competitor', ['correction', 'checkout'])
+def test_stock_correction_cannot_overwrite_a_competing_change(real_databases, competitor):
+    from sqlalchemy import func, select
+    from app.models import Order, StockAdjustment, StockMovement
+    from app.schemas import StockAdjustmentInput
+    from app.services.inventory import adjust_stock
+    factory, _ = real_databases
+    label = uuid.uuid4().hex
+    with factory.begin() as session:
+        branch = Branch(name=label, address='stock correction integration test')
+        ingredient = Ingredient(name=label, unit='g')
+        item = MenuItem(name=label, price=Decimal('5.00'))
+        customer = Customer(name=label, email=label+'@example.test', points=0)
+        user = User(email=label+'@admin.test', password_hash='not-a-login-account', role='admin')
+        session.add_all([branch, ingredient, item, customer, user]); session.flush()
+        ids = branch.id, ingredient.id, item.id, customer.id, user.id
+        session.add_all([BranchStock(branch_id=branch.id, ingredient_id=ingredient.id, quantity=Decimal('2.000')),
+                         RecipeComponent(menu_item_id=item.id, ingredient_id=ingredient.id, quantity=Decimal('2.000'))])
+    barrier = Barrier(2)
+    def attempt(number):
+        with factory() as session:
+            barrier.wait(timeout=10)
+            try:
+                if number == 1 and competitor == 'checkout':
+                    payload = CheckoutInput(request_key=label, branch_id=ids[0], customer_id=ids[3],
+                                            lines=[{'menu_item_id': ids[2], 'quantity': 1}])
+                    checkout(session, payload, ids[4])
+                else:
+                    adjust_stock(session, ids[0], ids[1], StockAdjustmentInput(
+                        quantity='0.000', expected_quantity='2.000', reason='Concurrent physical count'), ids[4])
+                return 'completed'
+            except BusinessError as error:
+                assert error.status == 409
+                return 'rejected'
+    with ThreadPoolExecutor(max_workers=2) as pool:
+        assert sorted(pool.map(attempt, [0, 1])) == ['completed', 'rejected']
+    with factory() as session:
+        assert session.get(BranchStock, (ids[0], ids[1])).quantity == Decimal('0.000')
+        adjustment_count = session.scalar(select(func.count()).select_from(StockAdjustment).where(StockAdjustment.branch_id == ids[0]))
+        order_count = session.scalar(select(func.count()).select_from(Order).where(Order.branch_id == ids[0]))
+        assert adjustment_count + order_count == 1
+        movement = session.scalar(select(StockMovement).where(StockMovement.branch_id == ids[0]))
+        assert movement.delta == Decimal('-2.000')

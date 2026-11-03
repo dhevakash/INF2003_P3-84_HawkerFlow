@@ -16,8 +16,8 @@ def test_customer_cannot_modify_menu(client):
     assert client.post('/api/menu', headers=auth, json={'name': 'New', 'price': '4.00'}).status_code == 403
 
 
-def test_manager_menu_crud(client):
-    auth = headers(client, 'manager@example.test')
+def test_staff_menu_crud(client):
+    auth = headers(client, 'staff@example.test')
     result = client.post('/api/menu', headers=auth, json={'name': 'New', 'price': '4.00'})
     assert result.status_code == 201
     item_id = result.json()['id']
@@ -26,10 +26,10 @@ def test_manager_menu_crud(client):
 
 
 def test_customer_only_sees_own_orders(client):
-    manager = headers(client, 'manager@example.test')
+    staff = headers(client, 'staff@example.test')
     payload = {'request_key': 'api-ownership-order', 'branch_id': 1, 'customer_id': 1,
                'lines': [{'menu_item_id': 1, 'quantity': 1}]}
-    assert client.post('/api/orders', headers=manager, json=payload).status_code == 201
+    assert client.post('/api/orders', headers=staff, json=payload).status_code == 201
     buyer = headers(client, 'buyer@example.test')
     other = headers(client, 'other@example.test')
     assert len(client.get('/api/orders', headers=buyer).json()) == 1
@@ -37,7 +37,7 @@ def test_customer_only_sees_own_orders(client):
 
 
 def test_historical_menu_delete_is_blocked(client):
-    auth = headers(client, 'manager@example.test')
+    auth = headers(client, 'staff@example.test')
     client.post('/api/orders', headers=auth, json={'request_key': 'historical-delete', 'branch_id': 1,
         'customer_id': 1, 'lines': [{'menu_item_id': 1, 'quantity': 1}]})
     assert client.delete('/api/menu/1', headers=auth).status_code == 409
