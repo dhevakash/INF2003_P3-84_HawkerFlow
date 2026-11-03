@@ -41,7 +41,8 @@
       <button type="button" data-view="stock/movements" data-roles="admin staff" hidden>Stock movements</button>
       <button type="button" data-view="customers" data-roles="admin staff" hidden>Customers</button>
       <button type="button" data-view="loyalty" data-roles="admin staff customer" hidden>Points history</button>
-      <button type="button" data-view="reviews" data-roles="admin staff customer" hidden>Feedback</button>
+      <button type="button" data-view="reviews" data-roles="admin staff customer" hidden>My feedback</button>
+      <button type="button" data-view="reviews/shared" data-roles="admin staff customer" hidden>Others&rsquo; feedback</button>
       <button type="button" data-view="analytics/sql" data-roles="admin staff" hidden>Sales insights</button>
       <button type="button" data-view="analytics/mongo" data-roles="admin staff" hidden>Feedback insights</button>
       <button type="button" data-view="profiles/me" data-roles="customer" hidden>My preferences</button>
@@ -105,7 +106,8 @@
       <h3 id="review-editor-title">Review a purchase</h3>
       <form id="review-editor">
         <input type="hidden" name="editing">
-        <label>Order ID<input name="order_id" type="number" min="1" required></label>
+        <label>Order ID<input name="order_id" type="number" min="1" list="own-order-ids" required></label>
+        <datalist id="own-order-ids"></datalist>
         <label>Rating<input name="rating" type="number" min="1" max="5" value="5" required></label>
         <label>Feedback<textarea name="text" minlength="3" maxlength="2000" required></textarea></label>
         <label>Tags (comma separated)<input name="tags" maxlength="409"></label>
@@ -140,6 +142,7 @@
     <section class="card"><div id="results" class="table-wrap" aria-live="polite"></div></section>
   </section>
   <dialog id="confirmation"><form method="dialog"><h2>Confirm action</h2><p id="confirmation-text"></p><div class="actions"><button value="cancel" class="secondary" autofocus>Cancel</button><button value="confirm" id="confirm-action">Confirm</button></div></form></dialog>
+  <dialog id="receipt" aria-label="Order receipt"><div id="receipt-body"></div><form method="dialog" class="actions"><button value="close" autofocus>Close</button></form></dialog>
 </main>
 <footer>HawkerFlow · Fictional branches and synthetic operational data</footer>
 </body>

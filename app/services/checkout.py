@@ -5,7 +5,7 @@ import hashlib
 import json
 from sqlalchemy import select
 from sqlalchemy.exc import IntegrityError
-from app.models import (BranchStock, Customer, LoyaltyTransaction, MenuItem,
+from app.models import (Branch, BranchStock, Customer, LoyaltyTransaction, MenuItem,
                         Order, OrderLine, RecipeComponent, StockMovement)
 
 
@@ -26,6 +26,37 @@ def order_result(order):
     return {'order_id': order.id, 'subtotal': format(order.subtotal, '.2f'),
             'discount': format(order.discount, '.2f'), 'total': format(order.total, '.2f'),
             'customer_id': order.customer_id, 'branch_id': order.branch_id}
+
+
+def order_detail(session, order):
+    """Human-readable receipt: dish names, per-line paid prices, and points moved.
+
+    Line totals use the OrderLine.unit_price snapshot taken at sale time, never the
+    live menu price, so historical receipts stay accurate when prices change later.
+    """
+    branch = session.get(Branch, order.branch_id)
+    rows = session.execute(
+        select(OrderLine, MenuItem.name)
+        .join(MenuItem, MenuItem.id == OrderLine.menu_item_id)
+        .where(OrderLine.order_id == order.id)
+        .order_by(OrderLine.id)
+    ).all()
+    lines = [{'menu_item_id': line.menu_item_id, 'name': name, 'quantity': line.quantity,
+              'unit_price': format(line.unit_price, '.2f'),
+              'line_total': format(line.unit_price * line.quantity, '.2f')}
+             for line, name in rows]
+    points = {kind: delta for kind, delta in session.execute(
+        select(LoyaltyTransaction.kind, LoyaltyTransaction.delta)
+        .where(LoyaltyTransaction.order_id == order.id)).all()}
+    return {'order_id': order.id, 'created_at': order.created_at.isoformat() + 'Z',
+            'branch': {'id': order.branch_id, 'name': branch.name if branch else None},
+            'customer_id': order.customer_id,
+            'lines': lines,
+            'subtotal': format(order.subtotal, '.2f'),
+            'discount': format(order.discount, '.2f'),
+            'total': format(order.total, '.2f'),
+            'points_earned': points.get('earn', 0),
+            'points_redeemed': -points.get('redeem', 0)}
 
 
 def _validate_retry(order, digest):

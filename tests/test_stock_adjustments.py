@@ -99,8 +99,10 @@ def test_corrections_do_not_rewrite_orders_and_admin_cannot_edit_or_delete_order
     auth = headers(client, 'admin@example.test')
     before = client.get('/api/orders', headers=auth).json()
     assert client.put('/api/stock/1/1', headers=auth, json={**BODY, 'expected_quantity': '8.000'}).status_code == 200
+    # Orders are immutable through the API: no write route exists. The GET receipt route
+    # makes write verbs return 405 (method not allowed); other paths stay 404. Both reject.
     for method in ('PUT', 'PATCH', 'DELETE'):
-        assert client.request(method, '/api/orders/' + str(order_id), headers=auth, json={'total': '0.00'}).status_code == 404
+        assert client.request(method, '/api/orders/' + str(order_id), headers=auth, json={'total': '0.00'}).status_code in (404, 405)
     assert client.get('/api/orders', headers=auth).json() == before
     with database() as session:
         assert session.get(Order, order_id).total == Decimal('5.00')

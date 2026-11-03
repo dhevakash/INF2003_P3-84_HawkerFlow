@@ -1,6 +1,6 @@
 from datetime import datetime, timezone
 from decimal import Decimal
-from fastapi import APIRouter, Depends, HTTPException, Path
+from fastapi import APIRouter, Depends, HTTPException, Path, Query
 from sqlalchemy import delete, func, select, text
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
@@ -18,7 +18,7 @@ from app.schemas import (AccountResult, AccountRoleInput, AccountStatusInput, Pr
                          ReplyInput, RestockInput, ReviewInput, SignupInput, SignupResult,
                          IngredientInput, RecipeInput, StockAdjustmentInput)
 from app.services.accounts import AccountEmailConflict, insert_privileged_account
-from app.services.checkout import checkout, order_result
+from app.services.checkout import checkout, order_detail, order_result
 from app.services.inventory import adjust_stock, restock
 
 router = APIRouter(prefix='/api')
@@ -43,6 +43,21 @@ def owned_order(session, order_id, user):
     if order is None or (user.role != Role.ADMIN and order.customer_id != user.customer_id):
         raise HTTPException(404, 'Purchase not found for this customer.')
     return order
+
+
+def public_review(doc):
+    """Shared-view projection: no identifying or private purchase fields.
+
+    Deliberately omits customer_id, order_id and every *_user_id audit field so one
+    customer cannot learn who wrote a review or trace it to a specific purchase.
+    Replies keep only their text and timestamps.
+    """
+    return {'rating': doc.get('rating'), 'text': doc.get('text'),
+            'tags': doc.get('tags', []), 'category_ratings': doc.get('category_ratings', {}),
+            'branch_id': doc.get('branch_id'), 'created_at': doc.get('created_at'),
+            'replies': [{'text': reply.get('text'), 'created_at': reply.get('created_at'),
+                         'updated_at': reply.get('updated_at')}
+                        for reply in doc.get('replies', [])]}
 
 
 @router.get('/health')
@@ -372,6 +387,17 @@ def orders(user=Depends(current_user), session: Session = Depends(get_session)):
             for o in session.scalars(query.order_by(Order.id.desc()).limit(100))]
 
 
+@router.get('/orders/{order_id}')
+def order_receipt(order_id: int = Path(gt=0), user=Depends(current_user),
+                  session: Session = Depends(get_session)):
+    # Staff and admin may open any receipt for their work; a customer only their own.
+    # 404 (not 403) for a customer's cross-account request hides whether the order exists.
+    order = session.get(Order, order_id)
+    if order is None or (user.role == 'customer' and order.customer_id != user.customer_id):
+        raise HTTPException(404, 'Purchase not found.')
+    return order_detail(session, order)
+
+
 @router.get('/loyalty')
 def loyalty(user=Depends(current_user), session: Session = Depends(get_session)):
     query = select(LoyaltyTransaction)
@@ -392,6 +418,14 @@ def sql_analytics(user=Operations, session: Session = Depends(get_session)):
 def reviews(user=Depends(current_user)):
     query = {'customer_id': user.customer_id} if user.role == 'customer' else {}
     return [document(d) for d in mongo_db().reviews.find(query).sort('created_at', -1).limit(100)]
+
+
+@router.get('/reviews/shared')
+def shared_reviews(branch_id: int | None = Query(default=None, gt=0), user=Depends(current_user)):
+    # Shared feedback visible to every role, anonymised via public_review() so no
+    # customer can see another customer's identity or private purchase reference.
+    query = {} if branch_id is None else {'branch_id': branch_id}
+    return [public_review(d) for d in mongo_db().reviews.find(query).sort('created_at', -1).limit(100)]
 
 
 @router.post('/reviews', status_code=201)
@@ -475,12 +509,15 @@ def own_profile_id(user):
 
 
 @router.get('/profiles/me')
-def read_profile(user=CustomerOrAdmin):
+def read_profile(user=CustomerOrAdmin, session: Session = Depends(get_session)):
     customer_id = own_profile_id(user)
+    # Points balance is SQL's source of truth (Customer.points); surfaced here read-only.
+    customer = session.get(Customer, customer_id)
+    points = customer.points if customer else 0
     found = mongo_db().profiles.find_one({'customer_id': customer_id})
     if not found:
-        return {'customer_id': customer_id, 'dietary_preferences': [], 'favourite_tags': []}
-    return document(found)
+        return {'customer_id': customer_id, 'dietary_preferences': [], 'favourite_tags': [], 'points': points}
+    return {**document(found), 'points': points}
 
 
 @router.put('/profiles/me')
@@ -525,7 +562,10 @@ def delete_customer_profile(customer_id: int, user=AdminOnly, session: Session =
 
 
 @router.get('/analytics/mongo')
-def mongo_analytics(user=Operations):
+def mongo_analytics(branch_id: int | None = Query(default=None, gt=0), user=Operations):
     db = mongo_db()
-    return {'negative_tags': list(db.reviews.aggregate(complaint_pipeline())),
+    # Optional branch_id narrows the complaint breakdown to one branch; monthly ratings
+    # stay cross-branch so the overview is preserved.
+    return {'branch_id': branch_id,
+            'negative_tags': list(db.reviews.aggregate(complaint_pipeline(branch_id))),
             'monthly_ratings': list(db.reviews.aggregate(monthly_pipeline()))}

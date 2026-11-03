@@ -11,7 +11,8 @@
     menu: ['Menu', ROLES], orders: ['Orders', ROLES], stock: ['Stock', OPERATIONS],
     recipes: ['Recipes', OPERATIONS], 'stock/movements': ['Stock movements', OPERATIONS],
     customers: ['Customers', OPERATIONS], loyalty: ['Points history', ROLES],
-    reviews: ['Feedback', ROLES], 'analytics/sql': ['Sales insights', OPERATIONS],
+    reviews: ['My feedback', ROLES], 'reviews/shared': ['Others\u2019 feedback', ROLES],
+    'analytics/sql': ['Sales insights', OPERATIONS],
     'analytics/mongo': ['Feedback insights', OPERATIONS],
     'profiles/me': ['My preferences', ['customer']], profiles: ['Customer preferences', ['admin']],
     accounts: ['Accounts', ['admin']]
@@ -22,6 +23,9 @@
   const field = (form, name) => form.elements.namedItem(name);
   const labels = value => value.split(',').map(item => item.trim()).filter(Boolean);
   const titleCase = value => value[0].toUpperCase() + value.slice(1);
+  // Backend sends money as preformatted strings like "5.00"; show them with a currency sign.
+  const money = value => '$' + value;
+  const formatDate = iso => { const date = new Date(iso); return isNaN(date) ? iso : date.toLocaleString(); };
   function node(tag, text, className) {
     const element = document.createElement(tag);
     if (text !== undefined) element.textContent = text;
@@ -311,6 +315,69 @@
       }), account.active ? 'danger' : 'secondary'));
     });
   }
+  function buildReceipt(order) {
+    const body = byId('receipt-body');
+    body.replaceChildren();
+    body.append(node('h2', 'Order ' + order.order_id));
+    const branchName = order.branch?.name || ('Branch ' + order.branch?.id);
+    body.append(node('p', formatDate(order.created_at) + ' · ' + branchName, 'muted'));
+    const table = node('table'), head = node('thead'), headRow = node('tr');
+    for (const heading of ['Dish', 'Qty', 'Unit price', 'Line total']) headRow.append(node('th', heading));
+    head.append(headRow); table.append(head);
+    const tbody = node('tbody');
+    for (const line of order.lines || []) {
+      const row = node('tr');
+      row.append(node('td', line.name), node('td', String(line.quantity)),
+        node('td', money(line.unit_price)), node('td', money(line.line_total)));
+      tbody.append(row);
+    }
+    table.append(tbody); body.append(table);
+    const totals = node('dl', undefined, 'totals');
+    const line = (term, value) => {
+      const row = node('div'); row.append(node('dt', term), node('dd', value)); return row;
+    };
+    totals.append(line('Subtotal', money(order.subtotal)));
+    totals.append(line('Points discount', '-' + money(order.discount)));
+    const grand = line('Total paid', money(order.total)); grand.className = 'grand-total';
+    totals.append(grand);
+    body.append(totals);
+    body.append(node('p', 'Points earned: ' + order.points_earned + ' · Points redeemed: ' + order.points_redeemed, 'muted'));
+  }
+  async function showReceipt(orderId) {
+    const dialog = byId('receipt'), version = sessionVersion;
+    if (dialog.open) return;
+    const order = await api('orders/' + orderId);
+    if (version !== sessionVersion || token === null) return;
+    buildReceipt(order);
+    dialog.showModal();
+  }
+  async function fillOwnOrderOptions() {
+    // Suggest the customer's own order ids in the review editor datalist.
+    const list = byId('own-order-ids');
+    if (!list) return;
+    try {
+      const orders = await api('orders');
+      list.replaceChildren();
+      for (const order of orders) {
+        const option = node('option'); option.value = String(order.order_id);
+        option.label = money(order.total) + ' \u00b7 ' + formatDate(order.created_at);
+        list.append(option);
+      }
+    } catch { /* suggestions are optional; ignore load failures */ }
+  }
+  function renderOrders(orders, target) {
+    target.replaceChildren();
+    if (!orders.length) { target.textContent = 'No purchases yet.'; return; }
+    for (const order of orders) {
+      const card = node('article', undefined, 'review-record');
+      card.append(node('h4', 'Order ' + order.order_id + ' · ' + money(order.total)));
+      card.append(node('p', formatDate(order.created_at), 'muted'));
+      const controls = node('div', undefined, 'actions');
+      controls.append(action('View receipt', () => showReceipt(order.order_id)));
+      card.append(controls);
+      target.append(card);
+    }
+  }
   function renderReviews(reviews, target) {
     target.replaceChildren();
     if (!reviews.length) { target.textContent = 'No reviews yet.'; return; }
@@ -380,6 +447,55 @@
       target.append(card);
     }
   }
+  function sharedReviewCard(review) {
+    // Shared reviews are anonymous: no order id, customer id or author shown.
+    const card = node('article', undefined, 'review-record');
+    card.append(node('h4', review.rating + '/5'));
+    card.append(node('p', review.text));
+    if ((review.tags || []).length) card.append(node('p', 'Tags: ' + review.tags.join(', '), 'muted'));
+    if (Object.keys(review.category_ratings || {}).length)
+      card.append(node('p', Object.entries(review.category_ratings).map(([name, rating]) => name + ': ' + rating + '/5').join(' \u00b7 '), 'muted'));
+    for (const reply of review.replies || []) {
+      const section = node('section', undefined, 'reply');
+      section.append(node('strong', 'Business reply'), node('p', reply.text));
+      card.append(section);
+    }
+    return card;
+  }
+  async function renderSharedReviews(initialReviews, target) {
+    target.replaceChildren();
+    // Branch filter: labels come from GET /api/branches; "All branches" clears the filter.
+    let branches = [];
+    try { branches = await api('branches'); } catch { branches = []; }
+    const picker = node('label', 'Branch');
+    const select = node('select'); select.id = 'shared-branch';
+    select.setAttribute('aria-label', 'Filter shared feedback by branch');
+    const all = node('option', 'All branches'); all.value = ''; select.append(all);
+    for (const branch of branches) {
+      const option = node('option', branch.name); option.value = String(branch.id); select.append(option);
+    }
+    picker.append(select); target.append(picker);
+    const list = node('div'); target.append(list);
+    const paint = reviews => {
+      list.replaceChildren();
+      if (!reviews.length) { list.append(node('p', 'No shared feedback yet.', 'muted')); return; }
+      for (const review of reviews) list.append(sharedReviewCard(review));
+    };
+    paint(initialReviews);
+    select.addEventListener('change', async () => {
+      const version = sessionVersion;
+      list.replaceChildren(node('p', 'Loading\u2026', 'loading'));
+      try {
+        const reviews = await api('reviews/shared' + (select.value ? '?branch_id=' + select.value : ''));
+        if (version !== sessionVersion) return;
+        paint(reviews);
+      } catch (error) {
+        if (version !== sessionVersion) return;
+        list.replaceChildren(node('p', 'Unable to load shared feedback. Try again.'));
+        await showError(error);
+      }
+    });
+  }
   async function loadView(requested = currentView) {
     let request = null, version = sessionVersion;
     try {
@@ -392,7 +508,9 @@
       const data = await api(path);
       if (request !== viewVersion || version !== sessionVersion) return;
       const target = byId('results');
-      if (path === 'reviews') renderReviews(data, target);
+      if (path === 'reviews') { renderReviews(data, target); if (allowed(['customer'])) fillOwnOrderOptions(); }
+      else if (path === 'reviews/shared') await renderSharedReviews(data, target);
+      else if (path === 'orders') renderOrders(data, target);
       else if (path === 'accounts') renderAccounts(data, target);
       else if (path === 'stock') {
         stockRows = data;
@@ -402,6 +520,7 @@
       }
       else if (path === 'profiles/me') {
         target.replaceChildren(
+          node('p', 'Points balance: ' + (data.points ?? 0)),
           node('p', 'Dietary preferences: ' + ((data.dietary_preferences || []).join(', ') || 'None saved')),
           node('p', 'Favourite tags: ' + ((data.favourite_tags || []).join(', ') || 'None saved')));
         fillProfile(data);
