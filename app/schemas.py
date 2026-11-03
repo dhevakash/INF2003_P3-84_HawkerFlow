@@ -1,5 +1,5 @@
 from decimal import Decimal
-from pydantic import BaseModel, ConfigDict, Field, model_validator
+from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
 
 class StrictModel(BaseModel):
@@ -15,6 +15,43 @@ class MenuInput(StrictModel):
     name: str = Field(min_length=1, max_length=120)
     price: Decimal = Field(gt=0, max_digits=10, decimal_places=2)
     active: bool = True
+
+    @field_validator('name')
+    @classmethod
+    def nonblank_name(cls, value):
+        value = value.strip()
+        if not value:
+            raise ValueError('Dish name must not be blank.')
+        return value
+
+
+class IngredientInput(StrictModel):
+    name: str = Field(min_length=1, max_length=100)
+    unit: str = Field(default='g', min_length=1, max_length=12)
+
+    @field_validator('name', 'unit')
+    @classmethod
+    def nonblank_text(cls, value):
+        value = value.strip()
+        if not value:
+            raise ValueError('Ingredient name and unit must not be blank.')
+        return value
+
+
+class RecipeIngredientInput(StrictModel):
+    ingredient_id: int = Field(gt=0)
+    quantity: Decimal = Field(gt=0, max_digits=14, decimal_places=3)
+
+
+class RecipeInput(StrictModel):
+    ingredients: list[RecipeIngredientInput] = Field(min_length=1, max_length=100)
+
+    @model_validator(mode='after')
+    def unique_ingredients(self):
+        ids = [line.ingredient_id for line in self.ingredients]
+        if len(ids) != len(set(ids)):
+            raise ValueError('An ingredient may only appear once in a recipe.')
+        return self
 
 
 class CustomerInput(StrictModel):

@@ -1,3 +1,5 @@
+from decimal import Decimal
+
 from app.nosql import complaint_pipeline, monthly_pipeline
 
 
@@ -18,11 +20,71 @@ def test_customer_cannot_modify_menu(client):
 
 def test_manager_menu_crud(client):
     auth = headers(client, 'manager@example.test')
+    assert client.post('/api/menu', headers=auth,
+                       json={'name': 'Rice meal', 'price': '4.00'}).status_code == 409
+    assert client.post('/api/menu', headers=auth,
+                       json={'name': '   ', 'price': '4.00'}).status_code == 422
     result = client.post('/api/menu', headers=auth, json={'name': 'New', 'price': '4.00'})
     assert result.status_code == 201
     item_id = result.json()['id']
+    assert client.put(f'/api/menu/{item_id}', headers=auth,
+                      json={'name': 'Rice meal', 'price': '4.00'}).status_code == 409
     assert client.put(f'/api/menu/{item_id}', headers=auth, json={'name': 'Renamed', 'price': '6.00'}).status_code == 200
     assert client.delete(f'/api/menu/{item_id}', headers=auth).status_code == 200
+
+
+def test_manager_can_manage_ingredients(client):
+    manager = headers(client, 'manager@example.test')
+    assert client.post('/api/ingredients', headers=manager,
+                       json={'name': '  ', 'unit': 'g'}).status_code == 422
+    created = client.post('/api/ingredients', headers=manager,
+                          json={'name': 'Sugar', 'unit': 'g'})
+    assert created.status_code == 201
+    ingredient_id = created.json()['id']
+    assert client.post('/api/ingredients', headers=manager,
+                       json={'name': 'Sugar', 'unit': 'kg'}).status_code == 409
+    assert client.put(f'/api/ingredients/{ingredient_id}', headers=manager,
+                      json={'name': 'Brown sugar', 'unit': 'g'}).json()['name'] == 'Brown sugar'
+    assert client.delete(f'/api/ingredients/{ingredient_id}', headers=manager).status_code == 200
+    assert client.delete('/api/ingredients/1', headers=manager).status_code == 409
+
+
+def test_manager_can_replace_recipe_and_invalid_recipes_are_rejected(client):
+    manager = headers(client, 'manager@example.test')
+    created = client.post('/api/ingredients', headers=manager,
+                          json={'name': 'Sauce', 'unit': 'ml'})
+    ingredient_id = created.json()['id']
+    recipe_path = '/api/menu/1/recipe'
+
+    replaced = client.put(recipe_path, headers=manager,
+                          json={'ingredients': [{'ingredient_id': ingredient_id, 'quantity': '12.500'}]})
+    assert replaced.status_code == 200
+    saved = replaced.json()[0]
+    assert saved['menu_item_id'] == 1 and saved['ingredient_id'] == ingredient_id
+    assert Decimal(str(saved['quantity'])) == Decimal('12.500')
+
+    invalid_recipes = [
+        {'ingredients': []},
+        {'ingredients': [{'ingredient_id': ingredient_id, 'quantity': '1'},
+                         {'ingredient_id': ingredient_id, 'quantity': '2'}]},
+        {'ingredients': [{'ingredient_id': ingredient_id, 'quantity': '0'}]},
+        {'ingredients': [{'ingredient_id': ingredient_id, 'quantity': '0.0001'}]},
+        {'ingredients': [{'ingredient_id': 999, 'quantity': '1'}]},
+    ]
+    for payload in invalid_recipes:
+        assert client.put(recipe_path, headers=manager, json=payload).status_code == 422
+
+    current = client.get('/api/recipes', headers=manager).json()
+    assert len(current) == 1 and current[0]['ingredient_id'] == ingredient_id
+    assert Decimal(str(current[0]['quantity'])) == Decimal('12.500')
+
+
+def test_menu_and_ingredient_management_is_manager_only(client):
+    customer = headers(client, 'buyer@example.test')
+    assert client.get('/api/ingredients', headers=customer).status_code == 403
+    assert client.get('/api/recipes', headers=customer).status_code == 403
+    assert client.post('/api/ingredients', headers=customer,
+                       json={'name': 'Forbidden', 'unit': 'g'}).status_code == 403
 
 
 def test_customer_only_sees_own_orders(client):
@@ -34,6 +96,20 @@ def test_customer_only_sees_own_orders(client):
     other = headers(client, 'other@example.test')
     assert len(client.get('/api/orders', headers=buyer).json()) == 1
     assert client.get('/api/orders', headers=other).json() == []
+
+
+def test_customer_can_only_order_for_their_own_account(client):
+    buyer = headers(client, 'buyer@example.test')
+    payload = {'request_key': 'customer-own-order', 'branch_id': 1, 'customer_id': 1,
+               'lines': [{'menu_item_id': 1, 'quantity': 1}]}
+    response = client.post('/api/orders', headers=buyer, json=payload)
+    assert response.status_code == 201
+    assert response.json()['customer_id'] == 1
+    assert [customer['id'] for customer in client.get('/api/customers', headers=buyer).json()] == [1]
+
+    other_payload = {**payload, 'request_key': 'customer-other-order', 'customer_id': 2}
+    assert client.post('/api/orders', headers=buyer, json=other_payload).status_code == 403
+    assert client.get('/api/orders', headers=buyer).json()[0]['customer_id'] == 1
 
 
 def test_historical_menu_delete_is_blocked(client):

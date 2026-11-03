@@ -2,15 +2,17 @@ from datetime import datetime, timezone
 from decimal import Decimal
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy import delete, select, text
+from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 from app import analytics
 from app.auth import current_user, issue_token, require_roles, verify_password
 from app.database import engine, get_session
 from app.models import (Branch, BranchStock, Customer, Ingredient, LoyaltyTransaction,
-                        MenuItem, Order, OrderLine, RecipeComponent, StockMovement, User)
+                        MenuItem, Order, OrderLine, RecipeComponent, StockMovement,
+                        StockReceipt, User)
 from app.nosql import complaint_pipeline, mongo_db, monthly_pipeline
 from app.schemas import (CheckoutInput, CustomerInput, Login, MenuInput, ProfileInput,
-                         ReplyInput, RestockInput, ReviewInput)
+                         IngredientInput, RecipeInput, ReplyInput, RestockInput, ReviewInput)
 from app.services.checkout import checkout, order_result
 from app.services.inventory import restock
 
@@ -81,22 +83,33 @@ def menu(user=Depends(current_user), session: Session = Depends(get_session)):
 
 @router.post('/menu', status_code=201)
 def add_menu(payload: MenuInput, user=Manager, session: Session = Depends(get_session)):
-    with session.begin():
-        item = MenuItem(**payload.model_dump())
-        session.add(item)
-        session.flush()
-        return fields(item, 'id', 'name', 'price', 'active')
+    try:
+        with session.begin():
+            if session.scalar(select(MenuItem.id).where(MenuItem.name == payload.name)):
+                raise HTTPException(409, 'A dish with this name already exists.')
+            item = MenuItem(**payload.model_dump())
+            session.add(item)
+            session.flush()
+            return fields(item, 'id', 'name', 'price', 'active')
+    except IntegrityError:
+        raise HTTPException(409, 'A dish with this name already exists.') from None
 
 
 @router.put('/menu/{item_id}')
 def update_menu(item_id: int, payload: MenuInput, user=Manager, session: Session = Depends(get_session)):
-    with session.begin():
-        item = session.scalar(select(MenuItem).where(MenuItem.id == item_id).with_for_update())
-        if not item:
-            raise HTTPException(404, 'Menu item not found.')
-        for key, value in payload.model_dump().items():
-            setattr(item, key, value)
-        return fields(item, 'id', 'name', 'price', 'active')
+    try:
+        with session.begin():
+            item = session.scalar(select(MenuItem).where(MenuItem.id == item_id).with_for_update())
+            if not item:
+                raise HTTPException(404, 'Menu item not found.')
+            if session.scalar(select(MenuItem.id).where(
+                    MenuItem.name == payload.name, MenuItem.id != item_id)):
+                raise HTTPException(409, 'A dish with this name already exists.')
+            for key, value in payload.model_dump().items():
+                setattr(item, key, value)
+            return fields(item, 'id', 'name', 'price', 'active')
+    except IntegrityError:
+        raise HTTPException(409, 'A dish with this name already exists.') from None
 
 
 @router.delete('/menu/{item_id}')
@@ -113,13 +126,105 @@ def delete_menu(item_id: int, user=Manager, session: Session = Depends(get_sessi
 
 
 @router.get('/recipes')
-def recipes(user=Staff, session: Session = Depends(get_session)):
-    return [fields(r, 'menu_item_id', 'ingredient_id', 'quantity') for r in session.scalars(select(RecipeComponent))]
+def recipes(user=Manager, session: Session = Depends(get_session)):
+    return [fields(r, 'menu_item_id', 'ingredient_id', 'quantity')
+            for r in session.scalars(select(RecipeComponent).order_by(
+                RecipeComponent.menu_item_id, RecipeComponent.ingredient_id))]
+
+
+@router.put('/menu/{item_id}/recipe')
+def replace_recipe(item_id: int, payload: RecipeInput, user=Manager,
+                   session: Session = Depends(get_session)):
+    ingredient_ids = sorted(line.ingredient_id for line in payload.ingredients)
+    with session.begin():
+        item = session.scalar(select(MenuItem).where(MenuItem.id == item_id).with_for_update())
+        if not item:
+            raise HTTPException(404, 'Menu item not found.')
+        ingredients = list(session.scalars(select(Ingredient).where(
+            Ingredient.id.in_(ingredient_ids)).order_by(Ingredient.id).with_for_update()))
+        if len(ingredients) != len(ingredient_ids):
+            raise HTTPException(422, 'A recipe references an ingredient that does not exist.')
+        session.execute(delete(RecipeComponent).where(RecipeComponent.menu_item_id == item_id))
+        components = [RecipeComponent(menu_item_id=item_id, ingredient_id=line.ingredient_id,
+                                      quantity=line.quantity) for line in payload.ingredients]
+        session.add_all(components)
+        session.flush()
+        return [fields(component, 'menu_item_id', 'ingredient_id', 'quantity')
+                for component in components]
+
+
+@router.get('/ingredients')
+def ingredients(user=Manager, session: Session = Depends(get_session)):
+    return [fields(ingredient, 'id', 'name', 'unit')
+            for ingredient in session.scalars(select(Ingredient).order_by(Ingredient.id))]
+
+
+@router.post('/ingredients', status_code=201)
+def add_ingredient(payload: IngredientInput, user=Manager,
+                   session: Session = Depends(get_session)):
+    try:
+        with session.begin():
+            if session.scalar(select(Ingredient.id).where(Ingredient.name == payload.name)):
+                raise HTTPException(409, 'An ingredient with this name already exists.')
+            ingredient = Ingredient(**payload.model_dump())
+            session.add(ingredient)
+            session.flush()
+            return fields(ingredient, 'id', 'name', 'unit')
+    except IntegrityError:
+        raise HTTPException(409, 'An ingredient with this name already exists.') from None
+
+
+@router.put('/ingredients/{ingredient_id}')
+def update_ingredient(ingredient_id: int, payload: IngredientInput, user=Manager,
+                      session: Session = Depends(get_session)):
+    try:
+        with session.begin():
+            ingredient = session.scalar(select(Ingredient).where(
+                Ingredient.id == ingredient_id).with_for_update())
+            if not ingredient:
+                raise HTTPException(404, 'Ingredient not found.')
+            if session.scalar(select(Ingredient.id).where(
+                Ingredient.name == payload.name, Ingredient.id != ingredient_id)):
+                raise HTTPException(409, 'An ingredient with this name already exists.')
+            ingredient.name, ingredient.unit = payload.name, payload.unit
+            session.flush()
+            return fields(ingredient, 'id', 'name', 'unit')
+    except IntegrityError:
+        raise HTTPException(409, 'An ingredient with this name already exists.') from None
+
+
+@router.delete('/ingredients/{ingredient_id}')
+def delete_ingredient(ingredient_id: int, user=Manager,
+                     session: Session = Depends(get_session)):
+    with session.begin():
+        ingredient = session.scalar(select(Ingredient).where(
+            Ingredient.id == ingredient_id).with_for_update())
+        if not ingredient:
+            raise HTTPException(404, 'Ingredient not found.')
+        references = (
+            (RecipeComponent, RecipeComponent.ingredient_id),
+            (BranchStock, BranchStock.ingredient_id),
+            (StockReceipt, StockReceipt.ingredient_id),
+            (StockMovement, StockMovement.ingredient_id),
+        )
+        if any(session.scalar(select(model.ingredient_id).where(
+                column == ingredient_id).limit(1)) is not None
+               for model, column in references):
+            raise HTTPException(409, 'Ingredient is referenced by a recipe or stock history and cannot be deleted.')
+        session.delete(ingredient)
+    return {'deleted': ingredient_id}
 
 
 @router.get('/customers')
-def customers(user=Staff, session: Session = Depends(get_session)):
-    return [fields(c, 'id', 'name', 'email', 'points', 'active') for c in session.scalars(select(Customer).order_by(Customer.id))]
+def customers(user=Depends(current_user), session: Session = Depends(get_session)):
+    query = select(Customer).order_by(Customer.id)
+    if user.role == 'customer':
+        if user.customer_id is None:
+            raise HTTPException(403, 'This customer account is not linked to a customer profile.')
+        query = query.where(Customer.id == user.customer_id)
+    elif user.role not in {'manager', 'cashier'}:
+        raise HTTPException(403, 'This action is not allowed for your role.')
+    return [fields(c, 'id', 'name', 'email', 'points', 'active') for c in session.scalars(query)]
 
 
 @router.post('/customers', status_code=201)
@@ -161,7 +266,12 @@ def movements(user=Manager, session: Session = Depends(get_session)):
 
 
 @router.post('/orders', status_code=201)
-def create_order(payload: CheckoutInput, user=Staff, session: Session = Depends(get_session)):
+def create_order(payload: CheckoutInput, user=Depends(current_user), session: Session = Depends(get_session)):
+    if user.role == 'customer':
+        if user.customer_id is None or payload.customer_id != user.customer_id:
+            raise HTTPException(403, 'Customers can only place orders for their own account.')
+    elif user.role not in {'manager', 'cashier'}:
+        raise HTTPException(403, 'This action is not allowed for your role.')
     return checkout(session, payload, user.id)
 
 
