@@ -4,6 +4,7 @@ from sqlalchemy.orm import sessionmaker
 from app.database import Base, make_engine
 from app.models import Branch, BranchStock, Customer, Ingredient, MenuItem, RecipeComponent, User
 from app.auth import hash_password
+from app.analytics import initialize_views
 
 
 @pytest.fixture(scope='session')
@@ -15,6 +16,7 @@ def password_hash():
 def database(tmp_path, password_hash):
     engine = make_engine(f'sqlite:///{tmp_path / "test.sqlite"}')
     Base.metadata.create_all(engine)
+    initialize_views(engine)
     factory = sessionmaker(bind=engine, expire_on_commit=False)
     with factory.begin() as s:
         s.add_all([Branch(id=1, name='Test Branch', address='Fictional'),
@@ -22,9 +24,11 @@ def database(tmp_path, password_hash):
             Customer(id=2, name='Other', email='other@example.test', points=0),
             Ingredient(id=1, name='Rice', unit='g'), MenuItem(id=1, name='Rice meal', price=Decimal('5.00'))])
         s.flush()
-        s.add_all([User(id=1, email='manager@example.test', role='manager', password_hash=password_hash),
+        s.add_all([User(id=1, email='staff@example.test', role='staff', password_hash=password_hash),
             User(id=2, email='buyer@example.test', role='customer', customer_id=1, password_hash=password_hash),
             User(id=3, email='other@example.test', role='customer', customer_id=2, password_hash=password_hash),
+            User(id=4, email='admin@example.test', role='admin', password_hash=password_hash),
+            User(id=5, email='staff2@example.test', role='staff', password_hash=password_hash),
             BranchStock(branch_id=1, ingredient_id=1, quantity=Decimal('10.000')),
             RecipeComponent(menu_item_id=1, ingredient_id=1, quantity=Decimal('2.000'))])
     yield factory

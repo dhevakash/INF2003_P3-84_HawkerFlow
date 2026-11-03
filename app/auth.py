@@ -10,6 +10,7 @@ from sqlalchemy import select
 from app.config import JWT_SECRET
 from app.database import SessionLocal
 from app.models import User
+from app.roles import Role, VALID_ROLES
 
 
 def hash_password(password):
@@ -30,7 +31,8 @@ def verify_password(password, stored):
 
 
 def issue_token(user):
-    return jwt.encode({'sub': str(user.id), 'exp': datetime.now(timezone.utc) + timedelta(hours=2)},
+    return jwt.encode({'sub': str(user.id), 'ver': getattr(user, 'session_version', 0),
+                      'exp': datetime.now(timezone.utc) + timedelta(hours=2)},
                       JWT_SECRET, algorithm='HS256')
 
 
@@ -44,21 +46,35 @@ class Principal:
 bearer = HTTPBearer(auto_error=False)
 
 
+def principal_for(user):
+    if not user.active:
+        raise HTTPException(401, 'Please sign in again.')
+    if user.role not in VALID_ROLES:
+        raise HTTPException(403, 'This account has an unsupported role. Complete the account migration first.')
+    if user.role == Role.CUSTOMER and user.customer_id is None:
+        raise HTTPException(403, 'This customer account is not linked to a customer record.')
+    return Principal(user.id, user.role, user.customer_id)
+
+
 def current_user(credentials: HTTPAuthorizationCredentials | None = Depends(bearer)):
     try:
         if credentials is None:
             raise ValueError('Missing bearer token')
-        claims = jwt.decode(credentials.credentials, JWT_SECRET, algorithms=['HS256'], options={'require': ['exp', 'sub']})
+        claims = jwt.decode(credentials.credentials, JWT_SECRET, algorithms=['HS256'], options={'require': ['exp', 'sub', 'ver']})
         with SessionLocal() as session:
             user = session.scalar(select(User).where(User.id == int(claims['sub'])))
             if not user:
                 raise ValueError('Unknown user')
-            return Principal(user.id, user.role, user.customer_id)
+            if type(claims['ver']) is not int or claims['ver'] != user.session_version:
+                raise ValueError('Revoked session')
+            return principal_for(user)
     except (jwt.InvalidTokenError, ValueError, KeyError):
         raise HTTPException(401, 'Please sign in again.') from None
 
 
 def require_roles(*roles):
+    if not roles or not set(roles) <= VALID_ROLES:
+        raise ValueError('Permission checks must explicitly allow known application roles.')
     def check(user: Principal = Depends(current_user)):
         if user.role not in roles:
             raise HTTPException(403, 'This action is not allowed for your role.')

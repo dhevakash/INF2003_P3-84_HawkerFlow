@@ -1,10 +1,14 @@
 """Explicit setup commands; importing the web app never destroys or seeds data."""
 import argparse
 import csv
+from getpass import getpass, GetPassWarning
+import os
 from datetime import datetime, timedelta, timezone
 from decimal import Decimal
 from pathlib import Path
 import random
+import warnings
+from pydantic import ValidationError
 from sqlalchemy import func, select
 from sqlalchemy.schema import CreateIndex, CreateTable
 from sqlalchemy.dialects import mysql
@@ -15,7 +19,8 @@ from app.database import Base, SessionLocal, engine
 from app.models import (Branch, BranchStock, Customer, Ingredient, MenuItem, Order,
                         RecipeComponent, StockMovement, StockReceipt, User)
 from app.nosql import initialize_mongo, mongo_db
-from app.schemas import CheckoutInput
+from app.schemas import CheckoutInput, InitialAdminInput
+from app.services.accounts import AccountSetupError, bootstrap_admin
 from app.services.checkout import checkout
 
 
@@ -34,10 +39,12 @@ def seed_sql():
             session.add_all(customers)
             session.flush()
             password = hash_password('DemoPass123!')
-            session.add_all([User(id=1, email='manager@hawkerflow.local', password_hash=password, role='manager'),
-                User(id=2, email='cashier@hawkerflow.local', password_hash=password, role='cashier')])
-            session.add_all([User(id=i+2, email=c.email, password_hash=password, role='customer', customer_id=i)
+            session.add_all([User(email='manager@hawkerflow.local', password_hash=password, role='staff'),
+                User(email='cashier@hawkerflow.local', password_hash=password, role='staff')])
+            session.add_all([User(email=c.email, password_hash=password, role='customer', customer_id=i)
                             for i, c in enumerate(customers, 1)])
+            session.flush()
+            actor_user_id = session.scalar(select(User.id).where(User.email == 'manager@hawkerflow.local'))
             ingredients = ['Rice', 'Chicken', 'Noodles', 'Tofu', 'Egg mixture', 'Cabbage', 'Carrot', 'Fish',
                            'Beef', 'Onion', 'Garlic', 'Chilli', 'Oil', 'Soy sauce', 'Spice mix']
             session.add_all([Ingredient(id=i, name=name, unit='g') for i, name in enumerate(ingredients, 1)])
@@ -53,19 +60,23 @@ def seed_sql():
                     quantity = Decimal('500000.000')
                     session.add(BranchStock(branch_id=branch_id, ingredient_id=ingredient_id, quantity=quantity))
                     receipt = StockReceipt(branch_id=branch_id, ingredient_id=ingredient_id, quantity=quantity,
-                                           actor_user_id=1, note='Synthetic opening inventory; all quantities in grams',
+                                           actor_user_id=actor_user_id, note='Synthetic opening inventory; all quantities in grams',
                                            created_at=datetime(2026, 7, 1))
                     session.add(receipt)
                     session.flush()
                     session.add(StockMovement(branch_id=branch_id, ingredient_id=ingredient_id,
                                               delta=quantity, receipt_id=receipt.id, created_at=receipt.created_at))
+        actor = session.scalar(select(User).where(User.email == 'manager@hawkerflow.local'))
+        if actor is None or actor.role not in {'admin', 'staff'}:
+            raise RuntimeError('The operational demo account is missing or still needs the role migration.')
+        actor_user_id = actor.id
     rng = random.Random(20261003)
     for number in range(1, 201):
         payload = CheckoutInput(request_key=f'seed-order-{number:06d}', branch_id=rng.randrange(1, 6),
             customer_id=rng.randrange(1, 51), lines=[{'menu_item_id': rng.randrange(1, 21), 'quantity': rng.randrange(1, 4)}])
         timestamp = datetime(2026, 10, 1, 12) - timedelta(days=rng.randrange(90))
         with SessionLocal() as session:
-            checkout(session, payload, 1, created_at=timestamp)
+            checkout(session, payload, actor_user_id, created_at=timestamp)
     with SessionLocal() as session:
         print({table.__tablename__: session.scalar(select(func.count()).select_from(table))
                for table in [Branch, Customer, MenuItem, Ingredient, Order]})
@@ -108,28 +119,61 @@ def import_uci(path):
     print({'external_examples_imported': len(records)})
 
 
+def admin_credentials(email):
+    supplied_email = email if email is not None else input('Initial Admin email: ')
+    # An explicit environment variable supports unattended local provisioning.
+    # Interactive use never echoes a password or accepts it as a command argument.
+    password = os.environ.get('HAWKERFLOW_INITIAL_ADMIN_PASSWORD')
+    if password is None:
+        with warnings.catch_warnings():
+            warnings.simplefilter('error', GetPassWarning)
+            password = getpass('Initial Admin password (12-128 characters): ')
+            confirmation = getpass('Confirm initial Admin password: ')
+        if password != confirmation:
+            raise AccountSetupError('Passwords do not match. No Admin was created.')
+    try:
+        return InitialAdminInput(email=supplied_email, password=password)
+    except ValidationError:
+        # Do not print validation inputs, which can contain the supplied secret.
+        raise AccountSetupError('Use a valid email and a nonblank password of 12-128 characters.') from None
+
+
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('command', choices=['init-db', 'seed', 'export-schema', 'import-uci'])
+    parser.add_argument('command', choices=['init-db', 'init-admin', 'seed', 'export-schema', 'import-uci'])
     parser.add_argument('--sql-only', action='store_true', help='SQLite/local SQL preview only; not a complete DBMS demo')
     parser.add_argument('--file', help='Path to the real yelp_labelled.txt for import-uci')
+    parser.add_argument('--email', help='Initial Admin email for init-admin; prompts if omitted')
     args = parser.parse_args()
+    if args.email is not None and args.command != 'init-admin':
+        parser.error('--email is only supported by init-admin')
     if args.command == 'init-db':
         Base.metadata.create_all(engine)
         initialize_views(engine)
         if not args.sql_only:
             initialize_mongo()
         print('Schema and views initialized.' + (' SQL preview only.' if args.sql_only else ' MongoDB validators and indexes initialized.'))
+    elif args.command == 'init-admin':
+        try:
+            result = bootstrap_admin(engine, lambda: admin_credentials(args.email))
+        except (AccountSetupError, EOFError, GetPassWarning):
+            parser.exit(1, 'Admin setup stopped. Check the role migration, an unused email and a matching '
+                        '12-128 character password. Use an interactive terminal for hidden password entry.\n')
+        if result.created:
+            print(f'Initial Admin created (account ID {result.account_id}). Sign in with the supplied credentials.')
+        else:
+            print(f'An Admin already exists (account ID {result.account_id}); no account or password was changed.')
     elif args.command == 'seed':
         seed_sql()
         if not args.sql_only:
             seed_mongo()
     elif args.command == 'export-schema':
         target = ROOT / 'database/sql/schema.generated.sql'
-        target.write_text('-- Generated from app/models.py. Do not hand-edit; regenerate instead.\n\n' +
+        schema = ('-- Generated from app/models.py. Do not hand-edit; regenerate instead.\n\n' +
             '\n\n'.join(str(CreateTable(t).compile(dialect=mysql.dialect())) + ';' for t in Base.metadata.sorted_tables) +
             '\n\n' + '\n'.join(str(CreateIndex(index).compile(dialect=mysql.dialect())) + ';'
-                for table in Base.metadata.sorted_tables for index in sorted(table.indexes, key=lambda i:i.name)) + '\n', encoding='utf-8')
+                for table in Base.metadata.sorted_tables for index in sorted(table.indexes, key=lambda i:i.name)))
+        target.write_text('\n'.join(line.rstrip() for line in schema.splitlines()) + '\n', encoding='utf-8')
         print(target)
     elif args.command == 'import-uci':
         if not args.file:

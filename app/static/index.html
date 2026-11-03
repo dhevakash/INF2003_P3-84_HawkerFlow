@@ -1,186 +1,146 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-        <title>HawkerFlow</title><link rel="stylesheet" href="/static/style.css">
-    </head>
-    <body>
-        <header>
-            <a href="/" class="brand">HawkerFlow<span>Team 84 · INF2003</span></a>
-            <a href="/docs" target="_blank">API explorer ↗</a>
-        </header>
-    <main>
-        <section class="intro">
-            <p class="eyebrow">LOCAL F&B OPERATIONS</p><h1>Good food.<br>Better decisions.</h1>
-            <p>Manage your sales, ingredient stock and customer feedback in one place.</p>
-            <p id="health" class="badge">Checking services…</p>
-        </section>
-        <section class="card" id="login-card">
-            <h2>Sign in</h2>
-            <form id="login">
-                <label>Email<input name="email" type="email" value="manager@hawkerflow.local" required></label>
-                <label>Password<input name="password" type="password" value="DemoPass123!" required></label>
-                <button>Sign in</button>
-            </form>
-            <p class="muted">Demo accounts: manager, cashier or customer1 @hawkerflow.local.<br>Demo password: DemoPass123!</p>
-        </section>
-        <section id="workspace" hidden>
-            <div class="toolbar"><h2 id="welcome">Workspace</h2>
-                <button id="logout" class="secondary">Sign out</button></div>
-                <nav id="tabs">
-                    <button data-view="menu">Menu</button>
-                    <button data-view="menu-management" data-manager>Menu &amp; recipes</button>
-                    <button data-view="orders">Orders</button>
-                    <button data-view="stock" data-staff>Stock</button>
-                    <button data-view="customers" data-staff>Customers</button>
-                    <button data-view="loyalty">Points history</button>
-                    <button data-view="reviews">Feedback</button>
-                    <button data-view="analytics/sql" data-manager>Sales insights</button>
-                    <button data-view="analytics/mongo" data-manager>Feedback insights</button>
-                </nav>
-            <section class="card">
-                <h3 id="view-title">Menu</h3>
-                <div id="results" class="table-wrap"></div>
-            </section>
-            <div class="grid" id="staff-forms" hidden>
-                <section class="card" id="legacy-checkout-card">
-                    <h3>Complete a single-item cash sale</h3>
-                    <form id="checkout">
-                        <label>Branch ID<input name="branch_id" type="number" min="1" value="1" required></label>
-                        <label>Customer ID<input name="customer_id" type="number" min="1" value="1" required></label>
-                        <label>Menu item ID<input name="menu_item_id" type="number" min="1" value="1" required></label>
-                        <label>Quantity<input name="quantity" type="number" min="1" max="100" value="1" required></label>
-                        <label>Points to redeem<input name="redeem_points" type="number" min="0" value="0" required></label>
-                        <button>Complete sale</button>
-                    </form>
-                    <p class="muted">Cashier fallback form. Managers can use the multi-item cart below.</p>
-                </section>
-                <section class="card" id="restock-card">
-                    <h3>Receive ingredients</h3>
-                    <form id="restock">
-                        <label>Branch ID<input name="branch_id" type="number" value="1" min="1" required></label>
-                        <label>Ingredient ID<input name="ingredient_id" type="number" value="1" min="1" required></label>
-                        <label>Quantity (grams)<input name="quantity" type="number" value="1000" min="0.001" step="0.001" required></label>
-                        <button>Record receipt</button>
-                    </form>
-                </section>
-                <section class="card manager-tools" id="menu-card" data-manager hidden>
-                    <h3>Manage menu and ingredients</h3>
-                    <p class="muted">Dish and recipe changes are saved securely by the server. A dish cannot be ordered until it has a valid recipe.</p>
-                    <div class="grid management-grid">
-                        <section class="management-panel">
-                            <h4>Dish details</h4>
-                            <button id="new-dish" class="secondary" type="button">New dish</button>
-                            <label>Choose a dish to edit
-                                <select id="menu-record"></select>
-                            </label>
-                            <form id="dish-editor">
-                                <label>Dish name<input id="dish-name" name="name" maxlength="120" required></label>
-                                <label>Price<input id="dish-price" name="price" type="number" min="0.01" step="0.01" required></label>
-                                <div class="button-row">
-                                    <button id="save-dish">Save dish</button>
-                                    <button id="delete-dish" class="danger" type="button" disabled>Delete dish</button>
-                                </div>
-                            </form>
-                            <p class="muted">Deleting a dish with order history is blocked.</p>
-                        </section>
-                        <section class="management-panel">
-                            <h4>Dish recipe</h4>
-                            <p id="recipe-help" class="muted">Save a new dish or select an existing dish to edit its recipe.</p>
-                            <form id="recipe-editor">
-                                <fieldset id="recipe-fieldset" disabled>
-                                    <div id="recipe-lines" class="recipe-lines"></div>
-                                    <div class="button-row">
-                                        <button id="add-recipe-line" class="secondary" type="button">Add ingredient</button>
-                                        <button id="save-recipe" type="submit">Save recipe</button>
-                                    </div>
-                                </fieldset>
-                            </form>
-                        </section>
-                    </div>
-                    <section class="management-panel ingredient-panel">
-                        <h4>Ingredients</h4>
-                        <button id="new-ingredient" class="secondary" type="button">New ingredient</button>
-                        <label>Choose an ingredient to edit
-                            <select id="ingredient-record"></select>
-                        </label>
-                        <form id="ingredient-editor">
-                            <div class="grid ingredient-fields">
-                                <label>Ingredient name<input id="ingredient-name" name="name" maxlength="100" required></label>
-                                <label>Unit (e.g. g, ml, pcs)<input id="ingredient-unit" name="unit" maxlength="12" value="g" required></label>
-                            </div>
-                            <div class="button-row">
-                                <button id="save-ingredient">Save ingredient</button>
-                                <button id="delete-ingredient" class="danger" type="button" disabled>Delete ingredient</button>
-                            </div>
-                        </form>
-                        <p class="muted">Ingredients referenced by recipes or stock history cannot be deleted.</p>
-                    </section>
-                </section>
-            </div>
-            <section class="card" id="order-card" hidden>
-                <h3>Build an order</h3>
-                <p class="muted">Prices are confirmed by the server at checkout. Redeem points in 100-point ($1) increments.</p>
-                <form id="multi-checkout">
-                    <div class="grid order-selectors">
-                        <label>Branch
-                            <select id="order-branch" name="branch_id" required></select>
-                        </label>
-                        <label id="order-customer-label">Customer
-                            <select id="order-customer" name="customer_id" required></select>
-                        </label>
-                    </div>
-                    <div class="dish-picker">
-                        <label for="dish-selection">Dish</label>
-                        <div class="dish-picker-controls">
-                            <select id="dish-selection" required></select>
-                            <button id="add-dish" type="button" class="secondary">Add dish</button>
-                        </div>
-                    </div>
-                    <div>
-                        <h4>Your cart</h4>
-                        <div id="order-cart" class="order-cart muted">Add a dish to start your cart.</div>
-                    </div>
-                    <div class="order-summary">
-                        <p>Available points: <strong id="available-points">Select a customer</strong></p>
-                        <label>Points to redeem
-                            <input id="redeem-points" name="redeem_points" type="number" min="0" step="100" value="0" required>
-                        </label>
-                        <p class="muted" id="redemption-limit">Select dishes and a customer to see redemption limits.</p>
-                        <dl class="totals">
-                            <div><dt>Subtotal</dt><dd id="order-subtotal">$0.00</dd></div>
-                            <div><dt>Discount</dt><dd id="order-discount">−$0.00</dd></div>
-                            <div class="grand-total"><dt>Total</dt><dd id="order-total">$0.00</dd></div>
-                        </dl>
-                    </div>
-                    <button id="place-order" type="submit">Place order</button>
-                </form>
-                <section id="order-receipt" class="receipt" aria-live="polite" hidden>
-                    <h4>Order complete</h4>
-                    <p id="receipt-heading"></p>
-                    <ul id="receipt-items"></ul>
-                    <dl class="totals">
-                        <div><dt>Subtotal</dt><dd id="receipt-subtotal"></dd></div>
-                        <div><dt>Points discount</dt><dd id="receipt-discount"></dd></div>
-                        <div class="grand-total"><dt>Paid</dt><dd id="receipt-total"></dd></div>
-                    </dl>
-                    <p class="success-note">Your order has been recorded successfully.</p>
-                </section>
-            </section>
-            <section class="card" id="review-card" hidden>
-                <h3>Review your purchase</h3>
-                <form id="review">
-                    <label>Order ID<input name="order_id" type="number" min="1" required></label>
-                    <label>Rating<input name="rating" type="number" min="1" max="5" value="5" required></label>
-                    <label>Feedback<textarea name="text" minlength="3" maxlength="2000" required></textarea></label>
-                    <label>Tags (comma separated)<input name="tags" value="food"></label>
-                    <button>Submit review</button>
-                </form>
-            </section>
-        </section>
-        <p id="message" role="status" aria-live="polite"></p>
-    </main>
-    <footer>HawkerFlow working starter · Fictional branches and synthetic operational data</footer>
-    <script src="/static/app.js"></script>
-    </body>
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HawkerFlow</title><link rel="stylesheet" href="/static/style.css">
+  <script src="/static/app.js" defer></script>
+</head>
+<body>
+<header><a href="/" class="brand">HawkerFlow<span>Team 84 · INF2003</span></a><a href="/docs" target="_blank" rel="noopener">API explorer ↗</a></header>
+<main>
+  <section class="intro"><p class="eyebrow">LOCAL F&amp;B OPERATIONS</p><h1>Good food.<br>Better decisions.</h1><p>Manage your sales, ingredient stock and customer feedback in one place.</p><p id="health" class="badge">Checking services…</p></section>
+  <section class="card" id="login-card">
+    <h2>Sign in</h2>
+    <form id="login" method="post">
+      <label>Email<input name="email" type="email" autocomplete="username" maxlength="180" required></label>
+      <label>Password<input name="password" type="password" autocomplete="current-password" maxlength="128" required></label>
+      <button type="submit">Sign in</button>
+    </form>
+    <p>New customer? <button type="button" id="show-signup" class="text-button">Create a customer account</button></p>
+  </section>
+  <section class="card" id="signup-card" hidden>
+    <h2>Create a customer account</h2><p>Keep track of your purchases, points and food preferences.</p>
+    <form id="signup" method="post">
+      <label>Name<input name="name" autocomplete="name" maxlength="120" required></label>
+      <label>Email<input name="email" type="email" autocomplete="email" maxlength="180" required></label>
+      <label>Password<input name="password" type="password" autocomplete="new-password" minlength="12" maxlength="128" required></label>
+      <label>Confirm password<input name="confirm_password" type="password" autocomplete="new-password" minlength="12" maxlength="128" required></label>
+      <p class="muted">Use a password of 12–128 characters. Staff accounts are created by an Admin.</p>
+      <button type="submit">Create customer account</button>
+    </form>
+    <button type="button" id="show-login" class="text-button">Back to sign in</button>
+  </section>
+  <p id="message" role="status" aria-live="polite" tabindex="-1"></p>
+  <section id="workspace" hidden>
+    <div class="toolbar"><div><h2 id="welcome">Workspace</h2><p id="role-description" class="muted"></p></div><button type="button" id="logout" class="secondary">Sign out</button></div>
+    <nav id="tabs" aria-label="Workspace">
+      <button type="button" data-view="menu" data-roles="admin staff customer" hidden>Menu</button>
+      <button type="button" data-view="orders" data-roles="admin staff customer" hidden>Orders</button>
+      <button type="button" data-view="stock" data-roles="admin staff" hidden>Stock</button>
+      <button type="button" data-view="recipes" data-roles="admin staff" hidden>Recipes</button>
+      <button type="button" data-view="stock/movements" data-roles="admin staff" hidden>Stock movements</button>
+      <button type="button" data-view="customers" data-roles="admin staff" hidden>Customers</button>
+      <button type="button" data-view="loyalty" data-roles="admin staff customer" hidden>Points history</button>
+      <button type="button" data-view="reviews" data-roles="admin staff customer" hidden>Feedback</button>
+      <button type="button" data-view="analytics/sql" data-roles="admin staff" hidden>Sales insights</button>
+      <button type="button" data-view="analytics/mongo" data-roles="admin staff" hidden>Feedback insights</button>
+      <button type="button" data-view="profiles/me" data-roles="customer" hidden>My preferences</button>
+      <button type="button" data-view="profiles" data-roles="admin" hidden>Customer preferences</button>
+      <button type="button" data-view="accounts" data-roles="admin" hidden>Accounts</button>
+    </nav>
+    <div class="toolbar"><h3 id="view-title">Menu</h3><button type="button" id="refresh-view" class="secondary">Refresh</button></div>
+    <section class="card" data-panel="menu" data-roles="admin staff" hidden>
+      <h3 id="menu-editor-title">Add a menu item</h3>
+      <form id="menu-editor" class="form-grid">
+        <input type="hidden" name="id">
+        <label>Name<input name="name" maxlength="120" required></label>
+        <label>Price<input name="price" type="number" min="0.01" step="0.01" required></label>
+        <label class="checkbox-label"><input name="active" type="checkbox" checked> Available for sale</label>
+        <div class="actions"><button type="submit">Save menu item</button><button type="button" data-reset="menu-editor" class="secondary">Cancel edit</button></div>
+      </form>
+    </section>
+    <section class="card" data-panel="orders" data-roles="admin staff" hidden>
+      <h3>Complete a cash sale</h3>
+      <form id="checkout" class="form-grid">
+        <label>Branch ID<input name="branch_id" type="number" min="1" required></label>
+        <label>Customer ID<input name="customer_id" type="number" min="1" required></label>
+        <label>Menu item ID<input name="menu_item_id" type="number" min="1" required></label>
+        <label>Quantity<input name="quantity" type="number" min="1" max="100" value="1" required></label>
+        <label>Points to redeem<input name="redeem_points" type="number" min="0" max="1000000" value="0" required></label>
+        <button type="submit">Complete sale</button>
+      </form><p class="muted">One menu item per sale. An unchanged sale can be retried safely after a connection error.</p>
+    </section>
+    <section class="card" data-panel="stock" data-roles="admin staff" hidden>
+      <h3>Receive ingredients</h3>
+      <form id="restock" class="form-grid">
+        <label>Branch<select name="branch_id" required><option value="">Choose a branch</option></select></label>
+        <label>Ingredient<select name="ingredient_id" required disabled><option value="">Choose a branch first</option></select></label>
+        <label><span id="restock-quantity-label">Quantity</span><input name="quantity" type="text" inputmode="decimal" data-stock-quantity pattern="[0-9]+([.][0-9]{1,3})?" maxlength="15" required aria-describedby="restock-quantity-help"></label>
+        <label>Note<input name="note" maxlength="255"></label><button type="submit">Record receipt</button>
+      </form><p id="restock-quantity-help" class="muted">Use numbers only, with up to three decimal places. Receipt quantities must be greater than zero.</p>
+    </section>
+    <section class="card" data-panel="stock" data-roles="admin" hidden>
+      <h3>Correct stock quantity</h3>
+      <p id="stock-editor-context" class="muted">Choose a branch and ingredient here, or select Edit stock in the table below.</p>
+      <form id="stock-editor" class="form-grid">
+        <input type="hidden" name="expected_quantity">
+        <label>Branch<select name="branch_id" required><option value="">Choose a branch</option></select></label>
+        <label>Ingredient<select name="ingredient_id" required disabled><option value="">Choose a branch first</option></select></label>
+        <label><span id="stock-quantity-label">Correct quantity</span><input name="quantity" type="text" inputmode="decimal" data-stock-quantity pattern="[0-9]+([.][0-9]{1,3})?" maxlength="15" required disabled aria-describedby="stock-quantity-help"></label>
+        <label>Reason<textarea name="reason" maxlength="255" required disabled></textarea></label>
+        <div class="actions"><button type="submit">Save stock correction</button><button type="button" data-reset="stock-editor" class="secondary">Cancel edit</button></div>
+      </form>
+      <p id="stock-quantity-help" class="muted">Use numbers only, with up to three decimal places. Zero is allowed. Each correction records who changed the quantity and why. To add a delivery, use Receive ingredients.</p>
+    </section>
+    <section class="card" data-panel="customers" data-roles="admin staff" hidden>
+      <h3 id="customer-editor-title">Add a customer record</h3>
+      <form id="customer-editor" class="form-grid">
+        <input type="hidden" name="id">
+        <label>Name<input name="name" maxlength="120" required></label>
+        <label>Email<input name="email" type="email" maxlength="180" required></label>
+        <div class="actions"><button type="submit">Save customer record</button><button type="button" data-reset="customer-editor" class="secondary">Cancel edit</button></div>
+      </form><p class="muted">Customer records support sales and loyalty. Creating a record does not create a login account.</p>
+    </section>
+    <section class="card" data-panel="reviews" data-roles="admin customer" hidden>
+      <h3 id="review-editor-title">Review a purchase</h3>
+      <form id="review-editor">
+        <input type="hidden" name="editing">
+        <label>Order ID<input name="order_id" type="number" min="1" required></label>
+        <label>Rating<input name="rating" type="number" min="1" max="5" value="5" required></label>
+        <label>Feedback<textarea name="text" minlength="3" maxlength="2000" required></textarea></label>
+        <label>Tags (comma separated)<input name="tags" maxlength="409"></label>
+        <div class="form-grid">
+          <label>Food rating (optional)<input name="food" type="number" min="1" max="5"></label>
+          <label>Service rating (optional)<input name="service" type="number" min="1" max="5"></label>
+          <label>Value rating (optional)<input name="value" type="number" min="1" max="5"></label>
+        </div>
+        <div class="actions"><button type="submit">Save review</button><button type="button" data-reset="review-editor" class="secondary">Cancel edit</button></div>
+      </form>
+    </section>
+    <section class="card" data-panel="profiles/me profiles" data-roles="admin customer" hidden>
+      <h3 id="profile-editor-title">Food preferences</h3>
+      <form id="profile-editor">
+        <label data-roles="admin" hidden>Customer ID<input name="customer_id" type="number" min="1"></label>
+        <label>Dietary preferences (comma separated)<input name="dietary_preferences" maxlength="409"></label>
+        <label>Favourite tags (comma separated)<input name="favourite_tags" maxlength="409"></label>
+        <p class="muted">Up to 10 values per field; each value can contain up to 40 characters.</p>
+        <button type="submit">Save preferences</button>
+      </form>
+    </section>
+    <section class="card" data-panel="accounts" data-roles="admin" hidden>
+      <h3>Create a Staff or Admin account</h3>
+      <form id="account-editor" method="post" class="form-grid">
+        <label>Email<input name="email" type="email" autocomplete="off" maxlength="180" required></label>
+        <label>Role<select name="role" required><option value="staff">Staff</option><option value="admin">Admin</option></select></label>
+        <label>Initial password<input name="password" type="password" autocomplete="new-password" minlength="12" maxlength="128" required></label>
+        <label>Confirm password<input name="confirm_password" type="password" autocomplete="new-password" minlength="12" maxlength="128" required></label>
+        <button type="submit">Create account</button>
+      </form><p class="muted">Role changes update the existing account. Existing IDs and purchase links stay intact.</p>
+    </section>
+    <section class="card"><div id="results" class="table-wrap" aria-live="polite"></div></section>
+  </section>
+  <dialog id="confirmation"><form method="dialog"><h2>Confirm action</h2><p id="confirmation-text"></p><div class="actions"><button value="cancel" class="secondary" autofocus>Cancel</button><button value="confirm" id="confirm-action">Confirm</button></div></form></dialog>
+</main>
+<footer>HawkerFlow · Fictional branches and synthetic operational data</footer>
+</body>
 </html>

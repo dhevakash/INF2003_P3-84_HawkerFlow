@@ -23,13 +23,13 @@ services:
       retries: 30
   app:
     build: .
-    ports: [ "127.0.0.1:8000:8000" ]
+    ports: [ "127.0.0.1:8080:8000" ]
     environment:
       APP_ENV: development
       JWT_SECRET: ${JWT_SECRET:-local-demo-only-change-before-sharing-123456789}
       DATABASE_URL: mysql+pymysql://hawkerflow:hawkerflow_dev@mariadb:3306/hawkerflow
       MONGO_URI: mongodb://mongo:27017
-      MONGO_DATABASE: hawkerflow
+      MONGO_DATABASE: hawkerflow_current
     depends_on:
       mariadb: { condition: service_healthy }
       mongo: { condition: service_healthy }

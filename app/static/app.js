@@ -1,497 +1,537 @@
-let token = null; // Session memory only; refresh requires sign-in.
-let role = null;
-let loggedInCustomerId = null;
-let pendingSale = null;
-
-// ordering
-const ordering = {branches: [], dishes: [], customers: []};
-const orderCart = new Map();
-
-// menu, ingredients
-let menuRecords = [];
-let ingredientRecords = [];
-let recipeRecords = [];
-let selectedMenuId = null;
-let selectedIngredientId = null;
-
-const byId = id => document.getElementById(id);
-const money = amount => '$' + Number(amount).toFixed(2);
-function message(text, error=false) {
-  byId('message').textContent = text;
-  byId('message').className = error ? 'error' : 'success';
-}
-async function api(path, method='GET', body) {
-  const response = await fetch('/api/' + path, {
-    method, headers: {'Content-Type':'application/json', ...(token ? {Authorization:'Bearer ' + token} : {})},
-    ...(body === undefined ? {} : {body:JSON.stringify(body)})
-  });
-  const data = await response.json();
-  if (!response.ok) throw new Error(typeof data.detail === 'string' ? data.detail : JSON.stringify(data.detail));
-  return data;
-}
-function render(data, target) {
-  target.replaceChildren();
-  if (!Array.isArray(data)) {
+(() => {
+  'use strict';
+  // Credentials and tokens live in memory only. Refresh requires sign-in.
+  let token = null, principal = null, currentView = 'menu', pendingSale = null;
+  let sessionVersion = 0, viewVersion = 0;
+  let stockRows = [];
+  const byId = id => document.getElementById(id);
+  const OPERATIONS = ['admin', 'staff'], REVIEWERS = ['admin', 'customer'];
+  const ROLES = ['admin', 'staff', 'customer'];
+  const VIEWS = {
+    menu: ['Menu', ROLES], orders: ['Orders', ROLES], stock: ['Stock', OPERATIONS],
+    recipes: ['Recipes', OPERATIONS], 'stock/movements': ['Stock movements', OPERATIONS],
+    customers: ['Customers', OPERATIONS], loyalty: ['Points history', ROLES],
+    reviews: ['Feedback', ROLES], 'analytics/sql': ['Sales insights', OPERATIONS],
+    'analytics/mongo': ['Feedback insights', OPERATIONS],
+    'profiles/me': ['My preferences', ['customer']], profiles: ['Customer preferences', ['admin']],
+    accounts: ['Accounts', ['admin']]
+  };
+  class Cancelled extends Error {}
+  const allowed = roles => principal !== null && roles.includes(principal.role);
+  const values = form => Object.fromEntries(new FormData(form));
+  const field = (form, name) => form.elements.namedItem(name);
+  const labels = value => value.split(',').map(item => item.trim()).filter(Boolean);
+  const titleCase = value => value[0].toUpperCase() + value.slice(1);
+  function node(tag, text, className) {
+    const element = document.createElement(tag);
+    if (text !== undefined) element.textContent = text;
+    if (className) element.className = className;
+    return element;
+  }
+  function message(text, error = false) {
+    byId('message').textContent = text;
+    byId('message').className = error ? 'error' : 'success';
+  }
+  function resetEditor(target) {
+    const form = typeof target === 'string' ? byId(target) : target;
+    // A control named "id" shadows form.id in browsers. Read the attribute instead.
+    const id = form.getAttribute('id');
+    form.reset();
+    if (id === 'review-editor') {
+      field(form, 'order_id').readOnly = false;
+      byId('review-editor-title').textContent = 'Review a purchase';
+    }
+    if (id === 'menu-editor') byId('menu-editor-title').textContent = 'Add a menu item';
+    if (id === 'customer-editor') byId('customer-editor-title').textContent = 'Add a customer record';
+    if (id === 'stock-editor' || id === 'restock') resetStockChoices(form);
+  }
+  function setChoices(select, choices, placeholder) {
+    select.replaceChildren();
+    const prompt = node('option', placeholder); prompt.value = ''; select.append(prompt);
+    for (const [id, name] of choices) {
+      const option = node('option', name + ' (ID ' + id + ')'); option.value = String(id); select.append(option);
+    }
+    select.value = '';
+  }
+  function resetStockChoices(form) {
+    setChoices(field(form, 'branch_id'), new Map(stockRows.map(row => [row.branch_id, row.branch])), 'Choose a branch');
+    updateStockIngredients(form);
+  }
+  function updateStockIngredients(form) {
+    const branchId = field(form, 'branch_id').value;
+    const rows = stockRows.filter(row => String(row.branch_id) === branchId);
+    const ingredient = field(form, 'ingredient_id');
+    setChoices(ingredient, new Map(rows.map(row => [row.ingredient_id, row.ingredient])),
+      branchId ? 'Choose an ingredient' : 'Choose a branch first');
+    ingredient.disabled = !branchId || rows.length === 0;
+    updateStockSelection(form);
+  }
+  function updateStockSelection(form) {
+    const selected = stockRows.find(row => String(row.branch_id) === field(form, 'branch_id').value &&
+      String(row.ingredient_id) === field(form, 'ingredient_id').value);
+    if (form.getAttribute('id') === 'restock') {
+      byId('restock-quantity-label').textContent = selected ? 'Quantity (' + selected.unit + ')' : 'Quantity';
+      return;
+    }
+    field(form, 'expected_quantity').value = selected ? selected.quantity : '';
+    field(form, 'quantity').value = selected ? selected.quantity : '';
+    field(form, 'quantity').disabled = !selected;
+    field(form, 'reason').value = ''; field(form, 'reason').disabled = !selected;
+    byId('stock-editor-context').textContent = selected ? selected.branch + ' · ' + selected.ingredient +
+      ' · Current: ' + selected.quantity + ' ' + selected.unit :
+      'Choose a branch and ingredient here, or select Edit stock in the table below.';
+    byId('stock-quantity-label').textContent = selected ? 'Correct quantity (' + selected.unit + ')' : 'Correct quantity';
+  }
+  function chooseStockRow(stock) {
+    const form = byId('stock-editor');
+    field(form, 'branch_id').value = String(stock.branch_id); updateStockIngredients(form);
+    field(form, 'ingredient_id').value = String(stock.ingredient_id); updateStockSelection(form);
+    focusEditor('stock-editor'); field(form, 'quantity').focus();
+  }
+  function validateStockQuantity(value, allowZero) {
+    if (typeof value !== 'string' || !/^[0-9]{1,11}(?:\.[0-9]{1,3})?$/.test(value) ||
+        (!allowZero && !/[1-9]/.test(value))) {
+      throw new Error('Enter a ' + (allowZero ? 'nonnegative' : 'positive') + ' quantity using digits and up to three decimal places.');
+    }
+  }
+  function installStockDecimalInput(input) {
+    const editable = /^[0-9]{0,11}(?:\.[0-9]{0,3})?$/;
+    let previous = input.value;
+    const remember = () => { if (editable.test(input.value)) previous = input.value; };
+    const proposed = text => input.value.slice(0, input.selectionStart) + text + input.value.slice(input.selectionEnd);
+    input.addEventListener('focus', remember);
+    input.addEventListener('beforeinput', event => {
+      remember();
+      if (event.data !== null && event.inputType.startsWith('insert') && !editable.test(proposed(event.data))) event.preventDefault();
+    });
+    input.addEventListener('paste', event => {
+      remember();
+      if (event.clipboardData && !editable.test(proposed(event.clipboardData.getData('text')))) event.preventDefault();
+    });
+    input.addEventListener('input', () => {
+      if (editable.test(input.value)) previous = input.value;
+      else input.value = previous;
+    });
+    input.form.addEventListener('reset', () => { previous = input.defaultValue; });
+  }
+  function updateVisibility() {
+    document.querySelectorAll('[data-roles]').forEach(element => {
+      const roleAllowed = allowed(element.dataset.roles.split(' '));
+      const inView = !element.dataset.panel || element.dataset.panel.split(' ').includes(currentView);
+      element.hidden = !(roleAllowed && inView);
+    });
+    const customerId = field(byId('profile-editor'), 'customer_id');
+    customerId.required = allowed(['admin']) && currentView === 'profiles';
+    customerId.disabled = !allowed(['admin']);
+    document.querySelectorAll('[data-view]').forEach(button => {
+      const active = button.dataset.view === currentView;
+      button.classList.toggle('active', active);
+      if (active) button.setAttribute('aria-current', 'page');
+      else button.removeAttribute('aria-current');
+    });
+  }
+  function endSession() {
+    token = null; principal = null; pendingSale = null; stockRows = [];
+    sessionVersion++; viewVersion++; currentView = 'menu';
+    byId('workspace').hidden = true; byId('login-card').hidden = false;
+    byId('signup-card').hidden = true; byId('results').replaceChildren();
+    document.querySelectorAll('form[id]').forEach(form => resetEditor(form));
+    if (byId('confirmation').open) byId('confirmation').close('cancel');
+    updateVisibility();
+  }
+  function applyPrincipal(user) {
+    if (!ROLES.includes(user.role) || !Number.isInteger(user.id) || user.id <= 0) {
+      endSession();
+      throw new Error('This account cannot open a workspace. Contact an administrator.');
+    }
+    const changed = !principal || principal.id !== user.id || principal.role !== user.role;
+    principal = user;
+    if (changed) {
+      sessionVersion++; viewVersion++; pendingSale = null; stockRows = [];
+      byId('results').replaceChildren();
+      document.querySelectorAll('#workspace form[id]').forEach(form => resetEditor(form));
+      if (!allowed(VIEWS[currentView][1])) currentView = 'menu';
+    }
+    byId('workspace').hidden = false; byId('login-card').hidden = true; byId('signup-card').hidden = true;
+    byId('welcome').textContent = titleCase(user.role) + ' workspace';
+    byId('view-title').textContent = VIEWS[currentView][0];
+    byId('role-description').textContent = {
+      admin: 'Operations, account administration, reviews and customer preferences.',
+      staff: 'Sales, stock, customer records and insights. Read feedback and add business replies.',
+      customer: 'Your purchases, points, reviews and food preferences.'
+    }[user.role];
+    updateVisibility();
+  }
+  async function api(path, method = 'GET', body) {
+    const requestToken = token, version = sessionVersion;
+    const response = await fetch('/api/' + path, {
+      method,
+      headers: {'Content-Type': 'application/json', ...(requestToken ? {Authorization: 'Bearer ' + requestToken} : {})},
+      ...(body === undefined ? {} : {body: JSON.stringify(body)})
+    });
+    if (requestToken && (requestToken !== token || version !== sessionVersion)) throw new Cancelled();
+    let data;
+    try { data = await response.json(); }
+    catch { throw new Error('The service returned an unexpected response. Try again.'); }
+    if (requestToken && (requestToken !== token || version !== sessionVersion)) throw new Cancelled();
+    if (!response.ok) {
+      if (response.status === 401 && requestToken) {
+        endSession();
+        message('Your session has ended. Please sign in again.', true);
+        throw new Cancelled();
+      }
+      // Validation responses can include submitted inputs. Display messages only.
+      const detail = typeof data.detail === 'string' ? data.detail :
+        Array.isArray(data.detail) ? data.detail.map(item => item.msg).join(' ') : 'The request could not be completed.';
+      const error = new Error(detail);
+      error.status = response.status;
+      throw error;
+    }
+    return data;
+  }
+  async function syncPrincipal() {
+    if (!token) throw new Cancelled();
+    applyPrincipal(await api('auth/me'));
+  }
+  async function showError(error) {
+    if (error instanceof Cancelled) return;
+    if (error.status === 403 && token) {
+      try { await syncPrincipal(); } catch (refreshError) { if (!(refreshError instanceof Cancelled)) message(refreshError.message, true); return; }
+    }
+    message(error.message || 'Unable to connect. Try again.', true);
+  }
+  async function run(roles, work) {
+    const version = sessionVersion;
+    await syncPrincipal();
+    if (version !== sessionVersion) throw new Error('Your access has changed. Review the workspace and try again.');
+    if (!allowed(roles)) throw new Error('This action is not allowed for your role.');
+    return work();
+  }
+  function handleForm(form, roles, work) {
+    form.addEventListener('submit', async event => {
+      event.preventDefault();
+      const buttons = [...form.querySelectorAll('button')];
+      if (form.dataset.busy) return;
+      form.dataset.busy = 'true'; buttons.forEach(button => { button.disabled = true; });
+      const submitted = values(form);
+      try {
+        if (roles) await run(roles, () => work(submitted, form));
+        else await work(submitted, form);
+      } catch (error) { await showError(error); }
+      finally { delete form.dataset.busy; buttons.forEach(button => { button.disabled = false; }); }
+    });
+  }
+  function action(label, work, className = 'secondary') {
+    const button = node('button', label, className); button.type = 'button';
+    button.addEventListener('click', async () => {
+      button.disabled = true;
+      try { await work(); } catch (error) { await showError(error); }
+      finally { button.disabled = false; }
+    });
+    return button;
+  }
+  async function confirmAction(text, label = 'Confirm') {
+    const dialog = byId('confirmation'), version = sessionVersion;
+    if (dialog.open) return false;
+    byId('confirmation-text').textContent = text;
+    byId('confirm-action').textContent = label;
+    dialog.returnValue = 'cancel';
+    const result = new Promise(resolve => dialog.addEventListener('close',
+      () => resolve(dialog.returnValue === 'confirm' && version === sessionVersion && token !== null), {once: true}));
+    dialog.showModal();
+    return result;
+  }
+  function focusEditor(id) {
+    const form = byId(id);
+    form.scrollIntoView({behavior: 'smooth', block: 'center'});
+    form.querySelector('input:not([type="hidden"]):not([disabled]),textarea,select')?.focus();
+  }
+  function fillProfile(profile) {
+    const form = byId('profile-editor');
+    field(form, 'customer_id').value = profile.customer_id || '';
+    field(form, 'dietary_preferences').value = (profile.dietary_preferences || []).join(', ');
+    field(form, 'favourite_tags').value = (profile.favourite_tags || []).join(', ');
+  }
+  function table(data, target, rowActions) {
+    if (!data.length) { target.textContent = 'No records yet.'; return; }
+    const result = node('table'), head = node('thead'), headings = node('tr');
+    const columns = [...new Set(data.flatMap(row => Object.keys(row)))];
+    for (const key of columns) headings.append(node('th', key.replaceAll('_', ' ')));
+    if (rowActions) headings.append(node('th', 'Actions'));
+    head.append(headings); result.append(head);
+    const body = node('tbody');
+    for (const row of data) {
+      const tr = node('tr');
+      for (const key of columns) {
+        const value = typeof row[key] === 'object' ? JSON.stringify(row[key]) : String(row[key] ?? '');
+        tr.append(node('td', value));
+      }
+      if (rowActions) {
+        const cell = node('td'); rowActions(row, cell); tr.append(cell);
+      }
+      body.append(tr);
+    }
+    result.append(body); target.append(result);
+  }
+  function render(data, target, rowActions) {
+    target.replaceChildren();
+    if (Array.isArray(data)) { table(data, target, rowActions); return; }
     for (const [name, value] of Object.entries(data)) {
-      const h = document.createElement('h4'); h.textContent = name.replaceAll('_',' '); target.append(h);
-      const section = document.createElement('div'); target.append(section);
+      target.append(node('h4', name.replaceAll('_', ' ')));
+      const section = node('div'); target.append(section);
       if (Array.isArray(value)) render(value, section);
-      else {const p=document.createElement('pre');p.textContent=JSON.stringify(value,null,2);section.append(p);}
+      else section.append(node('pre', JSON.stringify(value, null, 2)));
     }
-    return;
   }
-  if (!data.length) { target.textContent = 'No records yet.'; return; }
-  const table=document.createElement('table'), head=document.createElement('thead'), tr=document.createElement('tr');
-  const columns=[...new Set(data.flatMap(row=>Object.keys(row)))];
-  for(const key of columns){const th=document.createElement('th');th.textContent=key.replaceAll('_',' ');tr.append(th);}
-  head.append(tr);table.append(head);
-  const body=document.createElement('tbody');
-  for(const row of data){const tr=document.createElement('tr');for(const key of columns){const td=document.createElement('td');td.textContent=typeof row[key]==='object'?JSON.stringify(row[key]):String(row[key]??'');tr.append(td);}body.append(tr);}
-  table.append(body);target.append(table);
-}
-function setOptions(select, records, label, placeholder) {
-  select.replaceChildren();
-  const prompt = document.createElement('option');
-  prompt.value = '';
-  prompt.textContent = placeholder;
-  prompt.disabled = true;
-  prompt.selected = true;
-  select.append(prompt);
-  for (const record of records) {
-    const option = document.createElement('option');
-    option.value = record.id;
-    option.textContent = label(record);
-    select.append(option);
+  function renderAccounts(accounts, target) {
+    render(accounts, target, (account, cell) => {
+      const form = node('form', undefined, 'inline-form'), label = node('label', 'Role');
+      const select = node('select'); select.name = 'role';
+      select.setAttribute('aria-label', 'Role for ' + account.email);
+      for (const role of ROLES) {
+        const option = node('option', titleCase(role)); option.value = role;
+        option.disabled = role === 'customer' && account.customer_id === null;
+        option.selected = role === account.role; select.append(option);
+      }
+      label.append(select); form.append(label);
+      const save = node('button', 'Save role'); save.type = 'submit'; form.append(save);
+      handleForm(form, ['admin'], async data => {
+        if (data.role === account.role) { message('This account already has that role.'); return; }
+        if (!await confirmAction('Change ' + account.email + ' to ' + titleCase(data.role) + '? The account ID will stay the same.', 'Change role')) return;
+        await api('accounts/' + account.id + '/role', 'PUT', {role: data.role});
+        message('Account role updated.'); await loadView('accounts');
+      });
+      cell.append(form);
+      cell.append(action(account.active ? 'Deactivate account' : 'Reactivate account', () => run(['admin'], async () => {
+        const verb = account.active ? 'Deactivate' : 'Reactivate';
+        if (!await confirmAction(verb + ' ' + account.email + '? Existing account IDs and purchase history will be preserved.', verb + ' account')) return;
+        await api('accounts/' + account.id + '/status', 'PUT', {active: !account.active});
+        message('Account ' + (account.active ? 'deactivated' : 'reactivated') + '.');
+        await loadView('accounts');
+      }), account.active ? 'danger' : 'secondary'));
+    });
   }
-}
-function setSelectedOption(select, value) {
-  if (value !== null && [...select.options].some(option => option.value === String(value))) {
-    select.value = String(value);
-  }
-}
-function selectedCustomer() {
-  return ordering.customers.find(customer => customer.id === Number(byId('order-customer').value));
-}
-function cartSubtotal() {
-  const cents = [...orderCart].reduce((sum, [id, quantity]) => {
-    const dish = ordering.dishes.find(item => item.id === id);
-    return sum + (dish ? Math.round(Number(dish.price) * 100) * quantity : 0);
-  }, 0);
-  return cents / 100;
-}
-function redemptionCap(subtotal, customer) {
-  if (!customer) return 0;
-  return Math.min(Math.floor(customer.points / 100) * 100,
-    Math.floor(Math.round(subtotal * 100) / 100) * 100);
-}
-function updateOrderSummary() {
-  const customer = selectedCustomer();
-  const subtotal = cartSubtotal();
-  const cap = redemptionCap(subtotal, customer);
-  byId('available-points').textContent = customer ? String(customer.points) : 'Select a customer';
-  byId('redeem-points').max = String(cap);
-  const requested = Number(byId('redeem-points').value) || 0;
-  const discount = Math.min(requested, cap) / 100;
-  byId('redemption-limit').textContent = customer
-    ? `You can redeem up to ${cap} points for this order.`
-    : 'Select a customer to see available points.';
-  byId('order-subtotal').textContent = money(subtotal);
-  byId('order-discount').textContent = '−' + money(discount);
-  byId('order-total').textContent = money(Math.max(0, subtotal - discount));
-}
-function renderOrderCart() {
-  const target = byId('order-cart');
-  target.replaceChildren();
-  if (!orderCart.size) {
-    target.textContent = 'Add a dish to start your cart.';
-    target.classList.add('muted');
-    updateOrderSummary();
-    return;
-  }
-  target.classList.remove('muted');
-  for (const [id, quantity] of orderCart) {
-    const dish = ordering.dishes.find(item => item.id === id);
-    if (!dish) continue;
-    const row = document.createElement('div');
-    row.className = 'cart-row';
-    const description = document.createElement('div');
-    const name = document.createElement('strong');
-    name.textContent = dish.name;
-    const price = document.createElement('span');
-    price.className = 'muted';
-    price.textContent = ` ${money(dish.price)} each · ${money(Number(dish.price) * quantity)}`;
-    description.append(name, price);
-    const controls = document.createElement('div');
-    controls.className = 'quantity-controls';
-    const decrement = document.createElement('button');
-    decrement.type = 'button';
-    decrement.className = 'secondary';
-    decrement.dataset.cartAction = 'decrease';
-    decrement.dataset.dishId = String(id);
-    decrement.setAttribute('aria-label', `Decrease ${dish.name} quantity`);
-    decrement.textContent = '−';
-    const count = document.createElement('span');
-    count.textContent = String(quantity);
-    const increment = document.createElement('button');
-    increment.type = 'button';
-    increment.className = 'secondary';
-    increment.dataset.cartAction = 'increase';
-    increment.dataset.dishId = String(id);
-    increment.setAttribute('aria-label', `Increase ${dish.name} quantity`);
-    increment.textContent = '+';
-    const remove = document.createElement('button');
-    remove.type = 'button';
-    remove.className = 'remove-item';
-    remove.dataset.cartAction = 'remove';
-    remove.dataset.dishId = String(id);
-    remove.textContent = 'Remove';
-    controls.append(decrement, count, increment, remove);
-    row.append(description, controls);
-    target.append(row);
-  }
-  updateOrderSummary();
-}
-async function loadOrderingData() {
-  const previousBranch = byId('order-branch').value;
-  const previousCustomer = byId('order-customer').value;
-  const [branches, dishes, customers] = await Promise.all([
-    api('branches'), api('menu'), api('customers')
-  ]);
-  ordering.branches = branches;
-  ordering.dishes = dishes.filter(dish => dish.active);
-  ordering.customers = customers.filter(customer => customer.active &&
-    (role !== 'customer' || customer.id === loggedInCustomerId));
-  setOptions(byId('order-branch'), ordering.branches, branch => branch.name, 'Choose a branch');
-  setOptions(byId('order-customer'), ordering.customers,
-    customer => `${customer.name} · ${customer.points} points`,
-    role === 'customer' ? 'Your customer account' : 'Choose a customer');
-  setOptions(byId('dish-selection'), ordering.dishes,
-    dish => `${dish.name} · ${money(dish.price)}`, 'Choose a dish');
-  if (ordering.branches.some(branch => branch.id === Number(previousBranch))) byId('order-branch').value = previousBranch;
-  if (role === 'customer' && ordering.customers.some(customer => customer.id === loggedInCustomerId)) {
-    byId('order-customer').value = String(loggedInCustomerId);
-  } else if (ordering.customers.some(customer => customer.id === Number(previousCustomer))) {
-    byId('order-customer').value = previousCustomer;
-  }
-  byId('order-customer').disabled = role === 'customer';
-  byId('order-customer-label').firstChild.textContent = role === 'customer' ? 'Your account' : 'Customer';
-  renderOrderCart();
-}
-function menuLabel(item) {
-  return `${item.name} · ${money(item.price)}${item.active ? '' : ' · inactive'}`;
-}
-function ingredientLabel(ingredient) {
-  return `${ingredient.name} (${ingredient.unit})`;
-}
-function renderMenuOptions(selectedId = selectedMenuId) {
-  setOptions(byId('menu-record'), menuRecords, menuLabel, 'Create a new dish');
-  setSelectedOption(byId('menu-record'), selectedId);
-}
-function renderIngredientOptions(selectedId = selectedIngredientId) {
-  setOptions(byId('ingredient-record'), ingredientRecords, ingredientLabel, 'Create a new ingredient');
-  setSelectedOption(byId('ingredient-record'), selectedId);
-}
-function appendRecipeLine(component = {}) {
-  const row = document.createElement('div');
-  row.className = 'recipe-line';
-  const ingredientSelect = document.createElement('select');
-  ingredientSelect.className = 'recipe-ingredient';
-  ingredientSelect.setAttribute('aria-label', 'Recipe ingredient');
-  setOptions(ingredientSelect, ingredientRecords, ingredientLabel, 'Choose ingredient');
-  setSelectedOption(ingredientSelect, component.ingredient_id);
-  const quantity = document.createElement('input');
-  quantity.className = 'recipe-quantity';
-  quantity.type = 'number';
-  quantity.min = '0.001';
-  quantity.step = '0.001';
-  quantity.max = '99999999999.999';
-  quantity.value = component.quantity ?? '';
-  quantity.required = true;
-  quantity.setAttribute('aria-label', 'Ingredient quantity');
-  const remove = document.createElement('button');
-  remove.type = 'button';
-  remove.className = 'danger';
-  remove.textContent = 'Remove';
-  remove.addEventListener('click', () => row.remove());
-  row.append(ingredientSelect, quantity, remove);
-  byId('recipe-lines').append(row);
-}
-function renderRecipeForMenu(menuId) {
-  const lines = recipeRecords.filter(recipe => recipe.menu_item_id === Number(menuId));
-  byId('recipe-lines').replaceChildren();
-  for (const component of lines) appendRecipeLine(component);
-  byId('recipe-fieldset').disabled = !menuId;
-  byId('recipe-help').textContent = menuId
-    ? 'Add one or more ingredients, then save to replace the full recipe. Ingredients must be unique and quantities greater than zero, with at most three decimal places.'
-    : 'Save a new dish or select an existing dish to edit its recipe.';
-}
-async function loadMenuManagement(selectMenuId = selectedMenuId, selectIngredientId = selectedIngredientId) {
-  const [menus, ingredients, recipes] = await Promise.all([
-    api('menu'), api('ingredients'), api('recipes')
-  ]);
-  menuRecords = menus;
-  ingredientRecords = ingredients;
-  recipeRecords = recipes;
-  selectedMenuId = menuRecords.some(item => item.id === Number(selectMenuId)) ? Number(selectMenuId) : null;
-  selectedIngredientId = ingredientRecords.some(item => item.id === Number(selectIngredientId))
-    ? Number(selectIngredientId) : null;
-  renderMenuOptions();
-  renderIngredientOptions();
-  const selectedMenu = menuRecords.find(item => item.id === selectedMenuId);
-  byId('dish-name').value = selectedMenu?.name ?? '';
-  byId('dish-price').value = selectedMenu?.price ?? '';
-  byId('delete-dish').disabled = !selectedMenu;
-  renderRecipeForMenu(selectedMenuId);
-  const selectedIngredient = ingredientRecords.find(item => item.id === selectedIngredientId);
-  byId('ingredient-name').value = selectedIngredient?.name ?? '';
-  byId('ingredient-unit').value = selectedIngredient?.unit ?? 'g';
-  byId('delete-ingredient').disabled = !selectedIngredient;
-}
-function recipePayload() {
-  const rows = [...byId('recipe-lines').querySelectorAll('.recipe-line')];
-  if (!rows.length) throw new Error('A recipe must contain at least one ingredient.');
-  const seen = new Set();
-  const ingredients = rows.map(row => {
-    const ingredientId = Number(row.querySelector('.recipe-ingredient').value);
-    const quantityInput = row.querySelector('.recipe-quantity');
-    const quantityText = quantityInput.value.trim();
-    const quantity = Number(quantityText);
-    if (!ingredientId) throw new Error('Choose an ingredient for every recipe row.');
-    if (seen.has(ingredientId)) throw new Error('An ingredient may only appear once in a recipe.');
-    seen.add(ingredientId);
-    if (!quantityInput.validity.valid || !Number.isFinite(quantity) || quantity <= 0 ||
-        !/^\d+(\.\d{1,3})?$/.test(quantityText)) {
-      throw new Error('Each ingredient quantity must be greater than zero with at most three decimal places.');
+  function renderReviews(reviews, target) {
+    target.replaceChildren();
+    if (!reviews.length) { target.textContent = 'No reviews yet.'; return; }
+    for (const review of reviews) {
+      const card = node('article', undefined, 'review-record');
+      card.append(node('h4', 'Order ' + review.order_id + ' · ' + review.rating + '/5'));
+      card.append(node('p', review.text));
+      card.append(node('p', 'Tags: ' + (review.tags || []).join(', '), 'muted'));
+      if (Object.keys(review.category_ratings || {}).length)
+        card.append(node('p', Object.entries(review.category_ratings).map(([name, rating]) => name + ': ' + rating + '/5').join(' · '), 'muted'));
+      if (allowed(REVIEWERS)) {
+        const controls = node('div', undefined, 'actions');
+        controls.append(action('Edit review', () => {
+          const form = byId('review-editor');
+          field(form, 'editing').value = 'true';
+          field(form, 'order_id').value = review.order_id; field(form, 'order_id').readOnly = true;
+          field(form, 'rating').value = review.rating; field(form, 'text').value = review.text;
+          field(form, 'tags').value = (review.tags || []).join(', ');
+          for (const category of ['food', 'service', 'value']) field(form, category).value = review.category_ratings?.[category] || '';
+          byId('review-editor-title').textContent = 'Edit review for order ' + review.order_id; focusEditor('review-editor');
+        }));
+        controls.append(action('Delete review', () => run(REVIEWERS, async () => {
+          if (!await confirmAction('Delete the review and business replies for order ' + review.order_id + '? This cannot be undone.', 'Delete review')) return;
+          await api('reviews/' + review.order_id, 'DELETE');
+          resetEditor('review-editor'); message('Review deleted.'); await loadView('reviews');
+        }), 'danger'));
+        card.append(controls);
+      }
+      for (const [index, reply] of (review.replies || []).entries()) {
+        const section = node('section', undefined, 'reply');
+        section.append(node('strong', 'Business reply'), node('p', reply.text));
+        if (allowed(['admin'])) {
+          const edit = node('form'), label = node('label', 'Edit business reply'), text = node('textarea');
+          text.name = 'text'; text.maxLength = 1000; text.required = true; text.value = reply.text; label.append(text);
+          const save = node('button', 'Save reply'); save.type = 'submit'; edit.append(label, save); edit.hidden = true;
+          handleForm(edit, ['admin'], async data => {
+            await api('reviews/' + review.order_id + '/replies/' + index, 'PUT', {text: data.text});
+            message('Business reply updated.'); await loadView('reviews');
+          });
+          const controls = node('div', undefined, 'actions');
+          controls.append(action('Edit reply', () => { edit.hidden = !edit.hidden; if (!edit.hidden) text.focus(); }));
+          controls.append(action('Delete reply', () => run(['admin'], async () => {
+            if (!await confirmAction('Delete this business reply? This cannot be undone.', 'Delete reply')) return;
+            await api('reviews/' + review.order_id + '/replies/' + index, 'DELETE');
+            message('Business reply deleted.'); await loadView('reviews');
+          }), 'danger'));
+          section.append(controls, edit);
+        }
+        card.append(section);
+      }
+      if (allowed(OPERATIONS)) {
+        const form = node('form', undefined, 'reply-form'), label = node('label', 'Business reply');
+        const text = node('textarea'); text.name = 'text'; text.required = true; text.maxLength = 1000;
+        label.append(text);
+        const submit = node('button', 'Add reply'); submit.type = 'submit';
+        if ((review.replies || []).length >= 20) {
+          submit.disabled = true; text.disabled = true;
+          form.append(node('p', 'This review has reached the 20-reply limit.', 'muted'));
+        }
+        form.append(label, submit);
+        handleForm(form, OPERATIONS, async data => {
+          await api('reviews/' + review.order_id + '/replies', 'POST', {text: data.text});
+          message('Business reply added.'); await loadView('reviews');
+        });
+        card.append(form);
+      }
+      target.append(card);
     }
-    return {ingredient_id: ingredientId, quantity: quantityText};
+  }
+  async function loadView(requested = currentView) {
+    let request = null, version = sessionVersion;
+    try {
+      await syncPrincipal();
+      const path = VIEWS[requested] && allowed(VIEWS[requested][1]) ? requested : 'menu';
+      request = ++viewVersion; version = sessionVersion;
+      currentView = path; updateVisibility();
+      byId('view-title').textContent = VIEWS[path][0];
+      byId('results').replaceChildren(node('p', 'Loading…', 'loading'));
+      const data = await api(path);
+      if (request !== viewVersion || version !== sessionVersion) return;
+      const target = byId('results');
+      if (path === 'reviews') renderReviews(data, target);
+      else if (path === 'accounts') renderAccounts(data, target);
+      else if (path === 'stock') {
+        stockRows = data;
+        resetEditor('restock'); resetEditor('stock-editor');
+        render(data, target, allowed(['admin']) ? (stock, cell) =>
+          cell.append(action('Edit stock', () => run(['admin'], () => chooseStockRow(stock)))) : undefined);
+      }
+      else if (path === 'profiles/me') {
+        target.replaceChildren(
+          node('p', 'Dietary preferences: ' + ((data.dietary_preferences || []).join(', ') || 'None saved')),
+          node('p', 'Favourite tags: ' + ((data.favourite_tags || []).join(', ') || 'None saved')));
+        fillProfile(data);
+      }
+      else if (path === 'profiles') {
+        resetEditor('profile-editor');
+        render(data, target, (profile, cell) => {
+          const controls = node('div', undefined, 'actions');
+          controls.append(action('Edit preferences', () => { fillProfile(profile); focusEditor('profile-editor'); }));
+          controls.append(action('Delete preferences', () => run(['admin'], async () => {
+            if (!await confirmAction('Delete preferences for customer ' + profile.customer_id + '? Purchases and the customer account will remain.', 'Delete preferences')) return;
+            await api('profiles/' + profile.customer_id, 'DELETE'); message('Preferences deleted.'); await loadView('profiles');
+          }), 'danger'));
+          cell.append(controls);
+        });
+      } else if (path === 'menu' && allowed(OPERATIONS)) {
+        render(data, target, (item, cell) => {
+          const controls = node('div', undefined, 'actions');
+          controls.append(action('Edit item', () => {
+            const form = byId('menu-editor');
+            for (const name of ['id', 'name', 'price']) field(form, name).value = item[name];
+            field(form, 'active').checked = item.active;
+            byId('menu-editor-title').textContent = 'Edit menu item ' + item.id; focusEditor('menu-editor');
+          }));
+          controls.append(action('Delete item', () => run(OPERATIONS, async () => {
+            if (!await confirmAction('Delete ' + item.name + '? Items used in past sales must be marked unavailable instead.', 'Delete item')) return;
+            await api('menu/' + item.id, 'DELETE'); resetEditor('menu-editor');
+            message('Menu item deleted.'); await loadView('menu');
+          }), 'danger'));
+          cell.append(controls);
+        });
+      } else if (path === 'customers') {
+        render(data, target, (customer, cell) => cell.append(action('Edit customer', () => {
+          const form = byId('customer-editor');
+          for (const name of ['id', 'name', 'email']) field(form, name).value = customer[name];
+          byId('customer-editor-title').textContent = 'Edit customer ' + customer.id; focusEditor('customer-editor');
+        })));
+      } else render(data, target);
+    } catch (error) {
+      if ((request !== null && request !== viewVersion) || version !== sessionVersion) return;
+      if (!(error instanceof Cancelled)) byId('results').replaceChildren(node('p', 'Unable to load records. Use Refresh to try again.'));
+      await showError(error);
+    }
+  }
+  byId('show-signup').onclick = () => {
+    byId('login').reset(); byId('login-card').hidden = true; byId('signup-card').hidden = false;
+    message(''); field(byId('signup'), 'name').focus();
+  };
+  byId('show-login').onclick = () => {
+    byId('signup').reset(); byId('signup-card').hidden = true; byId('login-card').hidden = false;
+    message(''); field(byId('login'), 'email').focus();
+  };
+  handleForm(byId('signup'), null, async (data, form) => {
+    if (data.password !== data.confirm_password) throw new Error('Passwords do not match.');
+    const result = await api('auth/signup', 'POST', {name: data.name, email: data.email, password: data.password});
+    form.reset(); byId('signup-card').hidden = true; byId('login-card').hidden = false;
+    field(byId('login'), 'email').value = result.email;
+    field(byId('login'), 'password').value = ''; field(byId('login'), 'password').focus();
+    message('Your customer account is ready. Sign in to continue.');
   });
-  return {ingredients};
-}
-function showReceipt(result, cart, branch, customer) {
-  byId('receipt-heading').textContent =
-    `Order #${result.order_id} · ${branch?.name ?? 'Branch'} · ${customer?.name ?? 'Customer'}`;
-  const items = byId('receipt-items');
-  items.replaceChildren();
-  for (const [id, quantity] of cart) {
-    const dish = ordering.dishes.find(item => item.id === id);
-    const line = document.createElement('li');
-    line.textContent = `${dish?.name ?? `Dish #${id}`} × ${quantity}`;
-    items.append(line);
+  handleForm(byId('login'), null, async (data, form) => {
+    const result = await api('auth/login', 'POST', {email: data.email, password: data.password});
+    form.reset(); token = result.access_token;
+    try { await syncPrincipal(); } catch (error) { endSession(); throw error; }
+    message('Signed in.'); await loadView('menu');
+  });
+  byId('logout').onclick = () => { endSession(); message('Signed out.'); };
+  byId('refresh-view').onclick = () => loadView();
+  document.querySelectorAll('[data-view]').forEach(button => { button.onclick = () => loadView(button.dataset.view); });
+  document.querySelectorAll('[data-reset]').forEach(button => { button.onclick = () => resetEditor(button.dataset.reset); });
+  document.querySelectorAll('[data-stock-quantity]').forEach(installStockDecimalInput);
+  for (const id of ['restock', 'stock-editor']) {
+    const form = byId(id);
+    field(form, 'branch_id').addEventListener('change', () => updateStockIngredients(form));
+    field(form, 'ingredient_id').addEventListener('change', () => updateStockSelection(form));
   }
-  byId('receipt-subtotal').textContent = money(result.subtotal);
-  byId('receipt-discount').textContent = '−' + money(result.discount);
-  byId('receipt-total').textContent = money(result.total);
-  byId('order-receipt').hidden = false;
-}
-async function loadView(path) {
-  const apiPath=path==='menu-management'?'menu':path;
-  try { render(await api(apiPath), byId('results'));byId('view-title').textContent=path==='menu-management'?'menu management':path.replace('analytics/','').replaceAll('_',' ');
-    document.querySelectorAll('[data-view]').forEach(b=>b.classList.toggle('active',b.dataset.view===path));
-  } catch(error){message(error.message,true);}
-}
-byId('login').addEventListener('submit', async event=>{
-  event.preventDefault();
-  try {const result=await api('auth/login','POST',Object.fromEntries(new FormData(event.target)));
-    token=result.access_token;role=result.role;loggedInCustomerId=result.customer_id;
-    byId('workspace').hidden=false;byId('login-card').hidden=true;
-    byId('welcome').textContent=role[0].toUpperCase()+role.slice(1)+' workspace';
-    document.querySelectorAll('[data-manager]').forEach(x=>x.hidden=role!=='manager');
-    document.querySelectorAll('[data-staff]').forEach(x=>x.hidden=role==='customer');
-    byId('staff-forms').hidden=role==='customer';
-    byId('legacy-checkout-card').hidden=role==='manager';
-    byId('restock-card').hidden=role!=='manager';
-    byId('review-card').hidden=role!=='customer';
-    byId('order-card').hidden=role!=='customer';
-    message('Signed in.');
-    
-    if (role==='manager'||role==='customer') {
-      try { await loadOrderingData(); }
-      catch(error) { message('Signed in, but ordering options could not be loaded: '+error.message,true); }
-    }
-    if (role==='manager') {
-      try { await loadMenuManagement(); }
-      catch(error) { message('Signed in, but menu management data could not be loaded: '+error.message,true); }
-    }
-    await loadView('menu');
-  } catch(error){message(error.message,true);}
-});
-byId('logout').onclick=()=>location.reload();
-document.querySelectorAll('[data-view]').forEach(b=>b.onclick=()=>loadView(b.dataset.view));
-byId('checkout').addEventListener('submit',async event=>{
-  event.preventDefault();const form=Object.fromEntries(new FormData(event.target));
-  const cart={branch_id:Number(form.branch_id),customer_id:Number(form.customer_id),redeem_points:Number(form.redeem_points),lines:[{menu_item_id:Number(form.menu_item_id),quantity:Number(form.quantity)}]};
-  // Keep the same request key when retrying an unchanged sale after a network error.
-  const signature=JSON.stringify(cart);
-  if(!pendingSale || pendingSale.signature!==signature) pendingSale={signature,key:crypto.randomUUID()};
-  const button=event.target.querySelector('button');button.disabled=true;
-  try {const result=await api('orders','POST',{...cart,request_key:pendingSale.key});pendingSale=null;message('Sale completed: '+JSON.stringify(result));await loadView('orders');}
-  catch(error){message(error.message,true);}finally{button.disabled=false;}
-});
-byId('menu-record').addEventListener('change',()=>{
-  selectedMenuId=Number(byId('menu-record').value);
-  const item=menuRecords.find(record=>record.id===selectedMenuId);
-  byId('dish-name').value=item?.name??'';
-  byId('dish-price').value=item?.price??'';
-  byId('delete-dish').disabled=!item;
-  renderRecipeForMenu(selectedMenuId);
-});
-byId('new-dish').addEventListener('click',()=>{
-  selectedMenuId=null;
-  byId('menu-record').selectedIndex=0;
-  byId('dish-name').value='';
-  byId('dish-price').value='';
-  byId('delete-dish').disabled=true;
-  renderRecipeForMenu(null);
-  byId('dish-name').focus();
-});
-byId('dish-editor').addEventListener('submit',async event=>{
-  event.preventDefault();
-  const item=menuRecords.find(record=>record.id===selectedMenuId);
-  const payload={name:byId('dish-name').value.trim(),price:byId('dish-price').value,
-    active:item?.active??true};
-  const button=byId('save-dish');
-  button.disabled=true;
-  try{
-    const saved=await api(selectedMenuId?`menu/${selectedMenuId}`:'menu',selectedMenuId?'PUT':'POST',payload);
-    await loadMenuManagement(saved.id,selectedIngredientId);
-    await loadOrderingData();
-    message(`Dish "${saved.name}" saved. Save its recipe before placing orders.`,false);
-  }catch(error){message(error.message,true);}
-  finally{button.disabled=false;}
-});
-byId('delete-dish').addEventListener('click',async()=>{
-  if(!selectedMenuId||!window.confirm('Delete this dish? Dishes with order history cannot be deleted.'))return;
-  try{
-    await api(`menu/${selectedMenuId}`,'DELETE');
-    selectedMenuId=null;
-    await loadMenuManagement(null,selectedIngredientId);
-    await loadOrderingData();
-    message('Dish deleted.');
-  }catch(error){message(error.message,true);}
-});
-byId('add-recipe-line').addEventListener('click',()=>appendRecipeLine());
-byId('recipe-editor').addEventListener('submit',async event=>{
-  event.preventDefault();
-  if(!selectedMenuId){message('Save or select a dish before saving its recipe.',true);return;}
-  let payload;
-  try{payload=recipePayload();}
-  catch(error){message(error.message,true);return;}
-  const button=byId('save-recipe');
-  button.disabled=true;
-  try{
-    await api(`menu/${selectedMenuId}/recipe`,'PUT',payload);
-    await loadMenuManagement(selectedMenuId,selectedIngredientId);
-    message('Recipe saved.');
-  }catch(error){message(error.message,true);}
-  finally{button.disabled=false;}
-});
-byId('ingredient-record').addEventListener('change',()=>{
-  selectedIngredientId=Number(byId('ingredient-record').value);
-  const ingredient=ingredientRecords.find(record=>record.id===selectedIngredientId);
-  byId('ingredient-name').value=ingredient?.name??'';
-  byId('ingredient-unit').value=ingredient?.unit??'g';
-  byId('delete-ingredient').disabled=!ingredient;
-});
-byId('new-ingredient').addEventListener('click',()=>{
-  selectedIngredientId=null;
-  byId('ingredient-record').selectedIndex=0;
-  byId('ingredient-name').value='';
-  byId('ingredient-unit').value='g';
-  byId('delete-ingredient').disabled=true;
-  byId('ingredient-name').focus();
-});
-byId('ingredient-editor').addEventListener('submit',async event=>{
-  event.preventDefault();
-  const payload={name:byId('ingredient-name').value.trim(),unit:byId('ingredient-unit').value.trim()};
-  const button=byId('save-ingredient');
-  button.disabled=true;
-  try{
-    const saved=await api(selectedIngredientId?`ingredients/${selectedIngredientId}`:'ingredients',
-      selectedIngredientId?'PUT':'POST',payload);
-    await loadMenuManagement(selectedMenuId,saved.id);
-    await loadOrderingData();
-    message(`Ingredient "${saved.name}" saved.`);
-  }catch(error){message(error.message,true);}
-  finally{button.disabled=false;}
-});
-byId('delete-ingredient').addEventListener('click',async()=>{
-  if(!selectedIngredientId||!window.confirm('Delete this ingredient? Referenced ingredients cannot be deleted.'))return;
-  try{
-    await api(`ingredients/${selectedIngredientId}`,'DELETE');
-    selectedIngredientId=null;
-    await loadMenuManagement(selectedMenuId,null);
-    await loadOrderingData();
-    message('Ingredient deleted.');
-  }catch(error){message(error.message,true);}
-});
-byId('add-dish').addEventListener('click',()=>{
-  const id=Number(byId('dish-selection').value);
-  const dish=ordering.dishes.find(item=>item.id===id);
-  if(!dish){message('Choose an available dish first.',true);return;}
-  const quantity=orderCart.get(id)||0;
-  if(!quantity&&orderCart.size>=20){message('A cart can contain at most 20 different dishes.',true);return;}
-  if(quantity>=100){message('A dish quantity cannot exceed 100.',true);return;}
-  orderCart.set(id,quantity+1);
-  byId('order-receipt').hidden=true;
-  renderOrderCart();
-  message('');
-});
-byId('order-cart').addEventListener('click',event=>{
-  const button=event.target.closest('button[data-cart-action]');
-  if(!button)return;
-  const id=Number(button.dataset.dishId);
-  const quantity=orderCart.get(id)||0;
-  if(button.dataset.cartAction==='remove'||(button.dataset.cartAction==='decrease'&&quantity<=1))orderCart.delete(id);
-  else if(button.dataset.cartAction==='decrease')orderCart.set(id,quantity-1);
-  else if(button.dataset.cartAction==='increase'&&quantity<100)orderCart.set(id,quantity+1);
-  byId('order-receipt').hidden=true;
-  renderOrderCart();
-});
-byId('order-customer').addEventListener('change',updateOrderSummary);
-byId('redeem-points').addEventListener('input',updateOrderSummary);
-byId('multi-checkout').addEventListener('submit',async event=>{
-  event.preventDefault();
-  if(!orderCart.size){message('Add at least one dish to the cart.',true);return;}
-  const customer=selectedCustomer();
-  const branch=ordering.branches.find(item=>item.id===Number(byId('order-branch').value));
-  const redeemPoints=Number(byId('redeem-points').value);
-  const subtotal=cartSubtotal();
-  const cap=redemptionCap(subtotal,customer);
-  if(!branch||!customer){message('Choose a branch and customer before checkout.',true);return;}
-  if(!Number.isInteger(redeemPoints)||redeemPoints<0||redeemPoints%100!==0||redeemPoints>cap){
-    message(`Redeem a multiple of 100 points, up to ${cap} points for this order.`,true);return;
-  }
-  const cart=[...orderCart].map(([menu_item_id,quantity])=>({menu_item_id,quantity}))
-    .sort((a,b)=>a.menu_item_id-b.menu_item_id);
-  const payload={branch_id:branch.id,customer_id:customer.id,redeem_points:redeemPoints,lines:cart};
-  const signature=JSON.stringify(payload);
-  if(!pendingSale||pendingSale.signature!==signature)pendingSale={signature,key:crypto.randomUUID()};
-  const button=byId('place-order');
-  button.disabled=true;
-  try{
-    const result=await api('orders','POST',{...payload,request_key:pendingSale.key});
-    const completedCart=new Map(orderCart);
-    showReceipt(result,completedCart,branch,customer);
-    orderCart.clear();
-    byId('redeem-points').value='0';
-    byId('order-receipt').scrollIntoView({behavior:'smooth',block:'nearest'});
-    pendingSale=null;
-    renderOrderCart();
-    message(`Order #${result.order_id} completed. Total: ${money(result.total)}.`);
-    try { await loadOrderingData(); }
-    catch(error) { message(`Order #${result.order_id} completed, but points could not be refreshed: ${error.message}`,true); }
-    await loadView('orders');
-  }catch(error){message(error.message,true);}
-  finally{button.disabled=false;}
-});
-byId('restock').addEventListener('submit',async event=>{
-  event.preventDefault();const f=Object.fromEntries(new FormData(event.target));
-  try {const result=await api('stock/receipts','POST',{branch_id:Number(f.branch_id),ingredient_id:Number(f.ingredient_id),quantity:f.quantity,note:'Received through starter UI'});message('Receipt recorded: '+JSON.stringify(result));await loadView('stock');}
-  catch(error){message(error.message,true);}
-});
-byId('review').addEventListener('submit',async event=>{
-  event.preventDefault();const f=Object.fromEntries(new FormData(event.target));
-  try{await api('reviews','POST',{order_id:Number(f.order_id),rating:Number(f.rating),text:f.text,tags:f.tags.split(',').map(t=>t.trim()).filter(Boolean)});message('Review submitted.');await loadView('reviews');}
-  catch(error){message(error.message,true);}
-});
-api('health').then(s=>{byId('health').textContent=`SQL: ${s.sql} (${s.sql_dialect}) · MongoDB: ${s.mongo}`;}).catch(()=>{byId('health').textContent='Service unavailable';});
+  handleForm(byId('menu-editor'), OPERATIONS, async (data, form) => {
+    await api(data.id ? 'menu/' + data.id : 'menu', data.id ? 'PUT' : 'POST',
+      {name: data.name, price: data.price, active: field(form, 'active').checked});
+    resetEditor(form); message('Menu item saved.'); await loadView('menu');
+  });
+  handleForm(byId('customer-editor'), OPERATIONS, async (data, form) => {
+    await api(data.id ? 'customers/' + data.id : 'customers', data.id ? 'PUT' : 'POST', {name: data.name, email: data.email});
+    resetEditor(form); message('Customer record saved.'); await loadView('customers');
+  });
+  handleForm(byId('checkout'), OPERATIONS, async data => {
+    const cart = {branch_id: Number(data.branch_id), customer_id: Number(data.customer_id), redeem_points: Number(data.redeem_points),
+      lines: [{menu_item_id: Number(data.menu_item_id), quantity: Number(data.quantity)}]};
+    const signature = JSON.stringify(cart);
+    if (!pendingSale || pendingSale.signature !== signature) pendingSale = {signature, key: crypto.randomUUID()};
+    const result = await api('orders', 'POST', {...cart, request_key: pendingSale.key});
+    pendingSale = null; message('Sale completed. Order ' + result.order_id + '.'); await loadView('orders');
+  });
+  handleForm(byId('restock'), OPERATIONS, async data => {
+    if (!stockRows.some(row => String(row.branch_id) === data.branch_id && String(row.ingredient_id) === data.ingredient_id))
+      throw new Error('Choose a branch and ingredient from the stock list.');
+    validateStockQuantity(data.quantity, false);
+    await api('stock/receipts', 'POST', {branch_id: Number(data.branch_id), ingredient_id: Number(data.ingredient_id), quantity: data.quantity, note: data.note});
+    message('Receipt recorded.'); await loadView('stock');
+  });
+  handleForm(byId('stock-editor'), ['admin'], async data => {
+    if (!data.branch_id || !data.ingredient_id || data.expected_quantity === '') throw new Error('Choose a branch and ingredient first.');
+    validateStockQuantity(data.quantity, true);
+    if (!data.reason.trim()) throw new Error('Enter a reason for the stock correction.');
+    if (!await confirmAction('Set stock for branch ' + data.branch_id + ', ingredient ' + data.ingredient_id +
+        ' from ' + data.expected_quantity + ' to ' + data.quantity + '? This correction will be recorded in stock movements.', 'Save correction')) return;
+    await api('stock/' + data.branch_id + '/' + data.ingredient_id, 'PUT',
+      {quantity: data.quantity, expected_quantity: data.expected_quantity, reason: data.reason.trim()});
+    resetEditor('stock-editor'); message('Stock quantity corrected. The adjustment is recorded in stock movements.'); await loadView('stock');
+  });
+  handleForm(byId('review-editor'), REVIEWERS, async (data, form) => {
+    const category_ratings = {};
+    for (const category of ['food', 'service', 'value']) if (data[category]) category_ratings[category] = Number(data[category]);
+    await api(data.editing ? 'reviews/' + data.order_id : 'reviews', data.editing ? 'PUT' : 'POST',
+      {order_id: Number(data.order_id), rating: Number(data.rating), text: data.text, tags: labels(data.tags), category_ratings});
+    resetEditor(form); message('Review saved.'); await loadView('reviews');
+  });
+  handleForm(byId('profile-editor'), REVIEWERS, async data => {
+    const path = allowed(['admin']) ? 'profiles/' + data.customer_id : 'profiles/me';
+    await api(path, 'PUT', {dietary_preferences: labels(data.dietary_preferences), favourite_tags: labels(data.favourite_tags)});
+    message('Preferences saved.'); await loadView(allowed(['admin']) ? 'profiles' : 'profiles/me');
+  });
+  handleForm(byId('account-editor'), ['admin'], async (data, form) => {
+    if (data.password !== data.confirm_password) throw new Error('Passwords do not match.');
+    if (!await confirmAction('Create a new ' + titleCase(data.role) + ' account for ' + data.email + '?', 'Create account')) return;
+    await api('accounts', 'POST', {email: data.email, password: data.password, role: data.role});
+    form.reset(); message('Account created. The new user can sign in.'); await loadView('accounts');
+  });
+  updateVisibility();
+  api('health').then(status => {
+    byId('health').textContent = 'SQL: ' + status.sql + ' (' + status.sql_dialect + ') · MongoDB: ' + status.mongo;
+  }).catch(() => { byId('health').textContent = 'Service unavailable'; });
+})();

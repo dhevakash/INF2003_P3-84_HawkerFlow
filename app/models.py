@@ -2,9 +2,10 @@
 from datetime import datetime, timezone
 from decimal import Decimal
 from sqlalchemy import (Boolean, CheckConstraint, DateTime, ForeignKey, Index,
-                        Integer, Numeric, String, UniqueConstraint)
+                        Integer, Numeric, String, UniqueConstraint, true, text)
 from sqlalchemy.orm import Mapped, mapped_column
 from app.database import Base
+from app.roles import ROLE_CHECK_SQL
 
 
 def utcnow():
@@ -32,12 +33,16 @@ class Customer(Base):
 
 class User(Base):
     __tablename__ = 'users'
-    __table_args__ = (CheckConstraint("role IN ('manager','cashier','customer')", name='ck_user_role'),)
+    __table_args__ = (CheckConstraint(ROLE_CHECK_SQL, name='ck_user_role'),
+                      CheckConstraint('active IN (0,1)', name='ck_user_active'),
+                      CheckConstraint('session_version >= 0', name='ck_user_session_version'))
     id: Mapped[int] = mapped_column(primary_key=True)
     email: Mapped[str] = mapped_column(String(180), unique=True)
     password_hash: Mapped[str] = mapped_column(String(255))
     role: Mapped[str] = mapped_column(String(20))
     customer_id: Mapped[int | None] = mapped_column(ForeignKey('customers.id'), unique=True)
+    active: Mapped[bool] = mapped_column(Boolean, default=True, server_default=true())
+    session_version: Mapped[int] = mapped_column(Integer, default=0, server_default=text('0'))
 
 
 class MenuItem(Base):
@@ -116,12 +121,34 @@ class StockReceipt(Base):
     created_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow)
 
 
+class StockAdjustment(Base):
+    __tablename__ = 'stock_adjustments'
+    __table_args__ = (
+        CheckConstraint('previous_quantity >= 0 AND quantity >= 0 AND quantity <> previous_quantity',
+                        name='ck_adjustment_quantity'),
+    )
+    id: Mapped[int] = mapped_column(primary_key=True)
+    branch_id: Mapped[int] = mapped_column(ForeignKey('branches.id'))
+    ingredient_id: Mapped[int] = mapped_column(ForeignKey('ingredients.id'))
+    previous_quantity: Mapped[Decimal] = mapped_column(Numeric(14, 3))
+    quantity: Mapped[Decimal] = mapped_column(Numeric(14, 3))
+    actor_user_id: Mapped[int] = mapped_column(ForeignKey('users.id'))
+    reason: Mapped[str] = mapped_column(String(255))
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow)
+
+
+STOCK_MOVEMENT_ORIGIN_SQL = (
+    '(order_id IS NOT NULL AND receipt_id IS NULL AND adjustment_id IS NULL AND delta < 0) OR '
+    '(order_id IS NULL AND receipt_id IS NOT NULL AND adjustment_id IS NULL AND delta > 0) OR '
+    '(order_id IS NULL AND receipt_id IS NULL AND adjustment_id IS NOT NULL)'
+)
+
+
 class StockMovement(Base):
     __tablename__ = 'stock_movements'
     __table_args__ = (
         CheckConstraint('delta <> 0', name='ck_movement_nonzero'),
-        CheckConstraint('(order_id IS NOT NULL AND receipt_id IS NULL AND delta < 0) OR '
-                        '(order_id IS NULL AND receipt_id IS NOT NULL AND delta > 0)', name='ck_movement_origin'),
+        CheckConstraint(STOCK_MOVEMENT_ORIGIN_SQL, name='ck_movement_origin'),
     )
     id: Mapped[int] = mapped_column(primary_key=True)
     branch_id: Mapped[int] = mapped_column(ForeignKey('branches.id'))
@@ -129,6 +156,7 @@ class StockMovement(Base):
     delta: Mapped[Decimal] = mapped_column(Numeric(14, 3))
     order_id: Mapped[int | None] = mapped_column(ForeignKey('orders.id'))
     receipt_id: Mapped[int | None] = mapped_column(ForeignKey('stock_receipts.id'))
+    adjustment_id: Mapped[int | None] = mapped_column(ForeignKey('stock_adjustments.id'))
     created_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow)
 
 

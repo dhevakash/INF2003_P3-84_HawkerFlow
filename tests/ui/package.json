@@ -1,0 +1,12 @@
+{
+  "name": "hawkerflow-ui-tests",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test workspace.test.mjs",
+    "test:api": "node --test real-api.test.mjs"
+  },
+  "devDependencies": {
+    "jsdom": "26.1.0"
+  }
+}
