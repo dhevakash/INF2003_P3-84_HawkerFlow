@@ -1,6 +1,6 @@
 from datetime import datetime, timezone
 from decimal import Decimal
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Path
 from sqlalchemy import delete, func, select, text
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
@@ -11,12 +11,13 @@ from app.models import (Branch, BranchStock, Customer, Ingredient, LoyaltyTransa
                         MenuItem, Order, OrderLine, RecipeComponent, StockAdjustment, StockMovement,
                         StockReceipt, User)
 from app.nosql import complaint_pipeline, mongo_db, monthly_pipeline
-
 from app.roles import Role
+
 from app.schemas import (AccountResult, AccountRoleInput, AccountStatusInput, PrivilegedAccountInput,
                          CheckoutInput, CustomerInput, Login, MenuInput, ProfileInput,
                          ReplyInput, RestockInput, ReviewInput, SignupInput, SignupResult,
                          IngredientInput, RecipeInput, StockAdjustmentInput)
+from app.services.accounts import AccountEmailConflict, insert_privileged_account
 from app.services.checkout import checkout, order_result
 from app.services.inventory import adjust_stock, restock
 
@@ -299,15 +300,9 @@ def delete_ingredient(ingredient_id: int, user=Operations,
 
 
 @router.get('/customers')
-def customers(user=Depends(current_user), session: Session = Depends(get_session)):
-    query = select(Customer).order_by(Customer.id)
-    if user.role == 'customer':
-        if user.customer_id is None:
-            raise HTTPException(403, 'This customer account is not linked to a customer profile.')
-        query = query.where(Customer.id == user.customer_id)
-    elif user.role not in {'admin', 'staff'}:
-        raise HTTPException(403, 'This action is not allowed for your role.')
-    return [fields(c, 'id', 'name', 'email', 'points', 'active') for c in session.scalars(query)]
+def customers(user=Operations, session: Session = Depends(get_session)):
+    return [fields(c, 'id', 'name', 'email', 'points', 'active')
+            for c in session.scalars(select(Customer).order_by(Customer.id))]
 
 
 @router.post('/customers', status_code=201)
@@ -364,12 +359,7 @@ def correct_stock(payload: StockAdjustmentInput, branch_id: int = Path(gt=0), in
 
 
 @router.post('/orders', status_code=201)
-def create_order(payload: CheckoutInput, user=Depends(current_user), session: Session = Depends(get_session)):
-    if user.role == 'customer':
-        if user.customer_id is None or payload.customer_id != user.customer_id:
-            raise HTTPException(403, 'Customers can only place orders for their own account.')
-    elif user.role not in {'admin', 'staff'}:
-        raise HTTPException(403, 'This action is not allowed for your role.')
+def create_order(payload: CheckoutInput, user=Operations, session: Session = Depends(get_session)):
     return checkout(session, payload, user.id)
 
 

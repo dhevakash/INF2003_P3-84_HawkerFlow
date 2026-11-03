@@ -146,18 +146,13 @@ def test_customer_only_sees_own_orders(client):
     assert client.get('/api/orders', headers=other).json() == []
 
 
-def test_customer_can_only_order_for_their_own_account(client):
+def test_customers_cannot_place_orders_or_list_customers(client):
+    # Staff and admins operate ordering and customer records on a customer's behalf.
     buyer = headers(client, 'buyer@example.test')
     payload = {'request_key': 'customer-own-order', 'branch_id': 1, 'customer_id': 1,
                'lines': [{'menu_item_id': 1, 'quantity': 1}]}
-    response = client.post('/api/orders', headers=buyer, json=payload)
-    assert response.status_code == 201
-    assert response.json()['customer_id'] == 1
-    assert [customer['id'] for customer in client.get('/api/customers', headers=buyer).json()] == [1]
-
-    other_payload = {**payload, 'request_key': 'customer-other-order', 'customer_id': 2}
-    assert client.post('/api/orders', headers=buyer, json=other_payload).status_code == 403
-    assert client.get('/api/orders', headers=buyer).json()[0]['customer_id'] == 1
+    assert client.post('/api/orders', headers=buyer, json=payload).status_code == 403
+    assert client.get('/api/customers', headers=buyer).status_code == 403
 
 
 def test_historical_menu_delete_is_blocked(client):
