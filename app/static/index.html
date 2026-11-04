@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>HawkerFlow</title><link rel="stylesheet" href="/static/style.css">
-  <script src="/static/app.js" defer></script>
+  <title>HawkerFlow</title><link rel="stylesheet" href="/static/style.css?v=20261104-7">
+  <script src="/static/app.js?v=20261104-7" defer></script>
 </head>
 <body>
 <header><a href="/" class="brand">HawkerFlow<span>Team 84 · INF2003</span></a><a href="/docs" target="_blank" rel="noopener">API explorer ↗</a></header>
@@ -23,6 +23,8 @@
     <form id="signup" method="post">
       <label>Name<input name="name" autocomplete="name" maxlength="120" required></label>
       <label>Email<input name="email" type="email" autocomplete="email" maxlength="180" required></label>
+      <label>Birthday (optional)<input name="birthday" type="date" autocomplete="bday" min="1000-01-01" aria-describedby="signup-birthday-help"></label>
+      <p id="signup-birthday-help" class="muted">You can leave your birthday blank.</p>
       <label>Password<input name="password" type="password" autocomplete="new-password" minlength="12" maxlength="128" required></label>
       <label>Confirm password<input name="confirm_password" type="password" autocomplete="new-password" minlength="12" maxlength="128" required></label>
       <p class="muted">Use a password of 12–128 characters. Staff accounts are created by an Admin.</p>
@@ -33,6 +35,11 @@
   <p id="message" role="status" aria-live="polite" tabindex="-1"></p>
   <section id="workspace" hidden>
     <div class="toolbar"><div><h2 id="welcome">Workspace</h2><p id="role-description" class="muted"></p></div><button type="button" id="logout" class="secondary">Sign out</button></div>
+    <section id="customer-summary" class="card" data-roles="customer" hidden>
+      <h3>Your account</h3><p id="customer-points" aria-live="polite">Loading points balance…</p>
+      <p id="customer-birthday" class="muted" hidden></p>
+      <button type="button" id="customer-view-orders" class="secondary">View my purchases</button>
+    </section>
     <nav id="tabs" aria-label="Workspace">
       <button type="button" data-view="menu" data-roles="admin staff customer" hidden>Menu</button>
       <button type="button" data-view="orders" data-roles="admin staff customer" hidden>Orders</button>
@@ -58,6 +65,16 @@
         <label class="checkbox-label"><input name="active" type="checkbox" checked> Available for sale</label>
         <div class="actions"><button type="submit">Save menu item</button><button type="button" data-reset="menu-editor" class="secondary">Cancel edit</button></div>
       </form>
+    </section>
+    <section class="card" data-panel="recipes" data-roles="admin" hidden>
+      <h3>Edit recipe</h3>
+      <form id="recipe-editor">
+        <label>Menu item<select name="menu_item_id" required><option value="">Choose a menu item</option></select></label>
+        <p id="recipe-editor-context" class="muted">Choose a menu item to load or create its recipe.</p>
+        <div id="recipe-components" class="recipe-components"></div>
+        <div class="actions"><button type="button" id="add-recipe-ingredient" class="secondary">Add ingredient</button><button type="submit">Save recipe</button><button type="button" data-reset="recipe-editor" class="secondary">Cancel edit</button></div>
+      </form>
+      <p class="muted">Quantities are per serving, using each ingredient's unit. Use positive numbers with up to three decimal places. Changes apply to future sales; past orders and stock movements stay unchanged.</p>
     </section>
     <section class="card" data-panel="orders" data-roles="admin staff" hidden>
       <h3>Complete a cash sale</h3>
@@ -91,6 +108,19 @@
         <div class="actions"><button type="submit">Save stock correction</button><button type="button" data-reset="stock-editor" class="secondary">Cancel edit</button></div>
       </form>
       <p id="stock-quantity-help" class="muted">Use numbers only, with up to three decimal places. Zero is allowed. Each correction records who changed the quantity and why. To add a delivery, use Receive ingredients.</p>
+    </section>
+    <section class="card" data-panel="loyalty" data-roles="admin" hidden>
+      <h3>Correct customer points</h3>
+      <form id="points-editor" class="form-grid">
+        <label>Customer<select name="customer_id" required><option value="">Choose a customer</option></select></label>
+        <label>Change<select name="action"><option value="edit">Set total balance</option><option value="remove">Remove points</option></select></label>
+        <p id="points-current-balance" class="muted">Choose a customer here, or use Edit points / Remove points in the history below.</p>
+        <input type="hidden" name="expected_points">
+        <label><span id="points-value-label">New total points</span><input name="value" type="text" inputmode="numeric" pattern="[0-9]+" maxlength="10" required disabled></label>
+        <label>Reason<textarea name="reason" maxlength="255" required disabled></textarea></label>
+        <div class="actions"><button type="submit">Save points change</button><button type="button" data-reset="points-editor" class="secondary">Cancel edit</button></div>
+      </form>
+      <p class="muted">Set the corrected total or remove a chosen amount of available points. Each change records the reason, Admin and before/after balance. Original earnings, redemptions and orders stay in the history.</p>
     </section>
     <section class="card" data-panel="customers" data-roles="admin staff" hidden>
       <h3 id="customer-editor-title">Add a customer record</h3>
@@ -128,14 +158,43 @@
       </form>
     </section>
     <section class="card" data-panel="accounts" data-roles="admin" hidden>
-      <h3>Create a Staff or Admin account</h3>
+      <h3>Create an account</h3>
       <form id="account-editor" method="post" class="form-grid">
         <label>Email<input name="email" type="email" autocomplete="off" maxlength="180" required></label>
-        <label>Role<select name="role" required><option value="staff">Staff</option><option value="admin">Admin</option></select></label>
+        <label>Role<select name="role" required><option value="staff">Staff</option><option value="admin">Admin</option><option value="customer">Customer</option></select></label>
+        <label id="account-create-name" hidden>Customer name<input name="name" maxlength="120" disabled></label>
         <label>Initial password<input name="password" type="password" autocomplete="new-password" minlength="12" maxlength="128" required></label>
         <label>Confirm password<input name="confirm_password" type="password" autocomplete="new-password" minlength="12" maxlength="128" required></label>
         <button type="submit">Create account</button>
       </form><p class="muted">Role changes update the existing account. Existing IDs and purchase links stay intact.</p>
+    </section>
+    <section data-panel="accounts" data-roles="admin" hidden>
+      <div class="card" id="account-details-card" hidden>
+        <h3>Edit account details</h3><p id="account-details-context" class="muted"></p>
+        <form id="account-details" method="post" class="form-grid">
+          <input name="account_id" type="hidden">
+          <label>Email<input name="email" type="email" maxlength="180" autocomplete="off" required></label>
+          <label id="account-details-name">Customer name<input name="name" maxlength="120"></label>
+          <div class="actions"><button type="submit">Save details</button><button type="button" class="secondary" data-reset="account-details">Cancel edit</button></div>
+        </form><p class="muted">Changing the email ends this account's existing sessions. Account IDs, points and purchase links stay intact.</p>
+      </div>
+      <div class="card" id="account-password-card" hidden>
+        <h3>Reset account password</h3><p id="account-password-context" class="muted"></p>
+        <form id="account-password" method="post" class="form-grid">
+          <input name="account_id" type="hidden">
+          <label>New password<input name="password" type="password" autocomplete="new-password" minlength="12" maxlength="128" required></label>
+          <label>Confirm new password<input name="confirm_password" type="password" autocomplete="new-password" minlength="12" maxlength="128" required></label>
+          <div class="actions"><button type="submit">Reset password</button><button type="button" class="secondary" data-reset="account-password">Cancel reset</button></div>
+        </form><p class="muted">The old password and existing sessions will stop working. Disabled accounts stay disabled.</p>
+      </div>
+      <div class="card">
+        <form id="account-search" role="search" class="inline-form">
+          <label>Search all accounts<input name="query" type="search" maxlength="180" placeholder="Email, name, role or ID" autocomplete="off"></label>
+          <button type="submit">Search</button><button type="button" id="account-search-clear" class="secondary">Clear search</button>
+        </form>
+        <div class="toolbar"><p id="account-list-context" class="muted" aria-live="polite"></p><button type="button" id="account-status-view" class="secondary" aria-pressed="false">View disabled accounts</button></div>
+        <p class="muted">Search includes active and disabled accounts. Only disabled accounts without linked records can be deleted.</p>
+      </div>
     </section>
     <section class="card"><div id="results" class="table-wrap" aria-live="polite"></div></section>
   </section>

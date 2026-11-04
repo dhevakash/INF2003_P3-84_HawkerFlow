@@ -41,6 +41,7 @@ class Principal:
     id: int
     role: str
     customer_id: int | None
+    session_version: int = 0
 
 
 bearer = HTTPBearer(auto_error=False)
@@ -53,7 +54,7 @@ def principal_for(user):
         raise HTTPException(403, 'This account has an unsupported role. Complete the account migration first.')
     if user.role == Role.CUSTOMER and user.customer_id is None:
         raise HTTPException(403, 'This customer account is not linked to a customer record.')
-    return Principal(user.id, user.role, user.customer_id)
+    return Principal(user.id, user.role, user.customer_id, user.session_version)
 
 
 def current_user(credentials: HTTPAuthorizationCredentials | None = Depends(bearer)):
@@ -70,6 +71,17 @@ def current_user(credentials: HTTPAuthorizationCredentials | None = Depends(bear
             return principal_for(user)
     except (jwt.InvalidTokenError, ValueError, KeyError):
         raise HTTPException(401, 'Please sign in again.') from None
+
+
+def document_writer(user: Principal = Depends(current_user)):
+    """Hold an account lock until a Mongo write finishes, protecting deletion checks."""
+    with SessionLocal() as session, session.begin():
+        account = session.scalar(select(User).where(User.id == user.id).with_for_update(read=True))
+        if not account or not account.active or account.session_version != user.session_version:
+            raise HTTPException(401, 'Please sign in again.')
+        if account.role != user.role:
+            raise HTTPException(403, 'Your access has changed. Try again.')
+        yield user
 
 
 def require_roles(*roles):

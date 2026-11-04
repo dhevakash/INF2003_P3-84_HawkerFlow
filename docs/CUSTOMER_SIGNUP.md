@@ -7,13 +7,16 @@ the final release evidence for the delivered system.
 ## API
 
 Send `POST /api/auth/signup` without needing a login. The only accepted JSON
-fields are `name`, `email`, and `password`, for example:
+fields are `name`, `email`, and `password`, plus optional `birthday` and
+`confirm_password`, for example:
 
 ```json
 {
   "name": "Alex Tan",
   "email": "alex@example.test",
-  "password": "ChooseYourOwnPassword"
+  "password": "ChooseYourOwnPassword",
+  "confirm_password": "ChooseYourOwnPassword",
+  "birthday": "2000-02-29"
 }
 ```
 
@@ -36,6 +39,12 @@ or login token. Sign in afterward using the existing `POST /api/auth/login`.
 - Role query parameters or an existing Admin session cannot change the assigned
   signup role: a valid public signup still creates a Customer.
 - The server sets opening points to zero and creates an active customer record.
+- Birthday is optional. Omit it or send `null` to leave it unset. A supplied date
+  must use `YYYY-MM-DD`, be a real calendar date on or after `1000-01-01` (the
+  supported SQL DATE range), and not be in the future in Singapore time.
+- The website requires matching password confirmation and sends it to the server.
+  The API also checks confirmation whenever it is supplied; existing API clients
+  sending only a password remain supported. Confirmation is never stored.
 
 ## Atomic account creation and existing data
 
@@ -59,25 +68,45 @@ saves a preference profile.
 
 ## Validation results
 
-- 122 unit/regression tests passed, including 38 signup tests.
-- 15 API tests passed against real MariaDB/MongoDB test stores, including the
-  previous role-permission tests and seven signup cases.
-- Six separately enabled migration tests were skipped in the unit run; their
-  step 3 rehearsal already passed.
-- Tests cover successful signup/login, password hashing, role/identity injection,
-  invalid details, duplicate emails, existing-customer ownership, failure of the
-  second insert, rollback/retry, and Customer-only permissions after signup.
-- Test SQL changes were rolled back, and temporary MongoDB fixture databases
-  were removed. Live records/schemas and restored account/history data were
-  verified unchanged.
+- The signup suite covers successful signup/login, password hashing, role/ID
+  injection, duplicates across both tables, invalid details, leap days, future
+  birthdays, confirmation mismatch, insert failure/rollback, and ownership.
+- Real MariaDB tests exercise competing signups for the same email and a failed
+  second insert, verifying one complete account or no account, respectively.
+- The website is exercised against disposable MariaDB/MongoDB databases, including
+  immediate sign-in, a zero balance, empty own purchases and loyalty history,
+  and saved birthdays. See `evidence/CUSTOMER_SIGNUP_BIRTHDAY.md` for current results.
 
-The recorded result is `evidence/customer-signup-step5.md`.
+## Customer account summary
 
-## Remaining agreed steps
+After signing in, Customers see their current **Points balance** and saved birthday
+(when supplied), plus **View my purchases**. A new account has zero points and no
+purchases or loyalty entries. The summary refreshes from `GET /api/customers/me`,
+which uses the authenticated customer link; query parameters cannot choose another
+customer. Staff and Admin receive 403 on this self-service endpoint. Birthdays are
+not returned by the operational customer list. Logout and access changes clear
+the private summary.
 
-Implement repeatable initial Admin setup and protected privileged-account
-creation next. Add signup/navigation controls in the UI step. Rebuild and apply
-the live role migration only when the coordinated upgrade is ready.
+Birthday is stored in MariaDB `customers.birthday` as a nullable DATE. Existing
+customers retain `NULL`; no birthday, reward, age restriction or promotion is
+invented for them. Birthday-based features can be added separately later.
+
+## Existing database upgrade
+
+Fresh installations use the updated model/generated schema. For an existing
+database, back up both stores and rehearse `005_customer_birthday.py` twice on a
+restored SQL copy first. It adds only the nullable birthday column, verifies all
+existing rows, and preserves any birthdays when rerun. Apply it before starting
+the updated app image:
+
+```powershell
+docker compose run --rm -T --no-deps -e BIRTHDAY_MIGRATION_DATABASE_URL=mysql+pymysql://hawkerflow:hawkerflow_dev@mariadb:3306/hawkerflow app python database/migrations/005_customer_birthday.py --database hawkerflow --allow-live
+```
+
+Use an app image containing migration 005, or mount the current repository at
+`/code` with `PYTHONPATH=/code` during the migration. The explicit live option is
+needed only for an existing local/live database; rehearsal targets must have
+matching `hawkerflow_*_test` names.
 
 Implementation references: [Pydantic extra-field validation](https://docs.pydantic.dev/latest/concepts/models/)
 and [SQLAlchemy transaction framing](https://docs.sqlalchemy.org/en/20/orm/session_basics.html).

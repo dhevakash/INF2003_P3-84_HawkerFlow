@@ -1,6 +1,7 @@
 """Public signup must never accept privileged roles or existing identities."""
 import hashlib
 import json
+from datetime import date, datetime, timedelta, timezone
 
 import pytest
 from sqlalchemy import event, select
@@ -48,6 +49,9 @@ def test_public_signup_creates_linked_customer_with_hashed_password(client, data
     assert login.status_code == 200 and login.json()['role'] == 'customer'
     auth = {'Authorization': 'Bearer ' + login.json()['access_token']}
     assert client.get('/api/orders', headers=auth).json() == []
+    assert client.get('/api/loyalty', headers=auth).json() == []
+    own = client.get('/api/customers/me', headers=auth).json()
+    assert own == {'id': account['customer_id'], 'name': 'New Customer', 'email': account['email'], 'birthday': None, 'points': 0}
     assert client.put('/api/accounts/4/role', headers=auth, json={'role': 'admin'}).status_code == 403
     assert client.post('/api/menu', headers=auth, json={'name': 'Forbidden', 'price': '5.00'}).status_code == 403
 
@@ -144,8 +148,63 @@ def test_failure_in_account_insert_rolls_back_customer_and_allows_retry(client, 
             raise IntegrityError('simulated account insert failure', {}, RuntimeError('injected test failure'))
     event.listen(User, 'before_insert', fail_account_insert)
     try:
-        assert client.post('/api/auth/signup', json=payload()).status_code == 409
+        assert client.post('/api/auth/signup', json=payload(birthday='2000-02-29', confirm_password=PASSWORD)).status_code == 409
     finally:
         event.remove(User, 'before_insert', fail_account_insert)
     assert database_state(database) == before
     assert client.post('/api/auth/signup', json=payload()).status_code == 201
+
+
+@pytest.mark.parametrize('birthday', [None, '2000-02-29', '1999-12-31',
+                                    datetime.now(timezone(timedelta(hours=8))).date().isoformat()])
+def test_optional_birthday_persists_and_signup_can_sign_in_immediately(client, database, birthday):
+    result = client.post('/api/auth/signup', json=payload(birthday=birthday, confirm_password=PASSWORD))
+    assert result.status_code == 201 and PASSWORD not in result.text
+    account = result.json()
+    with database() as session:
+        customer = session.get(Customer, account['customer_id'])
+        assert customer.birthday == (date.fromisoformat(birthday) if birthday else None)
+        assert customer.points == 0
+    login = client.post('/api/auth/login', json={'email': account['email'], 'password': PASSWORD})
+    auth = {'Authorization': 'Bearer ' + login.json()['access_token']}
+    assert client.get('/api/customers/me', headers=auth).json()['birthday'] == birthday
+    assert client.get('/api/orders', headers=auth).json() == []
+    assert client.get('/api/loyalty', headers=auth).json() == []
+
+
+@pytest.mark.parametrize('birthday', ['2001-02-29', '2000-02-30', '01/02/2000', '2000-1-1',
+    '2000-01-01T00:00:00Z', '', 946684800, True, [], {}, '0999-12-31',
+    (date.today()+timedelta(days=2)).isoformat()])
+def test_invalid_or_future_birthday_does_not_create_either_record(client, database, birthday):
+    before = database_state(database)
+    response = client.post('/api/auth/signup', json=payload(birthday=birthday, confirm_password=PASSWORD))
+    assert response.status_code == 422 and PASSWORD not in response.text
+    assert database_state(database) == before
+
+
+def test_server_checks_password_confirmation_without_leaking_password(client, database):
+    before = database_state(database)
+    response = client.post('/api/auth/signup', json=payload(confirm_password='DifferentPassword123!'))
+    assert response.status_code == 422 and 'Passwords do not match' in response.text
+    assert PASSWORD not in response.text and 'DifferentPassword123!' not in response.text
+    assert database_state(database) == before
+
+
+@pytest.mark.parametrize('actor', [None, 'staff@example.test', 'admin@example.test'])
+def test_own_customer_summary_requires_customer_login(client, actor):
+    response = client.get('/api/customers/me', headers=auth_headers(client, actor) if actor else {})
+    assert response.status_code == (403 if actor else 401)
+
+
+def test_customer_summary_uses_session_identity_and_keeps_birthdays_private(client, database):
+    with database.begin() as session:
+        session.get(Customer, 1).birthday = date(2000, 2, 29)
+        session.get(Customer, 2).birthday = date(1991, 1, 1)
+    login = client.post('/api/auth/login', json={'email': 'buyer@example.test', 'password': 'TestPass123!'})
+    own = {'Authorization': 'Bearer '+login.json()['access_token']}
+    response = client.get('/api/customers/me?customer_id=2&id=3', headers=own)
+    assert response.status_code == 200
+    assert response.json() == {'id': 1, 'name': 'Buyer', 'email': 'buyer@example.test', 'points': 100, 'birthday': '2000-02-29'}
+    assert client.get('/api/customers', headers=own).status_code == 403
+    staff_customers = client.get('/api/customers', headers=auth_headers(client, 'staff@example.test')).json()
+    assert all('birthday' not in row for row in staff_customers)

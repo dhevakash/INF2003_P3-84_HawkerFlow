@@ -17,11 +17,13 @@ Store role values as `admin`, `staff`, and `customer`. Display them as Admin, St
 | View the menu | Yes | Yes | Yes |
 | Create, edit, or deactivate menu items | Yes | Yes | No |
 | View ingredient stock and recipes | Yes | Yes | No |
+| Create recipes or add, edit and remove recipe ingredients | Yes | No | No |
 | Receive ingredients and view stock movements | Yes | Yes | No |
 | Correct an existing stock quantity with a reason and audit history | Yes | No | No |
 | Process sales and redeem points through checkout | Yes | Yes | No |
 | Create or update operational customer records | Yes | Yes | Own details through customer self-service only |
 | View orders and loyalty history | All | All | Own only |
+| Edit customer point balances or remove available points with a recorded reason | Yes | No | No |
 | Edit or delete an already placed order | No | No | No |
 | View sales and feedback analytics | Yes | Yes | No |
 | Read purchase reviews | All | All, to support business replies | Own only |
@@ -31,10 +33,11 @@ Store role values as `admin`, `staff`, and `customer`. Display them as Admin, St
 | Moderate reviews or edit/delete business replies | Yes | No | No |
 | Read customer preference profiles | Any profile | No | Own profile only |
 | Create, edit, or delete customer preference profiles | Any profile | No | Own profile through supported self-service actions only |
-| Create Staff or additional Admin accounts | Yes, through protected administration | No | No |
+| List/search accounts, create Customer/Staff/additional Admin accounts | Yes, through protected administration | No | No |
+| Edit login details, reset passwords, reactivate accounts, delete unused disabled accounts | Yes; linked history is protected | No | No |
 | Change account roles or deactivate login accounts | Yes | No | No |
 
-Operational customer records are separate from login accounts and MongoDB preference profiles. Staff access to customer names, contact details, and sales-related records does not grant access to preference profiles, passwords, account activation, or role assignment. Loyalty changes must use the application's validated business operations.
+Operational customer records are separate from login accounts and MongoDB preference profiles. Staff access to customer names, contact details, and sales-related records does not grant access to preference profiles, passwords, account activation, or role assignment. Loyalty changes must use validated checkout operations or Admin-only audited corrections; original earning/redemption records and order references remain intact.
 
 ## Review and preference boundaries
 

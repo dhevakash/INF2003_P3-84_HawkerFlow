@@ -5,6 +5,7 @@ import hashlib
 import json
 from sqlalchemy import select
 from sqlalchemy.exc import IntegrityError
+from app.loyalty import MAX_POINTS
 from app.models import (BranchStock, Customer, LoyaltyTransaction, MenuItem,
                         Order, OrderLine, RecipeComponent, StockMovement)
 
@@ -50,7 +51,8 @@ def checkout(session, payload, actor_id, *, created_at=None):
             if len(items) != len(wanted_ids) or any(not item.active for item in items.values()):
                 raise BusinessError('A menu item is unavailable.', 422)
             recipes = list(session.scalars(select(RecipeComponent).where(
-                RecipeComponent.menu_item_id.in_(wanted_ids))))
+                RecipeComponent.menu_item_id.in_(wanted_ids))
+                .order_by(RecipeComponent.menu_item_id, RecipeComponent.ingredient_id).with_for_update()))
             configured = {r.menu_item_id for r in recipes}
             if configured != set(wanted_ids):
                 raise BusinessError('Every sold item must have a recipe configured.', 422)
@@ -89,6 +91,8 @@ def checkout(session, payload, actor_id, *, created_at=None):
                     delta=-quantity, order_id=order.id, created_at=order.created_at))
             # Teaching rule: 100 points = SGD 1; earn floor(net amount in SGD).
             earned = int(total)
+            if customer.points + earned - payload.redeem_points > MAX_POINTS:
+                raise BusinessError('The customer points balance would exceed the supported limit.', 422)
             customer.points += earned - payload.redeem_points
             if payload.redeem_points:
                 session.add(LoyaltyTransaction(customer_id=customer.id, order_id=order.id,

@@ -21,7 +21,8 @@ def test_admin_list_contains_only_safe_account_fields(client):
     assert response.status_code == 200
     accounts = response.json()
     assert [account['id'] for account in accounts] == [1, 2, 3, 4, 5]
-    assert all(set(account) == {'id', 'email', 'role', 'customer_id', 'active'} for account in accounts)
+    assert all(set(account) == {'id', 'email', 'role', 'customer_id', 'active', 'name'} for account in accounts)
+    assert accounts[1]['name'] == 'Buyer' and accounts[0]['name'] is None
     assert {account['role'] for account in accounts} == {'staff', 'customer', 'admin'}
     assert 'password' not in response.text
 

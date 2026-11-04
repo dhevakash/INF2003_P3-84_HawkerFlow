@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node --test workspace.test.mjs",
+    "test": "node --test workspace.test.mjs recipes.test.mjs loyalty.test.mjs accounts.test.mjs signup.test.mjs",
     "test:api": "node --test real-api.test.mjs"
   },
   "devDependencies": {
