@@ -1,11 +1,12 @@
 """SQL source of truth. Run `python -m app.cli export-schema` to inspect DDL."""
-from datetime import datetime, timezone
+from datetime import date, datetime, timezone
 from decimal import Decimal
-from sqlalchemy import (Boolean, CheckConstraint, DateTime, ForeignKey, Index,
+from sqlalchemy import (Boolean, CheckConstraint, Date, DateTime, ForeignKey, Index,
                         Integer, Numeric, String, UniqueConstraint, true, text)
 from sqlalchemy.orm import Mapped, mapped_column
 from app.database import Base
 from app.roles import ROLE_CHECK_SQL
+from app.loyalty import MAX_POINTS
 
 
 def utcnow():
@@ -27,6 +28,7 @@ class Customer(Base):
     id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str] = mapped_column(String(120))
     email: Mapped[str] = mapped_column(String(180), unique=True)
+    birthday: Mapped[date | None] = mapped_column(Date, nullable=True)
     points: Mapped[int] = mapped_column(Integer, default=0)
     active: Mapped[bool] = mapped_column(Boolean, default=True)
 
@@ -35,7 +37,8 @@ class User(Base):
     __tablename__ = 'users'
     __table_args__ = (CheckConstraint(ROLE_CHECK_SQL, name='ck_user_role'),
                       CheckConstraint('active IN (0,1)', name='ck_user_active'),
-                      CheckConstraint('session_version >= 0', name='ck_user_session_version'))
+                      CheckConstraint('session_version >= 0', name='ck_user_session_version'),
+                      {'sqlite_autoincrement': True})
     id: Mapped[int] = mapped_column(primary_key=True)
     email: Mapped[str] = mapped_column(String(180), unique=True)
     password_hash: Mapped[str] = mapped_column(String(255))
@@ -172,6 +175,27 @@ class LoyaltyTransaction(Base):
     order_id: Mapped[int] = mapped_column(ForeignKey('orders.id'))
     kind: Mapped[str] = mapped_column(String(12))
     delta: Mapped[int] = mapped_column(Integer)
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow)
+
+
+class LoyaltyAdjustment(Base):
+    __tablename__ = 'loyalty_adjustments'
+    __table_args__ = (
+        CheckConstraint(f'previous_points BETWEEN 0 AND {MAX_POINTS} AND points BETWEEN 0 AND {MAX_POINTS}',
+                        name='ck_loyalty_adjustment_bounds'),
+        CheckConstraint('delta = points - previous_points AND delta <> 0', name='ck_loyalty_adjustment_delta'),
+        CheckConstraint("action IN ('edit','remove') AND (action <> 'remove' OR delta < 0)",
+                        name='ck_loyalty_adjustment_action'),
+        CheckConstraint('length(trim(reason)) > 0', name='ck_loyalty_adjustment_reason'),
+    )
+    id: Mapped[int] = mapped_column(primary_key=True)
+    customer_id: Mapped[int] = mapped_column(ForeignKey('customers.id'))
+    actor_user_id: Mapped[int] = mapped_column(ForeignKey('users.id'))
+    action: Mapped[str] = mapped_column(String(12))
+    previous_points: Mapped[int] = mapped_column(Integer)
+    points: Mapped[int] = mapped_column(Integer)
+    delta: Mapped[int] = mapped_column(Integer)
+    reason: Mapped[str] = mapped_column(String(255))
     created_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow)
 
 

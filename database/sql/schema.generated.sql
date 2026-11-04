@@ -17,6 +17,7 @@ CREATE TABLE customers (
 	id INTEGER NOT NULL AUTO_INCREMENT,
 	name VARCHAR(120) NOT NULL,
 	email VARCHAR(180) NOT NULL,
+	birthday DATE,
 	points INTEGER NOT NULL,
 	active BOOL NOT NULL,
 	PRIMARY KEY (id),
@@ -92,6 +93,28 @@ CREATE TABLE users (
 	UNIQUE (email),
 	UNIQUE (customer_id),
 	FOREIGN KEY(customer_id) REFERENCES customers (id)
+)ENGINE=InnoDB
+
+;
+
+
+CREATE TABLE loyalty_adjustments (
+	id INTEGER NOT NULL AUTO_INCREMENT,
+	customer_id INTEGER NOT NULL,
+	actor_user_id INTEGER NOT NULL,
+	action VARCHAR(12) NOT NULL,
+	previous_points INTEGER NOT NULL,
+	points INTEGER NOT NULL,
+	delta INTEGER NOT NULL,
+	reason VARCHAR(255) NOT NULL,
+	created_at DATETIME NOT NULL,
+	PRIMARY KEY (id),
+	CONSTRAINT ck_loyalty_adjustment_bounds CHECK (previous_points BETWEEN 0 AND 2147483647 AND points BETWEEN 0 AND 2147483647),
+	CONSTRAINT ck_loyalty_adjustment_delta CHECK (delta = points - previous_points AND delta <> 0),
+	CONSTRAINT ck_loyalty_adjustment_action CHECK (action IN ('edit','remove') AND (action <> 'remove' OR delta < 0)),
+	CONSTRAINT ck_loyalty_adjustment_reason CHECK (length(trim(reason)) > 0),
+	FOREIGN KEY(customer_id) REFERENCES customers (id),
+	FOREIGN KEY(actor_user_id) REFERENCES users (id)
 )ENGINE=InnoDB
 
 ;

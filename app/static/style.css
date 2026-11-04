@@ -234,6 +234,87 @@ nav button.active {
     font-size: 13px;
 }
 
+.account-status {
+    margin-top:10px;
+    padding:6px 10px;
+    border-radius:7px;
+    font-size:12px;
+    line-height:1.4
+}
+
+.account-actions {
+    min-width:285px;
+    max-width:380px
+}
+
+.account-actions>.actions {
+    margin-top:12px;
+    gap:8px
+}
+
+.account-actions .actions button {
+    padding:6px 10px;
+    font-size:12px
+}
+
+.account-actions .inline-form button {
+    padding:10px 12px;
+    font-size:12px
+}
+
+#account-create-name,#account-details .actions,#account-password .actions {
+    grid-column:1/-1
+}
+
+#points-current-balance {
+    grid-column:1/-1;
+    margin:0
+}
+
+.points-audit {
+    margin-top:8px;
+    font-size:12px
+}
+
+.points-audit p {
+    margin:5px 0;
+    overflow-wrap:anywhere
+}
+
+.recipe-components {
+    display:grid;
+    gap:12px
+}
+
+.recipe-row {
+    display:grid;
+    grid-template-columns:minmax(140px,1fr) minmax(140px,1fr) auto;
+    gap:12px;
+    align-items:end
+}
+
+.recipe-row button {
+    padding:8px 12px;
+    font-size:12px
+}
+
+.recipe-record {
+    padding:16px 0;
+    border-bottom:1px solid var(--border)
+}
+
+.recipe-record:last-child {
+    border-bottom:0
+}
+
+.recipe-record .toolbar {
+    margin:0 0 10px
+}
+
+.recipe-record h4 {
+    margin:0
+}
+
 .muted,
 footer {
     font-size: 13px;
@@ -322,9 +403,9 @@ pre {
     padding: 14px;
     border-radius: 10px;
     overflow-wrap: anywhere;
-    position: sticky;
-    top: 10px;
-    z-index: 1;
+    position: static;
+    top: auto;
+    z-index: auto;
 }
 
 #message:empty {
@@ -362,8 +443,13 @@ dialog::backdrop {
 
 @media (max-width: 680px) {
     #login,
-    .form-grid {
+    .form-grid,
+    .recipe-row {
         grid-template-columns: 1fr;
+    }
+
+    .recipe-row button {
+        justify-self: start;
     }
 
     header,

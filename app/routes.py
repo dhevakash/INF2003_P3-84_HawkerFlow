@@ -5,21 +5,23 @@ from sqlalchemy import delete, func, select, text
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 from app import analytics
-from app.auth import current_user, hash_password, issue_token, principal_for, require_roles, verify_password
+from app.auth import current_user, document_writer, hash_password, issue_token, principal_for, require_roles, verify_password
 from app.database import engine, get_session
-from app.models import (Branch, BranchStock, Customer, Ingredient, LoyaltyTransaction,
+from app.models import (Branch, BranchStock, Customer, Ingredient, LoyaltyAdjustment, LoyaltyTransaction,
                         MenuItem, Order, OrderLine, RecipeComponent, StockAdjustment, StockMovement,
                         StockReceipt, User)
 from app.nosql import complaint_pipeline, mongo_db, monthly_pipeline
 from app.roles import Role
-
-from app.schemas import (AccountResult, AccountRoleInput, AccountStatusInput, PrivilegedAccountInput,
-                         CheckoutInput, CustomerInput, Login, MenuInput, ProfileInput,
-                         ReplyInput, RestockInput, ReviewInput, SignupInput, SignupResult,
-                         IngredientInput, RecipeInput, StockAdjustmentInput)
-from app.services.accounts import AccountEmailConflict, insert_privileged_account
+from app.schemas import (AccountCreateInput, AccountDetailsInput, AccountListResult, AccountPasswordInput,
+                         AccountResult, AccountRoleInput, AccountStatusInput, CheckoutInput, CustomerInput, Login,
+                         MenuInput, PointsEditInput, PointsRemovalInput, ProfileInput, RecipeInput, ReplyInput, RestockInput,
+                         ReviewInput, SignupInput, SignupResult, StockAdjustmentInput)
+from app.services.accounts import AccountEmailConflict
+from app.services.account_management import create_account, delete_unused_account, edit_details, lock_account
 from app.services.checkout import checkout, order_detail, order_result
 from app.services.inventory import adjust_stock, restock
+from app.services.loyalty import correct_points
+from app.services.recipes import save_recipe
 
 router = APIRouter(prefix='/api')
 Operations = Depends(require_roles(Role.ADMIN, Role.STAFF))
@@ -86,7 +88,7 @@ def signup(payload: SignupInput, session: Session = Depends(get_session)):
         if existing_account is not None or existing_customer is not None:
             raise HTTPException(409, 'This email is already in use. Sign in or contact an administrator.')
         # Never bind caller-supplied account IDs, customer links, roles or points.
-        customer = Customer(name=payload.name, email=payload.email, points=0, active=True)
+        customer = Customer(name=payload.name, email=payload.email, birthday=payload.birthday, points=0, active=True)
         session.add(customer)
         session.flush()
         account = User(email=payload.email, password_hash=password_hash,
@@ -118,7 +120,7 @@ def change_account_role(account_id: int, payload: AccountRoleInput, user=AdminOn
     with session.begin():
         admins = list(session.scalars(select(User).where(User.role == Role.ADMIN)
                                       .order_by(User.id).with_for_update()))
-        if not any(admin.id == user.id and admin.active for admin in admins):
+        if not any(admin.id == user.id and admin.active and admin.session_version == user.session_version for admin in admins):
             raise HTTPException(403, 'Your account no longer has Admin access.')
         account = session.scalar(select(User).where(User.id == account_id).with_for_update())
         if account is None:
@@ -132,28 +134,60 @@ def change_account_role(account_id: int, payload: AccountRoleInput, user=AdminOn
 
 
 @router.post('/accounts', status_code=201, response_model=AccountResult)
-def create_privileged_account(payload: PrivilegedAccountInput, user=AdminOnly,
+def create_privileged_account(payload: AccountCreateInput, user=AdminOnly,
                                session: Session = Depends(get_session)):
     password_hash = hash_password(payload.password.get_secret_value())
     with session.begin():
         # Same lock order as role changes; recheck authorization under the lock.
         admins = list(session.scalars(select(User).where(User.role == Role.ADMIN)
                                       .order_by(User.id).with_for_update()))
-        if not any(admin.id == user.id and admin.active for admin in admins):
+        if not any(admin.id == user.id and admin.active and admin.session_version == user.session_version for admin in admins):
             raise HTTPException(403, 'Your account no longer has Admin access.')
         try:
-            account = insert_privileged_account(session, email=payload.email,
-                password_hash=password_hash, role=payload.role)
+            account = create_account(session, payload, password_hash)
         except AccountEmailConflict as exc:
             raise HTTPException(409, str(exc)) from None
         result = fields(account, 'id', 'email', 'role', 'customer_id', 'active')
     return result
 
 
-@router.get('/accounts', response_model=list[AccountResult])
+@router.get('/accounts', response_model=list[AccountListResult])
 def accounts(user=AdminOnly, session: Session = Depends(get_session)):
-    return [fields(account, 'id', 'email', 'role', 'customer_id', 'active')
-            for account in session.scalars(select(User).order_by(User.id))]
+    return [{**fields(account, 'id', 'email', 'role', 'customer_id', 'active'), 'name': name}
+            for account, name in session.execute(select(User, Customer.name)
+                .outerjoin(Customer, Customer.id == User.customer_id).order_by(User.id))]
+
+
+@router.put('/accounts/{account_id}', response_model=AccountListResult)
+def update_account_details(account_id: int, payload: AccountDetailsInput, user=AdminOnly,
+                           session: Session = Depends(get_session)):
+    with session.begin():
+        account = lock_account(session, user, account_id)
+        try:
+            customer = edit_details(session, account, payload)
+        except AccountEmailConflict as exc:
+            raise HTTPException(409, str(exc)) from None
+        return {**fields(account, 'id', 'email', 'role', 'customer_id', 'active'),
+                'name': customer.name if customer else None}
+
+
+@router.put('/accounts/{account_id}/password')
+def reset_account_password(account_id: int, payload: AccountPasswordInput, user=AdminOnly,
+                            session: Session = Depends(get_session)):
+    password_hash = hash_password(payload.password.get_secret_value())
+    with session.begin():
+        account = lock_account(session, user, account_id)
+        account.password_hash = password_hash
+        account.session_version += 1
+    return {'id': account_id, 'password_reset': True}
+
+
+@router.delete('/accounts/{account_id}')
+def remove_unused_account(account_id: int, user=AdminOnly, session: Session = Depends(get_session)):
+    with session.begin():
+        account = lock_account(session, user, account_id)
+        delete_unused_account(session, account, mongo_db)
+    return {'deleted': account_id}
 
 
 @router.put('/accounts/{account_id}/status', response_model=AccountResult)
@@ -162,7 +196,7 @@ def change_account_status(account_id: int, payload: AccountStatusInput, user=Adm
     with session.begin():
         admins = list(session.scalars(select(User).where(User.role == Role.ADMIN)
                                       .order_by(User.id).with_for_update()))
-        if not any(admin.id == user.id and admin.active for admin in admins):
+        if not any(admin.id == user.id and admin.active and admin.session_version == user.session_version for admin in admins):
             raise HTTPException(403, 'Your account no longer has active Admin access.')
         account = session.scalar(select(User).where(User.id == account_id).with_for_update())
         if account is None:
@@ -226,98 +260,39 @@ def delete_menu(item_id: int, user=Operations, session: Session = Depends(get_se
 
 @router.get('/recipes')
 def recipes(user=Operations, session: Session = Depends(get_session)):
-    return [fields(r, 'menu_item_id', 'ingredient_id', 'quantity')
-            for r in session.scalars(select(RecipeComponent).order_by(
-                RecipeComponent.menu_item_id, RecipeComponent.ingredient_id))]
-
-
-@router.put('/menu/{item_id}/recipe')
-def replace_recipe(item_id: int, payload: RecipeInput, user=Operations,
-                   session: Session = Depends(get_session)):
-    ingredient_ids = sorted(line.ingredient_id for line in payload.ingredients)
-    with session.begin():
-        item = session.scalar(select(MenuItem).where(MenuItem.id == item_id).with_for_update())
-        if not item:
-            raise HTTPException(404, 'Menu item not found.')
-        ingredients = list(session.scalars(select(Ingredient).where(
-            Ingredient.id.in_(ingredient_ids)).order_by(Ingredient.id).with_for_update()))
-        if len(ingredients) != len(ingredient_ids):
-            raise HTTPException(422, 'A recipe references an ingredient that does not exist.')
-        session.execute(delete(RecipeComponent).where(RecipeComponent.menu_item_id == item_id))
-        components = [RecipeComponent(menu_item_id=item_id, ingredient_id=line.ingredient_id,
-                                      quantity=line.quantity) for line in payload.ingredients]
-        session.add_all(components)
-        session.flush()
-        return [fields(component, 'menu_item_id', 'ingredient_id', 'quantity')
-                for component in components]
+    query = (select(RecipeComponent, MenuItem.name, Ingredient.name, Ingredient.unit)
+        .join(MenuItem, RecipeComponent.menu_item_id == MenuItem.id)
+        .join(Ingredient, RecipeComponent.ingredient_id == Ingredient.id)
+        .order_by(RecipeComponent.menu_item_id, RecipeComponent.ingredient_id))
+    return [{'menu_item_id': row.menu_item_id, 'menu_item': item, 'ingredient_id': row.ingredient_id,
+             'ingredient': ingredient, 'quantity': format(row.quantity, '.3f'), 'unit': unit}
+            for row, item, ingredient, unit in session.execute(query)]
 
 
 @router.get('/ingredients')
 def ingredients(user=Operations, session: Session = Depends(get_session)):
     return [fields(ingredient, 'id', 'name', 'unit')
-            for ingredient in session.scalars(select(Ingredient).order_by(Ingredient.id))]
+            for ingredient in session.scalars(select(Ingredient).order_by(Ingredient.name, Ingredient.id))]
 
 
-@router.post('/ingredients', status_code=201)
-def add_ingredient(payload: IngredientInput, user=Operations,
-                   session: Session = Depends(get_session)):
-    try:
-        with session.begin():
-            if session.scalar(select(Ingredient.id).where(Ingredient.name == payload.name)):
-                raise HTTPException(409, 'An ingredient with this name already exists.')
-            ingredient = Ingredient(**payload.model_dump())
-            session.add(ingredient)
-            session.flush()
-            return fields(ingredient, 'id', 'name', 'unit')
-    except IntegrityError:
-        raise HTTPException(409, 'An ingredient with this name already exists.') from None
-
-
-@router.put('/ingredients/{ingredient_id}')
-def update_ingredient(ingredient_id: int, payload: IngredientInput, user=Operations,
-                      session: Session = Depends(get_session)):
-    try:
-        with session.begin():
-            ingredient = session.scalar(select(Ingredient).where(
-                Ingredient.id == ingredient_id).with_for_update())
-            if not ingredient:
-                raise HTTPException(404, 'Ingredient not found.')
-            if session.scalar(select(Ingredient.id).where(
-                Ingredient.name == payload.name, Ingredient.id != ingredient_id)):
-                raise HTTPException(409, 'An ingredient with this name already exists.')
-            ingredient.name, ingredient.unit = payload.name, payload.unit
-            session.flush()
-            return fields(ingredient, 'id', 'name', 'unit')
-    except IntegrityError:
-        raise HTTPException(409, 'An ingredient with this name already exists.') from None
-
-
-@router.delete('/ingredients/{ingredient_id}')
-def delete_ingredient(ingredient_id: int, user=Operations,
-                     session: Session = Depends(get_session)):
-    with session.begin():
-        ingredient = session.scalar(select(Ingredient).where(
-            Ingredient.id == ingredient_id).with_for_update())
-        if not ingredient:
-            raise HTTPException(404, 'Ingredient not found.')
-        references = (
-            (RecipeComponent, RecipeComponent.ingredient_id),
-            (BranchStock, BranchStock.ingredient_id),
-            (StockReceipt, StockReceipt.ingredient_id),
-            (StockMovement, StockMovement.ingredient_id),
-        )
-        if any(session.scalar(select(model.ingredient_id).where(
-                column == ingredient_id).limit(1)) is not None
-               for model, column in references):
-            raise HTTPException(409, 'Ingredient is referenced by a recipe or stock history and cannot be deleted.')
-        session.delete(ingredient)
-    return {'deleted': ingredient_id}
+@router.put('/recipes/{item_id}')
+def update_recipe(payload: RecipeInput, item_id: int = Path(gt=0), user=AdminOnly,
+                  session: Session = Depends(get_session)):
+    return save_recipe(session, item_id, payload)
 
 
 @router.get('/customers')
 def customers(user=Operations, session: Session = Depends(get_session)):
     return [fields(c, 'id', 'name', 'email', 'points', 'active')
             for c in session.scalars(select(Customer).order_by(Customer.id))]
+
+
+@router.get('/customers/me')
+def own_customer(user=Depends(require_roles(Role.CUSTOMER)), session: Session = Depends(get_session)):
+    customer = session.get(Customer, user.customer_id)
+    if customer is None:
+        raise HTTPException(404, 'Your linked customer record was not found.')
+    return fields(customer, 'id', 'name', 'email', 'birthday', 'points')
 
 
 @router.post('/customers', status_code=201)
@@ -401,10 +376,35 @@ def order_receipt(order_id: int = Path(gt=0), user=Depends(current_user),
 @router.get('/loyalty')
 def loyalty(user=Depends(current_user), session: Session = Depends(get_session)):
     query = select(LoyaltyTransaction)
+    corrections = select(LoyaltyAdjustment)
     if user.role == 'customer':
         query = query.where(LoyaltyTransaction.customer_id == user.customer_id)
-    return [fields(t, 'id', 'customer_id', 'order_id', 'kind', 'delta')
-            for t in session.scalars(query.order_by(LoyaltyTransaction.id.desc()).limit(100))]
+        corrections = corrections.where(LoyaltyAdjustment.customer_id == user.customer_id)
+    entries = [{**fields(t, 'id', 'customer_id', 'order_id', 'kind', 'delta'),
+                'created_at': t.created_at.isoformat(timespec='microseconds') + 'Z', 'adjustment_id': None}
+        for t in session.scalars(query.order_by(LoyaltyTransaction.created_at.desc(), LoyaltyTransaction.id.desc()).limit(100))]
+    for adjustment in session.scalars(corrections.order_by(LoyaltyAdjustment.created_at.desc(), LoyaltyAdjustment.id.desc()).limit(100)):
+        entry = {'id': None, 'adjustment_id': adjustment.id, 'customer_id': adjustment.customer_id,
+                 'order_id': None, 'kind': 'adjustment', 'delta': adjustment.delta,
+                 'created_at': adjustment.created_at.isoformat(timespec='microseconds') + 'Z'}
+        if user.role == Role.ADMIN:
+            entry.update(fields(adjustment, 'actor_user_id', 'action', 'previous_points', 'points', 'reason'))
+        entries.append(entry)
+    entries.sort(key=lambda entry: (entry['created_at'], entry['adjustment_id'] is not None,
+                                   entry['adjustment_id'] or entry['id']), reverse=True)
+    return entries[:100]
+
+
+@router.put('/loyalty/customers/{customer_id}/points')
+def edit_customer_points(payload: PointsEditInput, customer_id: int = Path(gt=0), user=AdminOnly,
+                         session: Session = Depends(get_session)):
+    return correct_points(session, customer_id, payload, user.id)
+
+
+@router.post('/loyalty/customers/{customer_id}/points/removals')
+def remove_customer_points(payload: PointsRemovalInput, customer_id: int = Path(gt=0), user=AdminOnly,
+                           session: Session = Depends(get_session)):
+    return correct_points(session, customer_id, payload, user.id, remove=True)
 
 
 @router.get('/analytics/sql')
@@ -429,7 +429,7 @@ def shared_reviews(branch_id: int | None = Query(default=None, gt=0), user=Depen
 
 
 @router.post('/reviews', status_code=201)
-def add_review(payload: ReviewInput, user=CustomerOrAdmin, session: Session = Depends(get_session)):
+def add_review(payload: ReviewInput, user=CustomerOrAdmin, session: Session = Depends(get_session), write_guard=Depends(document_writer)):
     order = owned_order(session, payload.order_id, user)
     doc = {**payload.model_dump(), 'customer_id': order.customer_id,
            'branch_id': order.branch_id, 'created_at': datetime.now(timezone.utc),
@@ -439,7 +439,7 @@ def add_review(payload: ReviewInput, user=CustomerOrAdmin, session: Session = De
 
 
 @router.put('/reviews/{order_id}')
-def edit_review(order_id: int, payload: ReviewInput, user=CustomerOrAdmin, session: Session = Depends(get_session)):
+def edit_review(order_id: int, payload: ReviewInput, user=CustomerOrAdmin, session: Session = Depends(get_session), write_guard=Depends(document_writer)):
     order = owned_order(session, order_id, user)
     if order_id != payload.order_id:
         raise HTTPException(422, 'Body order_id must match the path.')
@@ -453,7 +453,7 @@ def edit_review(order_id: int, payload: ReviewInput, user=CustomerOrAdmin, sessi
 
 
 @router.delete('/reviews/{order_id}')
-def remove_review(order_id: int, user=CustomerOrAdmin, session: Session = Depends(get_session)):
+def remove_review(order_id: int, user=CustomerOrAdmin, session: Session = Depends(get_session), write_guard=Depends(document_writer)):
     order = owned_order(session, order_id, user)
     result = mongo_db().reviews.delete_one({'order_id': order_id, 'customer_id': order.customer_id})
     if not result.deleted_count:
@@ -462,7 +462,7 @@ def remove_review(order_id: int, user=CustomerOrAdmin, session: Session = Depend
 
 
 @router.post('/reviews/{order_id}/replies')
-def reply(order_id: int, payload: ReplyInput, user=Operations):
+def reply(order_id: int, payload: ReplyInput, user=Operations, write_guard=Depends(document_writer)):
     # Predicate and update are atomic: two simultaneous replies cannot exceed the bound.
     result = mongo_db().reviews.update_one({'order_id': order_id, 'replies.19': {'$exists': False}},
         {'$push': {'replies': {'manager_user_id': user.id, 'text': payload.text,
@@ -480,7 +480,7 @@ def existing_reply(db, order_id, reply_index):
 
 
 @router.put('/reviews/{order_id}/replies/{reply_index}')
-def edit_reply(order_id: int, payload: ReplyInput, reply_index: int = Path(ge=0, le=19), user=AdminOnly):
+def edit_reply(order_id: int, payload: ReplyInput, reply_index: int = Path(ge=0, le=19), user=AdminOnly, write_guard=Depends(document_writer)):
     db = mongo_db()
     review = existing_reply(db, order_id, reply_index)
     updated = [dict(item) for item in review['replies']]
@@ -492,7 +492,7 @@ def edit_reply(order_id: int, payload: ReplyInput, reply_index: int = Path(ge=0,
 
 
 @router.delete('/reviews/{order_id}/replies/{reply_index}')
-def delete_reply(order_id: int, reply_index: int = Path(ge=0, le=19), user=AdminOnly):
+def delete_reply(order_id: int, reply_index: int = Path(ge=0, le=19), user=AdminOnly, write_guard=Depends(document_writer)):
     db = mongo_db()
     review = existing_reply(db, order_id, reply_index)
     updated = review['replies'][:reply_index] + review['replies'][reply_index + 1:]
@@ -521,7 +521,7 @@ def read_profile(user=CustomerOrAdmin, session: Session = Depends(get_session)):
 
 
 @router.put('/profiles/me')
-def save_profile(payload: ProfileInput, user=CustomerOrAdmin):
+def save_profile(payload: ProfileInput, user=CustomerOrAdmin, write_guard=Depends(document_writer)):
     customer_id = own_profile_id(user)
     mongo_db().profiles.update_one({'customer_id': customer_id},
         {'$set': {**payload.model_dump(), 'updated_at': datetime.now(timezone.utc), 'updated_by_user_id': user.id}}, upsert=True)
@@ -546,7 +546,7 @@ def customer_profile(customer_id: int, user=AdminOnly, session: Session = Depend
 
 @router.put('/profiles/{customer_id}')
 def update_customer_profile(customer_id: int, payload: ProfileInput, user=AdminOnly,
-                            session: Session = Depends(get_session)):
+                             session: Session = Depends(get_session), write_guard=Depends(document_writer)):
     existing_customer(session, customer_id)
     mongo_db().profiles.update_one({'customer_id': customer_id}, {'$set': {
         **payload.model_dump(), 'updated_at': datetime.now(timezone.utc), 'updated_by_user_id': user.id}}, upsert=True)
@@ -554,7 +554,7 @@ def update_customer_profile(customer_id: int, payload: ProfileInput, user=AdminO
 
 
 @router.delete('/profiles/{customer_id}')
-def delete_customer_profile(customer_id: int, user=AdminOnly, session: Session = Depends(get_session)):
+def delete_customer_profile(customer_id: int, user=AdminOnly, session: Session = Depends(get_session), write_guard=Depends(document_writer)):
     existing_customer(session, customer_id)
     if not mongo_db().profiles.delete_one({'customer_id': customer_id}).deleted_count:
         raise HTTPException(404, 'Profile not found.')

@@ -157,7 +157,7 @@ test('public signup has no role choice, sends customer fields only and clears pa
   app.id('show-signup').click();
   assert.equal(app.id('signup').querySelector('select,[name="role"]'), null);
   await submit(app, 'signup', {name: 'New Buyer', email: 'new@example.test', password, confirm_password: password});
-  assert.deepEqual(app.requests('auth/signup')[0].body, {name: 'New Buyer', email: 'new@example.test', password});
+  assert.deepEqual(app.requests('auth/signup')[0].body, {name: 'New Buyer', email: 'new@example.test', password, confirm_password: password});
   assert.equal(app.id('login-card').hidden, false);
   assert.equal(app.id('login').elements.email.value, 'new@example.test');
   assert.equal(app.id('signup').elements.password.value, '');
@@ -357,10 +357,14 @@ test('Admin status controls deactivate and reactivate the same account ID', asyn
   await view(app, 'accounts');
   button(app.id('results'), 'Deactivate account').click();
   await confirm(app);
+  await waitFor(() => app.id('results').textContent === 'No active accounts.');
+  app.id('account-status-view').click();
   await waitFor(() => app.id('results').textContent.includes('Reactivate account'));
   assert.deepEqual(app.requests('accounts/1/status', 'PUT')[0].body, {active: false});
   button(app.id('results'), 'Reactivate account').click();
   await confirm(app);
-  await waitFor(() => app.requests('accounts/1/status', 'PUT').length === 2 && app.id('results').textContent.includes('Deactivate account') && !app.id('results').querySelector('.loading'));
+  await waitFor(() => app.requests('accounts/1/status', 'PUT').length === 2 && app.id('results').textContent === 'No disabled accounts.');
+  app.id('account-status-view').click();
+  await waitFor(() => app.id('results').textContent.includes('Deactivate account'));
   assert.deepEqual(app.requests('accounts/1/status', 'PUT')[1].body, {active: true});
 });

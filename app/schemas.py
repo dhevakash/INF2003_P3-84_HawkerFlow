@@ -1,8 +1,10 @@
 from decimal import Decimal
+from datetime import date, datetime, timedelta, timezone
 import re
 from typing import Literal
 from pydantic import BaseModel, ConfigDict, Field, SecretStr, field_validator, model_validator
 from app.roles import Role
+from app.loyalty import MAX_POINTS
 
 
 class StrictModel(BaseModel):
@@ -35,11 +37,37 @@ class AccountCredentials(StrictModel):
 
 class SignupInput(AccountCredentials):
     name: str = Field(min_length=1, max_length=120)
+    birthday: date | None = None
+    confirm_password: SecretStr | None = Field(default=None, min_length=12, max_length=128)
 
     @field_validator('name', mode='before')
     @classmethod
     def normalize_name(cls, value):
         return value.strip() if isinstance(value, str) else value
+
+    @field_validator('birthday', mode='before')
+    @classmethod
+    def plain_birthday(cls, value):
+        if value is not None and type(value) is not date and (
+                not isinstance(value, str) or not re.fullmatch(r'[0-9]{4}-[0-9]{2}-[0-9]{2}', value)):
+            raise ValueError('Birthday must be a date in YYYY-MM-DD format.')
+        return value
+
+    @field_validator('birthday')
+    @classmethod
+    def valid_birthday(cls, value):
+        if value is not None:
+            if value.year < 1000:
+                raise ValueError('Birthday must be on or after 1000-01-01.')
+            if value > datetime.now(timezone(timedelta(hours=8))).date():
+                raise ValueError('Birthday cannot be in the future.')
+        return value
+
+    @model_validator(mode='after')
+    def matching_passwords(self):
+        if self.confirm_password is not None and self.password.get_secret_value() != self.confirm_password.get_secret_value():
+            raise ValueError('Passwords do not match.')
+        return self
 
 
 class InitialAdminInput(AccountCredentials):
@@ -50,12 +78,60 @@ class PrivilegedAccountInput(AccountCredentials):
     role: Literal['admin', 'staff']
 
 
+class AccountCreateInput(AccountCredentials):
+    role: Role
+    name: str | None = Field(default=None, min_length=1, max_length=120)
+
+    @field_validator('name', mode='before')
+    @classmethod
+    def normalize_name(cls, value):
+        return value.strip() if isinstance(value, str) else value
+
+    @model_validator(mode='after')
+    def customer_name_only(self):
+        if self.role == Role.CUSTOMER and self.name is None:
+            raise ValueError('Customer accounts require a name.')
+        if self.role != Role.CUSTOMER and self.name is not None:
+            raise ValueError('Only linked customer records have a customer name.')
+        return self
+
+
+class AccountDetailsInput(StrictModel):
+    email: str = Field(min_length=3, max_length=180, pattern=r'^[^\s@]+@[^\s@]+\.[^\s@]+$')
+    name: str | None = Field(default=None, min_length=1, max_length=120)
+
+    @field_validator('email', mode='before')
+    @classmethod
+    def normalize_email(cls, value):
+        return value.strip().lower() if isinstance(value, str) else value
+
+    @field_validator('name', mode='before')
+    @classmethod
+    def normalize_name(cls, value):
+        return value.strip() if isinstance(value, str) else value
+
+
+class AccountPasswordInput(StrictModel):
+    password: SecretStr = Field(min_length=12, max_length=128)
+
+    @field_validator('password')
+    @classmethod
+    def nonblank_password(cls, value):
+        if not value.get_secret_value().strip():
+            raise ValueError('Password must not be blank.')
+        return value
+
+
 class AccountResult(StrictModel):
     id: int = Field(gt=0)
     email: str
     role: Role
     customer_id: int | None
     active: bool
+
+
+class AccountListResult(AccountResult):
+    name: str | None
 
 
 class SignupResult(StrictModel):
@@ -143,7 +219,7 @@ class CheckoutInput(StrictModel):
 
 def plain_stock_decimal(value):
     if isinstance(value, str) and not re.fullmatch(r'[0-9]+(?:\.[0-9]{1,3})?', value):
-        raise ValueError('Use digits and up to three decimal places for stock quantities.')
+        raise ValueError('Use digits and up to three decimal places for ingredient quantities.')
     return value
 
 
@@ -157,6 +233,29 @@ class RestockInput(StrictModel):
     @classmethod
     def plain_quantity(cls, value):
         return plain_stock_decimal(value)
+
+
+class RecipeIngredientInput(StrictModel):
+    ingredient_id: int = Field(gt=0, strict=True)
+    quantity: Decimal = Field(gt=0, max_digits=14, decimal_places=3)
+
+    @field_validator('quantity', mode='before')
+    @classmethod
+    def plain_quantity(cls, value):
+        return plain_stock_decimal(value)
+
+
+class RecipeInput(StrictModel):
+    components: list[RecipeIngredientInput] = Field(min_length=1, max_length=100)
+    expected_components: list[RecipeIngredientInput] = Field(max_length=100)
+
+    @model_validator(mode='after')
+    def unique_ingredients(self):
+        for components in (self.components, self.expected_components):
+            ids = [component.ingredient_id for component in components]
+            if len(ids) != len(set(ids)):
+                raise ValueError('Each ingredient can appear only once in a recipe.')
+        return self
 
 
 class StockAdjustmentInput(StrictModel):
@@ -173,6 +272,24 @@ class StockAdjustmentInput(StrictModel):
     @classmethod
     def trim_reason(cls, value):
         return value.strip() if isinstance(value, str) else value
+
+
+class PointsCorrectionInput(StrictModel):
+    expected_points: int = Field(ge=0, le=MAX_POINTS, strict=True)
+    reason: str = Field(min_length=1, max_length=255)
+
+    @field_validator('reason', mode='before')
+    @classmethod
+    def trim_reason(cls, value):
+        return value.strip() if isinstance(value, str) else value
+
+
+class PointsEditInput(PointsCorrectionInput):
+    points: int = Field(ge=0, le=MAX_POINTS, strict=True)
+
+
+class PointsRemovalInput(PointsCorrectionInput):
+    amount: int = Field(gt=0, le=MAX_POINTS, strict=True)
 
 
 class ReviewInput(StrictModel):

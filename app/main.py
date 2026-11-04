@@ -1,4 +1,5 @@
 from fastapi import FastAPI, Request
+from fastapi.exceptions import RequestValidationError
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from pymongo.errors import DuplicateKeyError, OperationFailure, PyMongoError
@@ -10,6 +11,14 @@ from app.services.checkout import BusinessError
 app = FastAPI(title='HawkerFlow', version='0.1.0', description='INF2003 Team 84 working starter. See docs/STATUS.md.')
 app.include_router(router)
 app.mount('/static', StaticFiles(directory=ROOT / 'app/static'), name='static')
+
+
+@app.middleware('http')
+async def revalidate_page_assets(request: Request, call_next):
+    response = await call_next(request)
+    if request.url.path in {'/', '/static/style.css', '/static/app.js'}:
+        response.headers['Cache-Control'] = 'no-cache'
+    return response
 
 
 @app.get('/', include_in_schema=False)
@@ -25,6 +34,13 @@ def business_error(request: Request, exc: BusinessError):
 @app.exception_handler(IntegrityError)
 def integrity_error(request: Request, exc: IntegrityError):
     return JSONResponse(status_code=409, content={'detail': 'A unique, foreign-key or check constraint rejected this change.'})
+
+
+@app.exception_handler(RequestValidationError)
+def invalid_input(request: Request, exc: RequestValidationError):
+    # Validation errors can contain the complete submitted body, including passwords.
+    return JSONResponse(status_code=422, content={'detail': [
+        {key: error[key] for key in ('type', 'loc', 'msg')} for error in exc.errors()]})
 
 
 @app.exception_handler(PyMongoError)

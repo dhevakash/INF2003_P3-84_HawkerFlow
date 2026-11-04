@@ -89,6 +89,12 @@ export function mockedApp(role = 'admin') {
     health: {sql: 'connected', sql_dialect: 'test', mongo: 'connected'},
     menu: [{id: 1, name: 'Rice meal', price: '5.00', active: true}],
     stock: [{branch_id: 1, branch: 'Demo branch', ingredient_id: 1, ingredient: 'Rice', unit: 'g', quantity: '10.000'}],
+    ingredients: [{id: 1, name: 'Rice', unit: 'g'}, {id: 2, name: 'Oil', unit: 'kg'}, {id: 3, name: 'Eggs', unit: 'pcs'}],
+    recipes: [{menu_item_id: 1, menu_item: 'Rice meal', ingredient_id: 1, ingredient: 'Rice', unit: 'g', quantity: '2.000'}],
+    customers: [{id: 1, name: 'Buyer', email: 'buyer@example.test', points: 100, active: true},
+      {id: 2, name: 'Other buyer', email: 'other@example.test', points: 0, active: true}],
+    'customers/me': {id: 1, name: 'Buyer', email: 'buyer@example.test', birthday: null, points: 100},
+    loyalty: [{id: 7, customer_id: 1, order_id: 7, kind: 'earn', delta: 5}],
     accounts: [
       {id: 1, email: 'staff@example.test', role: 'staff', customer_id: null, active: true},
       {id: 4, email: 'admin@example.test', role: 'admin', customer_id: null, active: true},
